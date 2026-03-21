@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(xargs basename:*)",
+      "Bash(python tools/run_loop.py:*)",
+      "Bash(python -m pytest:*)",
+      "Bash(python -c:*)",
+      "Bash(python3:*)",
+      "Bash(python agent.py:*)",
+      "Bash(echo:*)",
+      "Bash(python:*)",
+      "Bash(/bin/bash:*)"
+    ]
+  }
+}

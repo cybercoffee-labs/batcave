@@ -1,0 +1,122 @@
+# Batman Lab — Master Configuration
+# All 11 scanners (A-K) + support modules
+
+# ─────────────────────── WATCHLISTS ───────────────────────
+watchlists:
+  equities:
+    - SPY
+    - QQQ
+    - XLE
+    - XLK
+    - XLF
+    - GLD
+    - TLT
+    - UAL
+    - DAL
+    - DIS
+    - KO
+    - HLT
+    - MCD
+  crypto:
+    - BTC/USDT
+    - ETH/USDT
+    - SOL/USDT
+
+# ─────────────────────── PORTFOLIO ───────────────────────
+portfolio:
+  weights:
+    SPY: 0.25
+    QQQ: 0.15
+    XLE: 0.05
+    XLK: 0.10
+    XLF: 0.05
+    GLD: 0.10
+    TLT: 0.10
+    UAL: 0.05
+    DAL: 0.05
+    DIS: 0.03
+    KO: 0.03
+    HLT: 0.02
+    MCD: 0.02
+
+# ─────────────────────── SCANNER THRESHOLDS ───────────────────────
+thresholds:
+  # Scanner A: Cross-Exchange CEX
+  min_spread_pct_A: 0.05
+
+  # Scanner B: Spot vs Futures Basis
+  min_basis_pct_B: 0.02
+
+  # Scanner C: P2P LATAM Premium
+  min_edge_pct_C: 0.0
+
+  # Scanner D: Multi-Exchange (20 coins x 5 exchanges)
+  min_spread_pct_D: 0.08
+
+  # Scanner E: Funding Rate
+  min_funding_rate_E: 0.01
+
+  # Scanner F: Cross-Currency P2P
+  min_cross_currency_pct_F: 1.0
+
+  # Scanner G: P2P Merchant Spread
+  min_merchant_spread_G: 0.5
+
+  # Scanner H: Stablecoin Depeg
+  min_depeg_pct_H: 0.2
+
+  # Scanner I: Cross-Platform MXN
+  min_edge_pct_I: 0.20
+
+  # Scanner J: DEX vs CEX (implicit in scanner, MIN_EDGE_PCT = 0.30)
+  # Scanner K: Futures vs Futures (implicit, threshold = 0.10)
+
+  # Fee configuration for Scanner C
+  fees:
+    bank_transfer_mxn: 0.10
+    bank_transfer_cop: 0.15
+    bank_transfer_ves: 0.20
+    bank_transfer_ars: 0.25
+    exchange_fee: 0.10
+    slippage_estimate: 0.05
+
+# ─────────────────────── ENGINE ───────────────────────
+engine:
+  max_workers: 8
+  retry_attempts: 2
+  retry_delay: 0.5
+  top_edges_k: 10
+  scan_interval_minutes: 20
+
+# ─────────────────────── NEWS INTEL ───────────────────────
+news_intel:
+  enabled: true
+  keywords:
+    - crypto
+    - bitcoin
+    - mexico
+    - peso
+    - fed
+    - inflation
+    - binance
+    - tether
+    - stablecoin
+    - arbitrage
+  lookback_hours: 48
+  max_records: 250
+
+# ─────────────────────── SIGNALS ───────────────────────
+signals:
+  windows:
+    corr_window: 60
+
+# ─────────────────────── OPERATIONAL ───────────────────────
+operational:
+  default_capital_usd: 28.0
+  max_daily_exposure_usd: 500.0
+  operating_hours:
+    mxn_spei_start: "05:00"
+    mxn_spei_end: "23:30"
+    timezone: "America/Mexico_City"
+  target_trades_per_day: 8
+  min_completion_rate: 95.0

@@ -1,0 +1,406 @@
+{
+  "timestamp": "2026-02-25T08:06:11.646185+00:00",
+  "equities": {
+    "XLF": {
+      "symbol": "XLF",
+      "px": 263.3299865722656,
+      "ret_1d": 0.008654564825241629,
+      "ret_intra": 0.3241737760772381,
+      "vol_z": -0.6742748933812358,
+      "rvol": 0.8495044750214213,
+      "dollar_vol": 9176655037.063599,
+      "rv20_ann": 0.145728137510072,
+      "status": "ok"
+    },
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 263.3299865722656,
+      "ret_1d": 0.008654564825241629,
+      "ret_intra": 0.3241737760772381,
+      "vol_z": -0.6742748933812358,
+      "rvol": 0.8495044750214213,
+      "dollar_vol": 9176655037.063599,
+      "rv20_ann": 0.145728137510072,
+      "status": "ok"
+    },
+    "SPY": {
+      "symbol": "SPY",
+      "px": 687.3499755859375,
+      "ret_1d": 0.008654564825241629,
+      "ret_intra": 0.2443353203509253,
+      "vol_z": -0.6507246427246735,
+      "rvol": 0.857410038388196,
+      "dollar_vol": 50669721825.25635,
+      "rv20_ann": 0.145728137510072,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 116.73999786376953,
+      "ret_1d": 0.010902516197783152,
+      "ret_intra": 0.1922241870115866,
+      "vol_z": -0.13354698939409745,
+      "rvol": 0.9594859687731624,
+      "dollar_vol": 1321555145.816803,
+      "rv20_ann": 0.20188422059302316,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 474.6099853515625,
+      "ret_1d": 0.015218714953567192,
+      "ret_intra": 0.7556690301713458,
+      "vol_z": -0.5012632529949136,
+      "rvol": 0.5709044185331371,
+      "dollar_vol": 6692190637.451172,
+      "rv20_ann": 0.1543523618839385,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 116.73500061035156,
+      "ret_1d": -0.01385890426498504,
+      "ret_intra": 0.00525296542821585,
+      "vol_z": 4.120203367509648,
+      "rvol": 7.591654588320453,
+      "dollar_vol": 129776634.87854004,
+      "rv20_ann": 0.5804634931811585,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 343.1499938964844,
+      "ret_1d": -0.00039224273593463366,
+      "ret_intra": 0.41801461113817906,
+      "vol_z": -0.5914478151899006,
+      "rvol": 0.7744325663400808,
+      "dollar_vol": 476292191.5283203,
+      "rv20_ann": 0.010494762445729559,
+      "status": "ok"
+    },
+    "XLK": {
+      "error": "Cannot set a DataFrame with multiple columns to the single column ret1d"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 112.5999984741211,
+      "ret_1d": -0.002233572833703179,
+      "ret_intra": 0.022242368718139227,
+      "vol_z": 0.5754954428093934,
+      "rvol": 2.230889283538387,
+      "dollar_vol": 28593418.412521362,
+      "rv20_ann": 0.024026249279749407,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 140.32000732421875,
+      "ret_1d": 0.008654564825241629,
+      "ret_intra": 0.3340338113880874,
+      "vol_z": -1.1026431777237204,
+      "rvol": 0.5472203043024679,
+      "dollar_vol": 1828313567.4316406,
+      "rv20_ann": 0.145728137510072,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 140.32000732421875,
+      "ret_1d": 0.008654564825241629,
+      "ret_intra": 0.3340338113880874,
+      "vol_z": -1.1026431777237204,
+      "rvol": 0.5472203043024679,
+      "dollar_vol": 1828313567.4316406,
+      "rv20_ann": 0.145728137510072,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 106.05000305175781,
+      "ret_1d": 0.0005018208124545342,
+      "ret_intra": 0.08569078690440124,
+      "vol_z": -0.05680427795941353,
+      "rvol": 0.9693334740469033,
+      "dollar_vol": 1441611926.4846802,
+      "rv20_ann": 0.006779511484714356,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 106.05000305175781,
+      "ret_1d": 0.0005018208124545342,
+      "ret_intra": 0.08569078690440124,
+      "vol_z": -0.05680427795941353,
+      "rvol": 0.9693334740469033,
+      "dollar_vol": 1441611926.4846802,
+      "rv20_ann": 0.006779511484714356,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 106.05000305175781,
+      "ret_1d": 0.0005018208124545342,
+      "ret_intra": 0.08569078690440124,
+      "vol_z": -0.05680427795941353,
+      "rvol": 0.9693334740469033,
+      "dollar_vol": 1441611926.4846802,
+      "rv20_ann": 0.006779511484714356,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 55.97999954223633,
+      "ret_1d": 0.0005018208124545342,
+      "ret_intra": 0.07508940933537711,
+      "vol_z": -1.2516156608988953,
+      "rvol": 0.56089769909179,
+      "dollar_vol": 152948554.7492981,
+      "rv20_ann": 0.006779511484714356,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 55.97999954223633,
+      "ret_1d": 0.01570730133250242,
+      "ret_intra": 0.07508940933537711,
+      "vol_z": -1.2516156608988953,
+      "rvol": 0.56089769909179,
+      "dollar_vol": 152948554.7492981,
+      "rv20_ann": 0.4310495829497784,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 55.97999954223633,
+      "ret_1d": 0.0005018208124545342,
+      "ret_intra": 0.07508940933537711,
+      "vol_z": -1.2516156608988953,
+      "rvol": 0.56089769909179,
+      "dollar_vol": 152948554.7492981,
+      "rv20_ann": 0.006779511484714356,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 55.97999954223633,
+      "ret_1d": 0.01570730133250242,
+      "ret_intra": 0.07508940933537711,
+      "vol_z": -1.2516156608988953,
+      "rvol": 0.56089769909179,
+      "dollar_vol": 152948554.7492981,
+      "rv20_ann": 0.4310495829497784,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 106.06999969482422,
+      "ret_1d": 0.011564860641195773,
+      "ret_intra": 0.03482926531535813,
+      "vol_z": 3.980623386181637,
+      "rvol": 5.988121150668821,
+      "dollar_vol": 101854671.83695221,
+      "rv20_ann": 0.36929705006275815,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 106.06999969482422,
+      "ret_1d": 0.011564860641195773,
+      "ret_intra": 0.03482926531535813,
+      "vol_z": 3.980623386181637,
+      "rvol": 5.988121150668821,
+      "dollar_vol": 101854671.83695221,
+      "rv20_ann": 0.36929705006275815,
+      "status": "ok"
+    },
+    "UAL": {
+      "error": "Cannot set a DataFrame with multiple columns to the single column ret"
+    }
+  },
+  "crypto": {
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 82.21,
+      "ret_1h": 0.00024333860566971843,
+      "rv_ann": 0.7238852122210632,
+      "spread": 0.00012163230554041373,
+      "depth_0_5pct": 101085.282,
+      "dollar_vol_1h": 563910.6163199999,
+      "status": "ok"
+    },
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 65064.93,
+      "ret_1h": 0.0005632932123398326,
+      "rv_ann": 0.5539126763480836,
+      "spread": 1.5369263857657973e-07,
+      "depth_0_5pct": 5.08573,
+      "dollar_vol_1h": 4320055.646825099,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 1893.6,
+      "ret_1h": 0.0001531709017541516,
+      "rv_ann": 0.7146806851457329,
+      "spread": 5.280960289814298e-06,
+      "depth_0_5pct": 405.2042,
+      "dollar_vol_1h": 1134077.2293599998,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "XLF": 0.7115579839071206,
+    "QQQ": 0.7115579839071206,
+    "SPY": 0.8558712397770525,
+    "XLY": 1.3451053639765058,
+    "IWM": 0.7383438826361158,
+    "MAR": 10.580587064849013,
+    "DAL": 0.4649989907758786,
+    "XLP": 2.5667890128311814,
+    "FOXA": -0.08894951837023823,
+    "DIS": -0.08894951837023823,
+    "MCD": 1.2926858150511522,
+    "TLT": 1.2926858150511522,
+    "HLT": 1.2926858150511522,
+    "KO": -0.5322947577990549,
+    "GLD": -0.19287870062700363,
+    "XLE": -0.5322947577990549,
+    "HYG": -0.19287870062700363,
+    "DKNG": 9.26625553695012,
+    "PEP": 9.26625553695012,
+    "SOL/USDT": 3.1873488695665704,
+    "BTC/USDT": 1.6856695125562962,
+    "ETH/USDT": 2.392362773062973
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.009502464228152274,
+        "p50": 0.0006253892295977121,
+        "p95": 0.0107532426873477,
+        "mu": 0.0006253892295977121,
+        "sigma": 0.0061573112792959765
+      },
+      "1W": {
+        "p5": -0.019519622649696703,
+        "p50": 0.0031269461479885604,
+        "p95": 0.025773514945673825,
+        "mu": 0.0031269461479885604,
+        "sigma": 0.013768166579131998
+      },
+      "1M": {
+        "p5": -0.03374528042026309,
+        "p50": 0.013758563051149666,
+        "p95": 0.061262406522562415,
+        "mu": 0.013758563051149666,
+        "sigma": 0.02888034986254841
+      }
+    }
+  },
+  "narrative": {
+    "total_hits": 750,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": null,
+      "Guadalajara": 250,
+      "Monterrey": null,
+      "Mexico City": 250,
+      "security": 250
+    },
+    "samples": {
+      "Guadalajara": [
+        {
+          "datetime": "20260225T074500Z",
+          "title": "Mexican cartel clashes fuel worries in lead up to FIFA World Cup",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.sitkasentinel.com/stories/mexican-cartel-clashes-fuel-worries-in-lead-up-to-fifa-world-cup,120732"
+        },
+        {
+          "datetime": "20260225T074500Z",
+          "title": "Local officials warn Congress of serious World Cup security concerns",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.zimbabwestar.com/news/278887388/local-officials-warn-congress-of-serious-world-cup-security-concerns"
+        },
+        {
+          "datetime": "20260225T073000Z",
+          "title": "  We just want to return home to our familie : Two St . Louis County women among many tourists stranded in Mexico",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.ksdk.com/article/news/local/we-just-want-to-return-home-to-our-families-two-st-louis-county-women-among-many-tourists-stranded-in-mexico/63-7770bb83-009b-4da1-9dd2-d674c3b76f1b"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260225T074500Z",
+          "title": "Mexican cartel clashes fuel worries in lead up to FIFA World Cup",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.sitkasentinel.com/stories/mexican-cartel-clashes-fuel-worries-in-lead-up-to-fifa-world-cup,120732"
+        },
+        {
+          "datetime": "20260225T074500Z",
+          "title": "READ IN FULL : President Donald Trump State of the Union speech",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.washingtonexaminer.com/news/4471164/read-in-full-president-donald-trumps-state-of-the-union-speech/"
+        },
+        {
+          "datetime": "20260225T074500Z",
+          "title": "Local officials warn Congress of serious World Cup security concerns",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.zimbabwestar.com/news/278887388/local-officials-warn-congress-of-serious-world-cup-security-concerns"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260225T074500Z",
+          "title": "Vitrina . La gran duda : \u00bf apoyar\u00eda Trump la represi\u00f3n de Delcy ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://bitlysdowssl-aws.com/2026/02/vitrina-la-gran-duda-apoyaria-trump-la-represion-de-delcy/"
+        },
+        {
+          "datetime": "20260225T074500Z",
+          "title": "Coupe du monde 2026\u00a0 :  Tout sera fantastique , rassure la Fifa apr\u00e8s la vague de violences au Mexique , \u00e0 quatre mois du coup denvoi",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.midilibre.fr/2026/02/25/coupe-du-monde-2026-tout-sera-fantastique-rassure-la-fifa-apres-la-vague-de-violences-au-mexique-a-quatre-mois-du-coup-denvoi-13243526.php"
+        },
+        {
+          "datetime": "20260225T074500Z",
+          "title": "\u0394\u03b5\u03af\u03c4\u03b5 \u03b6\u03c9\u03bd\u03c4\u03b1\u03bd\u03ac \u03c4\u03bf Galaxy Unpacked \u03a6\u03b5\u03b2\u03c1\u03bf\u03c5\u03ac\u03c1\u03b9\u03bf\u03c2 2026 : \u0397 \u03bd\u03ad\u03b1 \u03b5\u03c0\u03bf\u03c7\u03ae \u03c3\u03c4\u03b1 AI smartphone \u03b5\u03af\u03bd\u03b1\u03b9 \u03b5\u03b4\u03ce ! ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.inewsgr.com/107/deite-zontana-to-Galaxy-Unpacked-fevrouarios-2026--i-nea-epochi-sta-AI-smartphone-einai-edo.htm"
+        }
+      ]
+    }
+  },
+  "errors": [
+    {
+      "asset": "XLK",
+      "type": "equity",
+      "error": "Cannot set a DataFrame with multiple columns to the single column ret1d",
+      "timestamp": "2026-02-25T08:06:12.793512+00:00"
+    },
+    {
+      "asset": "UAL",
+      "type": "equity",
+      "error": "Cannot set a DataFrame with multiple columns to the single column ret",
+      "timestamp": "2026-02-25T08:06:13.311594+00:00"
+    }
+  ],
+  "meta": {
+    "duration_sec": 91.583864,
+    "equities_total": 21,
+    "crypto_total": 3,
+    "equities_ok": 19,
+    "crypto_ok": 3,
+    "errors": 2
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "started_at": "2026-03-06T20:15:10.171897+00:00",
+  "execution_mode": "SIMULATED",
+  "trades_today": 0,
+  "pnl_today_usd": 0.0,
+  "consecutive_losses": 0,
+  "total_exposure_usd": 0.0,
+  "initial_capital_usd": 500.0,
+  "last_loss_ts": null,
+  "api_failure_count": 0,
+  "disconnect_count": 0,
+  "cycles_completed": 120
+}

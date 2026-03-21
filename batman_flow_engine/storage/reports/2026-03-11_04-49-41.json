@@ -1,0 +1,545 @@
+{
+  "timestamp": "2026-03-11T04:49:01.247278+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 607.6400146484375,
+      "ret_1d": 1.646979570048141e-05,
+      "ret_intra": 0.006876707950782768,
+      "vol_z": 2.8138858798998987,
+      "rvol": 2.280992567074685,
+      "dollar_vol": 1231517385.7683105,
+      "rv20_ann": 0.16239017150776103,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 253.3699951171875,
+      "ret_1d": -0.0010256599148658935,
+      "ret_intra": -0.02309527518771093,
+      "vol_z": 2.5132001612859765,
+      "rvol": 2.1840788049697015,
+      "dollar_vol": 467537317.73986816,
+      "rv20_ann": 0.1903545687179542,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 50.060001373291016,
+      "ret_1d": -0.005379043732718606,
+      "ret_intra": -0.013401661069797788,
+      "vol_z": 4.1381851559204,
+      "rvol": 7.9055467127270225,
+      "dollar_vol": 427562021.1892662,
+      "rv20_ann": 0.20070271413281351,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 139.77000427246094,
+      "ret_1d": 0.0,
+      "ret_intra": 0.012202610541818704,
+      "vol_z": 3.27254530121701,
+      "rvol": 2.7939083284134774,
+      "dollar_vol": 147766385.9868927,
+      "rv20_ann": 0.2135058112089473,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 55.61000061035156,
+      "ret_1d": -0.012866532618511778,
+      "ret_intra": -0.02008809497177866,
+      "vol_z": 3.5787527366158147,
+      "rvol": 3.9547201563831975,
+      "dollar_vol": 239408838.02764893,
+      "rv20_ann": 0.18486043583303383,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 114.45999908447266,
+      "ret_1d": -0.0013098189645746612,
+      "ret_intra": 0.00192578102956098,
+      "vol_z": 3.206843667377795,
+      "rvol": 3.0962342499009763,
+      "dollar_vol": 74485760.08421326,
+      "rv20_ann": 0.16389139349105614,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 85.74500274658203,
+      "ret_1d": -0.0029122275395649182,
+      "ret_intra": -0.04034690306775102,
+      "vol_z": 3.8767434826550478,
+      "rvol": 5.100958148541645,
+      "dollar_vol": 116524972.12752533,
+      "rv20_ann": 0.154983582861018,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 477.7300109863281,
+      "ret_1d": 0.011216537509720141,
+      "ret_intra": -0.02206325024130973,
+      "vol_z": 3.2958462278802534,
+      "rvol": 4.019981407454014,
+      "dollar_vol": 223730996.47512817,
+      "rv20_ann": 0.32420972223287825,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 88.29000091552734,
+      "ret_1d": -0.010703775972285067,
+      "ret_intra": -0.017471619009129635,
+      "vol_z": 3.274275411795806,
+      "rvol": 3.9917666268569345,
+      "dollar_vol": 243588580.92590332,
+      "rv20_ann": 0.10210176588348652,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.05999755859375,
+      "ret_1d": -0.0016228360613054094,
+      "ret_intra": -0.0013720919653728014,
+      "vol_z": 3.1530018478748683,
+      "rvol": 4.165391022774013,
+      "dollar_vol": 372101335.5128784,
+      "rv20_ann": 0.03743487618951504,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 326.05999755859375,
+      "ret_1d": -0.008734702376290806,
+      "ret_intra": -0.01041000569802264,
+      "vol_z": 4.0427036598807495,
+      "rvol": 5.464276867546622,
+      "dollar_vol": 30209132.713806152,
+      "rv20_ann": 0.3860440984765858,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 298.3699951171875,
+      "ret_1d": -0.016915467221264618,
+      "ret_intra": -0.008144445673092027,
+      "vol_z": 4.070290380527913,
+      "rvol": 6.789540179510272,
+      "dollar_vol": 63095109.38745117,
+      "rv20_ann": 0.24477427927817463,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 59.25,
+      "ret_1d": -0.021861552301381162,
+      "ret_intra": -0.06205474564779079,
+      "vol_z": 3.895140672301404,
+      "rvol": 5.6719137925768415,
+      "dollar_vol": 138635401.5,
+      "rv20_ann": 0.476694794587609,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 91.08000183105469,
+      "ret_1d": -0.03685362928669765,
+      "ret_intra": -0.09104878535327776,
+      "vol_z": 3.756627696878204,
+      "rvol": 4.330600995639745,
+      "dollar_vol": 83106129.83074951,
+      "rv20_ann": 0.6080159273841796,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 101.31999969482422,
+      "ret_1d": -0.003350125920390847,
+      "ret_intra": -0.020021275820139572,
+      "vol_z": 4.008920540143155,
+      "rvol": 5.302669470839069,
+      "dollar_vol": 50568406.56768799,
+      "rv20_ann": 0.2824999799700118,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 58.150001525878906,
+      "ret_1d": -0.018736683219969977,
+      "ret_intra": 0.04426685986884449,
+      "vol_z": 3.861757956553709,
+      "rvol": 5.8596526908452935,
+      "dollar_vol": 14575937.532478333,
+      "rv20_ann": 0.4353889981577367,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 327.94000244140625,
+      "ret_1d": -0.008683253981594197,
+      "ret_intra": -0.03275379535612932,
+      "vol_z": 3.603673345294777,
+      "rvol": 4.735448509304791,
+      "dollar_vol": 51934218.4866333,
+      "rv20_ann": 0.17734459671964004,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 77.91000366210938,
+      "ret_1d": 0.0010276748271275274,
+      "ret_intra": -0.03915638475935157,
+      "vol_z": 3.0439918007211704,
+      "rvol": 4.150345649190744,
+      "dollar_vol": 55044586.237335205,
+      "rv20_ann": 0.17505039142361406,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 160.77999877929688,
+      "ret_1d": -0.004653913061104079,
+      "ret_intra": -0.04551809075319435,
+      "vol_z": 3.2130234578385783,
+      "rvol": 4.690408668299241,
+      "dollar_vol": 58448674.51623535,
+      "rv20_ann": 0.1972684481288007,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 25.190000534057617,
+      "ret_1d": -0.0007952468835422867,
+      "ret_intra": 0.1111258343446091,
+      "vol_z": 3.7428230951474033,
+      "rvol": 5.10127625431889,
+      "dollar_vol": 31326486.184158325,
+      "rv20_ann": 0.6496645701202799,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 70054.87,
+      "ret_1h": 0.007231433327999026,
+      "rv_ann": 0.638646574715002,
+      "spread": 1.4274756384243076e-07,
+      "depth_0_5pct": 8.13859,
+      "dollar_vol_1h": 42890605.875056095,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 86.54,
+      "ret_1h": 0.010627116664720493,
+      "rv_ann": 0.6871419450341265,
+      "spread": 0.00011556017796273318,
+      "depth_0_5pct": 48618.997,
+      "dollar_vol_1h": 7407342.577980001,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2035.93,
+      "ret_1h": 0.007302700910858606,
+      "rv_ann": 0.6621369980950621,
+      "spread": 4.911748164843625e-06,
+      "depth_0_5pct": 315.0371,
+      "dollar_vol_1h": 14603606.177316,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 5.638736815427075,
+    "IWM": 5.179043573644279,
+    "XLF": 10.564362254259756,
+    "XLK": 6.399640355222461,
+    "XLE": 7.472094753255526,
+    "XLY": 6.417877053664212,
+    "XLP": 8.446616785758234,
+    "GLD": 7.278831019256345,
+    "TLT": 7.06387042177872,
+    "HYG": 6.998383916379155,
+    "MAR": 8.960666529733622,
+    "HLT": 9.723891342405498,
+    "DAL": 9.079954039654439,
+    "UAL": 8.180671534263354,
+    "DIS": 8.773888205007479,
+    "FOXA": 8.972757835656937,
+    "BTC/USDT": 1.974456659227002,
+    "MCD": 7.864870837414627,
+    "SOL/USDT": 3.214767010029977,
+    "ETH/USDT": 2.478559623313797,
+    "KO": 6.844145055249596,
+    "PEP": 7.392704308907796,
+    "DKNG": 8.59627187544295
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.014176706347908595,
+        "p50": 0.0008013993904409579,
+        "p95": 0.015779505128790512,
+        "mu": 0.0008013993904409579,
+        "sigma": 0.009106061791865249
+      },
+      "1W": {
+        "p5": -0.029485065652924494,
+        "p50": 0.0040069969522047895,
+        "p95": 0.03749905955733407,
+        "mu": 0.0040069969522047895,
+        "sigma": 0.02036177317392424
+      },
+      "1M": {
+        "p5": -0.05262275661775542,
+        "p50": 0.017630786589701075,
+        "p95": 0.08788432979715757,
+        "mu": 0.017630786589701075,
+        "sigma": 0.042711215738490745
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.24330811493247032,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9644192949352284
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.917680538922672
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8183145634345151
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.7544172055067091
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7095855679073918
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6931091561055406
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6873546830089894
+      },
+      {
+        "a": "KO",
+        "b": "XLP",
+        "corr": 0.6692062774308243
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.6637233003364101
+      },
+      {
+        "a": "DAL",
+        "b": "IWM",
+        "corr": 0.6374428278465573
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": 3.518111623890497,
+      "vol_z_p90": 4.045462331945466,
+      "vol_z_gt2_pct": 1.0
+    },
+    "regime": {
+      "label": "TENSION",
+      "triggers": [
+        "vol_z_gt2_pct>=0.25",
+        "vol_z_gt2_pct>=0.40",
+        "vol_z_gt2_pct>=0.75"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": 1.567605834029706e-08,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "TENSION",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 605,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": null,
+      "Guadalajara": 105,
+      "Monterrey": 250,
+      "Mexico City": 250,
+      "security": null
+    },
+    "samples": {
+      "Guadalajara": [
+        {
+          "datetime": "20260311T031500Z",
+          "title": "Horarios de  Checo  en Gran Premio de China 2026 : \u00bf D\u00f3nde ver EN VIVO pr\u00e1ctica , qualy , sprint y carrera ? \u2013 El Financiero",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.elfinanciero.com.mx/deportes/2026/03/10/gran-premio-de-china-2026-f1-en-vivo-horarios-practica-qualy-sprint-y-carrera-donde-ver-a-checo/"
+        },
+        {
+          "datetime": "20260311T024500Z",
+          "title": "Polic\u00edas tapat\u00edos arrestaron a 158 personas por diferentes delitos en una semana - El Occidental | Noticias Locales , Policiacas , sobre M\u00e9xico , Guadalajara y el Mundo",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://oem.com.mx:443/eloccidental/local/policias-tapatios-arrestaron-a-158-personas-por-diferentes-delitos-en-una-semana-28891018"
+        },
+        {
+          "datetime": "20260311T024500Z",
+          "title": "Tala Rangel VS Guillermo Ochoa : \u00bf Qui\u00e9n ser\u00e1 el portero en el Mundial 2026 ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.futboltotal.com.mx/futbol-mexicano/seleccion-mexicana/tala-rangel-vs-guillermo-ochoa-quien-sera-el-portero-en-el-mundial-2026/2026/03/"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260311T041500Z",
+          "title": "Mariana Rodr\u00edguez pide a ciudadanos recordar qui\u00e9n obstaculiza el progreso del Estado \u2013 Publimetro M\u00e9xico",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.publimetro.com.mx/nuevo-leon/2026/03/10/mariana-rodriguez-pide-considerar-a-quien-se-le-dara-el-voto-en-las-proximas-elecciones/"
+        },
+        {
+          "datetime": "20260311T041500Z",
+          "title": "Chilango - \u00bf Qu\u00e9 es la Ley Valeria y qu\u00e9 busca castigar ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.chilango.com/noticias/que-es-la-ley-valeria-y-que-busca-castigar-la-propuesta-para-tipificar-el-acecho/"
+        },
+        {
+          "datetime": "20260311T041500Z",
+          "title": "M\u00e9xico otorga visas a selecci\u00f3n de Irak para repechaje rumbo al Mundial en Monterrey \u2013 Publimetro M\u00e9xico",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.publimetro.com.mx/deportes/2026/03/11/mexico-entrega-visas-a-irak-para-que-puedan-viajar-al-repechaje-mundialista-en-monterrey/"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260311T041500Z",
+          "title": "Hermosillo lidera generaci\u00f3n de empleo entre capitales del pa\u00eds de acuerdo al IMSS",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.critica.com.mx/vernoticias.php?artid=115623&mas=1"
+        },
+        {
+          "datetime": "20260311T041500Z",
+          "title": "\u7206\u5355 \uff01 \u5168\u7403\u91c7\u8d2d\u5546\u8702\u62e5\u800c\u81f3 \uff01 210\u4e07\u79cd\u5546\u54c1 \uff0c \u4e0a\u65b0 _ \u6df1\u5733\u65b0\u95fb\u7f51",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.sznews.com/news/content/2026-03/11/content_31972473.htm"
+        },
+        {
+          "datetime": "20260311T041500Z",
+          "title": "Movilidad urbana requiere voluntad pol\u00edtica y considerar propuestas ciudadanas , se\u00f1ala especialista",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/03/10/movilidad-urbana-requiere-voluntad-politica-y-considerar-propuestas-ciudadanas-senala-especialista/"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 27.854899,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  },
+  "ollama_status": "AVAILABLE",
+  "ollama_details": {
+    "available": true,
+    "model": "llama3.2:3b",
+    "model_installed": true,
+    "models_installed": [
+      "llava:latest",
+      "llama3.2:3b"
+    ],
+    "version": "0.15.5"
+  },
+  "intelligence": {
+    "summary": "There is a high concentration of USDT-based pairs, which indicates a strong demand for stablecoins in the region. The presence of both small cap (A) and large cap (C) coins suggests a balanced market. Notable patterns include the widening spread between C and A coins, indicating potential arbitrage opportunities.",
+    "risk_level": "LOW",
+    "notable_patterns": [
+      "Widening Spread Between Large and Small Cap Coins"
+    ],
+    "recommendation": "Focus on USDT-based pairs with large spreads to capitalize on regional demand for stablecoins.",
+    "confidence": 0.8,
+    "status": "ok",
+    "date": "2026-03-11",
+    "market_summary": {
+      "count_by_type": {
+        "A": 0,
+        "B": 7,
+        "C": 28
+      },
+      "best_spread_by_type": {
+        "A": 0.0,
+        "B": 0.0928,
+        "C": 2.934
+      },
+      "active_pairs": [
+        "BTC",
+        "USDT/ARS",
+        "USDT/COP",
+        "USDT/MXN",
+        "USDT/VES"
+      ],
+      "total_opportunities": 35,
+      "data_quality": 100.0
+    },
+    "opportunities_count": 35
+  },
+  "data_quality": {
+    "cycle_ts": "2026-03-11T04:49:41.141167+00:00",
+    "dq_score": 1.0,
+    "total_records": 50,
+    "valid_records": 50,
+    "issues": [],
+    "breakdown": {
+      "has_spot_price": 1.0,
+      "has_valid_spread": 1.0,
+      "not_anomalous": 1.0,
+      "has_premium_quality": 1.0
+    },
+    "status": "OK"
+  }
+}

@@ -1,0 +1,487 @@
+{
+  "timestamp": "2026-02-26T17:24:48.003755+00:00",
+  "equities": {
+    "SPY_FAKE_TEST": {
+      "symbol": "SPY_FAKE_TEST",
+      "status": "no_daily"
+    },
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 606.4299926757812,
+      "ret_1d": -0.016621262440386864,
+      "ret_intra": 0.008799910001727973,
+      "vol_z": -1.4706433315877059,
+      "rvol": 0.014003547999413194,
+      "dollar_vol": 147303058.08093262,
+      "rv20_ann": 0.1906304743744362,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 263.07000732421875,
+      "ret_1d": -0.005782745698639569,
+      "ret_intra": -0.0005698423212094905,
+      "vol_z": -1.7088232320515173,
+      "rvol": 0.5234087585955974,
+      "dollar_vol": 60475848.63372803,
+      "rv20_ann": 0.20249913814354986,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 52.125,
+      "ret_1d": 0.004819741761095786,
+      "ret_intra": -0.0051531721615561965,
+      "vol_z": -0.3951379088503484,
+      "rvol": 0.8453087059119456,
+      "dollar_vol": 27221290.875,
+      "rv20_ann": 0.21026835948436154,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 140.15499877929688,
+      "ret_1d": -0.020068493304153723,
+      "ret_intra": 0.005560294657300124,
+      "vol_z": -1.695729313563579,
+      "rvol": 0.42608455750266794,
+      "dollar_vol": 10097747.197052002,
+      "rv20_ann": 0.2858780260592747,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 55.31010055541992,
+      "ret_1d": 0.00820121690722253,
+      "ret_intra": 0.013005532987979684,
+      "vol_z": -1.6667191653052382,
+      "rvol": 0.4274947957829054,
+      "dollar_vol": 10299293.824424744,
+      "rv20_ann": 0.22866315434454731,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 116.44000244140625,
+      "ret_1d": -0.005551233382984022,
+      "ret_intra": 0.0014621639567233835,
+      "vol_z": -1.0124291762754751,
+      "rvol": 0.5711957628844979,
+      "dollar_vol": 6856453.103759766,
+      "rv20_ann": 0.15362132212032387,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 88.69000244140625,
+      "ret_1d": -0.0035950981591310605,
+      "ret_intra": 0.0074974857578278264,
+      "vol_z": -1.2637369177649136,
+      "rvol": 0.27293265643669223,
+      "dollar_vol": 3711499.2221679688,
+      "rv20_ann": 0.14594927176308925,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 475.8699951171875,
+      "ret_1d": 0.005175069958944789,
+      "ret_intra": 0.041929396228107096,
+      "vol_z": -1.1418088852929287,
+      "rvol": 0.26186285856392694,
+      "dollar_vol": 15633756.949584961,
+      "rv20_ann": 0.5565629674288816,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 90.08999633789062,
+      "ret_1d": 0.002001920458792217,
+      "ret_intra": 0.004010847961211761,
+      "vol_z": 0.025482627857440505,
+      "rvol": 1.0140556138192285,
+      "dollar_vol": 598223521.6025391,
+      "rv20_ann": 0.08393346614973055,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.7699966430664,
+      "ret_1d": -0.0017918517838282355,
+      "ret_intra": -0.0011130839303213902,
+      "vol_z": 0.9978792683392097,
+      "rvol": 1.5485170244209048,
+      "dollar_vol": 74371801.3589859,
+      "rv20_ann": 0.020285674459739143,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 348.8450012207031,
+      "ret_1d": 0.004043860146857536,
+      "ret_intra": -0.01686719155102634,
+      "vol_z": -0.5357589843444521,
+      "rvol": 0.11464708569019429,
+      "dollar_vol": 1422938.759979248,
+      "rv20_ann": 0.3578167623958059,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 315.45001220703125,
+      "ret_1d": 0.006685818349756234,
+      "ret_intra": -0.00012671726070945244,
+      "vol_z": 3.994973833853551,
+      "rvol": 4.735108942312614,
+      "dollar_vol": 13131553.108154297,
+      "rv20_ann": 0.1946830633660241,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 70.12999725341797,
+      "ret_1d": 0.010810032137368752,
+      "ret_intra": 0.027846897303300366,
+      "vol_z": -0.8632618463597351,
+      "rvol": 0.37701118249302695,
+      "dollar_vol": 1598683.417388916,
+      "rv20_ann": 0.49966612645217545,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 115.5,
+      "ret_1d": 0.021130454937533516,
+      "ret_intra": 0.059633027522935755,
+      "vol_z": -0.394213455786392,
+      "rvol": 0.3923995983381794,
+      "dollar_vol": 6571603.5,
+      "rv20_ann": 0.6031817853050949,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 105.4800033569336,
+      "ret_1d": 0.00409329169618311,
+      "ret_intra": -0.009251801200752752,
+      "vol_z": -0.1884555856817993,
+      "rvol": 0.9488279429957744,
+      "dollar_vol": 7786533.847808838,
+      "rv20_ann": 0.43125860065840754,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 56.32600021362305,
+      "ret_1d": 0.04028086378788598,
+      "ret_intra": 0.004028551615847364,
+      "vol_z": -0.38369929057241764,
+      "rvol": 0.21163600048133546,
+      "dollar_vol": 629048.7703857422,
+      "rv20_ann": 0.42258081252504326,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 334.0400085449219,
+      "ret_1d": 0.0030929964538357613,
+      "ret_intra": 0.025480501502363584,
+      "vol_z": 4.222117601570721,
+      "rvol": 8.992644870851672,
+      "dollar_vol": 82274054.10461426,
+      "rv20_ann": 0.14867282077881763,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 80.28500366210938,
+      "ret_1d": -0.0024543573161976973,
+      "ret_intra": 0.006708509869709944,
+      "vol_z": -1.3484454556007144,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.16732195766747868,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 168.125,
+      "ret_1d": -0.0061772074259982546,
+      "ret_intra": 0.039927023592275956,
+      "vol_z": 1.9127263350254975,
+      "rvol": 3.5760984131451163,
+      "dollar_vol": 90583228.125,
+      "rv20_ann": 0.27950170847464967,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 22.799999237060547,
+      "ret_1d": -0.006102933467208027,
+      "ret_intra": -0.014267182692587532,
+      "vol_z": -0.4704729559119738,
+      "rvol": 0.15538122691136227,
+      "dollar_vol": 774242.374092102,
+      "rv20_ann": 0.6979670976908652,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 66876.98,
+      "ret_1h": 0.0035026645489322217,
+      "rv_ann": 0.6102498789774686,
+      "spread": 1.4954139757892943e-07,
+      "depth_0_5pct": 5.34511,
+      "dollar_vol_1h": 35067520.942567594,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 1990.69,
+      "ret_1h": 0.0034731323722150265,
+      "rv_ann": 0.862890133353047,
+      "spread": 5.023926449712207e-06,
+      "depth_0_5pct": 343.70079999999996,
+      "dollar_vol_1h": 27212057.257021002,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 85.05,
+      "ret_1h": 0.005556869236226003,
+      "rv_ann": 0.8700748790225595,
+      "spread": 0.00011757098348133697,
+      "depth_0_5pct": 60676.012,
+      "dollar_vol_1h": 7549998.3845999995,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": -0.9786337251418873,
+    "IWM": -1.0073060170856487,
+    "XLF": 0.71647072795328,
+    "XLK": -1.0998883468750122,
+    "XLE": -1.1087144802006066,
+    "XLY": -0.3238855696184324,
+    "XLP": -0.8505328839645974,
+    "GLD": -0.2886930698837762,
+    "TLT": 1.4226888174042633,
+    "HYG": 2.7235051213262507,
+    "MAR": 0.03510881153462264,
+    "HLT": 8.2585278308703,
+    "DAL": -0.07941023444535578,
+    "UAL": 0.6675797431398731,
+    "DIS": 1.1218585698764203,
+    "FOXA": 0.27440974928649453,
+    "BTC/USDT": 1.8747130123947275,
+    "ETH/USDT": 2.6929383068252184,
+    "MCD": 11.168355735713092,
+    "SOL/USDT": 3.39592934284372,
+    "KO": -2.084276980586874,
+    "PEP": 5.258089185741213,
+    "DKNG": 0.37036640767445717
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.006195805312900491,
+        "p50": 0.00043401612595622767,
+        "p95": 0.007063837564812946,
+        "mu": 0.00043401612595622767,
+        "sigma": 0.004030654125821029
+      },
+      "1W": {
+        "p5": -0.012654650786187951,
+        "p50": 0.0021700806297811383,
+        "p95": 0.016994812045750228,
+        "mu": 0.0021700806297811383,
+        "sigma": 0.009012816619125811
+      },
+      "1M": {
+        "p5": -0.021548264190591797,
+        "p50": 0.009548354771037009,
+        "p95": 0.04064497373266581,
+        "mu": 0.009548354771037009,
+        "sigma": 0.018905443634148283
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.2390745044899741,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9630588486413505
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.882349332927911
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8064327386424937
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7161628540976449
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.6805358049081189
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.664241480872043
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6574299406700421
+      },
+      {
+        "a": "HYG",
+        "b": "QQQ",
+        "corr": 0.6449030943085499
+      },
+      {
+        "a": "IWM",
+        "b": "XLF",
+        "corr": 0.6361149050560276
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.6344850953069924
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": -0.16930779191513853,
+      "vol_z_p90": 2.120951084908306,
+      "vol_z_gt2_pct": 0.1
+    },
+    "regime": {
+      "label": "NORMAL",
+      "triggers": []
+    },
+    "deltas": {
+      "corr_stress_delta": -0.00014160327835124886,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.05,
+      "prev_regime": "NORMAL",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 750,
+    "by_keyword": {
+      "World Cup 2026": 250,
+      "FIFA 2026": null,
+      "Guadalajara": null,
+      "Monterrey": 250,
+      "Mexico City": null,
+      "security": 250
+    },
+    "samples": {
+      "World Cup 2026": [
+        {
+          "datetime": "20260226T170000Z",
+          "title": "U . S . Polo Assn . Returns as Official Apparel and Jersey Sponsor of the 2026 Dubai Polo Gold Cup for Third Consecutive Year",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.indiagazette.com/news/278889950/us-polo-assn-returns-as-official-apparel-and-jersey-sponsor-of-the-2026-dubai-polo-gold-cup-for-third-consecutive-year"
+        },
+        {
+          "datetime": "20260226T170000Z",
+          "title": "What Is Beyonc\u00e9 Act III Going To Be ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://mycolumbuspower.com/4880882/what-is-beyonces-act-iii-going-to-be/"
+        },
+        {
+          "datetime": "20260226T170000Z",
+          "title": "  A Victory For Free Speech :  PB4WEGO  License Plate Allowed To Return To The Roads",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://patch.com/new-york/malverne-lynbrook/victory-free-speech-pb4wego-license-plate-allowed-return-roads"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260226T170000Z",
+          "title": "  Estamos monitoreando la situaci\u00f3n en M\u00e9xico : afirma la FIFA",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://sipse.com/deportes/estamos-monitoreando-situacion-mexico-afirma-fifa-504755.html"
+        },
+        {
+          "datetime": "20260226T170000Z",
+          "title": "FIFA Infantino has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://mix1063.com/news/030030-fifas-infantino-has-complete-confidence-in-mexico-to-host-world-cup-games-despite-cartel-violence/"
+        },
+        {
+          "datetime": "20260226T170000Z",
+          "title": "Houston Pastor Fatally Shot During Burglary Attempt , Church Mourns Founder",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.worthynews.com/112528-houston-pastor-fatally-shot-during-burglary-attempt-church-mourns-founder"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260226T170000Z",
+          "title": "La calle 5 de Julio sigue en espera de asfaltado",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://elsiglo.com.ve/calle-5-julio-sigue-espera-asfaltado/"
+        },
+        {
+          "datetime": "20260226T170000Z",
+          "title": "Meloni  Export e Made in Italy punti di forza , governo lavora per valorizzarli  ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://bsnews.it/2026/02/26/meloni-export-e-made-in-italy-punti-di-forza-governo-lavora-per-valorizzarli/"
+        },
+        {
+          "datetime": "20260226T170000Z",
+          "title": "Qatar renews commitment to its role as effective international partner",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.qatar-tribune.com/article/221569/latest-news/qatar-renews-commitment-to-its-role-as-effective-international-partner"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 136.335466,
+    "equities_total": 21,
+    "crypto_total": 3,
+    "equities_ok": 21,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

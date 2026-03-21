@@ -1,0 +1,17 @@
+batman_bridge:
+  default_pair: MXN
+  engine_path: ~/Projects/batcave/batman_flow_engine
+  timeout_seconds: 30
+cycle:
+  interval_seconds: 300
+  max_cycles: 0
+gates:
+  kill_switch_file: storage/KILL_SWITCH
+  min_edge_net_pct: 0.1
+  require_human_approval_live: true
+  require_positive_edge: true
+logging:
+  executions_file: storage/logs/executions.jsonl
+  file: storage/logs/agent.log
+  level: INFO
+mode: SIMULATED

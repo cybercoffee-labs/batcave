@@ -1,0 +1,482 @@
+{
+  "timestamp": "2026-03-13T20:50:51.356783+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "status": "no_daily"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "status": "no_daily"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 246.5500030517578,
+      "ret_1d": -0.0033198707585588142,
+      "ret_intra": -0.05030616323219972,
+      "vol_z": 4.015618957650201,
+      "rvol": 5.231529439309998,
+      "dollar_vol": 815321875.7419281,
+      "rv20_ann": 0.19169469115226867,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 48.880001068115234,
+      "ret_1d": 0.0012279485342458637,
+      "ret_intra": -0.05390496076765017,
+      "vol_z": 3.4732383251525736,
+      "rvol": 3.573707017058847,
+      "dollar_vol": 111997573.3273468,
+      "rv20_ann": 0.19320586443558807,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 136.8000030517578,
+      "ret_1d": -0.0075735381552251005,
+      "ret_intra": 0.0,
+      "vol_z": -0.6934218929865762,
+      "rvol": 0.777348054203788,
+      "dollar_vol": 2100238599.652481,
+      "rv20_ann": 0.20376096460552565,
+      "status": "ok_daily"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 57.70000076293945,
+      "ret_1d": 0.0032983701965633525,
+      "ret_intra": 0.0,
+      "vol_z": -0.8120017431418584,
+      "rvol": 0.6295338906443955,
+      "dollar_vol": 2458210442.5037384,
+      "rv20_ann": 0.16741018249886186,
+      "status": "ok_daily"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 110.87999725341797,
+      "ret_1d": -0.0059357674133196,
+      "ret_intra": -0.049912210155903636,
+      "vol_z": 3.7619170104859814,
+      "rvol": 6.3820137229048886,
+      "dollar_vol": 158674265.66951752,
+      "rv20_ann": 0.17364213115311297,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 84.73999786376953,
+      "ret_1d": 0.005799150756707884,
+      "ret_intra": -0.017962719148365447,
+      "vol_z": 3.6594942515205826,
+      "rvol": 4.685901167399618,
+      "dollar_vol": 68248068.95951843,
+      "rv20_ann": 0.14694624099707468,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 460.79998779296875,
+      "ret_1d": -0.013021372569552835,
+      "ret_intra": -0.020824518026868022,
+      "vol_z": 2.9208016957261407,
+      "rvol": 3.7952753273256206,
+      "dollar_vol": 230184800.30218506,
+      "rv20_ann": 0.30535089761436635,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "status": "no_daily"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 79.20999908447266,
+      "ret_1d": -0.0018921674546061868,
+      "ret_intra": -0.013389855248198357,
+      "vol_z": 2.4323688642200674,
+      "rvol": 3.632806206382366,
+      "dollar_vol": 253165771.21385193,
+      "rv20_ann": 0.04381053847432612,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 313.7900085449219,
+      "ret_1d": -0.007935038205522972,
+      "ret_intra": -0.055603224200608814,
+      "vol_z": 3.8339433111992984,
+      "rvol": 7.3072374080091755,
+      "dollar_vol": 38385617.95529175,
+      "rv20_ann": 0.2521828631382472,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 291.54998779296875,
+      "ret_1d": -0.009252287658125068,
+      "ret_intra": -0.03296959356321916,
+      "vol_z": 3.873851900299298,
+      "rvol": 5.523297616139053,
+      "dollar_vol": 34602901.85119629,
+      "rv20_ann": 0.20975986495803942,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 58.779998779296875,
+      "ret_1d": 0.014393671584196747,
+      "ret_intra": 0.0,
+      "vol_z": -0.20919797889753783,
+      "rvol": 0.8892714766464623,
+      "dollar_vol": 650566739.9894714,
+      "rv20_ann": 0.46895949770799733,
+      "status": "ok_daily"
+    },
+    "KO": {
+      "symbol": "KO",
+      "status": "no_daily"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 99.29499816894531,
+      "ret_1d": -0.0014090117949914199,
+      "ret_intra": -0.04510268225107239,
+      "vol_z": 3.5403074967416597,
+      "rvol": 3.932442052894946,
+      "dollar_vol": 62609170.26045227,
+      "rv20_ann": 0.17907628795768876,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 57.400001525878906,
+      "ret_1d": -0.006080141819066541,
+      "ret_intra": -0.022729191633606205,
+      "vol_z": 1.1377894843439988,
+      "rvol": 2.1739805113593245,
+      "dollar_vol": 40449264.47527313,
+      "rv20_ann": 0.3024202796841767,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 326.4599914550781,
+      "ret_1d": 0.00784169281829924,
+      "ret_intra": -0.008579231290867129,
+      "vol_z": 3.836258499316935,
+      "rvol": 5.820971029086547,
+      "dollar_vol": 59162385.49145508,
+      "rv20_ann": 0.15075959763218072,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "status": "no_daily"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 25.8799991607666,
+      "ret_1d": 0.012055420023286124,
+      "ret_intra": 0.0027121153147091626,
+      "vol_z": 3.8129784487469203,
+      "rvol": 6.213960078162963,
+      "dollar_vol": 35709300.48202324,
+      "rv20_ann": 0.6267045402257843,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 71469.52,
+      "ret_1h": 0.003927099260499611,
+      "rv_ann": 0.5126857906352698,
+      "spread": 1.399197769225598e-07,
+      "depth_0_5pct": 13.177330000000001,
+      "dollar_vol_1h": 34820674.1302376,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2113.9,
+      "ret_1h": 0.005431680681861506,
+      "rv_ann": 0.6968075378555048,
+      "spread": 4.730603932654308e-06,
+      "depth_0_5pct": 340.6162,
+      "dollar_vol_1h": 11144097.76132,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 88.88,
+      "ret_1h": -0.00044984255510582827,
+      "rv_ann": 0.7723456891857804,
+      "spread": 0.00011251758087190892,
+      "depth_0_5pct": 60731.755,
+      "dollar_vol_1h": 8197237.705359999,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "IWM": 8.847715529930666,
+    "XLF": 7.074056183891555,
+    "XLK": 0.5956516280204731,
+    "XLE": 0.3458392474997296,
+    "XLY": 9.112498325815725,
+    "XLP": 7.895604350227643,
+    "GLD": 6.680719445756104,
+    "HYG": 5.794085539778892,
+    "MAR": 9.724445989236095,
+    "HLT": 8.661275620144918,
+    "DAL": 1.3796866879298628,
+    "DIS": 7.32059095043147,
+    "FOXA": 3.452708506104686,
+    "MCD": 8.782507346273256,
+    "BTC/USDT": 1.933356810483646,
+    "DKNG": 9.338231018991447,
+    "ETH/USDT": 2.5005590919164553,
+    "SOL/USDT": 3.323496342636238
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.0142180647112763,
+        "p50": 0.000760904148937639,
+        "p95": 0.01573987300915158,
+        "mu": 0.000760904148937639,
+        "sigma": 0.009106586533856547
+      },
+      "1W": {
+        "p5": -0.029689471859602728,
+        "p50": 0.003804520744688195,
+        "p95": 0.037298513348979115,
+        "mu": 0.003804520744688195,
+        "sigma": 0.020362946532687432
+      },
+      "1M": {
+        "p5": -0.0535177003312238,
+        "p50": 0.016739891276628057,
+        "p95": 0.08699748288447992,
+        "mu": 0.016739891276628057,
+        "sigma": 0.04271367699659657
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.2557912326945359,
+    "n_assets": 19,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9611867313375759
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9148942535970308
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.7971963124143725
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.7553753825060389
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.7398289764742354
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7197734301998687
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.7025918825126939
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.7002909769328308
+      },
+      {
+        "a": "KO",
+        "b": "XLP",
+        "corr": 0.6941416627231609
+      },
+      {
+        "a": "HYG",
+        "b": "IWM",
+        "corr": 0.6922006256855887
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": 2.572263108691845,
+      "vol_z_p90": 3.8588145399063527,
+      "vol_z_gt2_pct": 0.7333333333333333
+    },
+    "regime": {
+      "label": "TENSION",
+      "triggers": [
+        "vol_z_gt2_pct>=0.25",
+        "vol_z_gt2_pct>=0.40"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": 0.006320916598610171,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": -0.21666666666666667,
+      "prev_regime": "TENSION",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 500,
+    "by_keyword": {
+      "World Cup 2026": 250,
+      "FIFA 2026": null,
+      "Guadalajara": null,
+      "Monterrey": null,
+      "Mexico City": 250,
+      "security": null
+    },
+    "samples": {
+      "World Cup 2026": [
+        {
+          "datetime": "20260313T203000Z",
+          "title": "Iran team pushes back on Trump comments to exclude it from World Cup",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.sentinelandenterprise.com/2026/03/13/iran-world-cup-team-trump/"
+        },
+        {
+          "datetime": "20260313T200000Z",
+          "title": "Iran team pushes back on Trump comments to exclude it from World Cup",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.advocate-news.com/2026/03/13/iran-world-cup-team-trump/"
+        },
+        {
+          "datetime": "20260313T200000Z",
+          "title": "Commission recommends ban on short term rentals",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.simivalleyacorn.com/articles/commission-recommends-ban-on-short-term-rentals/"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260313T203000Z",
+          "title": "El centro de datos de Banorte marca un nuevo est\u00e1ndar y eficiencia operativa en el sistema financiero regional",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.todoenunclick.com/el-centro-de-datos-de-banorte-marca-un-nuevo-estandar-y-eficiencia-operativa-en-el-sistema-financiero-regional/"
+        },
+        {
+          "datetime": "20260313T203000Z",
+          "title": "City Settles Lawsuit for $120 , 000",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.riograndesun.com/news/city-settles-lawsuit-for-120-000/article_1ea04b59-f8e5-4b4b-b92f-66f6a2bda37b.html"
+        },
+        {
+          "datetime": "20260313T203000Z",
+          "title": "Sinaloa presume a su velocista : Joselyn Araujo gana 100 y 200 metros en Regional - El Sol de Sinaloa | Noticias Locales , Policiacas , sobre M\u00e9xico , Sinaloa y el Mundo",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://oem.com.mx:443/elsoldesinaloa/deportes/sinaloa-presume-a-su-velocista-joselyn-araujo-gana-100-y-200-metros-en-regional-28944607"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 0.75,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "partial",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 205.339614,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 15,
+    "crypto_ok": 3,
+    "errors": 0
+  },
+  "ollama_status": "AVAILABLE",
+  "ollama_details": {
+    "available": true,
+    "model": "llama3.2:3b",
+    "model_installed": true,
+    "models_installed": [
+      "llava:latest",
+      "llama3.2:3b"
+    ],
+    "version": "0.15.5"
+  },
+  "intelligence": {
+    "summary": "A favorable market environment is presented, with significant interest in USDT-based pairs. The highest spread for a given type is seen on pair C (USDT/COP), indicating high liquidity demand. Notable patterns include the increasing use of BTC and lesser-known cryptocurrencies like VES, suggesting growth potential.",
+    "risk_level": "LOW",
+    "notable_patterns": [
+      "VES adoption",
+      "Copper volatility"
+    ],
+    "recommendation": "Monitor USDT/COP pair closely for potential arbitrage opportunities due to high liquidity demand and favorable spread conditions.",
+    "confidence": 0.62,
+    "status": "ok",
+    "date": "2026-03-13",
+    "market_summary": {
+      "count_by_type": {
+        "A": 0,
+        "B": 8,
+        "C": 36
+      },
+      "best_spread_by_type": {
+        "A": 0.0,
+        "B": 0.0731,
+        "C": 6.263
+      },
+      "active_pairs": [
+        "BTC",
+        "USDT/ARS",
+        "USDT/COP",
+        "USDT/MXN",
+        "USDT/VES"
+      ],
+      "total_opportunities": 44,
+      "data_quality": 100.0
+    },
+    "opportunities_count": 44
+  },
+  "data_quality": {
+    "cycle_ts": "2026-03-13T20:54:59.073298+00:00",
+    "dq_score": 1.0,
+    "total_records": 50,
+    "valid_records": 50,
+    "issues": [],
+    "breakdown": {
+      "has_spot_price": 1.0,
+      "has_valid_spread": 1.0,
+      "not_anomalous": 1.0,
+      "has_premium_quality": 1.0
+    },
+    "status": "OK"
+  }
+}

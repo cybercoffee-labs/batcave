@@ -1,0 +1,70 @@
+# Batman Lab — Docker Compose
+# Run the complete ecosystem with one command:
+#   docker compose up -d
+#
+# Services:
+#   batman    — Engine loop (scans every 20 min)
+#   nightwing — Paper trading agent
+#   dashboard — Streamlit web UI on port 8501
+
+services:
+  batman:
+    build:
+      context: .
+      target: batman
+    container_name: batman-engine
+    restart: unless-stopped
+    volumes:
+      - batman-storage:/app/batman_flow_engine/storage
+      - batman-journal:/app/batman_flow_engine/journal
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "python", "-c", "import json; from pathlib import Path; d=json.loads(Path('/app/batman_flow_engine/storage/latest.json').read_text()); print('ok')"]
+      interval: 300s
+      timeout: 10s
+      retries: 3
+
+  nightwing:
+    build:
+      context: .
+      target: nightwing
+    container_name: nightwing-agent
+    restart: unless-stopped
+    volumes:
+      - batman-storage:/app/batman_flow_engine/storage:ro
+      - nightwing-storage:/app/nightwing_agent/storage
+    depends_on:
+      - batman
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  dashboard:
+    build:
+      context: .
+      target: dashboard
+    container_name: batman-dashboard
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    volumes:
+      - batman-storage:/app/batman_flow_engine/storage:ro
+      - batman-journal:/app/batman_flow_engine/journal
+      - nightwing-storage:/app/nightwing_agent/storage:ro
+    depends_on:
+      - batman
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  # Run tests: docker compose run --rm tests
+  tests:
+    build:
+      context: .
+      target: test
+    container_name: batman-tests
+    profiles: ["test"]
+
+volumes:
+  batman-storage:
+  batman-journal:
+  nightwing-storage:

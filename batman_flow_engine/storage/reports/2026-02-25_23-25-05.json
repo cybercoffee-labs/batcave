@@ -1,0 +1,590 @@
+{
+  "timestamp": "2026-02-25T23:23:57.209732+00:00",
+  "equities": {
+    "SPY": {
+      "symbol": "SPY",
+      "px": 693.0999755859375,
+      "ret_1d": 0.008438276037153747,
+      "ret_intra": 0.01666322280383903,
+      "vol_z": 2.6423451367548867,
+      "rvol": 3.656174093521583,
+      "dollar_vol": 2269514977.157593,
+      "rv20_ann": 0.1283020405451979,
+      "status": "ok"
+    },
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 616.52001953125,
+      "ret_1d": 0.014493226560549965,
+      "ret_intra": 0.026182263485078128,
+      "vol_z": -0.7489730238553884,
+      "rvol": 0.1587082855023583,
+      "dollar_vol": 1171061898.019043,
+      "rv20_ann": 0.1834751106094067,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 264.55999755859375,
+      "ret_1d": 0.00474689577237708,
+      "ret_intra": 0.006927028209886332,
+      "vol_z": 3.6241545020049517,
+      "rvol": 3.9888528098135083,
+      "dollar_vol": 381704518.8775635,
+      "rv20_ann": 0.20235859371531756,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.83000183105469,
+      "ret_1d": 0.017457814783051973,
+      "ret_intra": -0.006707521503911851,
+      "vol_z": 3.433471281029086,
+      "rvol": 4.817703343115544,
+      "dollar_vol": 219894484.06845093,
+      "rv20_ann": 0.20925999064567816,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 143.01499938964844,
+      "ret_1d": 0.01917037515827502,
+      "ret_intra": 0.028144493061917908,
+      "vol_z": 3.7023683746131613,
+      "rvol": 4.711715036319308,
+      "dollar_vol": 115128361.6436615,
+      "rv20_ann": 0.2809359297494485,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 54.8650016784668,
+      "ret_1d": -0.004174220482861757,
+      "ret_intra": 0.011243214419731196,
+      "vol_z": 2.8676215166289882,
+      "rvol": 3.744147555193937,
+      "dollar_vol": 111037655.80693817,
+      "rv20_ann": 0.2285729490588726,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 117.08000183105469,
+      "ret_1d": 0.0029981024543921375,
+      "ret_intra": 0.010094022362004074,
+      "vol_z": 3.742991274107102,
+      "rvol": 5.755882764436075,
+      "dollar_vol": 71287437.35488892,
+      "rv20_ann": 0.15434017111583004,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 88.98999786376953,
+      "ret_1d": -0.008134563683043994,
+      "ret_intra": -0.005698347890843225,
+      "vol_z": 3.9481496872117083,
+      "rvol": 6.314623699075455,
+      "dollar_vol": 85116352.2467575,
+      "rv20_ann": 0.15200726542280002,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 473.455810546875,
+      "ret_1d": -0.0025072627221415233,
+      "ret_intra": 0.052030489639491195,
+      "vol_z": 3.2811754161397553,
+      "rvol": 3.542293624236589,
+      "dollar_vol": 331645852.71606445,
+      "rv20_ann": 0.574263673985638,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 89.9000015258789,
+      "ret_1d": 0.00011125846563619923,
+      "ret_intra": 0.0005007864588972843,
+      "vol_z": 3.0004463088442233,
+      "rvol": 5.543887560525403,
+      "dollar_vol": 1738706304.7111816,
+      "rv20_ann": 0.0850339013283054,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.91999816894531,
+      "ret_1d": 0.0013612252651264978,
+      "ret_intra": 0.000989631799589663,
+      "vol_z": 3.483110392186458,
+      "rvol": 6.165135995445634,
+      "dollar_vol": 236868128.52015686,
+      "rv20_ann": 0.020062321351913028,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 347.4100036621094,
+      "ret_1d": 0.012501846484706647,
+      "ret_intra": -0.02184871884519024,
+      "vol_z": 0.5842540812340794,
+      "rvol": 2.040070726823499,
+      "dollar_vol": 30262885.419006348,
+      "rv20_ann": 0.360240364674412,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 313.2900085449219,
+      "ret_1d": 0.0018223905826566522,
+      "ret_intra": -0.01498163600820035,
+      "vol_z": 3.358047165375913,
+      "rvol": 4.241539127606894,
+      "dollar_vol": 33301788.03829956,
+      "rv20_ann": 0.19445879571424007,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 69.37000274658203,
+      "ret_1d": 0.0021666024730786493,
+      "ret_intra": -0.008575081658617423,
+      "vol_z": 3.9561273205689598,
+      "rvol": 5.5681275615881995,
+      "dollar_vol": 22368704.23564911,
+      "rv20_ann": 0.49974238456746445,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 112.86000061035156,
+      "ret_1d": 0.0024869563708935782,
+      "ret_intra": 0.016756762255419444,
+      "vol_z": 0.9215332980336886,
+      "rvol": 3.2708407584699066,
+      "dollar_vol": 28120536.332077026,
+      "rv20_ann": 0.6004595770494149,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 105.08000183105469,
+      "ret_1d": -0.009429514108660109,
+      "ret_intra": -0.01453620427917246,
+      "vol_z": 3.970877719390828,
+      "rvol": 4.926640079723012,
+      "dollar_vol": 54754246.71411133,
+      "rv20_ann": 0.4316020661091731,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 54.130001068115234,
+      "ret_1d": -0.03322616337194162,
+      "ret_intra": -0.0552403735400685,
+      "vol_z": 3.6338327415212217,
+      "rvol": 5.895016586675285,
+      "dollar_vol": 15501154.275875092,
+      "rv20_ann": 0.37619860258747,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 333.010009765625,
+      "ret_1d": -0.00012003611712663176,
+      "ret_intra": 0.01322015154561007,
+      "vol_z": 3.5077465307035665,
+      "rvol": 4.224778452487379,
+      "dollar_vol": 37927176.03222656,
+      "rv20_ann": 0.15108410238693978,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 80.46499633789062,
+      "ret_1d": -0.0030971258203583707,
+      "ret_intra": 0.01873768077612814,
+      "vol_z": 3.6013387893342688,
+      "rvol": 5.307005919989432,
+      "dollar_vol": 76616355.56304932,
+      "rv20_ann": 0.17037081605402649,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 169.19000244140625,
+      "ret_1d": -0.002182347126574835,
+      "ret_intra": 0.020138656707711977,
+      "vol_z": -0.331718702535958,
+      "rvol": 0.5316120009898018,
+      "dollar_vol": 32749601.202575684,
+      "rv20_ann": 0.27735165465392503,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 22.950000762939453,
+      "ret_1d": 0.025480539715694972,
+      "ret_intra": 0.04651647220115751,
+      "vol_z": 0.3992430366282371,
+      "rvol": 1.7236606928973852,
+      "dollar_vol": 18330004.9593544,
+      "rv20_ann": 0.6991662744355569,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 68321.99,
+      "ret_1h": -0.0016094778870685555,
+      "rv_ann": 0.6085452133273077,
+      "spread": 1.463657493426723e-07,
+      "depth_0_5pct": 9.61012,
+      "dollar_vol_1h": 23123947.1374659,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2068.47,
+      "ret_1h": -0.007047020137772253,
+      "rv_ann": 0.7768528762858297,
+      "spread": 4.83450288004077e-06,
+      "depth_0_5pct": 256.2383,
+      "dollar_vol_1h": 18945780.708869997,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 88.49,
+      "ret_1h": -0.006846240179573471,
+      "rv_ann": 0.7445995771112456,
+      "spread": 0.00011301350511375833,
+      "depth_0_5pct": 119104.56700000001,
+      "dollar_vol_1h": 7267741.0415199995,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "SPY": 6.270550210622647,
+    "QQQ": 0.10352440879536018,
+    "IWM": 7.5914430584842245,
+    "XLF": 7.829527685939842,
+    "XLK": 8.103797163786146,
+    "XLE": 6.4773132549955195,
+    "XLY": 8.646543274925222,
+    "XLP": 9.237661606916141,
+    "GLD": 7.200298798710227,
+    "TLT": 7.780929162328566,
+    "HYG": 8.551039919282212,
+    "MAR": 2.73547617534386,
+    "HLT": 7.258517244424823,
+    "DAL": 8.990469353370791,
+    "UAL": 4.066065614295437,
+    "DIS": 8.627081635264854,
+    "BTC/USDT": 1.9353932312904296,
+    "FOXA": 8.67712272969369,
+    "ETH/USDT": 2.555892867338423,
+    "MCD": 7.401872766351341,
+    "SOL/USDT": 3.395813848209642,
+    "KO": 8.224754975523158,
+    "PEP": 0.6700669836562847,
+    "DKNG": 2.5620954666104616
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.009457598779635371,
+        "p50": 0.0006661113838744438,
+        "p95": 0.010789821547384257,
+        "mu": 0.0006661113838744438,
+        "sigma": 0.006154792329701684
+      },
+      "1W": {
+        "p5": -0.01930674719074124,
+        "p50": 0.003330556919372219,
+        "p95": 0.02596786102948568,
+        "mu": 0.003330556919372219,
+        "sigma": 0.013762534036607266
+      },
+      "1M": {
+        "p5": -0.03282995925357331,
+        "p50": 0.014654450445237763,
+        "p95": 0.06213886014404883,
+        "mu": 0.014654450445237763,
+        "sigma": 0.028868534941673143
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.26039354945853765,
+    "n_assets": 21,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9619111404126454
+      },
+      {
+        "a": "QQQ",
+        "b": "SPY",
+        "corr": 0.9324892595111394
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.8821320367445227
+      },
+      {
+        "a": "SPY",
+        "b": "XLK",
+        "corr": 0.8786394120346966
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8066793242928011
+      },
+      {
+        "a": "IWM",
+        "b": "SPY",
+        "corr": 0.7679187822116569
+      },
+      {
+        "a": "HYG",
+        "b": "SPY",
+        "corr": 0.7149272812007248
+      },
+      {
+        "a": "SPY",
+        "b": "XLY",
+        "corr": 0.7141773116539295
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.709679774167508
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.6782454617010002
+      }
+    ],
+    "downside_corr_mean": 0.32544095550076596,
+    "downside_quantile": 0.2,
+    "tail_points": 12,
+    "downside_top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9690155037552683
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.9348285859214438
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9122175598258722
+      },
+      {
+        "a": "DIS",
+        "b": "DKNG",
+        "corr": 0.7883580472194833
+      },
+      {
+        "a": "IWM",
+        "b": "XLE",
+        "corr": 0.7674633528743656
+      },
+      {
+        "a": "QQQ",
+        "b": "SPY",
+        "corr": 0.7449729045951422
+      },
+      {
+        "a": "GLD",
+        "b": "PEP",
+        "corr": 0.7384667413955027
+      },
+      {
+        "a": "MAR",
+        "b": "XLF",
+        "corr": 0.7289196086776
+      },
+      {
+        "a": "HLT",
+        "b": "XLF",
+        "corr": 0.7176357446785864
+      },
+      {
+        "a": "KO",
+        "b": "XLK",
+        "corr": -0.7073014422515882
+      }
+    ],
+    "vol_shock": {
+      "vol_z_mean": 2.69419727837713,
+      "vol_z_p90": 3.9481496872117083,
+      "vol_z_gt2_pct": 0.7619047619047619
+    },
+    "regime": {
+      "label": "TENSION",
+      "triggers": [
+        "vol_z_gt2_pct>=0.25",
+        "vol_z_gt2_pct>=0.40",
+        "vol_z_gt2_pct>=0.75"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": -1.7946532815393823e-07,
+      "downside_corr_delta": 1.5016224685915347e-07,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "TENSION",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 1243,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": 243,
+      "Guadalajara": 250,
+      "Monterrey": 250,
+      "Mexico City": 250,
+      "security": 250
+    },
+    "samples": {
+      "FIFA 2026": [
+        {
+          "datetime": "20260225T230000Z",
+          "title": "FIFA president has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.wusa9.com/article/news/nation-world/fifa-president-confidence-mexico-host-world-cup-games-cartel-violence/507-3d53eb70-79a7-4a93-a414-2d01c25c1285"
+        },
+        {
+          "datetime": "20260225T230000Z",
+          "title": "FIFA president has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.kiiitv.com/article/news/nation-world/fifa-president-confidence-mexico-host-world-cup-games-cartel-violence/507-3d53eb70-79a7-4a93-a414-2d01c25c1285"
+        },
+        {
+          "datetime": "20260225T224500Z",
+          "title": "What Is Beyonc\u00e9 Act III Going To Be ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://thebeatdfw.com/4520686/what-is-beyonces-act-iii-going-to-be/"
+        }
+      ],
+      "Guadalajara": [
+        {
+          "datetime": "20260225T230000Z",
+          "title": "These Americans still feel safe in Mexico despite cartel violence \u2013 NBC Connecticut",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.nbcconnecticut.com/news/national-international/americans-mexico-home-still-feel-safe-despite-recent-cartel-violence/3707712/"
+        },
+        {
+          "datetime": "20260225T230000Z",
+          "title": "FIFA Infantino has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.gazettextra.com/apgstate/fifas-infantino-has-complete-confidence-in-mexico-to-host-world-cup-games-despite-cartel-violence/article_8243f712-a7eb-5d52-9d7c-39f0871148f1.html"
+        },
+        {
+          "datetime": "20260225T230000Z",
+          "title": "FIFA president has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.wusa9.com/article/news/nation-world/fifa-president-confidence-mexico-host-world-cup-games-cartel-violence/507-3d53eb70-79a7-4a93-a414-2d01c25c1285"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260225T230000Z",
+          "title": "Mart\u00edn Demichelis , opci\u00f3n para el banquillo del Mallorca",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.mundodeportivo.com/futbol/20260225/1004136264/martin-demichelis-opcion-banquillo-mallorca.html"
+        },
+        {
+          "datetime": "20260225T230000Z",
+          "title": "FIFA Infantino has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.gazettextra.com/apgstate/fifas-infantino-has-complete-confidence-in-mexico-to-host-world-cup-games-despite-cartel-violence/article_8243f712-a7eb-5d52-9d7c-39f0871148f1.html"
+        },
+        {
+          "datetime": "20260225T230000Z",
+          "title": "FIFA president has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.wusa9.com/article/news/nation-world/fifa-president-confidence-mexico-host-world-cup-games-cartel-violence/507-3d53eb70-79a7-4a93-a414-2d01c25c1285"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260225T230000Z",
+          "title": "Negligencia en albergue migrante causa muerte de ni\u00f1as",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.elmanana.com/noticias/nacional/negligencia-en-albergue-migrante-causa-muerte-de-ninas/6098933"
+        },
+        {
+          "datetime": "20260225T230000Z",
+          "title": "Mara Lezama y Estefan\u00eda Mercado colocan a Playa del Carmen como epicentro global de la gesti\u00f3n de riesgos con el Primer Congreso Internacional de Protecci\u00f3n Civil",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://noticaribe.com.mx/2026/02/25/mara-lezama-y-estefania-mercado-colocan-a-playa-del-carmen-como-epicentro-global-de-la-gestion-de-riesgos-con-el-primer-congreso-internacional-de-proteccion-civil/"
+        },
+        {
+          "datetime": "20260225T230000Z",
+          "title": "Hoy Tamaulipas - Mexico tiene primera cita en la Copa del Mundo de Clavados en Canada",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.hoytamaulipas.net/notas/612416/Mexico-tiene-primera-cita-en-la-Copa-del-Mundo-de-Clavados-en-Canada.html"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260225T230000Z",
+          "title": "\u0417\u0421\u0423 \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044e\u044e\u0442\u044c 97 % \u0442\u0435\u0440\u0438\u0442\u043e\u0440\u0456\u0457 \u041a\u0443\u043f  \u044f\u043d\u0441\u044c\u043a\u0430 - Korrespondent . net",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://ua.korrespondent.net/ukraine/4858006-zsu-kontroluiuit-97-terytorii-kupianska"
+        },
+        {
+          "datetime": "20260225T230000Z",
+          "title": "ICE wont be at polling places this year , a Trump DHS official promises",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.kmuw.org/2026-02-25/ice-wont-be-at-polling-places-this-year-a-trump-dhs-official-promises"
+        },
+        {
+          "datetime": "20260225T230000Z",
+          "title": "New Study : Agriculture Replacing Overlooked Ecosystems | World Resources Institute",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.wri.org/insights/global-ecosystem-conversion-grassland-wetland-savanna-to-agriculture"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "meta": {
+    "duration_sec": 68.613061,
+    "equities_total": 21,
+    "crypto_total": 3,
+    "equities_ok": 21,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

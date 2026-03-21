@@ -1,0 +1,43 @@
+# Batman Lab — Ruff Configuration
+# Fast Python linter (replaces flake8 + isort + pyupgrade)
+
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # flake8-simplify
+    "S",   # flake8-bandit (security)
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "S101",  # use of assert (needed in tests)
+    "S311",  # random (not crypto-sensitive here)
+    "B008",  # function call in default argument
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S106"]
+"**/test_*.py" = ["S101", "S106"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+timeout = 30
+addopts = "-q --tb=short"
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+check_untyped_defs = false

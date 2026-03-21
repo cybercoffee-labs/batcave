@@ -1,0 +1,483 @@
+{
+  "timestamp": "2026-03-02T19:12:08.813953+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 608.5599975585938,
+      "ret_1d": 0.002089106417163761,
+      "ret_intra": 0.010494167485887385,
+      "vol_z": 0.8323168789369206,
+      "rvol": 1.8953682222311785,
+      "dollar_vol": 10941219866.18628,
+      "rv20_ann": 0.1827043720191667,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 263.18499755859375,
+      "ret_1d": 0.006672156119186397,
+      "ret_intra": 9.497604551067518e-05,
+      "vol_z": -1.1523916022442824,
+      "rvol": 0.4886017043431314,
+      "dollar_vol": 41872469.92657471,
+      "rv20_ann": 0.2058045571586019,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.37009811401367,
+      "ret_1d": -0.0010699929042347883,
+      "ret_intra": -0.010781863814206538,
+      "vol_z": -0.6812339450161436,
+      "rvol": 0.8360617215347235,
+      "dollar_vol": 11048475.221969604,
+      "rv20_ann": 0.22266086861956527,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 139.6199951171875,
+      "ret_1d": 0.005928000283131015,
+      "ret_intra": -0.0009302674977638148,
+      "vol_z": -1.5806006170508375,
+      "rvol": 0.660549114271089,
+      "dollar_vol": 9062454.643066406,
+      "rv20_ann": 0.27500861229678264,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 56.66999816894531,
+      "ret_1d": 0.013146426527954391,
+      "ret_intra": 0.03148888943355921,
+      "vol_z": -0.44068829402721743,
+      "rvol": 0.6655276691455378,
+      "dollar_vol": 31458309.36355591,
+      "rv20_ann": 0.23105873247178255,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 115.40499877929688,
+      "ret_1d": -0.012442306120777695,
+      "ret_intra": -0.004700286186196223,
+      "vol_z": -2.0524555719513375,
+      "rvol": 0.5113457576833232,
+      "dollar_vol": 7614075.60446167,
+      "rv20_ann": 0.15785567987810228,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 88.9749984741211,
+      "ret_1d": -0.011565384755518562,
+      "ret_intra": 0.019069991548332776,
+      "vol_z": 0.02263817340122829,
+      "rvol": 1.0068581193479116,
+      "dollar_vol": 11847821.82181549,
+      "rv20_ann": 0.1492493889742356,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 489.8999938964844,
+      "ret_1d": 0.012571795470768404,
+      "ret_intra": 0.05620595493809666,
+      "vol_z": 0.5170387417646041,
+      "rvol": 1.3579929902321224,
+      "dollar_vol": 55055941.11407471,
+      "rv20_ann": 0.4081695936572033,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 89.533203125,
+      "ret_1d": -0.01426998118968285,
+      "ret_intra": -0.0015244342121596421,
+      "vol_z": -0.7622330397647643,
+      "rvol": 0.004756158129865843,
+      "dollar_vol": 2958714.23046875,
+      "rv20_ann": 0.09978534640146888,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.36499786376953,
+      "ret_1d": -0.004407659728536647,
+      "ret_intra": -0.006306054234688996,
+      "vol_z": -1.5426359653448563,
+      "rvol": 0.07107874117747925,
+      "dollar_vol": 3820953.8234329224,
+      "rv20_ann": 0.025350787935047196,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 333.6650085449219,
+      "ret_1d": -0.02388346249015228,
+      "ret_intra": -0.037985779990995394,
+      "vol_z": 2.1320604215727856,
+      "rvol": 5.015480047057687,
+      "dollar_vol": 121268211.70059204,
+      "rv20_ann": 0.36595881365397553,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 305.9800109863281,
+      "ret_1d": -0.018778030724651947,
+      "ret_intra": -0.018665737762969425,
+      "vol_z": -0.9563263665014794,
+      "rvol": 0.42071795245392785,
+      "dollar_vol": 2473848.388824463,
+      "rv20_ann": 0.22331261051328075,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 63.81999969482422,
+      "ret_1d": -0.02894607437267986,
+      "ret_intra": -0.04973203968375506,
+      "vol_z": -0.2981177873206825,
+      "rvol": 0.8737396549986375,
+      "dollar_vol": 2987541.8257141113,
+      "rv20_ann": 0.5702507147677474,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 102.58000183105469,
+      "ret_1d": -0.03562231424567953,
+      "ret_intra": -0.06062266760250179,
+      "vol_z": -0.5660243845172125,
+      "rvol": 0.7872135325422848,
+      "dollar_vol": 2316256.441345215,
+      "rv20_ann": 0.7016045263548211,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 103.58999633789062,
+      "ret_1d": -0.0230860021616827,
+      "ret_intra": -0.011922930595794301,
+      "vol_z": -1.2370412632860788,
+      "rvol": 0.4528541305118588,
+      "dollar_vol": 5027844.062255859,
+      "rv20_ann": 0.43560281474851975,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 56.7400016784668,
+      "ret_1d": 0.007074693805858126,
+      "ret_intra": 0.012581455036574818,
+      "vol_z": -0.392298864763133,
+      "rvol": 0.23193996487306404,
+      "dollar_vol": 515142.47523880005,
+      "rv20_ann": 0.4344754862797012,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 334.95001220703125,
+      "ret_1d": -0.01807710432786398,
+      "ret_intra": 0.02476633659761074,
+      "vol_z": -1.5941073405370565,
+      "rvol": 0.3829787234042553,
+      "dollar_vol": 3020579.210083008,
+      "rv20_ann": 0.17494499082737597,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 80.5250015258789,
+      "ret_1d": -0.012926501803527139,
+      "ret_intra": 0.01820828802018637,
+      "vol_z": -0.2425179978936422,
+      "rvol": 0.9366112576046208,
+      "dollar_vol": 5317146.37575531,
+      "rv20_ann": 0.17185984871230242,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 167.55999755859375,
+      "ret_1d": -0.012926405395261666,
+      "ret_intra": 0.022174741126515185,
+      "vol_z": -0.5170775746041555,
+      "rvol": 0.06500378700843354,
+      "dollar_vol": 1599862.8566894531,
+      "rv20_ann": 0.26977642033878774,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 23.844999313354492,
+      "ret_1d": 0.00020967435633455957,
+      "ret_intra": 0.07409903125594441,
+      "vol_z": -0.30922941120188285,
+      "rvol": 0.21561926591977013,
+      "dollar_vol": 1656273.652305603,
+      "rv20_ann": 0.6928119860317469,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 68662.3,
+      "ret_1h": -0.0031268479319930265,
+      "rv_ann": 0.7277851479434422,
+      "spread": 1.4563429516913292e-07,
+      "depth_0_5pct": 6.16962,
+      "dollar_vol_1h": 19410817.104294,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2024.96,
+      "ret_1h": -0.0021878387700798863,
+      "rv_ann": 0.9425578668069373,
+      "spread": 4.938381346741486e-06,
+      "depth_0_5pct": 172.892,
+      "dollar_vol_1h": 10929812.318208,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 86.99,
+      "ret_1h": -0.0036651013629596108,
+      "rv_ann": 1.094990720978457,
+      "spread": 0.00011494913500781787,
+      "depth_0_5pct": 121422.187,
+      "dollar_vol_1h": 6218596.80359,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 3.1880245474827866,
+    "IWM": -0.3817759674615473,
+    "XLF": 0.31878034570330693,
+    "XLK": -0.8367975051651484,
+    "XLE": 0.5799979414828964,
+    "XLY": -1.5976121101008462,
+    "XLP": 1.2117259680073833,
+    "GLD": 2.3228985877981785,
+    "TLT": -0.4613322226371871,
+    "HYG": -1.4009095149744046,
+    "MAR": 6.473089631029662,
+    "HLT": -0.3575048178993554,
+    "DAL": 0.9940001191495897,
+    "UAL": 0.7091004751991999,
+    "DIS": -0.45904751588957127,
+    "FOXA": 0.27277483429264204,
+    "BTC/USDT": 1.9520178547779532,
+    "ETH/USDT": 2.5928124944281596,
+    "MCD": -1.171172047601227,
+    "SOL/USDT": 3.668803297746752,
+    "KO": 0.8172848284863756,
+    "PEP": -0.03505726769448436,
+    "DKNG": 0.6454156689207896
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.006202047332677622,
+        "p50": 0.0003936614952791377,
+        "p95": 0.006989370323235898,
+        "mu": 0.0003936614952791377,
+        "sigma": 0.004009915085239846
+      },
+      "1W": {
+        "p5": -0.012780145822711093,
+        "p50": 0.0019683074763956884,
+        "p95": 0.016716760775502472,
+        "mu": 0.0019683074763956884,
+        "sigma": 0.00896644271459816
+      },
+      "1M": {
+        "p5": -0.022276063737713882,
+        "p50": 0.00866055289614103,
+        "p95": 0.03959716952999594,
+        "mu": 0.00866055289614103,
+        "sigma": 0.018808168911362683
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.2321333214490041,
+    "n_assets": 18,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9032310536040434
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.826673059336219
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7374617280840892
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.6922387919815417
+      },
+      {
+        "a": "IWM",
+        "b": "XLF",
+        "corr": 0.6576216842805358
+      },
+      {
+        "a": "DAL",
+        "b": "IWM",
+        "corr": 0.6521653196197383
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6504666192745023
+      },
+      {
+        "a": "UAL",
+        "b": "XLF",
+        "corr": 0.6310977294780816
+      },
+      {
+        "a": "IWM",
+        "b": "UAL",
+        "corr": 0.6231925991617264
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.6207772034936825
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": -0.5410462905174611,
+      "vol_z_p90": 0.5485665554818362,
+      "vol_z_gt2_pct": 0.05
+    },
+    "regime": {
+      "label": "NORMAL",
+      "triggers": []
+    },
+    "deltas": {
+      "corr_stress_delta": -0.011534141675799414,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.05,
+      "prev_regime": "NORMAL",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 603,
+    "by_keyword": {
+      "World Cup 2026": 250,
+      "FIFA 2026": 103,
+      "Guadalajara": null,
+      "Monterrey": null,
+      "Mexico City": 250,
+      "security": null
+    },
+    "samples": {
+      "World Cup 2026": [
+        {
+          "datetime": "20260302T184500Z",
+          "title": "Fethiye Times News \u2013 Week Ending 1 March 2026",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://fethiyetimes.com/fethiye-times-news-week-ending-1st-march-2026/"
+        },
+        {
+          "datetime": "20260302T184500Z",
+          "title": "Iran World Cup place in doubt by war . FIFA has Iraq next in line",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.mainlinemedianews.com/2026/03/02/world-cup-iran/"
+        },
+        {
+          "datetime": "20260302T184500Z",
+          "title": "  My favourite T20 WC match against Pakistan was definitely the 2007 final we played : Rohit Sharma recalls memories of IND - PAK contests",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.bangladeshsun.com/news/278897963/my-favourite-t20-wc-match-against-pakistan-was-definitely-the-2007-final-we-played-rohit-sharma-recalls-memories-of-ind-pak-contests"
+        }
+      ],
+      "FIFA 2026": [
+        {
+          "datetime": "20260302T184500Z",
+          "title": "Iran World Cup place in doubt by war . FIFA has Iraq next in line",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.mainlinemedianews.com/2026/03/02/world-cup-iran/"
+        },
+        {
+          "datetime": "20260302T184500Z",
+          "title": "MWC 2026 Day 1 : Phones , Concepts , And One Acrobatic Robot",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.slashgear.com/2113126/mwc-2026-day-1-products/"
+        },
+        {
+          "datetime": "20260302T184500Z",
+          "title": "  We hate you : Concerns grow that Trump will ruin the World Cup",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.alternet.org/world-cup-trump/"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260302T184500Z",
+          "title": "Sl\u0103biciunea fatal\u0103 a baronilor drogurilor : femeile care i - au dus direct \u00een m\u00e2inile for\u021belor speciale",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://adevarul.ro/stiri-externe/in-lume/slabiciunea-fatala-a-baronilor-drogurilor-femeile-2511873.html"
+        },
+        {
+          "datetime": "20260302T184500Z",
+          "title": "Thomas M\u00fcller spricht Klartext \u00fcber neuen Job :  Kann es nicht einsch\u00e4tzen  ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.abendzeitung-muenchen.de/promis/thomas-mueller-spricht-klartext-ueber-neuen-job-kann-es-nicht-einschaetzen-art-1115968"
+        },
+        {
+          "datetime": "20260302T184500Z",
+          "title": "\u0395\u03bb \u039c\u03ad\u03bd\u03c4\u03c3\u03bf : \u00ab \u03a3\u03c4\u03c1\u03b1\u03c4\u03b7\u03b3\u03cc\u03c2 \u00bb \u03c4\u03c9\u03bd \u03ba\u03b1\u03c1\u03c4\u03ad\u03bb \u03c3\u03c4\u03bf \u039c\u03b5\u03be\u03b9\u03ba\u03cc \u03ba\u03b1\u03b9 \u00ab \u03ac\u03c1\u03c7\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03c9\u03bd \u03c0\u03b5\u03c4\u03b5\u03b9\u03bd\u03ce\u03bd \u00bb ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.ekriti.gr/kosmos/el-mentso-stratigos-ton-kartel-sto-mexiko-kai-arhontas-ton-peteinon"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 160.717037,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

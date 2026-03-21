@@ -1,0 +1,2440 @@
+2026-03-20 20:16:09,804 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 20:16:12,597 [INFO] engine — ✓ equity QQQ
+2026-03-20 20:16:12,892026-03-20 20:26:39,874 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 20:26:42,985 [INFO] engine — ✓ equity QQQ
+2026-03-20 20:26:43,325 [INFO] engine — ✓ equity IWM
+2026-03-20 20:26:43,580 [INFO] engine — ✓ equity XLF
+2026-03-20 20:26:43,835 [INFO] engine — ✓ equity XLK
+2026-03-20 20:26:44,136 [INFO] engine — ✓ equity XLE
+2026-03-20 20:26:44,394 [INFO] engine — ✓ equity XLY
+2026-03-20 20:26:44,646 [INFO] engine — ✓ equity XLP
+2026-03-20 20:26:44,942 [INFO] engine — ✓ equity GLD
+2026-03-20 20:26:47,293 [INFO] engine — ✓ equity TLT
+2026-03-20 20:26:47,549 [INFO] engine — ✓ equity HYG
+2026-03-20 20:26:47,808 [INFO] engine — ✓ equity MAR
+2026-03-20 20:26:48,091 [INFO] engine — ✓ equity HLT
+2026-03-20 20:26:48,437 [INFO] engine — ✓ equity DAL
+2026-03-20 20:26:48,769 [INFO] engine — ✓ equity UAL
+2026-03-20 20:26:49,028 [INFO] engine — ✓ equity DIS
+2026-03-20 20:26:54,518 [INFO] engine — ✓ equity FOXA
+2026-03-20 20:26:55,771 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-20 20:26:55,862 [INFO] engine — ✓ equity MCD
+2026-03-20 20:26:56,120 [INFO] engine — ✓ equity KO
+2026-03-20 20:26:56,537 [INFO] engine — ✓ equity PEP
+2026-03-20 20:26:56,778 [INFO] engine — ✓ equity DKNG
+2026-03-20 20:26:56,947 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-20 20:26:56,972 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-20 20:29:13,791 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-20 20:29:13,791 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-20 20:29:14,061 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-20 20:29:14,431 [INFO] scanner_p2p — VES parallel rate: 656.02 (dolarapi.com)
+2026-03-20 20:29:15,204 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-20 20:29:15,816 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 20:29:16,470 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 20:29:17,376 [INFO] scanner_p2p — Using cached spot rates (age: 4s)
+2026-03-20 20:29:55,114 [INFO] scanner_p2p — Using cached spot rates (age: 41s)
+[2026-03-21 01:06:35 UTC] ═══ BATMAN FLOW ENGINE LOOP STARTED ═══
+[2026-03-21 01:06:35 UTC] Interval: 20 minutes
+[2026-03-21 01:06:35 UTC] Log file: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/logs/loop.log
+[2026-03-21 01:06:35 UTC] Press Ctrl+C to stop gracefully
+[2026-03-21 01:06:35 UTC] ─── CYCLE #1 START ───
+[2026-03-21 01:06:35 UTC] ⚠ CYCLE #1 SKIPPED (engine lock already present)
+[2026-03-21 01:06:35 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 01:06:35 UTC]    Next run at: 01:26:35 UTC
+[2026-03-21 01:26:39 UTC] ─── CYCLE #2 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70629.40 | OKX $70627.10 | spread -0.0033%
+  [scanner_cross] BTC: Skipped (spread 0.0033% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2154.25 | OKX $2154.02 | spread -0.0107%
+  [scanner_cross] ETH: Skipped (spread 0.0107% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.01 | OKX $90.00 | spread -0.0111%
+  [scanner_cross] SOL: Skipped (spread 0.0111% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70629.40 | Futures: $70583.90 | Basis: -0.0644%
+  [scanner_basis] Logged (basis 0.0644% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $17.9920 | Spread -0.033% | EdgeNet +0.413% ✓ | Logged (below threshold)
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3675.8400 | Spread +0.112% | EdgeNet -0.887% ✗ | Logged (below threshold)
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $648.8000 | Spread -4.180% | EdgeNet -1.451% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1467.9880 | Spread +0.239% | EdgeNet +0.684% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,615.9250 | okx=$70,618.2000 | bybit=$70,618.1000 | kucoin=$70,611.4000 | mexc=$70,607.6650 | Below threshold
+  [scanner_multi] ETH: binance=$2,153.8050 | okx=$2,153.6600 | bybit=$2,153.7100 | kucoin=$2,153.8800 | mexc=$2,153.6150 | Below threshold
+  [scanner_multi] SOL: binance=$90.0050 | okx=$90.0100 | bybit=$90.0000 | kucoin=$90.0100 | mexc=$90.0150 | Below threshold
+  [scanner_multi] XRP: binance=$1.4457 | okx=$1.4457 | bybit=$1.4458 | kucoin=$1.4461 | mexc=$1.4455 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0942 | okx=$0.0942 | bybit=$0.0942 | kucoin=$0.0942 | mexc=$0.0942 | Below threshold
+  [scanner_multi] ADA: binance=$0.2666 | okx=$0.2665 | bybit=$0.2666 | kucoin=$0.2667 | mexc=$0.2666 | Below threshold
+  [scanner_multi] AVAX: binance=$9.5650 | okx=$9.5630 | bybit=$9.5700 | kucoin=$9.5650 | mexc=$9.5645 | Below threshold
+  [scanner_multi] LINK: binance=$9.1550 | okx=$9.1560 | bybit=$9.1500 | kucoin=$9.1532 | mexc=$9.1515 | Below threshold
+  [scanner_multi] DOT: binance=$1.5065 | okx=$1.5070 | bybit=$1.5070 | kucoin=$1.5072 | mexc=$1.5065 | Below threshold
+  [scanner_multi] UNI: binance=$3.6135 | okx=$3.6120 | bybit=$3.6130 | kucoin=$3.6138 | mexc=$3.6135 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8395 | okx=$1.8400 | bybit=$1.8410 | kucoin=$1.8409 | mexc=$1.8395 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3145 | okx=$1.3160 | bybit=$1.3160 | kucoin=$1.3157 | mexc=$1.3143 | Below threshold
+  [scanner_multi] APT: binance=$0.9885 | okx=$0.9884 | bybit=$0.9890 | kucoin=$0.9882 | mexc=$0.9886 | Below threshold
+  [scanner_multi] ARB: binance=$0.0998 | okx=$0.0998 | bybit=$0.0999 | kucoin=$0.0999 | mexc=$0.0998 | Below threshold
+  [scanner_multi] OP: binance=$0.1237 | okx=$0.1238 | bybit=$0.1238 | kucoin=$0.1238 | mexc=$0.1237 | Below threshold
+  [scanner_multi] FIL: binance=$0.9015 | okx=$0.9014 | bybit=$0.9010 | kucoin=$0.9015 | mexc=$0.9019 | Below threshold
+  [scanner_multi] LTC: binance=$56.3450 | okx=$56.3500 | bybit=$56.3600 | kucoin=$56.3700 | mexc=$56.3450 | Below threshold
+  [scanner_multi] BCH: binance=$472.0500 | okx=$471.9000 | bybit=$471.8000 | kucoin=$471.9600 | mexc=$471.9500 | Below threshold
+  [scanner_multi] XLM: binance=$0.1653 | okx=$0.1653 | bybit=$0.1654 | kucoin=$0.1654 | mexc=$0.1653 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0032% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0009% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0007% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.66%
+  [scanner_cross_currency] ARS: Premium +1.08%
+  [scanner_cross_currency] COP: Premium -0.59%
+  [scanner_cross_currency] VES: Premium -1.10%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.25% | EdgeNet +0.25% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.76% | EdgeNet +0.56% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.67% | EdgeNet +0.47% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +2.18% | EdgeNet +0.68% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.33% | Buy 17.94 → Sell 18.00
+  [scanner_p2p_merchant] ARS: Spread +0.25% | Buy 1464.27 → Sell 1468.00
+[scanner_p2p_merchant] Scan complete: 0 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0001
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0001, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0001, bybit=1.0004
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9010 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9040       $17.9010       ok         ✅
+  binance_p2p        $17.9400       $18.0000       ok         ✅
+  okx_p2p            $18.0100       $17.8800       ok         ✅
+  bybit_p2p          $17.1200       $17.9000       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found
+  [scanner_dex] AVAX: No DEX data found2026-03-20 20:30:37,535 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-20 20:30:37,535 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-20 20:30:37,554 [INFO] ollama_intel — Read 39 opportunities for 2026-03-21
+2026-03-20 20:30:37,554 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-20 20:30:44,054 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-20 20:30:44,057 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-20 20:30:44,058 [INFO] engine — Intelligence generated: ok
+2026-03-20 20:30:44,060 [INFO] engine — Running ALFRED data quality check...
+2026-03-20 20:30:44,060 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-20 20:30:44,064 [WARNING] alfred — ALFRED WARNING: dq_score 70.00% < 75% threshold. Issues: unknown: has_spot_price failed 15x
+2026-03-20 20:30:44,065 [INFO] engine — Data quality: 70.00% (WARNING)
+2026-03-20 20:30:44,072 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_01-30-44.json
+2026-03-20 20:30:44,072 [INFO] engine — Hash: a5592c0e293ebb4142628026495dfc7ff98b96e52026-03-20 20:39:35,904 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 20:39:38,459 [INFO] engine — ✓ equity QQQ
+2026-03-20 20:39:38,762026-03-20 20:47:38,82026-03-20 20:50:49,105 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 20:50:51,523 [INFO] engine — ✓ equity QQQ
+22026-03-20 21:07:46,186 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 21:07:48,547 [INFO] engine — ✓ equity QQQ
+2026-03-20 21:07:48,802 [INFO] engine — ✓ equity IWM
+2026-03-20 21:07:49,045 [INFO] engine — ✓ equity XLF
+2026-03-20 21:07:49,292 [INFO] engine — ✓ equity XLK
+2026-03-20 21:07:49,538 [INFO] engine — ✓ equity XLE
+2026-03-20 21:07:49,790 [INFO] engine — ✓ equity XLY
+2026-03-20 21:07:50,127 [INFO] engine — ✓ equity XLP
+2026-03-20 21:07:50,421 [INFO] engine — ✓ equity GLD
+2026-03-20 21:07:52,763 [INFO] engine — ✓ equity TLT
+2026-03-20 21:07:53,008 [INFO] engine — ✓ equity HYG
+2026-03-20 21:07:53,388 [INFO] engine — ✓ equity MAR
+2026-03-20 21:07:53,644 [INFO] engine — ✓ equity HLT
+2026-03-20 21:07:53,902 [INFO] engine — ✓ equity DAL
+2026-03-20 21:07:54,189 [INFO] engine — ✓ equity UAL
+2026-03-20 21:07:54,440 [INFO] engine — ✓ equity DIS
+2026-03-20 21:07:54,741 [INFO] engine — ✓ equity FOXA
+2026-03-20 21:07:56,318 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-20 21:07:56,592 [INFO] engine — ✓ equity MCD
+2026-03-20 21:07:56,862 [INFO] engine — ✓ equity KO
+2026-03-20 21:07:56,979 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-20 21:07:57,001 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-20 21:07:57,109 [INFO] engine — ✓ equity PEP
+2026-03-20 21:07:57,367 [INFO] engine — ✓ equity DKNG
+2026-03-20 21:09:55,692 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-20 21:09:55,692 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-20 21:09:55,930 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-20 21:09:56,216 [INFO] scanner_p2p — VES parallel rate: 656.02 (dolarapi.com)
+2026-03-20 21:09:57,016 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-20 21:09:57,627 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 21:09:58,280 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 21:09:59,162 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 21:10:37,678 [INFO] scanner_p2p — Using cached spot rates (age: 42s)
+
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 01:07:29 UTC] ✓ CYCLE #1 COMPLETED SUCCESSFULLY
+[2026-03-21 01:07:29 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 01:07:29 UTC]    Next run at: 01:27:29 UTC
+[2026-03-21 01:27:33 UTC] ─── CYCLE #2 START ───
+[2026-03-21 01:27:33 UTC] ⚠ CYCLE #2 SKIPPED (engine lock already present)
+[2026-03-21 01:27:33 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 01:27:33 UTC]    Next run at: 01:47:33 UTC
+[2026-03-21 01:47:38 UTC] ─── CYCLE #3 START ───
+[2026-03-21 01:47:38 UTC] ⚠ CYCLE #3 SKIPPED (engine lock already present)
+[2026-03-21 01:47:38 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 01:47:38 UTC]    Next run at: 02:07:38 UTC
+[2026-03-21 02:07:46 UTC] ─── CYCLE #4 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70492.11 | OKX $70500.20 | spread +0.0115%
+  [scanner_cross] BTC: Skipped (spread 0.0115% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2148.54 | OKX $2148.62 | spread +0.0037%
+  [scanner_cross] ETH: Skipped (spread 0.0037% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $89.93 | OKX $89.95 | spread +0.0222%
+  [scanner_cross] SOL: Skipped (spread 0.0222% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70492.11 | Futures: $70461.50 | Basis: -0.0434%
+  [scanner_basis] Logged (basis 0.0434% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0000 | Spread +0.134% | EdgeNet +0.458% ✓ | Logged (below threshold)
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3677.5980 | Spread -0.000% | EdgeNet -0.839% ✗ | Logged (below threshold)
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $648.5980 | Spread -1.402% | EdgeNet -1.481% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1467.9940 | Spread +0.171% | EdgeNet +0.684% ✓ | Logged (below threshold)
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,492.1050 | okx=$70,500.2000 | bybit=$70,495.2000 | kucoin=$70,490.5000 | mexc=$70,490.8750 | Below threshold
+  [scanner_multi] ETH: binance=$2,148.5350 | okx=$2,148.3500 | bybit=$2,148.4700 | kucoin=$2,148.4700 | mexc=$2,148.4450 | Below threshold
+  [scanner_multi] SOL: binance=$89.9350 | okx=$89.9300 | bybit=$89.9200 | kucoin=$89.9200 | mexc=$89.9450 | Below threshold
+  [scanner_multi] XRP: binance=$1.4434 | okx=$1.4437 | bybit=$1.4436 | kucoin=$1.4436 | mexc=$1.4436 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0943 | okx=$0.0943 | bybit=$0.0942 | kucoin=$0.0943 | mexc=$0.0943 | Below threshold
+  [scanner_multi] ADA: binance=$0.2660 | okx=$0.2658 | bybit=$0.2660 | kucoin=$0.2659 | mexc=$0.2660 | Below threshold
+  [scanner_multi] AVAX: binance=$9.5450 | okx=$9.5470 | bybit=$9.5400 | kucoin=$9.5440 | mexc=$9.5465 | Below threshold
+  [scanner_multi] LINK: binance=$9.1150 | okx=$9.1200 | bybit=$9.1100 | kucoin=$9.1195 | mexc=$9.1140 | Below threshold
+  [scanner_multi] DOT: binance=$1.5055 | okx=$1.5040 | bybit=$1.5050 | kucoin=$1.5045 | mexc=$1.5055 | Below threshold
+  [scanner_multi] UNI: binance=$3.6025 | okx=$3.6020 | bybit=$3.6020 | kucoin=$3.6021 | mexc=$3.6025 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8475 | okx=$1.8480 | bybit=$1.8480 | kucoin=$1.8480 | mexc=$1.8475 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3155 | okx=$1.3150 | bybit=$1.3160 | kucoin=$1.3162 | mexc=$1.3158 | Below threshold
+  [scanner_multi] APT: binance=$0.9895 | okx=$0.9894 | bybit=$0.9890 | kucoin=$0.9896 | mexc=$0.9893 | Below threshold
+  [scanner_multi] ARB: binance=$0.0996 | okx=$0.0996 | bybit=$0.0996 | kucoin=$0.0997 | mexc=$0.0996 | Below threshold
+  [scanner_multi] OP: binance=$0.1235 | okx=$0.1234 | bybit=$0.1234 | kucoin=$0.1235 | mexc=$0.1235 | Below threshold
+  [scanner_multi] FIL: binance=$0.9005 | okx=$0.9002 | bybit=$0.8990 | kucoin=$0.8986 | mexc=$0.9005 | Below threshold
+  [scanner_multi] LTC: binance=$56.2050 | okx=$56.2000 | bybit=$56.2400 | kucoin=$56.2400 | mexc=$56.2050 | Below threshold
+  [scanner_multi] BCH: binance=$471.1500 | okx=$471.1000 | bybit=$470.9000 | kucoin=$471.4500 | mexc=$470.9500 | Below threshold
+  [scanner_multi] XLM: binance=$0.1651 | okx=$0.1650 | bybit=$0.1650 | kucoin=$0.1650 | mexc=$0.1651 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0048% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0022% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0026% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.71%
+  [scanner_cross_currency] ARS: Premium +1.08%
+  [scanner_cross_currency] COP: Premium -0.54%
+  [scanner_cross_currency] VES: Premium -1.10%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.25% | EdgeNet +0.25% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.81% | EdgeNet +0.61% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.62% | EdgeNet +0.42% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +2.19% | EdgeNet +0.69% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.28% | Buy 17.95 → Sell 18.00
+  [scanner_p2p_merchant] ARS: Spread +0.19% | Buy 1465.23 → Sell 1468.00
+[scanner_p2p_merchant] Scan complete: 0 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0001
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0001, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0001, bybit=1.0004
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9060 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9130       $17.9060       ok         ✅
+  binance_p2p        $17.9500       $18.0000       ok         ✅
+  okx_p2p            $18.0100       $17.8700       ok         ✅
+  bybit_p2p          $17.1200       $17.8600       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable2026-03-20 21:11:20,102 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-20 21:11:20,103 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-20 21:11:20,119 [INFO] ollama_intel — Read 66 opportunities for 2026-03-21
+2026-03-20 21:11:20,119 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-20 21:11:23,805 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-20 21:11:23,805 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-20 21:11:23,806 [INFO] engine — Intelligence generated: ok
+2026-03-20 21:11:23,806 [INFO] engine — Running ALFRED data quality check...
+2026-03-20 21:11:23,806 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-20 21:11:23,810 [INFO] alfred — ALFRED: dq_score 88.00% - OK
+2026-03-20 21:11:23,810 [INFO] engine — Data quality: 88.00% (OK)
+2026-03-20 21:11:23,814 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_02-11-23.json
+2026-03-20 21:11:23,814 [INFO] engine — Hash: 81f1aa6ab790933d66e1a7d2c09f502fc1fef8b3ac6ed8527d6299b9dc653e32026-03-20 21:14:19,285 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 21:14:21,923 [INFO] engine — ✓ equity QQQ
+2026-03-20 21:14:22,2026-03-20 21:31:32,754 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 21:31:35,181 [INFO] engine — ✓ equity QQQ
+2026-03-20 21:31:35,471 [INFO] engine — ✓ equity IWM
+2026-03-20 21:31:35,715 [INFO] engine — ✓ equity XLF
+2026-03-20 21:31:35,971 [INFO] engine — ✓ equity XLK
+2026-03-20 21:31:36,236 [INFO] engine — ✓ equity XLE
+2026-03-20 21:31:36,482 [INFO] engine — ✓ equity XLY
+2026-03-20 21:31:36,722 [INFO] engine — ✓ equity XLP
+2026-03-20 21:31:36,976 [INFO] engine — ✓ equity GLD
+2026-03-20 21:31:39,359 [INFO] engine — ✓ equity TLT
+2026-03-20 21:31:39,693 [INFO] engine — ✓ equity HYG
+2026-03-20 21:31:39,949 [INFO] engine — ✓ equity MAR
+2026-03-20 21:31:40,206 [INFO] engine — ✓ equity HLT
+2026-03-20 21:31:40,516 [INFO] engine — ✓ equity DAL
+2026-03-20 21:31:40,768 [INFO] engine — ✓ equity UAL
+2026-03-20 21:31:41,088 [INFO] engine — ✓ equity DIS
+2026-03-20 21:31:41,393 [INFO] engine — ✓ equity FOXA
+2026-03-20 21:31:42,927 [INFO] engine — ✓ equity MCD
+2026-03-20 21:31:43,103 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-20 21:31:43,128 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-20 21:31:43,174 [INFO] engine — ✓ equity KO
+2026-03-20 21:31:43,479 [INFO] engine — ✓ equity PEP
+2026-03-20 21:31:43,737 [INFO] engine — ✓ equity DKNG
+2026-03-20 21:31:43,901 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-20 21:33:38,312 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-20 21:33:38,313 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-20 21:33:38,547 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-20 21:33:38,804 [INFO] scanner_p2p — VES parallel rate: 656.02 (dolarapi.com)
+2026-03-20 21:33:39,628 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-20 21:33:40,233 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 21:33:40,833 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 21:33:41,690 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 21:34:17,037 [INFO] scanner_p2p — Using cached spot rates (age: 39s)
+
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 02:11:23 UTC] ✓ CYCLE #4 COMPLETED SUCCESSFULLY
+[2026-03-21 02:11:23 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 02:11:23 UTC]    Next run at: 02:31:23 UTC
+[2026-03-21 02:31:32 UTC] ─── CYCLE #5 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70593.43 | OKX $70584.70 | spread -0.0124%
+  [scanner_cross] BTC: Skipped (spread 0.0124% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2150.40 | OKX $2150.59 | spread +0.0088%
+  [scanner_cross] ETH: Skipped (spread 0.0088% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.08 | OKX $90.08 | spread +0.0000%
+  [scanner_cross] SOL: Skipped (spread 0.0000% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70595.82 | Futures: $70550.00 | Basis: -0.0649%
+  [scanner_basis] Logged (basis 0.0649% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0040 | Spread +0.178% | EdgeNet +0.480% ✓ | Logged (below threshold)
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3679.7620 | Spread +0.227% | EdgeNet -0.781% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $648.4000 | Spread -1.414% | EdgeNet -1.512% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1467.9960 | Spread +0.224% | EdgeNet +0.684% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,596.6450 | okx=$70,596.4000 | bybit=$70,604.8000 | kucoin=$70,596.5000 | mexc=$70,594.6950 | Below threshold
+  [scanner_multi] ETH: binance=$2,150.3950 | okx=$2,150.6000 | bybit=$2,150.4900 | kucoin=$2,150.4900 | mexc=$2,150.5250 | Below threshold
+  [scanner_multi] SOL: binance=$90.0750 | okx=$90.0800 | bybit=$90.0900 | kucoin=$90.0700 | mexc=$90.0850 | Below threshold
+  [scanner_multi] XRP: binance=$1.4449 | okx=$1.4447 | bybit=$1.4449 | kucoin=$1.4447 | mexc=$1.4447 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0945 | okx=$0.0945 | bybit=$0.0945 | kucoin=$0.0945 | mexc=$0.0945 | Below threshold
+  [scanner_multi] ADA: binance=$0.2666 | okx=$0.2664 | bybit=$0.2665 | kucoin=$0.2666 | mexc=$0.2666 | Below threshold
+  [scanner_multi] AVAX: binance=$9.5650 | okx=$9.5710 | bybit=$9.5600 | kucoin=$9.5680 | mexc=$9.5705 | Below threshold
+  [scanner_multi] LINK: binance=$9.1250 | okx=$9.1310 | bybit=$9.1300 | kucoin=$9.1310 | mexc=$9.1280 | Below threshold
+  [scanner_multi] DOT: binance=$1.5115 | okx=$1.5110 | bybit=$1.5120 | kucoin=$1.5117 | mexc=$1.5115 | Below threshold
+  [scanner_multi] UNI: binance=$3.6125 | okx=$3.6110 | bybit=$3.6110 | kucoin=$3.6117 | mexc=$3.6115 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8545 | okx=$1.8570 | bybit=$1.8560 | kucoin=$1.8565 | mexc=$1.8545 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3205 | okx=$1.3200 | bybit=$1.3200 | kucoin=$1.3208 | mexc=$1.3206 | Below threshold
+  [scanner_multi] APT: binance=$0.9925 | okx=$0.9920 | bybit=$0.9930 | kucoin=$0.9930 | mexc=$0.9930 | Below threshold
+  [scanner_multi] ARB: binance=$0.1000 | okx=$0.0999 | bybit=$0.1000 | kucoin=$0.1000 | mexc=$0.0999 | Below threshold
+  [scanner_multi] OP: binance=$0.1238 | okx=$0.1240 | bybit=$0.1238 | kucoin=$0.1238 | mexc=$0.1238 | Below threshold
+  [scanner_multi] FIL: binance=$0.9035 | okx=$0.9032 | bybit=$0.9040 | kucoin=$0.9036 | mexc=$0.9036 | Below threshold
+  [scanner_multi] LTC: binance=$56.2850 | okx=$56.2800 | bybit=$56.2800 | kucoin=$56.2400 | mexc=$56.2850 | Below threshold
+  [scanner_multi] BCH: binance=$470.6500 | okx=$470.4000 | bybit=$470.3000 | kucoin=$470.3300 | mexc=$470.5500 | Below threshold
+  [scanner_multi] XLM: binance=$0.1656 | okx=$0.1657 | bybit=$0.1657 | kucoin=$0.1657 | mexc=$0.1656 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0052% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0028% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0030% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.73%
+  [scanner_cross_currency] ARS: Premium +1.08%
+  [scanner_cross_currency] COP: Premium -0.48%
+  [scanner_cross_currency] VES: Premium -1.11%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.21% | EdgeNet +0.21% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.84% | EdgeNet +0.64% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.56% | EdgeNet +0.36% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +2.19% | EdgeNet +0.69% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.45% | Buy 17.94 → Sell 18.02
+  [scanner_p2p_merchant] ARS: Spread +0.24% | Buy 1464.50 → Sell 1468.00
+[scanner_p2p_merchant] Scan complete: 0 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0001
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0002, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0001, bybit=1.0003
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9240 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.5% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9250       $17.9170       ok         ✅
+  binance_p2p        $17.9400       $18.0200       ok         ✅
+  okx_p2p            $18.0100       $17.8800       ok         ✅
+  bybit_p2p          $17.1200       $17.8600       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...2026-03-20 21:34:59,493 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-20 21:34:59,494 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-20 21:34:59,510 [INFO] ollama_intel — Read 81 opportunities for 2026-03-21
+2026-03-20 21:34:59,510 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-20 21:35:03,107 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-20 21:35:03,108 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-20 21:35:03,108 [INFO] engine — Intelligence generated: ok
+2026-03-20 21:35:03,108 [INFO] engine — Running ALFRED data quality check...
+2026-03-20 21:35:03,109 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-20 21:35:03,111 [INFO] alfred — ALFRED: dq_score 94.00% - OK
+2026-03-20 21:35:03,113 [INFO] engine — Data quality: 94.00% (OK)
+2026-03-20 21:35:03,119 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_02-35-03.json
+2026-03-20 21:35:03,119 [INFO] engine — Hash: 29798530be64633d0275d6ac1f6b2fc0d74ffc1f63f03c8bba1b2026-03-20 21:38:04,137 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 21:38:06,523 [INFO] engine — ✓ equity QQQ
+2026-03-20 21:38:06,824 [INFO] 2026-03-20 21:55:11,861 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 21:55:14,481 [INFO] engine — ✓ equity QQQ
+2026-03-20 21:55:14,747 [INFO] engine — ✓ equity IWM
+2026-03-20 21:55:14,987 [INFO] engine — ✓ equity XLF
+2026-03-20 21:55:15,239 [INFO] engine — ✓ equity XLK
+2026-03-20 21:55:15,489 [INFO] engine — ✓ equity XLE
+2026-03-20 21:55:15,759 [INFO] engine — ✓ equity XLY
+2026-03-20 21:55:16,004 [INFO] engine — ✓ equity XLP
+2026-03-20 21:55:16,258 [INFO] engine — ✓ equity GLD
+2026-03-20 21:55:18,595 [INFO] engine — ✓ equity TLT
+2026-03-20 21:55:18,843 [INFO] engine — ✓ equity HYG
+2026-03-20 21:55:19,095 [INFO] engine — ✓ equity MAR
+2026-03-20 21:55:19,381 [INFO] engine — ✓ equity HLT
+2026-03-20 21:55:19,638 [INFO] engine — ✓ equity DAL
+2026-03-20 21:55:19,948 [INFO] engine — ✓ equity UAL
+2026-03-20 21:55:20,378 [INFO] engine — ✓ equity DIS
+2026-03-20 21:55:21,718 [INFO] engine — ✓ equity FOXA
+2026-03-20 21:55:23,494 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-20 21:55:23,583 [INFO] engine — ✓ equity MCD
+2026-03-20 21:55:23,829 [INFO] engine — ✓ equity KO
+2026-03-20 21:55:24,025 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-20 21:55:24,066 [INFO] engine — ✓ equity PEP
+2026-03-20 21:55:24,277 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-20 21:55:24,309 [INFO] engine — ✓ equity DKNG
+2026-03-20 21:57:21,212 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-20 21:57:21,213 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-20 21:57:21,467 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-20 21:57:21,739 [INFO] scanner_p2p — VES parallel rate: 656.02 (dolarapi.com)
+2026-03-20 21:57:22,682 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-20 21:57:23,293 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 21:57:23,915 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 21:57:24,812 [INFO] scanner_p2p — Using cached spot rates (age: 4s)
+2026-03-20 21:58:02,000 [INFO] scanner_p2p — Using cached spot rates (age: 41s)
+
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 02:35:03 UTC] ✓ CYCLE #5 COMPLETED SUCCESSFULLY
+[2026-03-21 02:35:03 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 02:35:03 UTC]    Next run at: 02:55:03 UTC
+[2026-03-21 02:55:11 UTC] ─── CYCLE #6 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70714.20 | OKX $70717.80 | spread +0.0051%
+  [scanner_cross] BTC: Skipped (spread 0.0051% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2153.75 | OKX $2153.75 | spread +0.0000%
+  [scanner_cross] ETH: Skipped (spread 0.0000% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.40 | OKX $90.41 | spread +0.0111%
+  [scanner_cross] SOL: Skipped (spread 0.0111% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70700.03 | Futures: $70670.30 | Basis: -0.0421%
+  [scanner_basis] Logged (basis 0.0421% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0120 | Spread +0.290% | EdgeNet +0.525% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3679.9520 | Spread +0.226% | EdgeNet -0.775% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $648.3598 | Spread -1.393% | EdgeNet -1.518% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.9200 | Spread +0.362% | EdgeNet +0.817% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,710.1750 | okx=$70,709.6000 | bybit=$70,714.1000 | kucoin=$70,706.1000 | mexc=$70,698.9850 | Below threshold
+  [scanner_multi] ETH: binance=$2,153.7550 | okx=$2,153.7300 | bybit=$2,153.6400 | kucoin=$2,154.0300 | mexc=$2,153.6550 | Below threshold
+  [scanner_multi] SOL: binance=$90.3950 | okx=$90.4000 | bybit=$90.4000 | kucoin=$90.3900 | mexc=$90.4050 | Below threshold
+  [scanner_multi] XRP: binance=$1.4465 | okx=$1.4464 | bybit=$1.4466 | kucoin=$1.4464 | mexc=$1.4466 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0947 | okx=$0.0947 | bybit=$0.0947 | kucoin=$0.0947 | mexc=$0.0947 | Below threshold
+  [scanner_multi] ADA: binance=$0.2667 | okx=$0.2667 | bybit=$0.2668 | kucoin=$0.2669 | mexc=$0.2667 | Below threshold
+  [scanner_multi] AVAX: binance=$9.5950 | okx=$9.5910 | bybit=$9.5900 | kucoin=$9.5910 | mexc=$9.5935 | Below threshold
+  [scanner_multi] LINK: binance=$9.1450 | okx=$9.1480 | bybit=$9.1500 | kucoin=$9.1504 | mexc=$9.1490 | Below threshold
+  [scanner_multi] DOT: binance=$1.5115 | okx=$1.5120 | bybit=$1.5120 | kucoin=$1.5116 | mexc=$1.5115 | Below threshold
+  [scanner_multi] UNI: binance=$3.6135 | okx=$3.6130 | bybit=$3.6120 | kucoin=$3.6131 | mexc=$3.6135 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8455 | okx=$1.8460 | bybit=$1.8460 | kucoin=$1.8454 | mexc=$1.8455 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3195 | okx=$1.3200 | bybit=$1.3200 | kucoin=$1.3198 | mexc=$1.3196 | Below threshold
+  [scanner_multi] APT: binance=$0.9885 | okx=$0.9889 | bybit=$0.9890 | kucoin=$0.9890 | mexc=$0.9888 | Below threshold
+  [scanner_multi] ARB: binance=$0.1001 | okx=$0.1000 | bybit=$0.1001 | kucoin=$0.1001 | mexc=$0.1000 | Below threshold
+  [scanner_multi] OP: binance=$0.1237 | okx=$0.1237 | bybit=$0.1237 | kucoin=$0.1237 | mexc=$0.1237 | Below threshold
+  [scanner_multi] FIL: binance=$0.9035 | okx=$0.9035 | bybit=$0.9040 | kucoin=$0.9046 | mexc=$0.9035 | Below threshold
+  [scanner_multi] LTC: binance=$56.2850 | okx=$56.2900 | bybit=$56.3000 | kucoin=$56.2900 | mexc=$56.2850 | Below threshold
+  [scanner_multi] BCH: binance=$471.6500 | okx=$471.6000 | bybit=$471.8000 | kucoin=$471.5800 | mexc=$471.6500 | Below threshold
+  [scanner_multi] XLM: binance=$0.1656 | okx=$0.1656 | bybit=$0.1656 | kucoin=$0.1658 | mexc=$0.1656 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0052% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0030% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0038% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.74%
+  [scanner_cross_currency] ARS: Premium +1.22%
+  [scanner_cross_currency] COP: Premium -0.48%
+  [scanner_cross_currency] VES: Premium -1.17%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.22% | EdgeNet +0.22% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.91% | EdgeNet +0.71% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.69% | EdgeNet +0.49% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +2.38% | EdgeNet +0.88% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.39% | Buy 17.95 → Sell 18.02
+  [scanner_p2p_merchant] ARS: Spread +0.38% | Buy 1464.40 → Sell 1470.00
+[scanner_p2p_merchant] Scan complete: 0 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0001
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0001, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0003, bybit=1.0004
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9150 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9270       $17.9150       ok         ✅
+  binance_p2p        $17.9500       $18.0200       ok         ✅
+  okx_p2p            $18.0100       $17.8800       ok         ✅
+  bybit_p2p          $17.1200       $17.8500       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found2026-03-20 21:58:43,931 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-20 21:58:43,932 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-20 21:58:43,947 [INFO] ollama_intel — Read 99 opportunities for 2026-03-21
+2026-03-20 21:58:43,948 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-20 21:58:47,224 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-20 21:58:47,225 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-20 21:58:47,225 [INFO] engine — Intelligence generated: ok
+2026-03-20 21:58:47,226 [INFO] engine — Running ALFRED data quality check...
+2026-03-20 21:58:47,226 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-20 21:58:47,228 [INFO] alfred — ALFRED: dq_score 88.00% - OK
+2026-03-20 21:58:47,229 [INFO] engine — Data quality: 88.00% (OK)
+2026-03-20 21:58:47,234 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_02-58-47.json
+2026-03-20 21:58:47,234 [INFO] engine — Hash: 0b42cccf03c5a949fa131b56facba4d8ebbd411fec6ab02026-03-20 22:11:07,824 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 22:11:10,239 [INFO] engine — ✓ equity QQQ
+2026-03-20 22:11:10,492 [INFO] engine2026-03-20 22:18:56,041 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 22:18:58,476 [INFO] engine — ✓ equity QQQ
+2026-03-20 22:18:58,841 [INFO] engine — ✓ equity IWM
+2026-03-20 22:18:59,114 [INFO] engine — ✓ equity XLF
+2026-03-20 22:18:59,367 [INFO] engine — ✓ equity XLK
+2026-03-20 22:18:59,628 [INFO] engine — ✓ equity XLE
+2026-03-20 22:18:59,869 [INFO] engine — ✓ equity XLY
+2026-03-20 22:19:00,114 [INFO] engine — ✓ equity XLP
+2026-03-20 22:19:00,414 [INFO] engine — ✓ equity GLD
+2026-03-20 22:19:02,736 [INFO] engine — ✓ equity TLT
+2026-03-20 22:19:03,075 [INFO] engine — ✓ equity HYG
+2026-03-20 22:19:03,314 [INFO] engine — ✓ equity MAR
+2026-03-20 22:19:03,575 [INFO] engine — ✓ equity HLT
+2026-03-20 22:19:03,863 [INFO] engine — ✓ equity DAL
+2026-03-20 22:19:04,126 [INFO] engine — ✓ equity UAL
+2026-03-20 22:19:04,369 [INFO] engine — ✓ equity DIS
+2026-03-20 22:19:04,647 [INFO] engine — ✓ equity FOXA
+2026-03-20 22:19:06,435 [INFO] engine — ✓ equity MCD
+2026-03-20 22:19:06,643 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-20 22:19:06,684 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-20 22:19:06,684 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-20 22:19:06,744 [INFO] engine — ✓ equity KO
+2026-03-20 22:19:07,010 [INFO] engine — ✓ equity PEP
+2026-03-20 22:19:07,270 [INFO] engine — ✓ equity DKNG
+2026-03-20 22:21:09,042 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-20 22:21:09,042 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-20 22:21:09,329 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-20 22:21:09,670 [INFO] scanner_p2p — VES parallel rate: 656.02 (dolarapi.com)
+2026-03-20 22:21:10,278 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-20 22:21:10,895 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 22:21:11,504 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 22:21:12,381 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 22:21:47,633 [INFO] scanner_p2p — Using cached spot rates (age: 39s)
+
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 02:58:47 UTC] ✓ CYCLE #6 COMPLETED SUCCESSFULLY
+[2026-03-21 02:58:47 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 02:58:47 UTC]    Next run at: 03:18:47 UTC
+[2026-03-21 03:18:56 UTC] ─── CYCLE #7 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70670.00 | OKX $70668.50 | spread -0.0021%
+  [scanner_cross] BTC: Skipped (spread 0.0021% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2152.51 | OKX $2152.69 | spread +0.0084%
+  [scanner_cross] ETH: Skipped (spread 0.0084% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.37 | OKX $90.37 | spread +0.0000%
+  [scanner_cross] SOL: Skipped (spread 0.0000% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70670.00 | Futures: $70633.60 | Basis: -0.0515%
+  [scanner_basis] Logged (basis 0.0515% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0080 | Spread +0.256% | EdgeNet +0.502% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3679.5520 | Spread +0.203% | EdgeNet -0.786% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $646.8998 | Spread -1.590% | EdgeNet -1.740% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.9200 | Spread +0.372% | EdgeNet +0.817% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,670.0050 | okx=$70,668.1000 | bybit=$70,675.2000 | kucoin=$70,677.6000 | mexc=$70,667.4850 | Below threshold
+  [scanner_multi] ETH: binance=$2,152.5050 | okx=$2,152.7000 | bybit=$2,152.4700 | kucoin=$2,152.6100 | mexc=$2,152.4050 | Below threshold
+  [scanner_multi] SOL: binance=$90.3750 | okx=$90.3800 | bybit=$90.4000 | kucoin=$90.3800 | mexc=$90.4050 | Below threshold
+  [scanner_multi] XRP: binance=$1.4457 | okx=$1.4455 | bybit=$1.4456 | kucoin=$1.4453 | mexc=$1.4459 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0948 | okx=$0.0948 | bybit=$0.0948 | kucoin=$0.0947 | mexc=$0.0948 | Below threshold
+  [scanner_multi] ADA: binance=$0.2661 | okx=$0.2661 | bybit=$0.2662 | kucoin=$0.2662 | mexc=$0.2661 | Below threshold
+  [scanner_multi] AVAX: binance=$9.5850 | okx=$9.5850 | bybit=$9.5800 | kucoin=$9.5890 | mexc=$9.5875 | Below threshold
+  [scanner_multi] LINK: binance=$9.1450 | okx=$9.1430 | bybit=$9.1400 | kucoin=$9.1459 | mexc=$9.1450 | Below threshold
+  [scanner_multi] DOT: binance=$1.5105 | okx=$1.5100 | bybit=$1.5110 | kucoin=$1.5106 | mexc=$1.5105 | Below threshold
+  [scanner_multi] UNI: binance=$3.6055 | okx=$3.6040 | bybit=$3.6050 | kucoin=$3.6052 | mexc=$3.6055 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8465 | okx=$1.8440 | bybit=$1.8460 | kucoin=$1.8445 | mexc=$1.8465 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3155 | okx=$1.3150 | bybit=$1.3160 | kucoin=$1.3160 | mexc=$1.3154 | Below threshold
+  [scanner_multi] APT: binance=$0.9875 | okx=$0.9869 | bybit=$0.9870 | kucoin=$0.9874 | mexc=$0.9874 | Below threshold
+  [scanner_multi] ARB: binance=$0.0998 | okx=$0.0998 | bybit=$0.0999 | kucoin=$0.0999 | mexc=$0.0999 | Below threshold
+  [scanner_multi] OP: binance=$0.1232 | okx=$0.1232 | bybit=$0.1232 | kucoin=$0.1231 | mexc=$0.1232 | Below threshold
+  [scanner_multi] FIL: binance=$0.9025 | okx=$0.9016 | bybit=$0.9020 | kucoin=$0.9018 | mexc=$0.9025 | Below threshold
+  [scanner_multi] LTC: binance=$56.2550 | okx=$56.2600 | bybit=$56.2600 | kucoin=$56.2600 | mexc=$56.2550 | Below threshold
+  [scanner_multi] BCH: binance=$470.4500 | okx=$470.5000 | bybit=$470.5000 | kucoin=$470.7100 | mexc=$470.4500 | Below threshold
+  [scanner_multi] XLM: binance=$0.1656 | okx=$0.1655 | bybit=$0.1655 | kucoin=$0.1655 | mexc=$0.1656 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0054% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0030% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0048% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.75%
+  [scanner_cross_currency] ARS: Premium +1.22%
+  [scanner_cross_currency] COP: Premium -0.49%
+  [scanner_cross_currency] VES: Premium -1.40%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.24% | EdgeNet +0.24% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +2.15% | EdgeNet +0.95% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.70% | EdgeNet +0.50% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +2.62% | EdgeNet +1.12% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.39% | Buy 17.95 → Sell 18.02
+  [scanner_p2p_merchant] ARS: Spread +0.40% | Buy 1464.14 → Sell 1470.00
+[scanner_p2p_merchant] Scan complete: 0 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0001
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0002, bybit=1.0001
+  [scanner_stablecoin_depeg] DAI: okx=1.0003, bybit=1.0005
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9240 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.5% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9200       $17.9120       ok         ✅
+  binance_p2p        $17.9500       $18.0200       ok         ✅
+  okx_p2p            $18.0200       $17.8800       ok         ✅
+  bybit_p2p          $17.1200       $17.8500       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found2026-03-20 22:22:30,543 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-20 22:22:30,544 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-20 22:22:30,559 [INFO] ollama_intel — Read 114 opportunities for 2026-03-21
+2026-03-20 22:22:30,559 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-20 22:22:35,120 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-20 22:22:35,120 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-20 22:22:35,121 [INFO] engine — Intelligence generated: ok
+2026-03-20 22:22:35,121 [INFO] engine — Running ALFRED data quality check...
+2026-03-20 22:22:35,121 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-20 22:22:35,124 [INFO] alfred — ALFRED: dq_score 94.00% - OK
+2026-03-20 22:22:35,125 [INFO] engine — Data quality: 94.00% (OK)
+2026-03-20 22:22:35,129 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_03-22-35.json
+2026-03-20 22:22:35,129 [INFO] engine — Hash: d483bb7cf48c2026-03-20 22:34:36,221 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 22:34:38,640 [INFO] engine — ✓ equity QQQ
+2026-03-20 22:34:38,889 [INFO] engine — ✓ equity IWM
+2026-03-20 22:2026-03-20 22:42:43,859 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 22:42:46,318 [INFO] engine — ✓ equity QQQ
+2026-03-20 22:42:46,573 [INFO] engine — ✓ equity IWM
+2026-03-20 22:42:46,816 [INFO] engine — ✓ equity XLF
+2026-03-20 22:42:47,065 [INFO] engine — ✓ equity XLK
+2026-03-20 22:42:47,362 [INFO] engine — ✓ equity XLE
+2026-03-20 22:42:47,614 [INFO] engine — ✓ equity XLY
+2026-03-20 22:42:47,871 [INFO] engine — ✓ equity XLP
+2026-03-20 22:42:48,140 [INFO] engine — ✓ equity GLD
+2026-03-20 22:42:50,508 [INFO] engine — ✓ equity TLT
+2026-03-20 22:42:50,753 [INFO] engine — ✓ equity HYG
+2026-03-20 22:42:51,007 [INFO] engine — ✓ equity MAR
+2026-03-20 22:42:51,257 [INFO] engine — ✓ equity HLT
+2026-03-20 22:42:51,548 [INFO] engine — ✓ equity DAL
+2026-03-20 22:42:51,802 [INFO] engine — ✓ equity UAL
+2026-03-20 22:42:52,066 [INFO] engine — ✓ equity DIS
+2026-03-20 22:42:52,393 [INFO] engine — ✓ equity FOXA
+2026-03-20 22:42:54,185 [INFO] engine — ✓ equity MCD
+2026-03-20 22:42:54,254 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-20 22:42:54,447 [INFO] engine — ✓ equity KO
+2026-03-20 22:42:54,597 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-20 22:42:54,621 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-20 22:42:54,697 [INFO] engine — ✓ equity PEP
+2026-03-20 22:42:54,949 [INFO] engine — ✓ equity DKNG
+2026-03-20 22:43:15,093 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-20 22:43:15,093 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-20 22:43:15,374 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-20 22:43:15,710 [INFO] scanner_p2p — VES parallel rate: 656.02 (dolarapi.com)
+2026-03-20 22:43:16,340 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-20 22:43:16,956 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 22:43:17,569 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 22:43:18,462 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 22:43:55,554 [INFO] scanner_p2p — Using cached spot rates (age: 40s)
+
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 03:22:35 UTC] ✓ CYCLE #7 COMPLETED SUCCESSFULLY
+[2026-03-21 03:22:35 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 03:22:35 UTC]    Next run at: 03:42:35 UTC
+[2026-03-21 03:42:43 UTC] ─── CYCLE #8 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70651.36 | OKX $70648.10 | spread -0.0046%
+  [scanner_cross] BTC: Skipped (spread 0.0046% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2152.28 | OKX $2152.77 | spread +0.0228%
+  [scanner_cross] ETH: Skipped (spread 0.0228% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.38 | OKX $90.41 | spread +0.0332%
+  [scanner_cross] SOL: Skipped (spread 0.0332% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70651.37 | Futures: $70610.20 | Basis: -0.0583%
+  [scanner_basis] Logged (basis 0.0583% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0080 | Spread +0.312% | EdgeNet +0.502% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3681.1900 | Spread +0.255% | EdgeNet -0.742% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.4798 | Spread -1.166% | EdgeNet -1.347% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.8560 | Spread +0.359% | EdgeNet +0.812% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,651.3650 | okx=$70,648.1000 | bybit=$70,648.9000 | kucoin=$70,649.1000 | mexc=$70,649.4250 | Below threshold
+  [scanner_multi] ETH: binance=$2,152.2850 | okx=$2,152.3400 | bybit=$2,152.2000 | kucoin=$2,152.5900 | mexc=$2,152.1850 | Below threshold
+  [scanner_multi] SOL: binance=$90.3850 | okx=$90.4000 | bybit=$90.3900 | kucoin=$90.3900 | mexc=$90.3950 | Below threshold
+  [scanner_multi] XRP: binance=$1.4466 | okx=$1.4467 | bybit=$1.4467 | kucoin=$1.4470 | mexc=$1.4468 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0948 | okx=$0.0948 | bybit=$0.0948 | kucoin=$0.0948 | mexc=$0.0948 | Below threshold
+  [scanner_multi] ADA: binance=$0.2660 | okx=$0.2660 | bybit=$0.2661 | kucoin=$0.2660 | mexc=$0.2660 | Below threshold
+  [scanner_multi] AVAX: binance=$9.5850 | okx=$9.5870 | bybit=$9.5800 | kucoin=$9.5870 | mexc=$9.5850 | Below threshold
+  [scanner_multi] LINK: binance=$9.1350 | okx=$9.1340 | bybit=$9.1300 | kucoin=$9.1337 | mexc=$9.1325 | Below threshold
+  [scanner_multi] DOT: binance=$1.5125 | okx=$1.5130 | bybit=$1.5130 | kucoin=$1.5127 | mexc=$1.5125 | Below threshold
+  [scanner_multi] UNI: binance=$3.6035 | okx=$3.6030 | bybit=$3.6030 | kucoin=$3.6050 | mexc=$3.6035 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8405 | okx=$1.8430 | bybit=$1.8410 | kucoin=$1.8414 | mexc=$1.8405 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3135 | okx=$1.3130 | bybit=$1.3140 | kucoin=$1.3139 | mexc=$1.3140 | Below threshold
+  [scanner_multi] APT: binance=$0.9865 | okx=$0.9860 | bybit=$0.9860 | kucoin=$0.9861 | mexc=$0.9860 | Below threshold
+  [scanner_multi] ARB: binance=$0.0998 | okx=$0.0998 | bybit=$0.0998 | kucoin=$0.0998 | mexc=$0.0998 | Below threshold
+  [scanner_multi] OP: binance=$0.1230 | okx=$0.1231 | bybit=$0.1231 | kucoin=$0.1230 | mexc=$0.1230 | Below threshold
+  [scanner_multi] FIL: binance=$0.9035 | okx=$0.9030 | bybit=$0.9030 | kucoin=$0.9031 | mexc=$0.9031 | Below threshold
+  [scanner_multi] LTC: binance=$56.1550 | okx=$56.1600 | bybit=$56.1600 | kucoin=$56.1500 | mexc=$56.1550 | Below threshold
+  [scanner_multi] BCH: binance=$470.6500 | okx=$470.7000 | bybit=$470.8000 | kucoin=$470.8300 | mexc=$470.6000 | Below threshold
+  [scanner_multi] XLM: binance=$0.1658 | okx=$0.1658 | bybit=$0.1658 | kucoin=$0.1657 | mexc=$0.1658 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0055% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0035% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0057% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.75%
+  [scanner_cross_currency] ARS: Premium +1.21%
+  [scanner_cross_currency] COP: Premium -0.44%
+  [scanner_cross_currency] VES: Premium -1.01%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.19% | EdgeNet +0.19% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.76% | EdgeNet +0.56% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.65% | EdgeNet +0.45% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +2.22% | EdgeNet +0.72% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.56% | Buy 17.92 → Sell 18.02
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.38% | Buy 1464.40 → Sell 1469.99
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0001, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0002, bybit=1.0008
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9170 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9250       $17.9170       ok         ✅
+  binance_p2p        $17.9200       $18.0200       ok         ✅
+  okx_p2p            $18.0100       $17.8900       ok         ✅
+  bybit_p2p          $17.1200       $17.8500       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found2026-03-20 22:44:37,655 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-20 22:44:37,656 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-20 22:44:37,672 [INFO] ollama_intel — Read 140 opportunities for 2026-03-21
+2026-03-20 22:44:37,672 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-20 22:44:42,064 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-20 22:44:42,066 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-20 22:44:42,067 [INFO] engine — Intelligence generated: ok
+2026-03-20 22:44:42,067 [INFO] engine — Running ALFRED data quality check...
+2026-03-20 22:44:42,067 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-20 22:44:42,070 [INFO] alfred — ALFRED: dq_score 82.00% - OK
+2026-03-20 22:44:42,071 [INFO] engine — Data quality: 82.00% (OK)
+2026-03-20 22:44:42,075 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_03-44-42.json
+2026-03-20 22:44:42,075 [INFO] engine — Hash: 34d0db031ad12026-03-20 22:58:07,109 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 22:58:09,594 [INFO] engine — ✓ equity QQQ
+2026-03-20 22:58:09,855 [INFO] engine — ✓ equity IWM
+2026-03-20 22:2026-03-20 23:04:50,917 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 23:04:53,279 [INFO] engine — ✓ equity QQQ
+2026-03-20 23:04:53,561 [INFO] engine — ✓ equity IWM
+2026-03-20 23:04:53,813 [INFO] engine — ✓ equity XLF
+2026-03-20 23:04:54,064 [INFO] engine — ✓ equity XLK
+2026-03-20 23:04:54,321 [INFO] engine — ✓ equity XLE
+2026-03-20 23:04:54,566 [INFO] engine — ✓ equity XLY
+2026-03-20 23:04:54,815 [INFO] engine — ✓ equity XLP
+2026-03-20 23:04:55,086 [INFO] engine — ✓ equity GLD
+2026-03-20 23:04:57,453 [INFO] engine — ✓ equity TLT
+2026-03-20 23:04:57,695 [INFO] engine — ✓ equity HYG
+2026-03-20 23:04:58,029 [INFO] engine — ✓ equity MAR
+2026-03-20 23:04:58,287 [INFO] engine — ✓ equity HLT
+2026-03-20 23:04:58,552 [INFO] engine — ✓ equity DAL
+2026-03-20 23:04:58,855 [INFO] engine — ✓ equity UAL
+2026-03-20 23:04:59,138 [INFO] engine — ✓ equity DIS
+2026-03-20 23:04:59,415 [INFO] engine — ✓ equity FOXA
+2026-03-20 23:05:01,182 [INFO] engine — ✓ equity MCD
+2026-03-20 23:05:01,443 [INFO] engine — ✓ equity KO
+2026-03-20 23:05:01,652 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-20 23:05:01,697 [INFO] engine — ✓ equity PEP
+2026-03-20 23:05:01,945 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-20 23:05:01,988 [INFO] engine — ✓ equity DKNG
+2026-03-20 23:05:02,443 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-20 23:05:25,880 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-20 23:05:25,881 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-20 23:05:26,149 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-20 23:05:26,492 [INFO] scanner_p2p — VES parallel rate: 653.04 (dolarapi.com)
+2026-03-20 23:05:27,257 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-20 23:05:27,849 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 23:05:28,447 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 23:05:29,323 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 23:06:05,088 [INFO] scanner_p2p — Using cached spot rates (age: 39s)
+
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 03:44:42 UTC] ✓ CYCLE #8 COMPLETED SUCCESSFULLY
+[2026-03-21 03:44:42 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 03:44:42 UTC]    Next run at: 04:04:42 UTC
+[2026-03-21 04:04:50 UTC] ─── CYCLE #9 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70759.66 | OKX $70757.90 | spread -0.0025%
+  [scanner_cross] BTC: Skipped (spread 0.0025% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2156.46 | OKX $2156.67 | spread +0.0097%
+  [scanner_cross] ETH: Skipped (spread 0.0097% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.77 | OKX $90.78 | spread +0.0110%
+  [scanner_cross] SOL: Skipped (spread 0.0110% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70763.87 | Futures: $70721.10 | Basis: -0.0604%
+  [scanner_basis] Logged (basis 0.0604% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0000 | Spread +0.334% | EdgeNet +0.458% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3680.3900 | Spread +0.239% | EdgeNet -0.764% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.1500 | Spread -1.216% | EdgeNet -0.946% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.9180 | Spread +0.359% | EdgeNet +0.817% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,768.7250 | okx=$70,766.8000 | bybit=$70,774.2000 | kucoin=$70,763.8000 | mexc=$70,766.3050 | Below threshold
+  [scanner_multi] ETH: binance=$2,156.8450 | okx=$2,157.0500 | bybit=$2,156.8700 | kucoin=$2,156.4000 | mexc=$2,156.8750 | Below threshold
+  [scanner_multi] SOL: binance=$90.7750 | okx=$90.7900 | bybit=$90.8000 | kucoin=$90.7700 | mexc=$90.7750 | Below threshold
+  [scanner_multi] XRP: binance=$1.4474 | okx=$1.4472 | bybit=$1.4476 | kucoin=$1.4474 | mexc=$1.4476 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0948 | okx=$0.0948 | bybit=$0.0948 | kucoin=$0.0947 | mexc=$0.0948 | Below threshold
+  [scanner_multi] ADA: binance=$0.2663 | okx=$0.2663 | bybit=$0.2664 | kucoin=$0.2662 | mexc=$0.2663 | Below threshold
+  [scanner_multi] AVAX: binance=$9.6050 | okx=$9.6070 | bybit=$9.6100 | kucoin=$9.6070 | mexc=$9.6065 | Below threshold
+  [scanner_multi] LINK: binance=$9.1450 | okx=$9.1480 | bybit=$9.1500 | kucoin=$9.1490 | mexc=$9.1490 | Below threshold
+  [scanner_multi] DOT: binance=$1.5155 | okx=$1.5150 | bybit=$1.5150 | kucoin=$1.5158 | mexc=$1.5155 | Below threshold
+  [scanner_multi] UNI: binance=$3.6085 | okx=$3.6090 | bybit=$3.6060 | kucoin=$3.6090 | mexc=$3.6085 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8415 | okx=$1.8410 | bybit=$1.8430 | kucoin=$1.8426 | mexc=$1.8415 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3175 | okx=$1.3170 | bybit=$1.3170 | kucoin=$1.3174 | mexc=$1.3177 | Below threshold
+  [scanner_multi] APT: binance=$0.9885 | okx=$0.9887 | bybit=$0.9890 | kucoin=$0.9888 | mexc=$0.9889 | Below threshold
+  [scanner_multi] ARB: binance=$0.1000 | okx=$0.0998 | bybit=$0.0999 | kucoin=$0.0998 | mexc=$0.0999 | Below threshold
+  [scanner_multi] OP: binance=$0.1232 | okx=$0.1232 | bybit=$0.1232 | kucoin=$0.1231 | mexc=$0.1232 | Below threshold
+  [scanner_multi] FIL: binance=$0.9045 | okx=$0.9044 | bybit=$0.9040 | kucoin=$0.9043 | mexc=$0.9046 | Below threshold
+  [scanner_multi] LTC: binance=$56.3050 | okx=$56.3300 | bybit=$56.3200 | kucoin=$56.2600 | mexc=$56.3050 | Below threshold
+  [scanner_multi] BCH: binance=$471.5500 | okx=$471.5000 | bybit=$471.4000 | kucoin=$471.3400 | mexc=$471.5500 | Below threshold
+  [scanner_multi] XLM: binance=$0.1658 | okx=$0.1659 | bybit=$0.1659 | kucoin=$0.1659 | mexc=$0.1658 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0055% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0036% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0060% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.71%
+  [scanner_cross_currency] ARS: Premium +1.21%
+  [scanner_cross_currency] COP: Premium -0.46%
+  [scanner_cross_currency] VES: Premium -0.62%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.17% | EdgeNet +0.17% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.33% | EdgeNet +0.13% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.68% | EdgeNet +0.48% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +1.83% | EdgeNet +0.33% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.50% | Buy 17.92 → Sell 18.01
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.40% | Buy 1464.11 → Sell 1469.99
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0001, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0001, bybit=1.0007
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9160 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9250       $17.9160       ok         ✅
+  binance_p2p        $17.9200       $18.0100       ok         ✅
+  okx_p2p            $18.0100       $17.8900       ok         ✅
+  bybit_p2p          $17.1200       $17.8500       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found2026-03-20 23:06:47,996 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-20 23:06:47,997 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-20 23:06:48,013 [INFO] ollama_intel — Read 167 opportunities for 2026-03-21
+2026-03-20 23:06:48,013 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-20 23:06:51,924 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-20 23:06:51,925 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-20 23:06:51,925 [INFO] engine — Intelligence generated: ok
+2026-03-20 23:06:51,926 [INFO] engine — Running ALFRED data quality check...
+2026-03-20 23:06:51,926 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-20 23:06:51,929 [WARNING] alfred — ALFRED WARNING: dq_score 74.00% < 75% threshold. Issues: unknown: has_spot_price failed 13x, unknown: has_valid_spread failed 7x
+2026-03-20 23:06:51,930 [INFO] engine — Data quality: 74.00% (WARNING)
+2026-03-20 23:06:51,933 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_2026-03-20 23:21:52,226 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 23:21:54,703 [INFO] engine — ✓ equity QQQ
+2026-03-20 23:21:54,962 [INFO] engine — ✓ equity IWM
+2026-03-20 23:21:55,216 [INFO] engine — ✓ equity XLF
+2026-03-20 23:21:55,479 [INFO] engine — ✓ equity XLK
+2026-03-2026-03-20 23:27:00,851 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 23:27:03,411 [INFO] engine — ✓ equity QQQ
+2026-03-20 23:27:03,687 [INFO] engine — ✓ equity IWM
+2026-03-20 23:27:03,956 [INFO] engine — ✓ equity XLF
+2026-03-20 23:27:04,218 [INFO] engine — ✓ equity XLK
+2026-03-20 23:27:04,521 [INFO] engine — ✓ equity XLE
+2026-03-20 23:27:04,799 [INFO] engine — ✓ equity XLY
+2026-03-20 23:27:05,077 [INFO] engine — ✓ equity XLP
+2026-03-20 23:27:05,380 [INFO] engine — ✓ equity GLD
+2026-03-20 23:27:07,899 [INFO] engine — ✓ equity TLT
+2026-03-20 23:27:08,145 [INFO] engine — ✓ equity HYG
+2026-03-20 23:27:08,402 [INFO] engine — ✓ equity MAR
+2026-03-20 23:27:08,649 [INFO] engine — ✓ equity HLT
+2026-03-20 23:27:08,926 [INFO] engine — ✓ equity DAL
+2026-03-20 23:27:09,192 [INFO] engine — ✓ equity UAL
+2026-03-20 23:27:09,456 [INFO] engine — ✓ equity DIS
+2026-03-20 23:27:09,692 [INFO] engine — ✓ equity FOXA
+2026-03-20 23:27:11,475 [INFO] engine — ✓ equity MCD
+2026-03-20 23:27:11,581 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-20 23:27:11,599 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-20 23:27:11,741 [INFO] engine — ✓ equity KO
+2026-03-20 23:27:12,170 [INFO] engine — ✓ equity PEP
+2026-03-20 23:27:12,434 [INFO] engine — ✓ equity DKNG
+2026-03-20 23:27:12,567 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-20 23:27:27,321 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-20 23:27:27,321 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-20 23:27:27,605 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-20 23:27:27,874 [INFO] scanner_p2p — VES parallel rate: 653.04 (dolarapi.com)
+2026-03-20 23:27:28,714 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-20 23:27:29,320 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 23:27:29,922 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 23:27:30,818 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 23:28:06,518 [INFO] scanner_p2p — Using cached spot rates (age: 39s)
+
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 04:06:52 UTC] ✓ CYCLE #9 COMPLETED SUCCESSFULLY
+[2026-03-21 04:06:52 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 04:06:52 UTC]    Next run at: 04:26:52 UTC
+[2026-03-21 04:27:00 UTC] ─── CYCLE #10 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70799.40 | OKX $70789.30 | spread -0.0143%
+  [scanner_cross] BTC: Skipped (spread 0.0143% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2156.97 | OKX $2156.91 | spread -0.0028%
+  [scanner_cross] ETH: Skipped (spread 0.0028% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.59 | OKX $90.60 | spread +0.0110%
+  [scanner_cross] SOL: Skipped (spread 0.0110% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70799.39 | Futures: $70763.00 | Basis: -0.0514%
+  [scanner_basis] Logged (basis 0.0514% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0060 | Spread +0.368% | EdgeNet +0.491% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3681.5900 | Spread +0.289% | EdgeNet -0.731% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.1600 | Spread -1.214% | EdgeNet -0.944% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.8660 | Spread +0.380% | EdgeNet +0.813% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,799.5950 | okx=$70,797.0000 | bybit=$70,803.3000 | kucoin=$70,789.5000 | mexc=$70,798.7350 | Below threshold
+  [scanner_multi] ETH: binance=$2,156.9650 | okx=$2,157.0900 | bybit=$2,157.0200 | kucoin=$2,156.8100 | mexc=$2,156.9050 | Below threshold
+  [scanner_multi] SOL: binance=$90.6150 | okx=$90.6200 | bybit=$90.6300 | kucoin=$90.6000 | mexc=$90.6250 | Below threshold
+  [scanner_multi] XRP: binance=$1.4472 | okx=$1.4474 | bybit=$1.4474 | kucoin=$1.4474 | mexc=$1.4474 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0949 | okx=$0.0949 | bybit=$0.0949 | kucoin=$0.0948 | mexc=$0.0948 | Below threshold
+  [scanner_multi] ADA: binance=$0.2663 | okx=$0.2662 | bybit=$0.2663 | kucoin=$0.2663 | mexc=$0.2663 | Below threshold
+  [scanner_multi] AVAX: binance=$9.5950 | okx=$9.5930 | bybit=$9.5900 | kucoin=$9.5950 | mexc=$9.5940 | Below threshold
+  [scanner_multi] LINK: binance=$9.1350 | okx=$9.1370 | bybit=$9.1400 | kucoin=$9.1423 | mexc=$9.1380 | Below threshold
+  [scanner_multi] DOT: binance=$1.5135 | okx=$1.5140 | bybit=$1.5130 | kucoin=$1.5132 | mexc=$1.5135 | Below threshold
+  [scanner_multi] UNI: binance=$3.6045 | okx=$3.6040 | bybit=$3.6040 | kucoin=$3.6052 | mexc=$3.6045 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8415 | okx=$1.8420 | bybit=$1.8420 | kucoin=$1.8413 | mexc=$1.8415 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3175 | okx=$1.3170 | bybit=$1.3170 | kucoin=$1.3170 | mexc=$1.3172 | Below threshold
+  [scanner_multi] APT: binance=$0.9875 | okx=$0.9873 | bybit=$0.9870 | kucoin=$0.9875 | mexc=$0.9875 | Below threshold
+  [scanner_multi] ARB: binance=$0.0998 | okx=$0.0998 | bybit=$0.0999 | kucoin=$0.0998 | mexc=$0.0998 | Below threshold
+  [scanner_multi] OP: binance=$0.1232 | okx=$0.1231 | bybit=$0.1231 | kucoin=$0.1231 | mexc=$0.1232 | Below threshold
+  [scanner_multi] FIL: binance=$0.9055 | okx=$0.9049 | bybit=$0.9050 | kucoin=$0.9044 | mexc=$0.9052 | Below threshold
+  [scanner_multi] LTC: binance=$56.2950 | okx=$56.3100 | bybit=$56.2800 | kucoin=$56.2800 | mexc=$56.2950 | Below threshold
+  [scanner_multi] BCH: binance=$471.9500 | okx=$471.7000 | bybit=$471.8000 | kucoin=$471.8600 | mexc=$471.8500 | Below threshold
+  [scanner_multi] XLM: binance=$0.1658 | okx=$0.1659 | bybit=$0.1659 | kucoin=$0.1659 | mexc=$0.1658 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0047% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0037% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0064% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.75%
+  [scanner_cross_currency] ARS: Premium +1.21%
+  [scanner_cross_currency] COP: Premium -0.43%
+  [scanner_cross_currency] VES: Premium -0.59%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.18% | EdgeNet +0.18% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.35% | EdgeNet +0.15% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.64% | EdgeNet +0.44% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +1.81% | EdgeNet +0.31% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.56% | Buy 17.92 → Sell 18.02
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.42% | Buy 1463.80 → Sell 1469.99
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0002, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0001, bybit=1.0007
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9100 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9220       $17.9100       ok         ✅
+  binance_p2p        $17.9200       $18.0200       ok         ✅
+  okx_p2p            $18.0100       $17.8900       ok         ✅
+  bybit_p2p          $17.1200       $17.8500       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found2026-03-20 23:28:49,786 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-20 23:28:49,787 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-20 23:28:49,804 [INFO] ollama_intel — Read 194 opportunities for 2026-03-21
+2026-03-20 23:28:49,804 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-20 23:28:52,926 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-20 23:28:52,927 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-20 23:28:52,928 [INFO] engine — Intelligence generated: ok
+2026-03-20 23:28:52,928 [INFO] engine — Running ALFRED data quality check...
+2026-03-20 23:28:52,928 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-20 23:28:52,931 [WARNING] alfred — ALFRED WARNING: dq_score 72.00% < 75% threshold. Issues: unknown: has_spot_price failed 14x, unknown: has_valid_spread failed 8x
+2026-03-20 23:28:52,933 [INFO] engine — Data quality: 72.00% (WARNING)
+2026-03-20 23:28:52,937 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow2026-03-20 23:44:02,359 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 23:44:04,747 [INFO] engine — ✓ equity QQQ
+2026-03-20 23:44:05,009 [INFO] engine — ✓ equity IWM
+2026-03-20 23:44:05,393 [INFO] engine — ✓ equity XLF
+2026-03-20 23:44:05,654 [INFO] engine — ✓ equity XLK
+2026-03-22026-03-20 23:49:01,863 [INFO] engine — ENGINE START — equities=20 crypto=3 scanners=11
+2026-03-20 23:49:04,242 [INFO] engine — ✓ equity QQQ
+2026-03-20 23:49:04,498 [INFO] engine — ✓ equity IWM
+2026-03-20 23:49:04,748 [INFO] engine — ✓ equity XLF
+2026-03-20 23:49:04,996 [INFO] engine — ✓ equity XLK
+2026-03-20 23:49:05,246 [INFO] engine — ✓ equity XLE
+2026-03-20 23:49:05,506 [INFO] engine — ✓ equity XLY
+2026-03-20 23:49:05,753 [INFO] engine — ✓ equity XLP
+2026-03-20 23:49:06,040 [INFO] engine — ✓ equity GLD
+2026-03-20 23:49:08,392 [INFO] engine — ✓ equity TLT
+2026-03-20 23:49:08,639 [INFO] engine — ✓ equity HYG
+2026-03-20 23:49:08,883 [INFO] engine — ✓ equity MAR
+2026-03-20 23:49:09,162 [INFO] engine — ✓ equity HLT
+2026-03-20 23:49:09,410 [INFO] engine — ✓ equity DAL
+2026-03-20 23:49:09,720 [INFO] engine — ✓ equity UAL
+2026-03-20 23:49:09,972 [INFO] engine — ✓ equity DIS
+2026-03-20 23:49:10,237 [INFO] engine — ✓ equity FOXA
+2026-03-20 23:49:12,007 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-20 23:49:12,033 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-20 23:49:12,035 [INFO] engine — ✓ equity MCD
+2026-03-20 23:49:12,111 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-20 23:49:12,303 [INFO] engine — ✓ equity KO
+2026-03-20 23:49:12,590 [INFO] engine — ✓ equity PEP
+2026-03-20 23:49:12,847 [INFO] engine — ✓ equity DKNG
+2026-03-20 23:50:56,640 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-20 23:50:56,641 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-20 23:50:56,879 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-20 23:50:57,147 [INFO] scanner_p2p — VES parallel rate: 653.04 (dolarapi.com)
+2026-03-20 23:50:57,889 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-20 23:50:58,600 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-20 23:50:59,202 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 23:51:00,094 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-20 23:51:35,064 [INFO] scanner_p2p — Using cached spot rates (age: 38s)
+
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 04:28:52 UTC] ✓ CYCLE #10 COMPLETED SUCCESSFULLY
+[2026-03-21 04:28:52 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 04:28:52 UTC]    Next run at: 04:48:52 UTC
+[2026-03-21 04:49:01 UTC] ─── CYCLE #11 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70638.26 | OKX $70630.90 | spread -0.0104%
+  [scanner_cross] BTC: Skipped (spread 0.0104% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2152.12 | OKX $2152.07 | spread -0.0023%
+  [scanner_cross] ETH: Skipped (spread 0.0023% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.23 | OKX $90.24 | spread +0.0111%
+  [scanner_cross] SOL: Skipped (spread 0.0111% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70638.26 | Futures: $70600.60 | Basis: -0.0533%
+  [scanner_basis] Logged (basis 0.0533% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0140 | Spread +0.357% | EdgeNet +0.536% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3681.9900 | Spread +0.331% | EdgeNet -0.720% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.1398 | Spread -1.207% | EdgeNet -0.947% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.8300 | Spread +0.386% | EdgeNet +0.811% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,638.2550 | okx=$70,630.9000 | bybit=$70,639.9000 | kucoin=$70,643.5000 | mexc=$70,636.8350 | Below threshold
+  [scanner_multi] ETH: binance=$2,152.1250 | okx=$2,152.0700 | bybit=$2,151.9600 | kucoin=$2,152.1200 | mexc=$2,151.8850 | Below threshold
+  [scanner_multi] SOL: binance=$90.2250 | okx=$90.2300 | bybit=$90.2200 | kucoin=$90.2300 | mexc=$90.2250 | Below threshold
+  [scanner_multi] XRP: binance=$1.4451 | okx=$1.4450 | bybit=$1.4451 | kucoin=$1.4450 | mexc=$1.4451 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0946 | okx=$0.0946 | bybit=$0.0946 | kucoin=$0.0946 | mexc=$0.0946 | Below threshold
+  [scanner_multi] ADA: binance=$0.2661 | okx=$0.2660 | bybit=$0.2661 | kucoin=$0.2661 | mexc=$0.2661 | Below threshold
+  [scanner_multi] AVAX: binance=$9.5550 | okx=$9.5610 | bybit=$9.5600 | kucoin=$9.5600 | mexc=$9.5575 | Below threshold
+  [scanner_multi] LINK: binance=$9.1050 | okx=$9.1050 | bybit=$9.1100 | kucoin=$9.1053 | mexc=$9.1060 | Below threshold
+  [scanner_multi] DOT: binance=$1.5085 | okx=$1.5070 | bybit=$1.5090 | kucoin=$1.5082 | mexc=$1.5085 | Below threshold
+  [scanner_multi] UNI: binance=$3.5915 | okx=$3.5910 | bybit=$3.5910 | kucoin=$3.5907 | mexc=$3.5915 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8395 | okx=$1.8430 | bybit=$1.8400 | kucoin=$1.8406 | mexc=$1.8395 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3155 | okx=$1.3140 | bybit=$1.3160 | kucoin=$1.3156 | mexc=$1.3153 | Below threshold
+  [scanner_multi] APT: binance=$0.9845 | okx=$0.9840 | bybit=$0.9840 | kucoin=$0.9843 | mexc=$0.9846 | Below threshold
+  [scanner_multi] ARB: binance=$0.0996 | okx=$0.0997 | bybit=$0.0997 | kucoin=$0.0997 | mexc=$0.0997 | Below threshold
+  [scanner_multi] OP: binance=$0.1229 | okx=$0.1228 | bybit=$0.1228 | kucoin=$0.1228 | mexc=$0.1229 | Below threshold
+  [scanner_multi] FIL: binance=$0.9015 | okx=$0.9011 | bybit=$0.9010 | kucoin=$0.9013 | mexc=$0.9015 | Below threshold
+  [scanner_multi] LTC: binance=$56.1850 | okx=$56.1900 | bybit=$56.1800 | kucoin=$56.1900 | mexc=$56.1850 | Below threshold
+  [scanner_multi] BCH: binance=$471.0500 | okx=$470.8000 | bybit=$470.8000 | kucoin=$470.9200 | mexc=$470.9000 | Below threshold
+  [scanner_multi] XLM: binance=$0.1653 | okx=$0.1653 | bybit=$0.1654 | kucoin=$0.1654 | mexc=$0.1653 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0040% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0038% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0067% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.80%
+  [scanner_cross_currency] ARS: Premium +1.21%
+  [scanner_cross_currency] COP: Premium -0.39%
+  [scanner_cross_currency] VES: Premium -0.60%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.19% | EdgeNet +0.18% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.39% | EdgeNet +0.19% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.60% | EdgeNet +0.40% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +1.81% | EdgeNet +0.31% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.56% | Buy 17.92 → Sell 18.02
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.44% | Buy 1463.62 → Sell 1470.00
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0002, bybit=1.0001
+  [scanner_stablecoin_depeg] DAI: okx=1.0001, bybit=1.0007
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9120 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9210       $17.9120       ok         ✅
+  binance_p2p        $17.9200       $18.0200       ok         ✅
+  okx_p2p            $18.0100       $17.8900       ok         ✅
+  bybit_p2p          $17.1200       $17.8500       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found2026-03-20 23:52:18,060 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-20 23:52:18,061 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-20 23:52:18,078 [INFO] ollama_intel — Read 221 opportunities for 2026-03-21
+2026-03-20 23:52:18,079 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-20 23:52:22,681 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-20 23:52:22,682 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-20 23:52:22,683 [INFO] engine — Intelligence generated: ok
+2026-03-20 23:52:22,683 [INFO] engine — Running ALFRED data quality check...
+2026-03-20 23:52:22,684 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-20 23:52:22,687 [WARNING] alfred — ALFRED WARNING: dq_score 72.00% < 75% threshold. Issues: unknown: has_spot_price failed 14x, unknown: has_valid_spread failed 8x
+2026-03-20 23:52:22,689 [INFO] engine — Data quality: 72.00% (WARNING)
+2026-03-20 23:52:22,693 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flo2026-03-21 00:06:16,263 [INFO] engine — ENGINE START — equities=13 crypto=3 scanners=11
+2026-03-21 00:06:18,685 [INFO] engine — ✓ equity SPY
+2026-03-21 00:06:18,945 [INFO] engine — ✓ equity QQQ
+2026-03-21 00:06:19,199 [INFO] engine — ✓ equity XLE
+2026-03-21 00:06:19,453 [INFO] engine — ✓ equity XLK
+2026-03-212026-03-21 00:12:28,668 [INFO] engine — ENGINE START — equities=13 crypto=3 scanners=11
+2026-03-21 00:12:31,184 [INFO] engine — ✓ equity SPY
+2026-03-21 00:12:31,492 [INFO] engine — ✓ equity QQQ
+2026-03-21 00:12:31,766 [INFO] engine — ✓ equity XLE
+2026-03-21 00:12:32,054 [INFO] engine — ✓ equity XLK
+2026-03-21 00:12:32,330 [INFO] engine — ✓ equity XLF
+2026-03-21 00:12:32,609 [INFO] engine — ✓ equity GLD
+2026-03-21 00:12:32,907 [INFO] engine — ✓ equity TLT
+2026-03-21 00:12:33,331 [INFO] engine — ✓ equity UAL
+2026-03-21 00:12:35,421 [INFO] engine — ✓ equity DAL
+2026-03-21 00:12:35,550 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-21 00:12:35,566 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-21 00:12:35,684 [INFO] engine — ✓ equity DIS
+2026-03-21 00:12:35,841 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-21 00:12:35,969 [INFO] engine — ✓ equity KO
+2026-03-21 00:12:36,247 [INFO] engine — ✓ equity HLT
+2026-03-21 00:12:36,523 [INFO] engine — ✓ equity MCD
+2026-03-21 00:13:02,556 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-21 00:13:02,557 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-21 00:13:02,813 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-21 00:13:03,167 [INFO] scanner_p2p — VES parallel rate: 653.04 (dolarapi.com)
+2026-03-21 00:13:04,022 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-21 00:13:04,710 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-21 00:13:05,373 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-21 00:13:06,321 [INFO] scanner_p2p — Using cached spot rates (age: 4s)
+2026-03-21 00:13:43,756 [INFO] scanner_p2p — Using cached spot rates (age: 41s)
+
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 04:52:22 UTC] ✓ CYCLE #11 COMPLETED SUCCESSFULLY
+[2026-03-21 04:52:22 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 04:52:22 UTC]    Next run at: 05:12:22 UTC
+[2026-03-21 05:12:28 UTC] ─── CYCLE #12 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+DIS        4.05   3.12 EXTREME
+SPY        3.66   2.98 STRESS
+QQQ        3.46   2.97 STRESS
+XLE        3.57   2.93 STRESS
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70643.14 | OKX $70639.10 | spread -0.0057%
+  [scanner_cross] BTC: Skipped (spread 0.0057% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2153.77 | OKX $2153.56 | spread -0.0098%
+  [scanner_cross] ETH: Skipped (spread 0.0098% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.32 | OKX $90.32 | spread +0.0000%
+  [scanner_cross] SOL: Skipped (spread 0.0000% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70643.14 | Futures: $70611.00 | Basis: -0.0455%
+  [scanner_basis] Logged (basis 0.0455% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0180 | Spread +0.368% | EdgeNet +0.558% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3684.1900 | Spread +0.391% | EdgeNet -0.661% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.3376 | Spread -1.142% | EdgeNet -0.917% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.5780 | Spread +0.294% | EdgeNet +0.793% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.08%)...
+  [scanner_multi] BTC: binance=$70,643.1450 | okx=$70,634.0000 | bybit=$70,640.6000 | kucoin=$70,643.0000 | mexc=$70,642.3750 | Below threshold
+  [scanner_multi] ETH: binance=$2,153.2650 | okx=$2,153.5400 | bybit=$2,153.1200 | kucoin=$2,153.5300 | mexc=$2,153.1450 | Below threshold
+  [scanner_multi] SOL: binance=$90.3150 | okx=$90.3100 | bybit=$90.3100 | kucoin=$90.3200 | mexc=$90.3150 | Below threshold
+  [scanner_multi] XRP: binance=$1.4457 | okx=$1.4458 | bybit=$1.4458 | kucoin=$1.4457 | mexc=$1.4455 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0948 | okx=$0.0948 | bybit=$0.0948 | kucoin=$0.0949 | mexc=$0.0948 | Below threshold
+  [scanner_multi] ADA: binance=$0.2663 | okx=$0.2663 | bybit=$0.2664 | kucoin=$0.2664 | mexc=$0.2663 | Below threshold
+  [scanner_multi] AVAX: binance=$9.5650 | okx=$9.5690 | bybit=$9.5700 | kucoin=$9.5700 | mexc=$9.5675 | Below threshold
+  [scanner_multi] LINK: binance=$9.1150 | okx=$9.1130 | bybit=$9.1100 | kucoin=$9.1157 | mexc=$9.1155 | Below threshold
+  [scanner_multi] DOT: binance=$1.5075 | okx=$1.5080 | bybit=$1.5080 | kucoin=$1.5080 | mexc=$1.5075 | Below threshold
+  [scanner_multi] UNI: binance=$3.5945 | okx=$3.5940 | bybit=$3.5950 | kucoin=$3.5941 | mexc=$3.5945 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8405 | okx=$1.8420 | bybit=$1.8420 | kucoin=$1.8424 | mexc=$1.8405 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3155 | okx=$1.3160 | bybit=$1.3160 | kucoin=$1.3154 | mexc=$1.3155 | Below threshold
+  [scanner_multi] APT: binance=$0.9885 | okx=$0.9884 | bybit=$0.9890 | kucoin=$0.9884 | mexc=$0.9884 | Below threshold
+  [scanner_multi] ARB: binance=$0.0998 | okx=$0.0998 | bybit=$0.0997 | kucoin=$0.0997 | mexc=$0.0997 | Below threshold
+  [scanner_multi] OP: binance=$0.1229 | okx=$0.1229 | bybit=$0.1229 | kucoin=$0.1228 | mexc=$0.1229 | Below threshold
+  [scanner_multi] FIL: binance=$0.9025 | okx=$0.9023 | bybit=$0.9030 | kucoin=$0.9035 | mexc=$0.9026 | Below threshold
+  [scanner_multi] LTC: binance=$56.4150 | okx=$56.4300 | bybit=$56.4200 | kucoin=$56.4200 | mexc=$56.4150 | Below threshold
+  [scanner_multi] BCH: binance=$470.8500 | okx=$470.7000 | bybit=$470.9000 | kucoin=$471.2300 | mexc=$470.6500 | Below threshold
+  [scanner_multi] XLM: binance=$0.1661 | okx=$0.1661 | bybit=$0.1662 | kucoin=$0.1661 | mexc=$0.1661 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0031% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0035% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0068% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.81%
+  [scanner_cross_currency] ARS: Premium +1.19%
+  [scanner_cross_currency] COP: Premium -0.36%
+  [scanner_cross_currency] VES: Premium -0.57%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.17% | EdgeNet +0.17% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.38% | EdgeNet +0.18% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.55% | EdgeNet +0.35% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +1.76% | EdgeNet +0.26% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.61% | Buy 17.92 → Sell 18.03
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.38% | Buy 1464.50 → Sell 1470.00
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0001, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0002, bybit=1.0007
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9070 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9120       $17.9070       ok         ✅
+  binance_p2p        $17.9200       $18.0300       ok         ✅
+  okx_p2p            $18.0100       $17.8900       ok         ✅
+  bybit_p2p          $17.1200       $17.8500       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found2026-03-21 00:14:27,387 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-21 00:14:27,389 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-21 00:14:27,408 [INFO] ollama_intel — Read 248 opportunities for 2026-03-21
+2026-03-21 00:14:27,408 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-21 00:14:32,582 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-21 00:14:32,583 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-21 00:14:32,585 [INFO] engine — Intelligence generated: ok
+2026-03-21 00:14:32,585 [INFO] engine — Running ALFRED data quality check...
+2026-03-21 00:14:32,586 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-21 00:14:32,590 [WARNING] alfred — ALFRED WARNING: dq_score 72.00% < 75% threshold. Issues: unknown: has_spot_price failed 14x, unknown: has_valid_spread failed 8x
+2026-03-21 00:14:32,592 [INFO] engine — Data quality: 72.00% (WARNING)
+2026-03-21 00:14:32,598 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_05-14-32.json
+2026-03-21 00:14:32,598 [INFO] engine — Hash: 8fdda07beef2c2b119297b2f34830dd0e48ab2a87181968e0d404eac4b613596
+2026-03-21 00:14:32,649 [INFO] harvey — HARVEY ingest complete: scanned=2078 inserted=6 db=/Users/erickposselt/Projects/batcave/batman_flow_engine/storage/batman.db
+8,408 [INFO] 2026-03-21 00:28:12,974 [INFO] engine — ENGINE START — equities=13 crypto=3 scanners=11
+2026-03-21 00:28:15,544 [INFO] engine — ✓ equity SPY
+2026-03-21 00:28:15,839 [INFO] engine — ✓ equity QQQ
+2026-03-21 00:28:16,096 [INFO] engine — ✓ equity XLE
+2026-03-21 00:28:16,349 [INFO] engine — ✓ equity XLK
+2026-03-212026-03-21 00:34:37,181 [INFO] engine — ENGINE START — equities=13 crypto=3 scanners=11
+2026-03-21 00:34:39,696 [INFO] engine — ✓ equity SPY
+2026-03-21 00:34:39,939 [INFO] engine — ✓ equity QQQ
+2026-03-21 00:34:40,192 [INFO] engine — ✓ equity XLE
+2026-03-21 00:34:40,441 [INFO] engine — ✓ equity XLK
+2026-03-21 00:34:40,693 [INFO] engine — ✓ equity XLF
+2026-03-21 00:34:40,987 [INFO] engine — ✓ equity GLD
+2026-03-21 00:34:41,289 [INFO] engine — ✓ equity TLT
+2026-03-21 00:34:41,534 [INFO] engine — ✓ equity UAL
+2026-03-21 00:34:43,318 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-21 00:34:43,519 [INFO] engine — ✓ equity DAL
+2026-03-21 00:34:43,555 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-21 00:34:43,681 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-21 00:34:43,784 [INFO] engine — ✓ equity DIS
+2026-03-21 00:34:44,041 [INFO] engine — ✓ equity KO
+2026-03-21 00:34:44,390 [INFO] engine — ✓ equity HLT
+2026-03-21 00:34:44,681 [INFO] engine — ✓ equity MCD
+2026-03-21 00:37:02,869 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-21 00:37:02,871 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-21 00:37:03,163 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-21 00:37:03,520 [INFO] scanner_p2p — VES parallel rate: 653.04 (dolarapi.com)
+2026-03-21 00:37:04,569 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-21 00:37:05,203 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-21 00:37:05,860 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-21 00:37:06,788 [INFO] scanner_p2p — Using cached spot rates (age: 4s)
+2026-03-21 00:37:41,009 [INFO] scanner_p2p — Using cached spot rates (age: 38s)
+
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 05:14:32 UTC] ✓ CYCLE #12 COMPLETED SUCCESSFULLY
+[2026-03-21 05:14:32 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 05:14:32 UTC]    Next run at: 05:34:32 UTC
+[2026-03-21 05:34:37 UTC] ─── CYCLE #13 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME    
+-----------------------------------
+UAL        3.66   4.07 EXTREME   
+XLK        3.91   3.75 EXTREME   
+HLT        4.09   3.67 EXTREME   
+DAL        2.96   3.32 EXTREME   
+KO         3.72   3.31 EXTREME   
+MCD        3.95   3.15 EXTREME   
+DIS        4.05   3.12 EXTREME   
+SPY        3.66   2.98 STRESS    
+QQQ        3.46   2.97 STRESS    
+XLE        3.57   2.93 STRESS    
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70772.13 | OKX $70783.10 | spread +0.0155%
+  [scanner_cross] BTC: Skipped (spread 0.0155% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2155.77 | OKX $2155.74 | spread -0.0014%
+  [scanner_cross] ETH: Skipped (spread 0.0014% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.44 | OKX $90.45 | spread +0.0111%
+  [scanner_cross] SOL: Skipped (spread 0.0111% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70772.14 | Futures: $70746.40 | Basis: -0.0364%
+  [scanner_basis] Logged (basis 0.0364% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0160 | Spread +0.401% | EdgeNet +0.547% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3684.3700 | Spread +0.372% | EdgeNet -0.656% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.2978 | Spread -0.981% | EdgeNet -0.923% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.8400 | Spread +0.403% | EdgeNet +0.811% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.08%)...
+  [scanner_multi] BTC: binance=$70,772.1350 | okx=$70,777.0000 | bybit=$70,781.2000 | kucoin=$70,774.3000 | mexc=$70,771.4750 | Below threshold
+  [scanner_multi] ETH: binance=$2,155.7650 | okx=$2,155.7500 | bybit=$2,155.6200 | kucoin=$2,155.7500 | mexc=$2,155.7250 | Below threshold
+  [scanner_multi] SOL: binance=$90.4350 | okx=$90.4400 | bybit=$90.4300 | kucoin=$90.4400 | mexc=$90.4450 | Below threshold
+  [scanner_multi] XRP: binance=$1.4484 | okx=$1.4485 | bybit=$1.4485 | kucoin=$1.4484 | mexc=$1.4482 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0949 | okx=$0.0949 | bybit=$0.0949 | kucoin=$0.0949 | mexc=$0.0949 | Below threshold
+  [scanner_multi] ADA: binance=$0.2667 | okx=$0.2668 | bybit=$0.2668 | kucoin=$0.2668 | mexc=$0.2667 | Below threshold
+  [scanner_multi] AVAX: binance=$9.6150 | okx=$9.6190 | bybit=$9.6100 | kucoin=$9.6190 | mexc=$9.6175 | Below threshold
+  [scanner_multi] LINK: binance=$9.1350 | okx=$9.1370 | bybit=$9.1400 | kucoin=$9.1373 | mexc=$9.1390 | Below threshold
+  [scanner_multi] DOT: binance=$1.5125 | okx=$1.5130 | bybit=$1.5120 | kucoin=$1.5127 | mexc=$1.5125 | Below threshold
+  [scanner_multi] UNI: binance=$3.6015 | okx=$3.6020 | bybit=$3.6010 | kucoin=$3.6010 | mexc=$3.6015 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8375 | okx=$1.8380 | bybit=$1.8380 | kucoin=$1.8376 | mexc=$1.8375 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3195 | okx=$1.3190 | bybit=$1.3200 | kucoin=$1.3194 | mexc=$1.3189 | Below threshold
+  [scanner_multi] APT: binance=$0.9995 | okx=$0.9994 | bybit=$0.9990 | kucoin=$0.9993 | mexc=$0.9989 | Below threshold
+  [scanner_multi] ARB: binance=$0.1001 | okx=$0.1002 | bybit=$0.1002 | kucoin=$0.1001 | mexc=$0.1001 | Below threshold
+  [scanner_multi] OP: binance=$0.1232 | okx=$0.1233 | bybit=$0.1233 | kucoin=$0.1232 | mexc=$0.1232 | Below threshold
+  [scanner_multi] FIL: binance=$0.9075 | okx=$0.9073 | bybit=$0.9080 | kucoin=$0.9072 | mexc=$0.9077 | Below threshold
+  [scanner_multi] LTC: binance=$56.4050 | okx=$56.4000 | bybit=$56.4100 | kucoin=$56.4100 | mexc=$56.4050 | Below threshold
+  [scanner_multi] BCH: binance=$471.6500 | okx=$471.6000 | bybit=$471.6000 | kucoin=$471.4900 | mexc=$471.4000 | Below threshold
+  [scanner_multi] XLM: binance=$0.1666 | okx=$0.1666 | bybit=$0.1666 | kucoin=$0.1667 | mexc=$0.1666 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0021% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0028% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0070% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.80%
+  [scanner_cross_currency] ARS: Premium +1.21%
+  [scanner_cross_currency] COP: Premium -0.34%
+  [scanner_cross_currency] VES: Premium -0.57%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.14% | EdgeNet +0.14% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.37% | EdgeNet +0.17% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.55% | EdgeNet +0.35% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +1.78% | EdgeNet +0.28% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.61% | Buy 17.92 → Sell 18.03
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.47% | Buy 1463.10 → Sell 1470.00
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0001, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0003, bybit=1.0005
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9040 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9080       $17.9040       ok         ✅
+  binance_p2p        $17.9200       $18.0300       ok         ✅
+  okx_p2p            $18.0100       $17.8900       ok         ✅
+  bybit_p2p          $17.1200       $17.8300       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found2026-03-21 00:38:25,150 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-21 00:38:25,151 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-21 00:38:25,173 [INFO] ollama_intel — Read 275 opportunities for 2026-03-21
+2026-03-21 00:38:25,173 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-21 00:38:30,496 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-21 00:38:30,496 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-21 00:38:30,497 [INFO] engine — Intelligence generated: ok
+2026-03-21 00:38:30,498 [INFO] engine — Running ALFRED data quality check...
+2026-03-21 00:38:30,498 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-21 00:38:30,502 [WARNING] alfred — ALFRED WARNING: dq_score 72.00% < 75% threshold. Issues: unknown: has_spot_price failed 14x, unknown: has_valid_spread failed 8x
+2026-03-21 00:38:30,504 [INFO] engine — Data quality: 72.00% (WARNING)
+2026-03-21 00:38:30,510 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_05-38-30.json
+2026-03-21 00:38:30,510 [INFO] engine — Hash: a83c916afd47d2fa39f248dc52711dec68cd952f055897a394441b964056c606
+2026-03-21 00:38:30,568 [INFO] harvey — HARVEY ingest complete: scanned=2105 inserted=6 db=/Users/erickposselt/Projects/batcave/batman_flow_engine/storage/batman.db
+-03-21
+2026-03-21 00:19:19,873 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-21 00:19:22,746 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-21 00:19:22,747 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-21 00:19:22,747 [INFO] engine — Intelligence generated: ok
+2026-03-21 00:19:22,748 [INFO] engine — Running ALFRED data quality check...
+2026-03-21 00:19:22,748 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-21 00:19:22,752 [WARNING] alfred — ALFRED WARNING: dq_score 72.00% < 75% threshold. Issues: unknown: has_spot_price failed 14x, unknown: has_valid_spread failed 8x
+2026-03-21 00:19:22,754 [INFO] engine — Data quality: 72.00% (WARNING)
+2026-03-21 00:19:22,761 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_05-19-22.json
+2026-03-21 00:19:22,761 [INFO] engine — Hash: 433f6ce5ac2db9aadf397e4e3fd416c69c801f23aba7cabf36d8b67389002489
+2026-03-21 00:19:22,810 [INFO] harvey — HARVEY ingest complete: scanned=2084 inserted=6 db=/Users/erickposselt/Projects/batcave/batman_flow_engine/storage/batman.db
+t_p2p $17.12 → Sell@okx_p2p $17.89 | Edge: +3.498% | P&L: $+3.50/trade
+    3. Buy@bybit_p2p $17.12 → Sell@bitso_spot $17.92 | Edge: +3.196% | P&L: $+3.20/trade
+
+[scanner_cross_mxn] Scan complete: 12 routes, 3 viable
+[2026-03-21 03:56:22 UTC] ✓ CYCLE #19 COMPLETED SUCCESSFULLY
+[2026-03-21 03:56:22 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 03:56:22 UTC]   2026-03-21 00:39:27,207 [INFO] engine — ENGINE START — equities=13 crypto=3 scanners=11
+2026-03-21 00:39:29,742 [INFO] engine — ✓ equity SPY
+2026-03-21 00:39:30,049 [INFO] engine — ✓ equity QQQ
+2026-03-21 00:39:30,342 [INFO] engine — ✓ equity XLE
+2026-03-21 00:39:30,606 [INFO] engine — ✓ equity XLK
+2026-03-21 00:39:30,862 [INFO] engine — ✓ equity XLF
+2026-03-21 00:39:31,121 [INFO] engine — ✓ equity GLD
+2026-03-21 00:39:31,394 [INFO] engine — ✓ equity TLT
+2026-03-21 00:39:31,704 [INFO] engine — ✓ equity UAL
+2026-03-21 00:39:33,340 [INFO] engine — ✓ equity DAL
+2026-03-21 00:39:33,894 [INFO] engine — ✓ equity DIS
+2026-03-21 00:39:33,917 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-21 00:39:34,154 [INFO] engine — ✓ equity KO
+2026-03-21 00:39:34,323 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-21 00:39:34,347 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-21 00:39:34,443 [INFO] engine — ✓ equity HLT
+2026-03-21 00:39:34,750 [INFO] engine — ✓ equity MCD
+2026-03-21 00:39:53,885 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-21 00:39:53,886 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-21 00:39:54,165 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-21 00:39:54,438 [INFO] scanner_p2p — VES parallel rate: 653.04 (dolarapi.com)
+2026-03-21 00:39:55,300 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-21 00:39:55,923 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-21 00:39:56,560 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-21 00:39:57,487 [INFO] scanner_p2p — Using cached spot rates (age: 4s)
+2026-03-21 00:40:31,280 [INFO] scanner_p2p — Using cached spot rates (age: 37s)
+
+[scanner_ff] Scanning 10 assets across 3 futures exchanges...
+[scanner_ff] Done: 0 opportunities
+[2026-03-21 05:19:22 UTC] ✓ CYCLE #12 COMPLETED SUCCESSFULLY
+[2026-03-21 05:19:22 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 05:19:22 UTC]    Next run at: 05:39:22 UTC
+[2026-03-21 05:39:27 UTC] ─── CYCLE #13 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME    
+-----------------------------------
+UAL        3.66   4.07 EXTREME   
+XLK        3.91   3.75 EXTREME   
+HLT        4.09   3.67 EXTREME   
+DAL        2.96   3.32 EXTREME   
+KO         3.72   3.31 EXTREME   
+MCD        3.95   3.15 EXTREME   
+DIS        4.05   3.12 EXTREME   
+SPY        3.66   2.98 STRESS    
+QQQ        3.46   2.97 STRESS    
+XLE        3.57   2.93 STRESS    
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70758.82 | OKX $70757.00 | spread -0.0026%
+  [scanner_cross] BTC: Skipped (spread 0.0026% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2155.07 | OKX $2155.09 | spread +0.0009%
+  [scanner_cross] ETH: Skipped (spread 0.0009% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.31 | OKX $90.31 | spread +0.0000%
+  [scanner_cross] SOL: Skipped (spread 0.0000% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70758.82 | Futures: $70724.10 | Basis: -0.0491%
+  [scanner_basis] Logged (basis 0.0491% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0160 | Spread +0.401% | EdgeNet +0.547% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3684.9700 | Spread +0.388% | EdgeNet -0.640% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.1978 | Spread -1.026% | EdgeNet -0.938% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.8400 | Spread +0.412% | EdgeNet +0.811% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 20 assets across 5 exchanges (threshold: 0.08%)...
+  [scanner_multi] BTC: binance=$70,721.9950 | okx=$70,730.0000 | bybit=$70,735.8000 | kucoin=$70,731.3000 | mexc=$70,728.0850 | Below threshold
+  [scanner_multi] ETH: binance=$2,153.9750 | okx=$2,154.1000 | bybit=$2,153.8200 | kucoin=$2,153.9800 | mexc=$2,153.9350 | Below threshold
+  [scanner_multi] SOL: binance=$90.2450 | okx=$90.2500 | bybit=$90.2400 | kucoin=$90.2400 | mexc=$90.2450 | Below threshold
+  [scanner_multi] XRP: binance=$1.4487 | okx=$1.4482 | bybit=$1.4483 | kucoin=$1.4484 | mexc=$1.4486 | Below threshold
+  [scanner_multi] DOGE: binance=$0.0948 | okx=$0.0948 | bybit=$0.0948 | kucoin=$0.0948 | mexc=$0.0948 | Below threshold
+  [scanner_multi] ADA: binance=$0.2663 | okx=$0.2664 | bybit=$0.2664 | kucoin=$0.2664 | mexc=$0.2663 | Below threshold
+  [scanner_multi] AVAX: binance=$9.6050 | okx=$9.6010 | bybit=$9.6000 | kucoin=$9.6020 | mexc=$9.6025 | Below threshold
+  [scanner_multi] LINK: binance=$9.1250 | okx=$9.1230 | bybit=$9.1300 | kucoin=$9.1258 | mexc=$9.1255 | Below threshold
+  [scanner_multi] DOT: binance=$1.5105 | okx=$1.5100 | bybit=$1.5100 | kucoin=$1.5100 | mexc=$1.5105 | Below threshold
+  [scanner_multi] UNI: binance=$3.5965 | okx=$3.5970 | bybit=$3.5970 | kucoin=$3.5967 | mexc=$3.5965 | Below threshold
+  [scanner_multi] ATOM: binance=$1.8375 | okx=$1.8380 | bybit=$1.8390 | kucoin=$1.8376 | mexc=$1.8375 | Below threshold
+  [scanner_multi] NEAR: binance=$1.3165 | okx=$1.3180 | bybit=$1.3170 | kucoin=$1.3177 | mexc=$1.3167 | Below threshold
+  [scanner_multi] APT: binance=$0.9995 | okx=$0.9997 | bybit=$0.9990 | kucoin=$0.9991 | mexc=$0.9990 | Below threshold
+  [scanner_multi] ARB: binance=$0.1000 | okx=$0.1000 | bybit=$0.1000 | kucoin=$0.1000 | mexc=$0.0999 | Below threshold
+  [scanner_multi] OP: binance=$0.1230 | okx=$0.1231 | bybit=$0.1231 | kucoin=$0.1232 | mexc=$0.1230 | Below threshold
+  [scanner_multi] FIL: binance=$0.9065 | okx=$0.9058 | bybit=$0.9060 | kucoin=$0.9056 | mexc=$0.9066 | Below threshold
+  [scanner_multi] LTC: binance=$56.3150 | okx=$56.3200 | bybit=$56.3200 | kucoin=$56.3100 | mexc=$56.3150 | Below threshold
+  [scanner_multi] BCH: binance=$471.5500 | okx=$471.4000 | bybit=$471.5000 | kucoin=$471.3400 | mexc=$471.3500 | Below threshold
+  [scanner_multi] XLM: binance=$0.1663 | okx=$0.1663 | bybit=$0.1663 | kucoin=$0.1663 | mexc=$0.1663 | Below threshold
+[scanner_multi] Done: 0 opportunities from 20 assets
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0020% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0027% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0071% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.80%
+  [scanner_cross_currency] ARS: Premium +1.21%
+  [scanner_cross_currency] COP: Premium -0.34%
+  [scanner_cross_currency] VES: Premium -0.59%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.14% | EdgeNet +0.14% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.39% | EdgeNet +0.19% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.55% | EdgeNet +0.35% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +1.80% | EdgeNet +0.30% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.61% | Buy 17.92 → Sell 18.03
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.46% | Buy 1463.20 → Sell 1470.00
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0002, bybit=1.0001
+  [scanner_stablecoin_depeg] DAI: okx=1.0003, bybit=1.0005
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Bitso Spot (reference)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+  [scanner_cross_mxn] Reference price (Bitso): $17.9040 MXN
+  [scanner_cross_mxn] ⚠️  bybit_p2p buy=$17.1200 is 4.4% away from reference — UNRELIABLE
+
+  Platform           Buy USDT @     Sell USDT @    Status     Reliable
+  ──────────────────────────────────────────────────────────────────────
+  bitso_spot         $17.9080       $17.9040       ok         ✅
+  binance_p2p        $17.9200       $18.0300       ok         ✅
+  okx_p2p            $18.0100       $17.8900       ok         ✅
+  bybit_p2p          $17.1200       $17.8300       ok         ❌
+
+  [scanner_cross_mxn] Routes analyzed: 6
+  [scanner_cross_mxn] Viable routes (reliable only): 0
+
+  No viable cross-platform routes found right now.
+  (This is normal — cross-platform arb windows are brief)
+
+[scanner_cross_mxn] Scan complete: 6 routes, 0 viable
+[scanner_dex] Scanning 10 tokens DEX vs CEX...
+  [scanner_dex] ETH: No DEX data found
+  [scanner_dex] SOL: No DEX data found
+  [scanner_dex] ARB: No DEX data found
+  [scanner_dex] OP: No DEX data found
+  [scanner_dex] AVAX: No DEX data found
+  [scanner_dex] LINK: No DEX data found
+  [scanner_dex] UNI: No DEX data found
+  [scanner_dex] DOGE: No DEX data found
+  [scanner_dex] MATIC: No DEX data found
+  [scanner_dex] NEAR: No DEX data found
+[scanner_dex] Done: 0 analyzed, 0 viable2026-03-21 00:41:13,596 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-21 00:41:13,598 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-21 00:41:13,619 [INFO] ollama_intel — Read 281 opportunities for 2026-03-21
+2026-03-21 00:41:13,620 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-21 00:41:17,564 [WARNING] ollama_intel — Failed to parse Ollama JSON response: Expecting ',' delimiter: line 6 column 20 (char 604)
+2026-03-21 00:41:17,564 [INFO] ollama_intel — Calling Ollama (attempt 2/2)...
+2026-03-21 00:41:20,871 [WARNING] ollama_intel — Failed to parse Ollama JSON response: Expecting ',' delimiter: line 6 column 21 (char 607)
+2026-03-21 00:41:20,872 [WARNING] ollama_intel — Ollama unavailable after 2 attempts: JSON parse error: Expecting ',' delimiter: line 6 column 21 (char 607)
+2026-03-21 00:41:20,872 [INFO] ollama_intel — Market intelligence generated: unavailable
+2026-03-21 00:41:20,873 [INFO] engine — Intelligence generated: unavailable
+2026-03-21 00:41:20,874 [INFO] engine — Running ALFRED data quality check...
+2026-03-21 00:41:20,874 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-21 00:41:20,879 [WARNING] alfred — ALFRED WARNING: dq_score 72.00% < 75% threshold. Issues: unknown: has_spot_price failed 14x, unknown: has_valid_spread failed 8x
+2026-03-21 00:41:20,880 [INFO] engine — Data quality: 72.00% (WARNING)
+2026-03-21 00:41:20,886 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_05-41-20.json
+2026-03-21 00:41:20,886 [INFO] engine — Hash: 771751fd6badb80733ecdc481ec1b66a608f8f85435f198ed34d1a0808228cc7
+2026-03-21 00:41:20,946 [INFO] harvey — HARVEY ingest complete: scanned=2111 inserted=6 db=/Users/erickposselt/Projects/batcave/batman_flow_engine/storage/batman.db
+p2p $17.12 → Sell@binance_p2p $18.02 | Edge: +4.257% | P&L: $+4.26/trade
+    2. Buy@bybit_p2p $17.12 → Sell@okx_p2p $17.89 | Edge: +3.498% | P&L: $+3.50/trade
+    3. Buy@bybit_p2p $17.12 → Sell@bitso_spot $17.91 | Edge: +3.132% | P&L: $+3.13/trade
+
+[scanner_cross_mxn] Scan complete: 12 routes, 3 viable
+[2026-03-21 04:17:16 UTC] ✓ CYCLE #20 COMPLETED SUCCESSFULLY
+[2026-03-21 04:17:16 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 04:17:16 UTC]    Next run at: 04:37:16 UTC
+[2026-03-21 04:37:25 UTC] ─── CYCLE #21 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70643.79 | OKX $70639.50 | spread -0.0061%
+  [scanner_cross] BTC: Skipped (spread 0.0061% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2152.05 | OKX $2152.15 | spread +0.0046%
+  [scanner_cross] ETH: Skipped (spread 0.0046% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.24 | OKX $90.25 | spread +0.0111%
+  [scanner_cross] SOL: Skipped (spread 0.0111% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70643.79 | Futures: $70604.50 | Basis: -0.0556%
+  [scanner_basis] Logged (basis 0.0556% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0140 | Spread +0.357% | EdgeNet +0.536% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3681.9900 | Spread +0.330% | EdgeNet -0.720% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.2398 | Spread -1.202% | EdgeNet -0.932% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.8660 | Spread +0.382% | EdgeNet +0.813% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 3 assets across exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,649.80 | okx=$70,642.00 | bybit=$70,644.90 | No opportunity
+  [scanner_multi] ETH: binance=$2,152.26 | okx=$2,152.14 | bybit=$2,151.95 | No opportunity
+  [scanner_multi] SOL: binance=$90.25 | okx=$90.27 | bybit=$90.26 | No opportunity
+[scanner_multi] Scan complete: 0 opportunities found
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0043% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0037% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0063% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.79%
+  [scanner_cross_currency] ARS: Premium +1.21%
+  [scanner_cross_currency] COP: Premium -0.42%
+  [scanner_cross_currency] VES: Premium -0.58%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.21% | EdgeNet +0.21% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.37% | EdgeNet +0.17% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.63% | EdgeNet +0.43% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +1.79% | EdgeNet +0.29% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.56% | Buy 17.92 → Sell 18.02
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.41% | Buy 1464.00 → Sell 1469.99
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0002, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0001, bybit=1.0008
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching Bitso Spot...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+
+  Platform           Buy USDT @     Sell USDT @    Status
+  ────────────────────────────────────────────────────────────
+  binance_p2p        $17.9200       $18.0200       ok
+  bitso_spot         $17.9250       $17.9160       ok
+  okx_p2p            $18.0100       $17.8900       ok
+  bybit_p2p          $17.1200       $17.8500       ok
+
+  [scanner_cross_mxn] Routes analyzed: 12
+  [scanner_cross_mxn] Viable routes: 3
+
+  ⭐ TOP ROUTES:
+    1. Buy@bybit_p2p $17.12 → Sell@binance_p2p $18.02 | Edge: +4.257% | P&L: $+4.26/trade
+    2. Buy@bybit_p2p $17.12 → Sell@okx_p2p $17.89 | Edge: +3.498% | P&L: $+3.50/trade
+    3. Buy@bybit_p2p $17.12 → Sell@bitso_spot $17.92 | Edge: +3.150% | P&L: $+3.15/trade
+
+[scanner_cross_mxn] Scan complete: 12 routes, 3 viable
+[2026-03-21 04:38:18 UTC] ✓ CYCLE #21 COMPLETED SUCCESSFULLY
+[2026-03-21 04:38:18 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 04:38:18 UTC]    Next run at: 04:58:18 UTC
+[2026-03-21 04:58:26 UTC] ─── CYCLE #22 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+DKNG       3.92   4.60 EXTREME
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+XLY        3.95   3.62 EXTREME
+MAR        3.88   3.53 EXTREME
+PEP        3.58   3.47 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70642.14 | OKX $70641.30 | spread -0.0012%
+  [scanner_cross] BTC: Skipped (spread 0.0012% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2151.91 | OKX $2151.89 | spread -0.0009%
+  [scanner_cross] ETH: Skipped (spread 0.0009% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.31 | OKX $90.31 | spread +0.0000%
+  [scanner_cross] SOL: Skipped (spread 0.0000% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70642.14 | Futures: $70615.40 | Basis: -0.0379%
+  [scanner_basis] Logged (basis 0.0379% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0140 | Spread +0.357% | EdgeNet +0.536% ✓ | Logged2026-03-21 00:00:39,515 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-21 00:00:40,115 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-21 00:00:40,989 [INFO] scanner_p2p — Using cached spot rates (age: 4s)
+2026-03-21 00:00:46,680 [INFO] scanner_p2p — Using cached spot rates (age: 9s)
+2026-03-21 00:00:54,948 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-21 00:00:54,949 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-21 00:00:54,962 [INFO] ollama_intel — Read 236 opportunities for 2026-03-21
+2026-03-21 00:00:54,962 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-21 00:00:58,449 [WARNING] ollama_intel — Failed to parse Ollama JSON response: Expecting ',' delimiter: line 6 column 21 (char 501)
+2026-03-21 00:00:58,449 [INFO] ollama_intel — Calling Ollama (attempt 2/2)...
+2026-03-21 00:01:02,650 [WARNING] ollama_intel — Failed to parse Ollama JSON response: Expecting ':' delimiter: line 1 column 768 (char 767)
+2026-03-21 00:01:02,650 [WARNING] ollama_intel — Ollama unavailable after 2 attempts: JSON parse error: Expecting ':' delimiter: line 1 column 768 (char 767)
+2026-03-21 00:01:02,651 [INFO] ollama_intel — Market intelligence generated: unavailable
+2026-03-21 00:01:02,651 [INFO] engine — Intelligence generated: unavailable
+2026-03-21 00:01:02,651 [INFO] engine — Running ALFRED data quality check...
+2026-03-21 00:01:02,651 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-21 00:01:02,654 [WARNING] alfred — ALFRED WARNING: dq_score 72.00% < 75% threshold. Issues: unknown: has_spot_price failed 14x, unknown: has_valid_spread failed 8x
+2026-03-21 00:01:02,655 [INFO] engine — Data quality: 72.00% (WARNING)
+2026-03-21 00:01:02,661 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_05-01-02.json
+2026-03-21 00:01:02,661 [INFO] engine — Hash: 916d6dd2d371b9b94b11fe9012fcc555088e558688e0fe7aa76071b7b7f19be8
+2026-03-21 00:01:02,698 [INFO] harvey — HARVEY ingest complete: scanned=2066 inserted=9 db=/Users/erickposselt/Projects/batcave/batman_flow_engine/storage/batman.db
+2026-03-21 00:21:07,145 [INFO] engine — ENGINE START — equities=13 crypto=3
+2026-03-21 00:21:09,519 [INFO] engine — ✓ equity SPY
+2026-03-21 00:21:09,773 [INFO] engine — ✓ equity QQQ
+2026-03-21 00:21:10,064 [INFO] engine — ✓ equity XLE
+2026-03-21 00:21:10,307 [INFO] engine — ✓ equity XLK
+2026-03-21 00:21:10,553 [INFO] engine — ✓ equity XLF
+2026-03-21 00:21:10,809 [INFO] engine — ✓ equity GLD
+2026-03-21 00:21:11,076 [INFO] engine — ✓ equity TLT
+2026-03-21 00:21:11,408 [INFO] engine — ✓ equity UAL
+2026-03-21 00:21:13,231 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-21 00:21:13,388 [INFO] engine — ✓ equity DAL
+2026-03-21 00:21:13,388 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-21 00:21:13,643 [INFO] engine — ✓ equity DIS
+2026-03-21 00:21:13,812 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-21 00:21:13,896 [INFO] engine — ✓ equity KO
+2026-03-21 00:21:14,193 [INFO] engine — ✓ equity HLT
+2026-03-21 00:21:14,477 [INFO] engine — ✓ equity MCD
+2026-03-21 00:21:44,752 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-21 00:21:44,753 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-21 00:21:44,990 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-21 00:21:45,328 [INFO] scanner_p2p — VES parallel rate: 653.04 (dolarapi.com)
+2026-03-21 00:21:46,154 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-21 00:21:46,765 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-21 00:21:47,384 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-21 00:21:48,330 [INFO] scanner_p2p — Using cached spot rates (age: 4s)
+2026-03-21 00:21:53,996 [INFO] scanner_p2p — Using cached spot rates (age: 9s)
+
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3684.3900 | Spread +0.396% | EdgeNet -0.655% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.0980 | Spread -1.179% | EdgeNet -0.954% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.7260 | Spread +0.373% | EdgeNet +0.803% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 3 assets across exchanges (threshold: 0.10%)...
+  [scanner_multi] BTC: binance=$70,642.14 | okx=$70,641.30 | bybit=$70,651.00 | No opportunity
+  [scanner_multi] ETH: binance=$2,151.90 | okx=$2,151.89 | bybit=$2,151.71 | No opportunity
+  [scanner_multi] SOL: binance=$90.31 | okx=$90.32 | bybit=$90.31 | No opportunity
+[scanner_multi] Scan complete: 0 opportunities found
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0037% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0037% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0070% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.79%
+  [scanner_cross_currency] ARS: Premium +1.20%
+  [scanner_cross_currency] COP: Premium -0.36%
+  [scanner_cross_currency] VES: Premium -0.60%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.14% | EdgeNet +0.14% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.39% | EdgeNet +0.19% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.56% | EdgeNet +0.36% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +1.81% | EdgeNet +0.31% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.56% | Buy 17.92 → Sell 18.02
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.41% | Buy 1464.00 → Sell 1470.00
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0001, bybit=1.0001
+  [scanner_stablecoin_depeg] DAI: okx=1.0002, bybit=1.0007
+[scanner_stablecoin_depeg] Scan complete: 0 events found
+[scanner_cross_mxn] Scanning USDT/MXN across all platforms (threshold: 0.20%)...
+  [scanner_cross_mxn] Fetching Binance P2P...
+  [scanner_cross_mxn] Fetching Bitso Spot...
+  [scanner_cross_mxn] Fetching OKX P2P...
+  [scanner_cross_mxn] Fetching Bybit P2P...
+
+  Platform           Buy USDT @     Sell USDT @    Status
+  ────────────────────────────────────────────────────────────
+  binance_p2p        $17.9200       $18.0200       ok
+  bitso_spot         $17.9200       $17.9070       ok
+  okx_p2p            $18.0100       $17.8900       ok
+  bybit_p2p          $17.1200       $17.8500       ok
+
+  [scanner_cross_mxn] Routes analyzed: 12
+  [scanner_cross_mxn] Viable routes: 3
+
+  ⭐ TOP ROUTES:
+    1. Buy@bybit_p2p $17.12 → Sell@binance_p2p $18.02 | Edge: +4.257% | P&L: $+4.26/trade
+    2. Buy@bybit_p2p $17.12 → Sell@okx_p2p $17.89 | Edge: +3.498% | P&L: $+3.50/trade
+    3. Buy@bybit_p2p $17.12 → Sell@bitso_spot $17.91 | Edge: +3.097% | P&L: $+3.10/trade
+
+[scanner_cross_mxn] Scan complete: 12 routes, 3 viable
+[2026-03-21 05:01:02 UTC] ✓ CYCLE #22 COMPLETED SUCCESSFULLY
+[2026-03-21 05:01:02 UTC] ⏳ Waiting 20 minutes until next cycle...
+[2026-03-21 05:01:02 UTC]    Next run at: 05:21:02 UTC
+[2026-03-21 05:21:07 UTC] ─── CYCLE #23 START ───
+✅ DB inicializada: storage/batman.db
+
+🦇 RISK SCORES TOP 10
+SYM       VOL_Z   RISK REGIME
+-----------------------------------
+UAL        3.66   4.07 EXTREME
+XLK        3.91   3.75 EXTREME
+HLT        4.09   3.67 EXTREME
+DAL        2.96   3.32 EXTREME
+KO         3.72   3.31 EXTREME
+MCD        3.95   3.15 EXTREME
+DIS        4.05   3.12 EXTREME
+SPY        3.66   2.98 STRESS
+QQQ        3.46   2.97 STRESS
+XLE        3.57   2.93 STRESS
+[scanner_cross] Scanning 3 pairs (threshold: 0.05%)...
+  [scanner_cross] BTC: Binance $70750.00 | OKX $70746.00 | spread -0.0057%
+  [scanner_cross] BTC: Skipped (spread 0.0057% < threshold 0.05%)
+  [scanner_cross] ETH: Binance $2156.29 | OKX $2156.29 | spread +0.0000%
+  [scanner_cross] ETH: Skipped (spread 0.0000% < threshold 0.05%)
+  [scanner_cross] SOL: Binance $90.46 | OKX $90.45 | spread -0.0111%
+  [scanner_cross] SOL: Skipped (spread 0.0111% < threshold 0.05%)
+[scanner_basis] Scanning BTCUSDT...
+  [scanner_basis] Spot: $70750.01 | Futures: $70713.90 | Basis: -0.0510%
+  [scanner_basis] Logged (basis 0.0510% >= threshold 0.02%)
+📡 Scanning P2P markets across LATAM...
+  [scanner_p2p] Scanning USDT/MXN...
+  [scanner_p2p] USDT/MXN: Buy $18.0180 | Spread +0.368% | EdgeNet +0.558% ✓ | Logged
+  [scanner_p2p] Scanning USDT/COP...
+  [scanner_p2p] USDT/COP: Buy $3684.3900 | Spread +0.396% | EdgeNet -0.655% ✗ | Logged
+  [scanner_p2p] Scanning USDT/VES...
+  [scanner_p2p] USDT/VES: Buy $649.2396 | Spread -1.050% | EdgeNet -0.932% ✗ | Logged
+  [scanner_p2p] Scanning USDT/ARS...
+  [scanner_p2p] USDT/ARS: Buy $1469.7400 | Spread +0.333% | EdgeNet +0.804% ✓ | Logged
+📡 P2P scan complete: 4/4 pairs successful
+[scanner_multi] Scanning 3 assets across exchanges (threshold: 0.08%)...
+  [scanner_multi] BTC: binance=$70,750.01 | okx=$70,745.90 | bybit=$70,749.90 | No opportunity
+  [scanner_multi] ETH: binance=$2,156.30 | okx=$2,156.33 | bybit=$2,156.20 | No opportunity
+  [scanner_multi] SOL: binance=$90.45 | okx=$90.46 | bybit=$90.45 | No opportunity
+[scanner_multi] Scan complete: 0 opportunities found
+[scanner_funding] Scanning funding rates for 3 assets (threshold: 0.0100%)...
+  [scanner_funding] BTC: binance=-0.0015% | okx=+0.0027% | bybit=+0.0050%
+  [scanner_funding] ETH: binance=+0.0024% | okx=+0.0033% | bybit=+0.0029%
+  [scanner_funding] SOL: binance=+0.0024% | okx=+0.0069% | bybit=+0.0076%
+[scanner_funding] Scan complete: 0 opportunities found
+[scanner_cross_currency] Scanning 4 currencies (threshold: 1.00%)...
+  [scanner_cross_currency] MXN: Premium +0.81%
+  [scanner_cross_currency] ARS: Premium +1.20%
+  [scanner_cross_currency] COP: Premium -0.36%
+  [scanner_cross_currency] VES: Premium -0.58%
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→MXN: Spread +1.16% | EdgeNet +0.16% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→MXN: Spread +1.39% | EdgeNet +0.19% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] COP→ARS: Spread +1.56% | EdgeNet +0.36% ✓ | Logged
+  [scanner_cross_currency] Log error: Object of type bool_ is not JSON serializable
+  [scanner_cross_currency] VES→ARS: Spread +1.79% | EdgeNet +0.29% ✓ | Logged
+[scanner_cross_currency] Scan complete: 4 opportunities found
+[scanner_p2p_merchant] Scanning 2 fiats (threshold: 0.50%)...
+  [scanner_p2p_merchant] MXN: Spread +0.61% | Buy 17.92 → Sell 18.03
+  [scanner_p2p_merchant] ✓ Opportunity logged for MXN
+  [scanner_p2p_merchant] ARS: Spread +0.41% | Buy 1464.00 → Sell 1470.00
+[scanner_p2p_merchant] Scan complete: 1 opportunities found
+[scanner_stablecoin_depeg] Scanning 3 stablecoins (arb threshold: 0.20%)...
+  [scanner_stablecoin_depeg] USDT: binance=1.0002
+  [scanner_stablecoin_depeg] USDC: binance=1.0002, okx=1.0002, bybit=1.0002
+  [scanner_stablecoin_depeg] DAI: okx=1.0003, bybit=1.00072026-03-21 00:22:02,018 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-21 00:22:02,018 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-21 00:22:02,040 [INFO] ollama_intel — Read 263 opportunities for 2026-03-21
+2026-03-21 00:22:02,040 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-21 00:22:05,143 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-21 00:22:05,143 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-21 00:22:05,144 [INFO] engine — Intelligence generated: ok
+2026-03-21 00:22:05,144 [INFO] engine — Running ALFRED data quality check...
+2026-03-21 00:22:05,145 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-21 00:22:05,149 [WARNING] alfred — ALFRED WARNING: dq_score 72.00% < 75% threshold. Issues: unknown: has_spot_price failed 14x, unknown: has_valid_spread failed 8x
+2026-03-21 00:22:05,151 [INFO] engine — Data quality: 72.00% (WARNING)
+2026-03-21 00:22:05,156 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_05-22-05.json
+2026-03-21 00:22:05,156 [INFO] engine — Hash: 1772777e5636326eeb9e805455125a2e9ddbd2fd90f6f5e13e67873fb489a8ad
+2026-03-21 00:22:05,206 [INFO] harvey — HARVEY ingest complete: scanned=2093 inserted=9 db=/Users/erickposselt/Projects/batcave/batman_flow_engine/storage/batman.db
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       2026-03-21 00:42:09,754 [INFO] engine — ENGINE START — equities=13 crypto=3
+2026-03-21 00:42:12,385 [INFO] engine — ✓ equity SPY
+2026-03-21 00:42:12,678 [INFO] engine — ✓ equity QQQ
+2026-03-21 00:42:12,925 [INFO] engine — ✓ equity XLE
+2026-03-21 00:42:13,180 [INFO] engine — ✓ equity XLK
+2026-03-21 00:42:13,431 [INFO] engine — ✓ equity XLF
+2026-03-21 00:42:13,737 [INFO] engine — ✓ equity GLD
+2026-03-21 00:42:14,101 [INFO] engine — ✓ equity TLT
+2026-03-21 00:42:14,398 [INFO] engine — ✓ equity UAL
+2026-03-21 00:42:16,085 [INFO] engine — ✓ crypto BTC/USDT
+2026-03-21 00:42:16,110 [INFO] engine — ✓ crypto ETH/USDT
+2026-03-21 00:42:16,425 [INFO] engine — ✓ equity DAL
+2026-03-21 00:42:16,565 [INFO] engine — ✓ crypto SOL/USDT
+2026-03-21 00:42:16,698 [INFO] engine — ✓ equity DIS
+2026-03-21 00:42:16,976 [INFO] engine — ✓ equity KO
+2026-03-21 00:42:17,273 [INFO] engine — ✓ equity HLT
+2026-03-21 00:42:17,562 [INFO] engine — ✓ equity MCD
+2026-03-21 00:42:54,224 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-03-21 00:42:54,225 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-03-21 00:42:54,461 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-03-21 00:42:54,718 [INFO] scanner_p2p — VES parallel rate: 653.04 (dolarapi.com)
+2026-03-21 00:42:55,591 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-03-21 00:42:56,218 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-03-21 00:42:56,873 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-03-21 00:42:57,800 [INFO] scanner_p2p — Using cached spot rates (age: 4s)
+2026-03-21 00:43:04,317 [INFO] scanner_p2p — Using cached spot rates (age: 10s)
+2026-03-21 00:43:12,083 [INFO] engine — Generating market intelligence with Ollama...
+2026-03-21 00:43:12,084 [INFO] ollama_intel — Generating market intelligence for 2026-03-21...
+2026-03-21 00:43:12,103 [INFO] ollama_intel — Read 290 opportunities for 2026-03-21
+2026-03-21 00:43:12,103 [INFO] ollama_intel — Calling Ollama (attempt 1/2)...
+2026-03-21 00:43:14,841 [INFO] ollama_intel — Successfully received AI analysis from Ollama
+2026-03-21 00:43:14,842 [INFO] ollama_intel — Market intelligence generated: ok
+2026-03-21 00:43:14,843 [INFO] engine — Intelligence generated: ok
+2026-03-21 00:43:14,843 [INFO] engine — Running ALFRED data quality check...
+2026-03-21 00:43:14,843 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-03-21 00:43:14,848 [WARNING] alfred — ALFRED WARNING: dq_score 72.00% < 75% threshold. Issues: unknown: has_spot_price failed 14x, unknown: has_valid_spread failed 8x
+2026-03-21 00:43:14,850 [INFO] engine — Data quality: 72.00% (WARNING)
+2026-03-21 00:43:14,855 [INFO] engine — Report: /Users/erickposselt/Projects/batcave/batman_flow_engine/storage/reports/2026-03-21_05-43-14.json
+2026-03-21 00:43:14,855 [INFO] engine — Hash: e37c146cfbb77104a5c41456817b395ef43fd9e9d7a84ab794d4e9b9a605fbc3
+2026-03-21 00:43:14,911 [INFO] harvey — HARVEY ingest complete: scanned=2120 inserted=9 db=/Users/erickposselt/Projects/batcave/batman_flow_engine/storage/batman.db

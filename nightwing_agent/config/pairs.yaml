@@ -1,0 +1,32 @@
+# NIGHTWING P2P Pair Configuration
+
+pairs:
+  - symbol: USDT/MXN
+    fiat: MXN
+    crypto: USDT
+    enabled: true
+    priority: 1
+    notes: "Primary pair - SPEI transfers, high liquidity"
+
+  - symbol: USDT/ARS
+    fiat: ARS
+    crypto: USDT
+    enabled: true
+    priority: 2
+    notes: "Secondary pair - 24/7, higher bank fees"
+
+  - symbol: USDT/COP
+    fiat: COP
+    crypto: USDT
+    enabled: false
+    priority: 99
+    notes: "Disabled - negative edge_net"
+
+  - symbol: USDT/VES
+    fiat: VES
+    crypto: USDT
+    enabled: false
+    priority: 99
+    notes: "Disabled - inverted market dynamics"
+
+default_pair: USDT/MXN

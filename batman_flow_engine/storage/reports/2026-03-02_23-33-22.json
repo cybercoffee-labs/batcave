@@ -1,0 +1,532 @@
+{
+  "timestamp": "2026-03-02T23:31:12.817453+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 608.0700073242188,
+      "ret_1d": 0.0013165412306767386,
+      "ret_intra": 0.009680554570238531,
+      "vol_z": -0.15427073736494612,
+      "rvol": 0.680061208373523,
+      "dollar_vol": 2006442522.4676514,
+      "rv20_ann": 0.18254705160149823,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 263.82000732421875,
+      "ret_1d": 0.009139067801502707,
+      "ret_intra": 0.0025079938171637117,
+      "vol_z": 2.970144137338571,
+      "rvol": 2.752079776070846,
+      "dollar_vol": 429661485.04833984,
+      "rv20_ann": 0.20694171637482575,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.29999923706055,
+      "ret_1d": -0.002530928416023904,
+      "ret_intra": -0.012131736268301996,
+      "vol_z": 4.072795381547634,
+      "rvol": 6.450154392856156,
+      "dollar_vol": 317245402.5818901,
+      "rv20_ann": 0.22264290162382458,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 139.52000427246094,
+      "ret_1d": 0.005605467882775666,
+      "ret_intra": -0.0016457654922293896,
+      "vol_z": 3.780371454696594,
+      "rvol": 4.430870808469883,
+      "dollar_vol": 175050168.56048584,
+      "rv20_ann": 0.27489519050488187,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 57.025001525878906,
+      "ret_1d": 0.019830726975288315,
+      "ret_intra": 0.03795054516357954,
+      "vol_z": 2.3844155393449338,
+      "rvol": 2.678138836344445,
+      "dollar_vol": 231878824.85462952,
+      "rv20_ann": 0.23528228315639968,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 115.41000366210938,
+      "ret_1d": -0.012399008930676015,
+      "ret_intra": -0.004657122038337347,
+      "vol_z": 4.011716132559182,
+      "rvol": 5.442522051793954,
+      "dollar_vol": 197268934.3395996,
+      "rv20_ann": 0.1578193380492941,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 88.69999694824219,
+      "ret_1d": -0.014548186790207744,
+      "ret_intra": 0.015920277499900326,
+      "vol_z": 4.0032237512006885,
+      "rvol": 6.476439163503677,
+      "dollar_vol": 215355166.09062195,
+      "rv20_ann": 0.1534709885000975,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 489.9800109863281,
+      "ret_1d": 0.012837146760680682,
+      "ret_intra": 0.056378468773252255,
+      "vol_z": 2.2175807873156144,
+      "rvol": 2.6104000888696595,
+      "dollar_vol": 175011060.32409668,
+      "rv20_ann": 0.40823760941679904,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 89.62000274658203,
+      "ret_1d": -0.01341259460225115,
+      "ret_intra": -0.0005564435869578332,
+      "vol_z": -0.03074934276876394,
+      "rvol": 0.9373616652685528,
+      "dollar_vol": 262283154.71818542,
+      "rv20_ann": 0.09801300680051067,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.29000091552734,
+      "ret_1d": -0.005465882445470553,
+      "ret_intra": -0.007233373532892218,
+      "vol_z": 3.4032393270935364,
+      "rvol": 4.13954635333023,
+      "dollar_vol": 310197367.5171051,
+      "rv20_ann": 0.0278261566576224,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 330.260009765625,
+      "ret_1d": -0.03350509642172907,
+      "ret_intra": -0.04780298335637578,
+      "vol_z": 0.9306213641656039,
+      "rvol": 2.5203398664885266,
+      "dollar_vol": 71303136.10839844,
+      "rv20_ann": 0.3767427387878967,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 304.75,
+      "ret_1d": -0.022642023206088786,
+      "ret_intra": -0.02261060958619998,
+      "vol_z": 0.8529795232769347,
+      "rvol": 2.641930677684137,
+      "dollar_vol": 35233061.75,
+      "rv20_ann": 0.22827709799808255,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 64.2300033569336,
+      "ret_1d": -0.022317155265343946,
+      "ret_intra": -0.04362716118833154,
+      "vol_z": 3.7543291927323588,
+      "rvol": 4.681222230926774,
+      "dollar_vol": 42985929.74662781,
+      "rv20_ann": 0.5664853762899913,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 103.22000122070312,
+      "ret_1d": -0.029499575349505796,
+      "ret_intra": -0.0547618671672071,
+      "vol_z": 0.28184045670729724,
+      "rvol": 1.621633707341824,
+      "dollar_vol": 51281761.00646973,
+      "rv20_ann": 0.6977930196277965,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 104.31999969482422,
+      "ret_1d": -0.016257420024133665,
+      "ret_intra": -0.004959907108261441,
+      "vol_z": 4.078354727142019,
+      "rvol": 5.156805874508433,
+      "dollar_vol": 101010864.9845047,
+      "rv20_ann": 0.43234755968587363,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 56.79999923706055,
+      "ret_1d": 0.00795550485405157,
+      "ret_intra": 0.013652170817017861,
+      "vol_z": 1.9762615058379367,
+      "rvol": 4.440289662239147,
+      "dollar_vol": 19789233.33419037,
+      "rv20_ann": 0.43501134117964907,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 334.7699890136719,
+      "ret_1d": -0.018465311863746774,
+      "ret_intra": 0.024215562745877106,
+      "vol_z": 4.0221587993940116,
+      "rvol": 5.523757195839213,
+      "dollar_vol": 74042417.55010986,
+      "rv20_ann": 0.17557169484005344,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 80.19999694824219,
+      "ret_1d": -0.016566040213537164,
+      "ret_intra": 0.01409872765603204,
+      "vol_z": 3.962956284214235,
+      "rvol": 5.900445508118742,
+      "dollar_vol": 89017104.41273499,
+      "rv20_ann": 0.17693300773256715,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 167.25999450683594,
+      "ret_1d": -0.01459883908074156,
+      "ret_intra": 0.020344617312742397,
+      "vol_z": 0.6532911814999165,
+      "rvol": 2.301734594365337,
+      "dollar_vol": 71256102.85980225,
+      "rv20_ann": 0.2712573414419475,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 23.809999465942383,
+      "ret_1d": -0.0008392974822393937,
+      "ret_intra": 0.07252246160687759,
+      "vol_z": 0.7723827381818136,
+      "rvol": 2.6709442175013614,
+      "dollar_vol": 22549569.52421379,
+      "rv20_ann": 0.692674210159218,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 68861.45,
+      "ret_1h": -0.008338650836133277,
+      "rv_ann": 0.7231735554420925,
+      "spread": 1.452167384474648e-07,
+      "depth_0_5pct": 7.02628,
+      "dollar_vol_1h": 28237388.162304997,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2033.62,
+      "ret_1h": -0.00983533123642788,
+      "rv_ann": 0.9501505761170826,
+      "spread": 4.917351612763924e-06,
+      "depth_0_5pct": 246.59550000000002,
+      "dollar_vol_1h": 16778869.472076,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 86.68,
+      "ret_1h": -0.015447523852794132,
+      "rv_ann": 1.0289468951721898,
+      "spread": 0.00011536021226268564,
+      "depth_0_5pct": 117816.047,
+      "dollar_vol_1h": 7957305.132480001,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 1.1643134899528118,
+    "IWM": 6.0759431673247715,
+    "XLF": 9.610770715443419,
+    "XLK": 8.051358763116001,
+    "XLE": 5.3111969391553275,
+    "XLY": 8.850086865361105,
+    "XLP": 9.462482084500698,
+    "GLD": 5.190386910039147,
+    "TLT": 1.2667437530811503,
+    "HYG": 7.263621646015928,
+    "MAR": 3.5083100426831484,
+    "HLT": 3.3233980706873445,
+    "DAL": 8.31211561955256,
+    "UAL": 2.425917627710298,
+    "DIS": 8.934642458540639,
+    "FOXA": 5.878161022685589,
+    "BTC/USDT": 1.9925091705068176,
+    "ETH/USDT": 2.6807837991328407,
+    "MCD": 8.861724321209808,
+    "SOL/USDT": 3.6274259637858286,
+    "KO": 9.029782271602722,
+    "PEP": 2.9599193575059672,
+    "DKNG": 3.5865359227750737
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.0061872191862012175,
+        "p50": 0.0003946696579524716,
+        "p95": 0.00697655850210616,
+        "mu": 0.0003946696579524716,
+        "sigma": 0.004001513113143259
+      },
+      "1W": {
+        "p5": -0.01274420258611281,
+        "p50": 0.001973348289762358,
+        "p95": 0.016690899165637527,
+        "mu": 0.001973348289762358,
+        "sigma": 0.008947655333845134
+      },
+      "1M": {
+        "p5": -0.02218906268907011,
+        "p50": 0.008682732474954375,
+        "p95": 0.039554527638978855,
+        "mu": 0.008682732474954375,
+        "sigma": 0.018768760169027256
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.24320215341334575,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9576020381415014
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9023386959739647
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8302229106713412
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7422302219353846
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.6934827046750413
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6710186625851376
+      },
+      {
+        "a": "IWM",
+        "b": "XLF",
+        "corr": 0.6539974901925285
+      },
+      {
+        "a": "DAL",
+        "b": "IWM",
+        "corr": 0.6523241396483538
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6490140947358285
+      },
+      {
+        "a": "UAL",
+        "b": "XLF",
+        "corr": 0.6349050661139758
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": 2.3971821102057587,
+      "vol_z_p90": 4.027222457609374,
+      "vol_z_gt2_pct": 0.6
+    },
+    "regime": {
+      "label": "TENSION",
+      "triggers": [
+        "vol_z_gt2_pct>=0.25",
+        "vol_z_gt2_pct>=0.40"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": -1.1084478579448387e-07,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "TENSION",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 940,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": 117,
+      "Guadalajara": 75,
+      "Monterrey": 248,
+      "Mexico City": 250,
+      "security": 250
+    },
+    "samples": {
+      "FIFA 2026": [
+        {
+          "datetime": "20260302T223000Z",
+          "title": "Iran World Cup place in doubt by war . FIFA has Iraq next in line",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.nydailynews.com/2026/03/02/world-cup-iran/"
+        },
+        {
+          "datetime": "20260302T223000Z",
+          "title": "How to Do the 2026 World Cup Car - Free in Kansas City",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://matadornetwork.com/read/kansas-city-world-cup-tips/"
+        },
+        {
+          "datetime": "20260302T223000Z",
+          "title": "Laryea Earns CAF Call - Up For Interclub Quarter - Finals Course",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.ghanamma.com/2026/03/02/laryea-earns-caf-call-up-for-interclub-quarter-finals-course/"
+        }
+      ],
+      "Guadalajara": [
+        {
+          "datetime": "20260302T230000Z",
+          "title": "\u0637\u0644\u0628 \u0647\u0627\u0626\u0644 \u0639\u0644\u0649 \u0627\u0644\u062a\u0630\u0627\u0643\u0631 \u0641\u064a \u0645\u0648\u0646\u062f\u064a\u0627\u0644 2026 \u0628\u0623\u0633\u0639\u0627\u0631 \u062e\u064a\u0627\u0644\u064a\u0629",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.azzaman.com/%D8%B7%D9%84%D8%A8-%D9%87%D8%A7%D8%A6%D9%84-%D8%B9%D9%84%D9%89-%D8%A7%D9%84%D8%AA%D8%B0%D8%A7%D9%83%D8%B1-%D9%81%D9%8A-%D9%85%D9%88%D9%86%D8%AF%D9%8A%D8%A7%D9%84-2026-%D8%A8%D8%A3%D8%B3%D8%B9%D8%A7/"
+        },
+        {
+          "datetime": "20260302T223000Z",
+          "title": "Bad Bunny viral moment with Mexican fans mid Sydney concert",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.hola.com/us/celebrities/20260302887055/bad-bunnys-viral-moment-mexican-fans-sydney-concert/"
+        },
+        {
+          "datetime": "20260302T211500Z",
+          "title": "Rafa M\u00e1rquez respalda la Copa Leyendas en Guadalajara como mensaje positivo para M\u00e9xico",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.publimetro.com.mx/deportes/2026/03/02/rafa-marquez-respalda-la-copa-leyendas-en-guadalajara-como-mensaje-positivo-para-mexico/"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260302T230000Z",
+          "title": "Sheinbaum se pronuncia por la detenci\u00f3n de Karina Barr\u00f3n",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.sdpnoticias.com/estados/nuevo-leon/sheinbaum-se-pronuncia-por-la-detencion-de-karina-barron/"
+        },
+        {
+          "datetime": "20260302T224500Z",
+          "title": "Demichelis sorprendi\u00f3 en Espa\u00f1a y cit\u00f3 a Gallardo en su presentaci\u00f3n :  Hay que creer  DEPORTES El Intransigente",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://elintransigente.com/2026/03/demichelis-sorprendio-en-espana-y-cito-a-gallardo-en-su-presentacion-hay-que-creer/"
+        },
+        {
+          "datetime": "20260302T220000Z",
+          "title": "Capacitan a polic\u00edas de Monterrey en defensa de ataques con drones",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://horacero.com.mx/nuevo-leon/capacitan-a-policias-de-monterrey-en-defensa-de-ataques-con-drones"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260302T230000Z",
+          "title": "\u0637\u0644\u0628 \u0647\u0627\u0626\u0644 \u0639\u0644\u0649 \u0627\u0644\u062a\u0630\u0627\u0643\u0631 \u0641\u064a \u0645\u0648\u0646\u062f\u064a\u0627\u0644 2026 \u0628\u0623\u0633\u0639\u0627\u0631 \u062e\u064a\u0627\u0644\u064a\u0629",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.azzaman.com/%D8%B7%D9%84%D8%A8-%D9%87%D8%A7%D8%A6%D9%84-%D8%B9%D9%84%D9%89-%D8%A7%D9%84%D8%AA%D8%B0%D8%A7%D9%83%D8%B1-%D9%81%D9%8A-%D9%85%D9%88%D9%86%D8%AF%D9%8A%D8%A7%D9%84-2026-%D8%A8%D8%A3%D8%B3%D8%B9%D8%A7/"
+        },
+        {
+          "datetime": "20260302T230000Z",
+          "title": "El Gobierno de Israel ataca a S\u00e1nchez por no permitir el uso de las bases de EEUU en la guerra contra Ir\u00e1n",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.publico.es/internacional/ataque-eeuu-e-israel-iran-ultima-hora-directo_2220.html"
+        },
+        {
+          "datetime": "20260302T230000Z",
+          "title": "Shakira a c\u00e2ntat gratuit \u00een fa\u0163a a 400 . 000 de oameni . \u201e Este un vis . GALERIE FOTO",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://stirileprotv.ro/show-buzz/entertainment/shakira-a-cantat-gratuit-in-fa-a-a-400-000-de-persoane-este-un-vis-galerie-foto.html"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260302T230000Z",
+          "title": "\u039c\u03b1\u03ba\u03c1\u03cc\u03bd : \u0397 \u0393\u03b1\u03bb\u03bb\u03af\u03b1 \u03b1\u03c5\u03be\u03ac\u03bd\u03b5\u03b9 \u03c4\u03bf \u03c0\u03c5\u03c1\u03b7\u03bd\u03b9\u03ba\u03cc \u03c4\u03b7\u03c2 \u03bf\u03c0\u03bb\u03bf\u03c3\u03c4\u03ac\u03c3\u03b9\u03bf \u2013 \u03a3\u03c4\u03b7\u03bd \u00ab \u03c0\u03c5\u03c1\u03b7\u03bd\u03b9\u03ba\u03ae \u03bf\u03bc\u03c0\u03c1\u03ad\u03bb\u03b1 \u00bb \u03ba\u03b1\u03b9 \u03b7 \u0395\u03bb\u03bb\u03ac\u03b4\u03b1",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.lifo.gr/now/world/makron-i-gallia-ayxanei-pyriniko-tis-oplostasio-stin-pyriniki-omprela-kai-i-ellada"
+        },
+        {
+          "datetime": "20260302T230000Z",
+          "title": "Inician campa\u00f1a anual de donaci\u00f3n altruista de sangre en UAEM",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.diariodemorelos.com/noticias/inician-campa-anual-de-donaci-n-altruista-de-sangre-en-uaem"
+        },
+        {
+          "datetime": "20260302T230000Z",
+          "title": "TJDFT lan\u00e7a nova fase de plataforma de monitoramento urbano com GDF",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://jornaldebrasilia.com.br/brasilia/tjdft-lanca-nova-fase-de-plataforma-de-monitoramento-urbano-com-gdf/"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 129.582307,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

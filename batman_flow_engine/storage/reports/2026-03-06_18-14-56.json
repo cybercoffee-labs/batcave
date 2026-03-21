@@ -1,0 +1,520 @@
+{
+  "timestamp": "2026-03-06T18:14:18.380825+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 605.0599975585938,
+      "ret_1d": -0.006326263511565398,
+      "ret_intra": -0.014351568945655924,
+      "vol_z": 0.8157993914040278,
+      "rvol": 1.1666530992352238,
+      "dollar_vol": 512482187.57214355,
+      "rv20_ann": 0.1674895020742569,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 252.08999633789062,
+      "ret_1d": -0.018236689199744274,
+      "ret_intra": -0.04970313019303585,
+      "vol_z": -0.37892964348208147,
+      "rvol": 0.9111470721865538,
+      "dollar_vol": 134095996.38198853,
+      "rv20_ann": 0.22539669445247767,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 50.369998931884766,
+      "ret_1d": -0.016929550463475735,
+      "ret_intra": -0.03892388707244143,
+      "vol_z": -0.8579190655202072,
+      "rvol": 0.5499981086072128,
+      "dollar_vol": 16111801.188343048,
+      "rv20_ann": 0.21803276106836136,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 139.22999572753906,
+      "ret_1d": 0.0024283731041340197,
+      "ret_intra": -0.021299022186812122,
+      "vol_z": -0.22429278725808174,
+      "rvol": 0.923116045913583,
+      "dollar_vol": 20216473.839630127,
+      "rv20_ann": 0.25391172280258484,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 56.58000183105469,
+      "ret_1d": 0.0017690131555397888,
+      "ret_intra": 0.03940480212454145,
+      "vol_z": 1.3212778173043642,
+      "rvol": 1.4441019027724828,
+      "dollar_vol": 42703926.12199402,
+      "rv20_ann": 0.18482616532932267,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 114.91999816894531,
+      "ret_1d": -0.014084173488084084,
+      "ret_intra": -0.02145780160144517,
+      "vol_z": -0.8424308306716753,
+      "rvol": 0.835077320388857,
+      "dollar_vol": 10650095.910308838,
+      "rv20_ann": 0.1599115379557224,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 85.58000183105469,
+      "ret_1d": 0.0019883995496182147,
+      "ret_intra": -0.04326434040491656,
+      "vol_z": -0.7731362511349609,
+      "rvol": 0.42146126974602954,
+      "dollar_vol": 7802671.08694458,
+      "rv20_ann": 0.16124427635093036,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 472.9200134277344,
+      "ret_1d": 0.014461693735098877,
+      "ret_intra": -0.0034768187433242836,
+      "vol_z": -0.9080026275909439,
+      "rvol": 0.4172385770774332,
+      "dollar_vol": 17373189.61328125,
+      "rv20_ann": 0.3473877610907193,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 88.88999938964844,
+      "ret_1d": 0.0011256020318251689,
+      "ret_intra": -0.013319979986917696,
+      "vol_z": -1.2052064360486934,
+      "rvol": 0.5287082622217848,
+      "dollar_vol": 29368278.008346558,
+      "rv20_ann": 0.08715776828017072,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 79.98500061035156,
+      "ret_1d": -0.001124557717772103,
+      "ret_intra": -0.01112692714482566,
+      "vol_z": -1.078512402641693,
+      "rvol": 0.3092283551083196,
+      "dollar_vol": 19061945.360458374,
+      "rv20_ann": 0.028197413710655473,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 324.0299987792969,
+      "ret_1d": -0.027395637211813515,
+      "ret_intra": -0.07959093874518097,
+      "vol_z": -0.16985118567812754,
+      "rvol": 0.8445070994131436,
+      "dollar_vol": 5124534.43069458,
+      "rv20_ann": 0.38795364347121375,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 298.70001220703125,
+      "ret_1d": -0.02857988527209328,
+      "ret_intra": -0.05918289900564344,
+      "vol_z": -0.6462972730930684,
+      "rvol": 0.4415916746132867,
+      "dollar_vol": 2469054.3009033203,
+      "rv20_ann": 0.24075455167450627,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 59.369998931884766,
+      "ret_1d": -0.03215395388197248,
+      "ret_intra": -0.16697065064811323,
+      "vol_z": -0.4379852402677545,
+      "rvol": 0.835589204639325,
+      "dollar_vol": 6741166.528720856,
+      "rv20_ann": 0.5511385776412319,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 92.68000030517578,
+      "ret_1d": -0.02924029477009887,
+      "ret_intra": -0.20786324525490785,
+      "vol_z": 0.16755257325863213,
+      "rvol": 1.0912477243648044,
+      "dollar_vol": 6505394.581420898,
+      "rv20_ann": 0.6841121857332537,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 101.05500030517578,
+      "ret_1d": -0.013319473746009636,
+      "ret_intra": -0.047639244897739075,
+      "vol_z": -1.2425728069441324,
+      "rvol": 0.5368181099938242,
+      "dollar_vol": 4308580.993011475,
+      "rv20_ann": 0.3179750180015042,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 59.25,
+      "ret_1d": 0.009496448844060855,
+      "ret_intra": 0.07648980767522073,
+      "vol_z": -0.8568297254086849,
+      "rvol": 0.7881592738532578,
+      "dollar_vol": 1120536.0,
+      "rv20_ann": 0.4397732652477077,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 325.8349914550781,
+      "ret_1d": -0.004944316899978394,
+      "ret_intra": -0.026457351345229863,
+      "vol_z": -0.2780410442458873,
+      "rvol": 0.6367936416138968,
+      "dollar_vol": 3910671.5674438477,
+      "rv20_ann": 0.1783548376296886,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 76.97000122070312,
+      "ret_1d": -0.0007791891120688971,
+      "ret_intra": -0.04716511037593896,
+      "vol_z": 1.1161476580332834,
+      "rvol": 1.3640762656545569,
+      "dollar_vol": 6932380.129943848,
+      "rv20_ann": 0.17915180872139674,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 157.8800048828125,
+      "ret_1d": -0.0177039720310518,
+      "ret_intra": -0.06830720145860536,
+      "vol_z": -0.34315028313428086,
+      "rvol": 0.5620561658410883,
+      "dollar_vol": 3123340.1365966797,
+      "rv20_ann": 0.2241241526164951,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 25.030000686645508,
+      "ret_1d": -0.01663397437532903,
+      "ret_intra": 0.0840190784424999,
+      "vol_z": -0.1147334390005222,
+      "rvol": 0.9248265750603362,
+      "dollar_vol": 2174856.759662628,
+      "rv20_ann": 0.6766781820732131,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 1978.89,
+      "ret_1h": 0.006167503915068595,
+      "rv_ann": 0.643623988207086,
+      "spread": 5.053044332879859e-06,
+      "depth_0_5pct": 392.404,
+      "dollar_vol_1h": 9631204.991526,
+      "status": "ok"
+    },
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 68323.96,
+      "ret_1h": 0.005427995838428679,
+      "rv_ann": 0.47278361442164585,
+      "spread": 1.463639928962708e-07,
+      "depth_0_5pct": 12.9768,
+      "dollar_vol_1h": 10607727.9639064,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 84.8,
+      "ret_1h": 0.00700629378933626,
+      "rv_ann": 0.6349456959679829,
+      "spread": 0.00011794539128389593,
+      "depth_0_5pct": 57132.409,
+      "dollar_vol_1h": 1901910.5119999999,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 2.519394547157157,
+    "IWM": 0.891402398434492,
+    "XLF": -0.04400619046570342,
+    "XLK": 0.9837034723033665,
+    "XLE": 3.1444256254590526,
+    "XLY": 0.07216165362190263,
+    "XLP": -0.11205482341963036,
+    "GLD": -0.07536786404617923,
+    "TLT": -0.5391147789009325,
+    "HYG": -0.5940948560851882,
+    "MAR": 1.019693913923011,
+    "HLT": 0.040881514590626944,
+    "DAL": 0.8409923549387335,
+    "UAL": 1.8250925176571715,
+    "DIS": -0.5194663487469353,
+    "FOXA": 0.10393237810219447,
+    "ETH/USDT": 2.4700053313383594,
+    "BTC/USDT": 1.821671593340842,
+    "SOL/USDT": 3.108846686830233,
+    "MCD": 0.5799485035528067,
+    "KO": 2.7272767513277882,
+    "PEP": 0.47894557415920047,
+    "DKNG": 1.3091729627059059
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.014196888157791321,
+        "p50": 0.0007832569077067646,
+        "p95": 0.01576340197320485,
+        "mu": 0.0007832569077067646,
+        "sigma": 0.009107301617471555
+      },
+      "1W": {
+        "p5": -0.029580338140727937,
+        "p50": 0.003916284538533823,
+        "p95": 0.03741290721779558,
+        "mu": 0.003916284538533823,
+        "sigma": 0.020364545508260185
+      },
+      "1M": {
+        "p5": -0.05303145653010458,
+        "p50": 0.017231651969548824,
+        "p95": 0.08749476046920224,
+        "mu": 0.017231651969548824,
+        "sigma": 0.042717031036053996
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.24166059820078142,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9620792355786906
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9111942900951637
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8163872746688404
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7305433354885004
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.7138507004853643
+      },
+      {
+        "a": "KO",
+        "b": "XLP",
+        "corr": 0.6724765002040406
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6692754573542655
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6660343916060728
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.6548727697781592
+      },
+      {
+        "a": "IWM",
+        "b": "XLF",
+        "corr": 0.6439595657763346
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": -0.34685568010602436,
+      "vol_z_p90": 0.8458342180669538,
+      "vol_z_gt2_pct": 0.0
+    },
+    "regime": {
+      "label": "NORMAL",
+      "triggers": []
+    },
+    "deltas": {
+      "corr_stress_delta": 0.0035821064520674684,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": -1.0,
+      "prev_regime": "TENSION",
+      "regime_changed": true
+    }
+  },
+  "narrative": {
+    "total_hits": 339,
+    "by_keyword": {
+      "World Cup 2026": 250,
+      "FIFA 2026": null,
+      "Guadalajara": 89,
+      "Monterrey": null,
+      "Mexico City": null,
+      "security": null
+    },
+    "samples": {
+      "World Cup 2026": [
+        {
+          "datetime": "20260306T173000Z",
+          "title": "Weekly Coffee News : Unionization in Milwaukee + New U . S . Coffee Roasting Champ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://dailycoffeenews.com/2026/03/06/weekly-coffee-news-unionization-in-milwaukee-new-u-s-coffee-roasting-champ/"
+        },
+        {
+          "datetime": "20260306T173000Z",
+          "title": "Tomori keen to make England World Cup squad",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://promptnewsonline.com/tomori-keen-to-make-englands-world-cup-squad/"
+        },
+        {
+          "datetime": "20260306T173000Z",
+          "title": "Team Alive - Rampage takes Line Honours in the 2026 Rolex China Sea Race",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.thailand-business-news.com/pr-news/team-alive-rampage-takes-line-honours-in-the-2026-rolex-china-sea-race"
+        }
+      ],
+      "Guadalajara": [
+        {
+          "datetime": "20260306T173000Z",
+          "title": "The Determination of Puerto Rico Allanis Navas \u2013 FIVB",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.fivb.com/the-determination-of-puerto-ricos-allanis-navas/"
+        },
+        {
+          "datetime": "20260306T171500Z",
+          "title": "Alfonso Gonz\u00e1lez vive nueva etapa goleadora en Atlas - Grupo Milenio",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.milenio.com/futbol/liga-mx/alfonso-gonzalez-vive-etapa-goleadora-atlas"
+        },
+        {
+          "datetime": "20260306T171500Z",
+          "title": " \u00bf D\u00f3nde ver la jornada 10 de la Liga Mx ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.sopitas.com/deportes/liga-mx-donde-ver-partidos-hoy-jornada-10/"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 27.949506,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  },
+  "ollama_status": "AVAILABLE",
+  "ollama_details": {
+    "available": true,
+    "model": "llama3.2:3b",
+    "model_installed": true,
+    "models_installed": [
+      "llama3.2:3b"
+    ],
+    "version": "0.15.5"
+  },
+  "intelligence": {
+    "summary": "Today\u2019s LATAM market data reveals a strong demand for USDT-based pairs, with the highest concentration on USDT/COP and USDT/MXN, indicating a potential arbitrage opportunity. The best spread for type B is 0.0991, which suggests a relatively low risk trade.",
+    "risk_level": "LOW",
+    "notable_patterns": [
+      "Strong demand for USDT-based pairs",
+      "Significant spread between types"
+    ],
+    "recommendation": "Focus on USDT/COP and USDT/MXN pairs to capitalize on the low-risk arbitrage opportunity",
+    "confidence": 0.85,
+    "status": "ok",
+    "date": "2026-03-06",
+    "market_summary": {
+      "count_by_type": {
+        "A": 0,
+        "B": 28,
+        "C": 54
+      },
+      "best_spread_by_type": {
+        "A": 0.0,
+        "B": 0.0991,
+        "C": 2.159
+      },
+      "active_pairs": [
+        "BTC",
+        "USDT/COP",
+        "USDT/MXN",
+        "USDT/VES"
+      ],
+      "total_opportunities": 82,
+      "data_quality": 98.78
+    },
+    "opportunities_count": 82
+  },
+  "data_quality": {
+    "cycle_ts": "2026-03-06T18:14:56.477963+00:00",
+    "dq_score": 0.98,
+    "total_records": 50,
+    "valid_records": 49,
+    "issues": [
+      "VES: has_spot_price failed 1x",
+      "VES: has_premium_quality failed 1x"
+    ],
+    "breakdown": {
+      "has_spot_price": 0.98,
+      "has_valid_spread": 1.0,
+      "not_anomalous": 1.0,
+      "has_premium_quality": 0.98
+    },
+    "status": "OK"
+  }
+}

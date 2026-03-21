@@ -1,0 +1,506 @@
+{
+  "timestamp": "2026-03-05T20:00:32.008599+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 604.0800170898438,
+      "ret_1d": -0.01094800340709737,
+      "ret_intra": -0.01384508218699132,
+      "vol_z": -4.013711569046841,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.17858658195061508,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 254.72999572753906,
+      "ret_1d": -0.027184651996514632,
+      "ret_intra": -0.036609840023074325,
+      "vol_z": -2.3553977389917007,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.23546893864813384,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.040000915527344,
+      "ret_1d": -0.009070138804096328,
+      "ret_intra": -0.007679604300910636,
+      "vol_z": -1.0541270675870187,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.21581999832937682,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 138.71499633789062,
+      "ret_1d": -0.00811341454198857,
+      "ret_intra": -0.019266162729631664,
+      "vol_z": -3.019251079238408,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.2557329191894886,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 56.5099983215332,
+      "ret_1d": 0.0056788032556569865,
+      "ret_intra": 0.027467627372286474,
+      "vol_z": -1.2996181555158628,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.19318795370016095,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 115.7750015258789,
+      "ret_1d": -0.005384346779035042,
+      "ret_intra": -0.013547449127347178,
+      "vol_z": -3.050024946944531,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.17040342027749017,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 85.45500183105469,
+      "ret_1d": -0.019755609064768722,
+      "ret_intra": -0.04327136001987131,
+      "vol_z": -1.4692413459634102,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.16008141242446527,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 465.45001220703125,
+      "ret_1d": -0.013571941107992598,
+      "ret_intra": -0.021094658385220733,
+      "vol_z": -1.6504438656976579,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.3615462776023678,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 88.70500183105469,
+      "ret_1d": -0.005116846924838898,
+      "ret_intra": -0.011698461974197216,
+      "vol_z": -1.5619834991658978,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.09480628660569117,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.03500366210938,
+      "ret_1d": -0.004550110408505301,
+      "ret_intra": -0.009896646643458018,
+      "vol_z": -1.8208216224494476,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.029273983446989827,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 330.614990234375,
+      "ret_1d": -0.01597805298554032,
+      "ret_intra": -0.04091729791245147,
+      "vol_z": -1.3605043593242776,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.3783299572462271,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 306.2650146484375,
+      "ret_1d": 0.004352413270384278,
+      "ret_intra": -0.019701038713131558,
+      "vol_z": -0.6880250772441863,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.21723810658232726,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 60.529998779296875,
+      "ret_1d": -0.052919009238135986,
+      "ret_intra": -0.12579432919119493,
+      "vol_z": -2.29940594199413,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.5564683435287207,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 93.61499786376953,
+      "ret_1d": -0.07076813189406322,
+      "ret_intra": -0.16246927679893475,
+      "vol_z": -3.247669206979452,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.7048443332552077,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 102.08999633789062,
+      "ret_1d": -0.009262529931666319,
+      "ret_intra": -0.03333021732901986,
+      "vol_z": -2.8576082073505185,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.32243763217968735,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 58.1599006652832,
+      "ret_1d": -0.00446214034877524,
+      "ret_intra": 0.07763385862168204,
+      "vol_z": -2.55674316590904,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.4408765475305567,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 325.9649963378906,
+      "ret_1d": -0.01751543664636272,
+      "ret_intra": -0.019683658342639743,
+      "vol_z": -1.3281333038521692,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.18253007097435645,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 76.81999969482422,
+      "ret_1d": -0.016590071942578957,
+      "ret_intra": -0.04357569737672118,
+      "vol_z": -2.7686536186893873,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.1907375862739703,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 160.82000732421875,
+      "ret_1d": -0.019092720097266248,
+      "ret_intra": -0.04585093855060962,
+      "vol_z": -2.243956064522738,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.21949630055167704,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 25.344999313354492,
+      "ret_1d": -0.003150846349341256,
+      "ret_intra": 0.13172577786521744,
+      "vol_z": -1.48606360123775,
+      "rvol": 0.0,
+      "dollar_vol": 0.0,
+      "rv20_ann": 0.7124399237622507,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 70995.93,
+      "ret_1h": 0.0010978866176136748,
+      "rv_ann": 0.6650787108738349,
+      "spread": 1.408593844397189e-07,
+      "depth_0_5pct": 11.109169999999999,
+      "dollar_vol_1h": 1034027.3220779999,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2076.76,
+      "ret_1h": 0.0011569833587228295,
+      "rv_ann": 0.8647222029622066,
+      "spread": 4.815459551448745e-06,
+      "depth_0_5pct": 389.7031,
+      "dollar_vol_1h": 461636.5424440001,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 88.82,
+      "ret_1h": 0.0010143130846387294,
+      "rv_ann": 0.9258995172959636,
+      "spread": 0.00011259359342443174,
+      "depth_0_5pct": 85742.37700000001,
+      "dollar_vol_1h": 121394.11325999998,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": -5.273584617295716,
+    "IWM": -3.2381021358715336,
+    "XLF": -1.6922964824409208,
+    "XLK": -4.018514959734499,
+    "XLE": -2.0049914236589066,
+    "XLY": -4.123707200111444,
+    "XLP": -2.23502448521652,
+    "GLD": -2.291295616755295,
+    "TLT": -2.398535169714524,
+    "HYG": -2.7615667601817453,
+    "MAR": -1.9299412653921515,
+    "HLT": -1.2518396074271616,
+    "DAL": -2.9141124555699793,
+    "UAL": -3.9333275817711755,
+    "DIS": -3.771179743076872,
+    "FOXA": -3.315390561066402,
+    "BTC/USDT": 1.8002242923094027,
+    "ETH/USDT": 2.4479388675139626,
+    "SOL/USDT": 3.2243380099168792,
+    "MCD": -2.047735907843118,
+    "KO": -3.7697942734080887,
+    "PEP": -3.1171502369859443,
+    "DKNG": -1.813324382475499
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.014178430563653276,
+        "p50": 0.000850082450465909,
+        "p95": 0.015878595464585095,
+        "mu": 0.000850082450465909,
+        "sigma": 0.009136707307121735
+      },
+      "1W": {
+        "p5": -0.029354364447981212,
+        "p50": 0.004250412252329545,
+        "p95": 0.0378551889526403,
+        "mu": 0.004250412252329545,
+        "sigma": 0.02043029862924325
+      },
+      "1M": {
+        "p5": -0.05178816037788614,
+        "p50": 0.018701813910249998,
+        "p95": 0.08919178819838613,
+        "mu": 0.018701813910249998,
+        "sigma": 0.042854955946217674
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.24971917261903623,
+    "n_assets": 19,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9578738341591323
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9126244121276972
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8076629679350388
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7235468288263518
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.7121941412492556
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6817613444211214
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6798033435933905
+      },
+      {
+        "a": "KO",
+        "b": "XLP",
+        "corr": 0.6678870113558655
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.6480136791071528
+      },
+      {
+        "a": "IWM",
+        "b": "UAL",
+        "corr": 0.6457435959013252
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": -2.106569171885221,
+      "vol_z_p90": -1.275069046722978,
+      "vol_z_gt2_pct": 0.0
+    },
+    "regime": {
+      "label": "NORMAL",
+      "triggers": []
+    },
+    "deltas": {
+      "corr_stress_delta": 0.009559717368871401,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "NORMAL",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 899,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": null,
+      "Guadalajara": 149,
+      "Monterrey": 250,
+      "Mexico City": 250,
+      "security": 250
+    },
+    "samples": {
+      "Guadalajara": [
+        {
+          "datetime": "20260305T190000Z",
+          "title": "Traveling to Mexico for spring break ? Here what to know after cartel - related violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.aol.com/articles/traveling-mexico-spring-break-heres-165625080.html"
+        },
+        {
+          "datetime": "20260305T173000Z",
+          "title": "Atlas saca el triunfo sobre Xolos y llegar\u00e1 de maravilla al Cl\u00e1sico Tapat\u00edo",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.notisistema.com/noticias/atlas-saca-el-triunfo-sobre-xolos-y-llegara-de-maravilla-al-clasico-tapatio/"
+        },
+        {
+          "datetime": "20260305T173000Z",
+          "title": "Cuestionan a SIAPA por mala calidad del agua sin estudios",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.notisistema.com/noticias/cuestionan-a-siapa-por-justificar-mala-calidad-del-agua-sin-estudios/"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260305T191500Z",
+          "title": "Alerta por contrabando de ajo chino en M\u00e9xico",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://eldiariodesonora.com.mx/mexico/2026/03/05/contrabando-ajo-chino-mexico.html"
+        },
+        {
+          "datetime": "20260305T191500Z",
+          "title": "SANTOS BRAVOS anunciam primeiro EP da carreira ,  DUAL  ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://billboard.com.br/santos-bravos-primeiro-ep-dual/"
+        },
+        {
+          "datetime": "20260305T191500Z",
+          "title": "Sheinbaum destaca reuni\u00f3n con FIFA y garantiza seguridad para el mundial",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://eldeber.com.bo/deportes/sheinbaum-destaca-reunion-fifa-garantiza-seguridad-mundial_1772730496"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260305T193000Z",
+          "title": "Trump fires Kristi Noem as homeland security secretary",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.irishtimes.com/world/us/2026/03/05/trump-fires-kristi-noem-as-homeland-security-secretary/"
+        },
+        {
+          "datetime": "20260305T193000Z",
+          "title": "Mega operativo en la Friki Plaza",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.omnia.com.mx/noticia/418040/mega-operativo-en-la-friki-plaza"
+        },
+        {
+          "datetime": "20260305T193000Z",
+          "title": "  Ya nos lleg\u00f3 la Reforma Electoral , la analizaremos : Bonilla",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.omnia.com.mx/noticia/418035/ya-nos-llego-la-reforma-electoral-la-analizaremos-bonilla"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260305T193000Z",
+          "title": "\u041c\u0438\u043d\u0438\u0441\u0442\u044a\u0440 \u0418\u0432\u0430\u043d \u0425\u0440\u0438\u0441\u0442\u0430\u043d\u043e\u0432 : \u041d\u0435 \u0441\u044a\u043c \u0441\u0435 \u0438\u0437\u043f\u043b\u044a\u0437\u0432\u0430\u043b ! \u041f\u043e\u0434\u0433\u043e\u0442\u0432\u0435\u043d \u0441\u044a\u043c \u0437\u0430 \u0443\u043c\u0438\u0448\u043b\u0435\u043d\u0438 \u0430\u0442\u0430\u043a\u0438 \u043a\u044a\u043c \u043c\u0435\u043d",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.ruse24.bg/novini/Bylgaria/Ministur-Ivan-Hristanov-Ne-sum-se-izpluzvalPodgotven-sum-za-umishleni-ataki-kum-men-2913470"
+        },
+        {
+          "datetime": "20260305T193000Z",
+          "title": "Trump quer ser envolvido na escolha de sucessor de Khamenei",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.dnoticias.pt/2026/3/5/483688-trump-quer-ser-envolvido-na-escolha-de-sucessor-de-khamenei/"
+        },
+        {
+          "datetime": "20260305T193000Z",
+          "title": "Sam Altman d\u00e9clare \u00e0 son personnel quOpenAI na pas son mot \u00e0 dire sur les d\u00e9cisions du Pentagone et ne peut pas choisir la mani\u00e8re dont larm\u00e9e utilise sa technologie",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://intelligence-artificielle.developpez.com/actu/380848/Sam-Altman-declare-a-son-personnel-qu-OpenAI-n-a-pas-son-mot-a-dire-sur-les-decisions-du-Pentagone-et-ne-peut-pas-choisir-la-maniere-dont-l-armee-utilise-sa-technologie/"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 47.24463,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

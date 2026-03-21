@@ -1,0 +1,464 @@
+{
+  "timestamp": "2026-03-05T21:21:57.043274+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 608.9000244140625,
+      "ret_1d": -0.0030172807043736738,
+      "ret_intra": -0.005976465791481367,
+      "vol_z": 3.4536950264128046,
+      "rvol": 3.047931646849379,
+      "dollar_vol": 2060912858.7330322,
+      "rv20_ann": 0.17438804401910218,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 256.79998779296875,
+      "ret_1d": -0.01924739094695721,
+      "ret_intra": -0.028781119336413252,
+      "vol_z": 3.5214377403961183,
+      "rvol": 3.0020979574679663,
+      "dollar_vol": 529672830.0219116,
+      "rv20_ann": 0.22528201709032272,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.25,
+      "ret_1d": -0.004866189651172899,
+      "ret_intra": -0.003596799229154568,
+      "vol_z": 3.9163134993112876,
+      "rvol": 5.713278932402467,
+      "dollar_vol": 258301383.75,
+      "rv20_ann": 0.2147096634941371,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 140.16000366210938,
+      "ret_1d": 0.0024283731041340197,
+      "ret_intra": -0.009049764968910634,
+      "vol_z": 3.6522743698058484,
+      "rvol": 4.19046258011513,
+      "dollar_vol": 165216407.51678467,
+      "rv20_ann": 0.2539117228025853,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 56.5,
+      "ret_1d": 0.0053248803658315766,
+      "ret_intra": 0.027285837388061562,
+      "vol_z": 3.758896498770186,
+      "rvol": 4.278013131503537,
+      "dollar_vol": 231063078.0,
+      "rv20_ann": 0.19313585667760166,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 116.52999877929688,
+      "ret_1d": 0.0013737759560098063,
+      "ret_intra": -0.0071145494795805675,
+      "vol_z": 4.072803385288246,
+      "rvol": 6.453182458254519,
+      "dollar_vol": 179218010.8026123,
+      "rv20_ann": 0.17022652774186237,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 85.41000366210938,
+      "ret_1d": -0.020282319257481654,
+      "ret_intra": -0.04377514605994126,
+      "vol_z": 4.098831987400739,
+      "rvol": 6.266726570011791,
+      "dollar_vol": 256317641.65008545,
+      "rv20_ann": 0.16091344311323733,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 466.2099914550781,
+      "ret_1d": -0.012090565447196364,
+      "ret_intra": -0.019496317584020928,
+      "vol_z": 3.357766660927517,
+      "rvol": 3.572650862861445,
+      "dollar_vol": 215159174.52645874,
+      "rv20_ann": 0.36077835396898766,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 88.80999755859375,
+      "ret_1d": -0.004046320069620024,
+      "ret_intra": -0.010528658278001646,
+      "vol_z": 4.056216296697039,
+      "rvol": 4.788496479312273,
+      "dollar_vol": 234315853.50860596,
+      "rv20_ann": 0.09390277212426568,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.05000305175781,
+      "ret_1d": -0.003988037291230684,
+      "ret_intra": -0.00971109100767753,
+      "vol_z": 3.8221389096710228,
+      "rvol": 3.771370391411025,
+      "dollar_vol": 315849214.49116516,
+      "rv20_ann": 0.02819374573652078,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 333.0299987792969,
+      "ret_1d": -0.008669951312180891,
+      "ret_intra": -0.033911587375290875,
+      "vol_z": 4.1214636567841,
+      "rvol": 7.712428524969434,
+      "dollar_vol": 62392504.21130371,
+      "rv20_ann": 0.3748481966394485,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 307.30999755859375,
+      "ret_1d": 0.008002988255943633,
+      "ret_intra": -0.016356237275185426,
+      "vol_z": 3.7733738641661887,
+      "rvol": 4.881040366078027,
+      "dollar_vol": 57233413.9453125,
+      "rv20_ann": 0.21867775561342123,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 61.310001373291016,
+      "ret_1d": -0.04028034378066126,
+      "ret_intra": -0.11452912673511162,
+      "vol_z": 3.5221475137126013,
+      "rvol": 3.8664922956719328,
+      "dollar_vol": 59527290.46335983,
+      "rv20_ann": 0.5445376288626775,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 95.41000366210938,
+      "ret_1d": -0.051565738501796445,
+      "ret_intra": -0.14641017795003652,
+      "vol_z": 3.389119691594819,
+      "rvol": 3.7018526279964576,
+      "dollar_vol": 50436017.775878906,
+      "rv20_ann": 0.6851215939777788,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 102.38999938964844,
+      "ret_1d": -0.006132871394567513,
+      "ret_intra": -0.030489548358051177,
+      "vol_z": 4.047161752522745,
+      "rvol": 4.651205537714252,
+      "dollar_vol": 76690314.32284546,
+      "rv20_ann": 0.32174120952220525,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 58.689998626708984,
+      "ret_1d": 0.004611065554527634,
+      "ret_intra": 0.08745594402905521,
+      "vol_z": 4.006470930119365,
+      "rvol": 7.871294611796565,
+      "dollar_vol": 21546037.535842896,
+      "rv20_ann": 0.4428427926984419,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 327.4200134277344,
+      "ret_1d": -0.013016091197178285,
+      "ret_intra": -0.015307798828307129,
+      "vol_z": 3.7956429610710627,
+      "rvol": 5.021279797359148,
+      "dollar_vol": 65554725.408447266,
+      "rv20_ann": 0.17721880104415932,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 77.0,
+      "ret_1d": -0.013795096790376967,
+      "ret_intra": -0.041334657712133405,
+      "vol_z": 4.131640833629092,
+      "rvol": 6.775719260875865,
+      "dollar_vol": 137555572.0,
+      "rv20_ann": 0.1878163758332342,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 160.69000244140625,
+      "ret_1d": -0.019839239007164226,
+      "ret_intra": -0.0466222607199297,
+      "vol_z": 4.051991013552721,
+      "rvol": 5.589633551786764,
+      "dollar_vol": 91839960.54534912,
+      "rv20_ann": 0.22029813352381586,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 25.454999923706055,
+      "ret_1d": 0.0011789657351709934,
+      "ret_intra": 0.13663761569076338,
+      "vol_z": 3.8619301050977577,
+      "rvol": 5.302784702204734,
+      "dollar_vol": 28054617.24591446,
+      "rv20_ann": 0.712641507205001,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 71444.97,
+      "ret_1h": 0.002926308433695013,
+      "rv_ann": 0.6645746129228365,
+      "spread": 1.3996975666133653e-07,
+      "depth_0_5pct": 11.45427,
+      "dollar_vol_1h": 13655797.235481601,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2094.22,
+      "ret_1h": 0.0008554646989384906,
+      "rv_ann": 0.8666979003414115,
+      "spread": 4.775058912176415e-06,
+      "depth_0_5pct": 272.7975,
+      "dollar_vol_1h": 7114268.060495999,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 89.62,
+      "ret_1h": 0.004595897320928355,
+      "rv_ann": 0.928603303349205,
+      "spread": 0.00011158846175311181,
+      "depth_0_5pct": 83667.56599999999,
+      "dollar_vol_1h": 3202663.81518,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 6.909812399364196,
+    "IWM": 6.915810831033645,
+    "XLF": 8.961130299322035,
+    "XLK": 7.732844146265679,
+    "XLE": 7.886551945913145,
+    "XLY": 9.5334620073885,
+    "XLP": 9.468681856157696,
+    "GLD": 7.111447174416758,
+    "TLT": 8.471149912332603,
+    "HYG": 7.546865893213946,
+    "MAR": 10.442361922984556,
+    "HLT": 8.195262508957338,
+    "DAL": 7.5483099141953085,
+    "UAL": 7.3915636002615255,
+    "DIS": 8.48742147093944,
+    "FOXA": 10.384821229195634,
+    "BTC/USDT": 1.972588846427415,
+    "MCD": 8.281805072923637,
+    "KO": 9.794425385621565,
+    "ETH/USDT": 2.5734832361848894,
+    "SOL/USDT": 3.4360249197812927,
+    "PEP": 8.986862607426385,
+    "DKNG": 8.903300805392714
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.014167425439556356,
+        "p50": 0.0008346268776503507,
+        "p95": 0.015836679194857057,
+        "mu": 0.0008346268776503507,
+        "sigma": 0.009120620310184338
+      },
+      "1W": {
+        "p5": -0.029372474395030684,
+        "p50": 0.004173134388251754,
+        "p95": 0.03771874317153419,
+        "mu": 0.004173134388251754,
+        "sigma": 0.020394327010537398
+      },
+      "1M": {
+        "p5": -0.052004071310014235,
+        "p50": 0.018361791308307715,
+        "p95": 0.08872765392662967,
+        "mu": 0.018361791308307715,
+        "sigma": 0.04277950124225428
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.23808271514308837,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9578699671392354
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9100751043848548
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8100568275618172
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7208415892209776
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.7140736834138595
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6717899417706881
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6667059801386437
+      },
+      {
+        "a": "KO",
+        "b": "XLP",
+        "corr": 0.6618128610386991
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.6455866537026343
+      },
+      {
+        "a": "IWM",
+        "b": "UAL",
+        "corr": 0.6293392403327343
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": 3.820565834846563,
+      "vol_z_p90": 4.101095154339075,
+      "vol_z_gt2_pct": 1.0
+    },
+    "regime": {
+      "label": "TENSION",
+      "triggers": [
+        "vol_z_gt2_pct>=0.25",
+        "vol_z_gt2_pct>=0.40",
+        "vol_z_gt2_pct>=0.75"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": 7.75469139907281e-05,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "TENSION",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 500,
+    "by_keyword": {
+      "World Cup 2026": 250,
+      "FIFA 2026": null,
+      "Guadalajara": null,
+      "Monterrey": 250,
+      "Mexico City": null,
+      "security": null
+    },
+    "samples": {
+      "World Cup 2026": [
+        {
+          "datetime": "20260305T210000Z",
+          "title": "Media Insider : TVNZ news review \u2013 why report will remain secret ; TVNZ CEO steps into crime story ; Brodie Kane on podcast break - up",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.nzherald.co.nz/business/media-insider/media-insider-tvnz-news-review-why-report-will-remain-secret-tvnz-ceo-steps-into-crime-story-brodie-kane-on-podcast-break-up/premium/HB2PEOA5DVHBLPLSBOO73YRVIU/"
+        },
+        {
+          "datetime": "20260305T210000Z",
+          "title": "WA measles cases rise to 26 as US total tops 1 , 100 in 2026",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.fox13seattle.com/news/measles-cases-rise-2026"
+        },
+        {
+          "datetime": "20260305T210000Z",
+          "title": "India shatters records with 250+ total , 19 sixes in T20 WC semi - final vs England",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.zimbabwestar.com/news/278904569/india-shatters-records-with-250-total-19-sixes-in-t20-wc-semi-final-vs-england"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260305T204500Z",
+          "title": "Otra vez Rayados contra Messi",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.elnorte.com/rayados-enfrentara-otra-vez-al-inter-miami-de-messi/ar3164090"
+        },
+        {
+          "datetime": "20260305T201500Z",
+          "title": "Radiograf\u00eda del blindaje para el Mundial 2026 : as\u00ed proteger\u00e1n a miles de familias en M\u00e9xico - Siete24 Noticias con proposito y sentido humano",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://siete24.mx/deportes/radiografia-del-blindaje-para-el-mundial-2026-asi-protegeran-a-miles-de-familias-en-mexico/"
+        },
+        {
+          "datetime": "20260305T201500Z",
+          "title": " \u00bf Beca en el Tec de Monterrey ? Abre ITESM proceso de admisi\u00f3n gratuito",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.tiempo.com.mx/local/beca-en-el-tec-de-monterrey-abre-itesm-proceso-de-admision-gratuito/"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 30.170854,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

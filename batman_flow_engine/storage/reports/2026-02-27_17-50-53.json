@@ -1,0 +1,533 @@
+{
+  "timestamp": "2026-02-27T17:48:49.927236+00:00",
+  "equities": {
+    "SPY_FAKE_TEST": {
+      "symbol": "SPY_FAKE_TEST",
+      "status": "no_daily"
+    },
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 605.5349731445312,
+      "ret_1d": -0.006138779946037731,
+      "ret_intra": 0.0044704169746654365,
+      "vol_z": -0.8565364601580078,
+      "rvol": 0.0348449157214893,
+      "dollar_vol": 130860346.44134521,
+      "rv20_ann": 0.18671456852855248,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 260.19000244140625,
+      "ret_1d": -0.021805285935226904,
+      "ret_intra": -0.0066619395401606996,
+      "vol_z": -1.2508485643214582,
+      "rvol": 0.6029434434425428,
+      "dollar_vol": 52308858.280822754,
+      "rv20_ann": 0.21719401661025978,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.03499984741211,
+      "ret_1d": -0.027792358398437522,
+      "ret_intra": -0.023442386065885334,
+      "vol_z": -0.43857217994366476,
+      "rvol": 0.7199643275309523,
+      "dollar_vol": 28407969.210063934,
+      "rv20_ann": 0.23102792509515657,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 138.71499633789062,
+      "ret_1d": -0.016310814003026253,
+      "ret_intra": -0.00854125718633214,
+      "vol_z": -1.2274016753733499,
+      "rvol": 0.4357938192284211,
+      "dollar_vol": 7901483.621398926,
+      "rv20_ann": 0.2821552530133179,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 55.560001373291016,
+      "ret_1d": 0.009173498185541362,
+      "ret_intra": 0.0014365543926948554,
+      "vol_z": -1.2833470087789733,
+      "rvol": 0.4732622750702762,
+      "dollar_vol": 12036685.377513885,
+      "rv20_ann": 0.22844532439150583,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 116.12000274658203,
+      "ret_1d": -0.007945324911820317,
+      "ret_intra": -0.0007744285224992042,
+      "vol_z": -1.257084185460119,
+      "rvol": 0.3873500628222929,
+      "dollar_vol": 4020190.6150894165,
+      "rv20_ann": 0.15441441360946848,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 89.79499816894531,
+      "ret_1d": 0.010522142158131187,
+      "ret_intra": 0.01708640802607153,
+      "vol_z": -1.8865498781418093,
+      "rvol": 0.30242107608058155,
+      "dollar_vol": 3419393.5302734375,
+      "rv20_ann": 0.14472604510475345,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 481.0799865722656,
+      "ret_1d": 0.007539531505206032,
+      "ret_intra": 0.052783603746978436,
+      "vol_z": -1.0073679008890721,
+      "rvol": 0.1807179094276764,
+      "dollar_vol": 14138940.805358887,
+      "rv20_ann": 0.5579278528650702,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 90.70999908447266,
+      "ret_1d": 0.004874293317480127,
+      "ret_intra": 0.014115514689889697,
+      "vol_z": -0.9410577706470298,
+      "rvol": 0.015288434327974325,
+      "dollar_vol": 7798066.491294861,
+      "rv20_ann": 0.08488855667208664,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.7249984741211,
+      "ret_1d": -0.0015460730038233672,
+      "ret_intra": -0.0015460730038233672,
+      "vol_z": -1.6245808010736928,
+      "rvol": 0.1363533385408172,
+      "dollar_vol": 3937846.150566101,
+      "rv20_ann": 0.0202801918156666,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 340.4100036621094,
+      "ret_1d": -0.02898138303289899,
+      "ret_intra": -0.03681175165900796,
+      "vol_z": 1.6799697879392768,
+      "rvol": 3.658284653274361,
+      "dollar_vol": 50033462.338256836,
+      "rv20_ann": 0.37180515402254755,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 308.989990234375,
+      "ret_1d": -0.02781360070277905,
+      "ret_intra": -0.020230221586050923,
+      "vol_z": -1.0785742395094022,
+      "rvol": 0.35413676105963726,
+      "dollar_vol": 1341634.5375976562,
+      "rv20_ann": 0.22563552701297468,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 65.50499725341797,
+      "ret_1d": -0.07098290641294358,
+      "ret_intra": -0.060590935036797355,
+      "vol_z": 0.601108961144762,
+      "rvol": 1.2460216413998595,
+      "dollar_vol": 7497374.460639954,
+      "rv20_ann": 0.56720024412616,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 105.77999877929688,
+      "ret_1d": -0.09310318593895317,
+      "ret_intra": -0.07551127012684589,
+      "vol_z": -0.5327700580100022,
+      "rvol": 0.07518459521326132,
+      "dollar_vol": 2675599.289123535,
+      "rv20_ann": 0.7013282098256387,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 105.08000183105469,
+      "ret_1d": -0.004452877376731612,
+      "ret_intra": -0.016887311307485553,
+      "vol_z": -1.5960846883856512,
+      "rvol": 0.3198940936535407,
+      "dollar_vol": 2503636.123626709,
+      "rv20_ann": 0.42494994517013773,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 56.52000045776367,
+      "ret_1d": -0.0052798176464593505,
+      "ret_intra": -0.001678022041625371,
+      "vol_z": 0.01895474944285509,
+      "rvol": 1.0331148055548218,
+      "dollar_vol": 1878894.3752174377,
+      "rv20_ann": 0.43299062142702316,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 339.739990234375,
+      "ret_1d": 0.01557406353418056,
+      "ret_intra": 0.031907316507068906,
+      "vol_z": -1.1564327028930834,
+      "rvol": 0.26601089820034024,
+      "dollar_vol": 1830179.3273925781,
+      "rv20_ann": 0.1539063967016662,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 81.33499908447266,
+      "ret_1d": 0.010372659434442877,
+      "ret_intra": 0.025144981581367576,
+      "vol_z": -1.6083100286177316,
+      "rvol": 0.3618888070868594,
+      "dollar_vol": 3686183.4935073853,
+      "rv20_ann": 0.16712852366448647,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 169.13999938964844,
+      "ret_1d": 0.009308972082280098,
+      "ret_intra": 0.029395666136093013,
+      "vol_z": 1.6062671318300856,
+      "rvol": 3.0001459291116714,
+      "dollar_vol": 106928108.79414368,
+      "rv20_ann": 0.2812232174440951,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 23.225000381469727,
+      "ret_1d": -0.011068549655820603,
+      "ret_intra": 0.01641137828181871,
+      "vol_z": -0.6681033745616436,
+      "rvol": 0.03871211606825573,
+      "dollar_vol": 697168.0614509583,
+      "rv20_ann": 0.7096123130589258,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 65402.64,
+      "ret_1h": -0.0011083584153452897,
+      "rv_ann": 0.4576543186985195,
+      "spread": 1.5290993340447113e-07,
+      "depth_0_5pct": 8.99536,
+      "dollar_vol_1h": 70358167.29355921,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 1918.37,
+      "ret_1h": -0.00455595049684776,
+      "rv_ann": 0.6718372227400998,
+      "spread": 5.213044078889468e-06,
+      "depth_0_5pct": 189.28289999999998,
+      "dollar_vol_1h": 36656107.490465,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 81.32,
+      "ret_1h": -0.0006144770800050603,
+      "rv_ann": 0.7415442161106933,
+      "spread": 0.00012296341838309398,
+      "depth_0_5pct": 56936.789,
+      "dollar_vol_1h": 15386750.416319998,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": -0.24004393807578395,
+    "IWM": -0.4077107116815135,
+    "XLF": 0.608530348949955,
+    "XLK": -0.5510252198682939,
+    "XLE": -0.6112267496576038,
+    "XLY": -0.7619224571608011,
+    "XLP": -1.5865340091915137,
+    "GLD": -0.18150592168089208,
+    "TLT": -0.6183873787510035,
+    "HYG": -1.4621719930375408,
+    "MAR": 5.063267744304513,
+    "HLT": -0.5821534747022705,
+    "DAL": 2.353940313885539,
+    "UAL": 0.33096241616048727,
+    "DIS": -1.0236195323651538,
+    "FOXA": 1.3300924347494694,
+    "MCD": -0.7656135403632703,
+    "BTC/USDT": 1.877119479280298,
+    "KO": -1.1941493886506878,
+    "ETH/USDT": 2.4688200611977,
+    "PEP": 4.556950472466381,
+    "DKNG": 0.06569369307402229,
+    "SOL/USDT": 3.3295467782420545
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.006206024028497998,
+        "p50": 0.00041692723322874826,
+        "p95": 0.007039878494955494,
+        "mu": 0.00041692723322874826,
+        "sigma": 0.0040264773454884925
+      },
+      "1W": {
+        "p5": -0.012724733066745264,
+        "p50": 0.002084636166143741,
+        "p95": 0.016894005399032748,
+        "mu": 0.002084636166143741,
+        "sigma": 0.009003477054375176
+      },
+      "1M": {
+        "p5": -0.02189199584351314,
+        "p50": 0.009172399131032462,
+        "p95": 0.040236794105578066,
+        "mu": 0.009172399131032462,
+        "sigma": 0.018885852797851235
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.24746699207889308,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9615745710819524
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9012046964398315
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8167039472168319
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.753344391662791
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.683373222509963
+      },
+      {
+        "a": "DAL",
+        "b": "IWM",
+        "corr": 0.6806105375081263
+      },
+      {
+        "a": "IWM",
+        "b": "XLF",
+        "corr": 0.6709491882965729
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6625826585882219
+      },
+      {
+        "a": "IWM",
+        "b": "UAL",
+        "corr": 0.6462963945297853
+      },
+      {
+        "a": "UAL",
+        "b": "XLF",
+        "corr": 0.6456953555354494
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": -0.7253660443203855,
+      "vol_z_p90": 0.7016247782132958,
+      "vol_z_gt2_pct": 0.0
+    },
+    "regime": {
+      "label": "NORMAL",
+      "triggers": []
+    },
+    "deltas": {
+      "corr_stress_delta": 0.00828737168428631,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": -0.05,
+      "prev_regime": "NORMAL",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 1199,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": 199,
+      "Guadalajara": 250,
+      "Monterrey": 250,
+      "Mexico City": 250,
+      "security": 250
+    },
+    "samples": {
+      "FIFA 2026": [
+        {
+          "datetime": "20260227T171500Z",
+          "title": "Pentagon Anti - Drone Laser Prompts 2nd Texas Airspace Closure",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.flyingmag.com/pentagon-anti-drone-laser-2nd-texas-faa-shutdown/"
+        },
+        {
+          "datetime": "20260227T161500Z",
+          "title": "World Cup ticket resale prices hit record high as June kickoff approaches",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.myjoyonline.com/world-cup-ticket-resale-prices-hit-record-high-as-june-kickoff-approaches/"
+        },
+        {
+          "datetime": "20260227T160000Z",
+          "title": "Travel to Mexico Reopens : Key Guidance for Spring Break and World Cup Travelers",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.theautochannel.com/news/2026/02/27/1638600-travel-to-mexico-reopens-key-guidance-for-spring-break-and.html"
+        }
+      ],
+      "Guadalajara": [
+        {
+          "datetime": "20260227T171500Z",
+          "title": "Mexican cartel leader killed : In  El Mencho  last redoubt , a crucifix , saint candles and a handwritten psalm",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://abc7news.com/post/mexican-cartel-leader-killed-el-menchos-last-redoubt-crucifix-saint-candles-handwritten-psalm/18657305/"
+        },
+        {
+          "datetime": "20260227T161500Z",
+          "title": "Bloody trade",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.sb.by/en/bloody-trade-.html"
+        },
+        {
+          "datetime": "20260227T151500Z",
+          "title": "Mexican cartel leader killed : In  El Mencho  last redoubt , a crucifix , saint candles and a handwritten psalm",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://abc11.com/post/mexican-cartel-leader-killed-el-menchos-last-redoubt-crucifix-saint-candles-handwritten-psalm/18657305/"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260227T163000Z",
+          "title": "La lucha contra los c\u00e1rteles en M\u00e9xico es un acto aterrador de equilibrio",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.eldiariodechihuahua.mx/nacional/2026/feb/27/la-lucha-contra-los-carteles-en-mexico-es-un-acto-aterrador-de-equilibrio-775237.html"
+        },
+        {
+          "datetime": "20260227T163000Z",
+          "title": "INFANTINO REAFIRMA  PLENA CONFIANZA  A SHEINBAUM Y MEXICO COMO SEDE DEL MUNDIAL \u2013 CALIBRE800 . COM",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.calibre800.com/2026/02/27/infantino-reafirma-plena-confianza-a-sheinbaum-y-mexico-como-sede-del-mundial/"
+        },
+        {
+          "datetime": "20260227T163000Z",
+          "title": "La incre\u00edble haza\u00f1a de dos scouts venezolanos : caminaron desde Caracas a Washington D . C . ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.eluniversal.com/el-universal/227436/la-increible-hazana-de-dos-scouts-venezolanos-caminaron-desde-caracas-a-washington-dc"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260227T171500Z",
+          "title": "Canadian man in ICE custody sick from contaminated water , poor food",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://torontosun.com/news/world/canadian-dad-sick-contaminated-water-poor-food-texas-ice-facility"
+        },
+        {
+          "datetime": "20260227T171500Z",
+          "title": "US Military Accidentally Shot Down Border Patrol Drone Near Texas Border",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://ktsmradio.iheart.com/content/2026-02-27-us-military-accidentally-shot-down-border-patrol-drone-near-texas-border/"
+        },
+        {
+          "datetime": "20260227T171500Z",
+          "title": "Mitski New Album  Nothing About to Happen to Me  is Out Now \u2013 Starmometer",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://starmometer.com/mitskis-new-album-nothings-about-to-happen-to-me-is-out-now/"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260227T171500Z",
+          "title": "Border clashes to wider conflict : What behind recent Afghanistan - Pakistan tension escalation ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.middleeaststar.com/news/278892089/border-clashes-to-wider-conflict-what-behind-recent-afghanistan-pakistan-tension-escalation"
+        },
+        {
+          "datetime": "20260227T171500Z",
+          "title": "\u0645\u0633\u0627\u0639\u062f\u0627\u062a \u0646\u0642\u062f\u064a\u0629 \u0644\u0644\u0645\u0631\u0636\u0649 \u0645\u0646 \u0645\u062a\u0642\u0627\u0639\u062f\u064a \u0627\u0644\u0634\u0631\u0637\u0629",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.alakhbar.info/69a1c684b5dce60001614221/"
+        },
+        {
+          "datetime": "20260227T171500Z",
+          "title": "Bayer hofft auf ein Ende des Glyphosat - Rechtsstreits",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.rundschau-online.de:443/wirtschaft/bayer-hofft-auf-ein-ende-des-glyphosat-rechtsstreits-3-1224597"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 123.634899,
+    "equities_total": 21,
+    "crypto_total": 3,
+    "equities_ok": 21,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

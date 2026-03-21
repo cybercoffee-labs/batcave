@@ -1,0 +1,533 @@
+{
+  "timestamp": "2026-03-04T22:19:24.695977+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 610.6370239257812,
+      "ret_1d": 0.01512815432742352,
+      "ret_intra": 0.01639863049450785,
+      "vol_z": 3.1884335834633264,
+      "rvol": 3.662707440502362,
+      "dollar_vol": 1451023174.918518,
+      "rv20_ann": 0.18538906207914196,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 261.739990234375,
+      "ret_1d": 0.009673854832628897,
+      "ret_intra": 0.00499150583928154,
+      "vol_z": 3.1037503594644376,
+      "rvol": 3.3666326900862025,
+      "dollar_vol": 407265854.3647461,
+      "rv20_ann": 0.2166965704428732,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.5099983215332,
+      "ret_1d": 0.005647000073133237,
+      "ret_intra": 0.019999966763033727,
+      "vol_z": 3.968501183830061,
+      "rvol": 6.442443659475594,
+      "dollar_vol": 187567426.17806625,
+      "rv20_ann": 0.21772629432329657,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 139.83999633789062,
+      "ret_1d": 0.01687496861274593,
+      "ret_intra": 0.009164963170568585,
+      "vol_z": 2.7624453088132377,
+      "rvol": 3.6009005785336163,
+      "dollar_vol": 73739447.98892212,
+      "rv20_ann": 0.27380419375078924,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 56.18000030517578,
+      "ret_1d": -0.005855785231497067,
+      "ret_intra": 0.025837687050076052,
+      "vol_z": 3.8769060606865717,
+      "rvol": 4.175055545528037,
+      "dollar_vol": 145869460.67237854,
+      "rv20_ann": 0.20438898453690177,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 116.33999633789062,
+      "ret_1d": 0.017595242918646135,
+      "ret_intra": 0.0051840200898165545,
+      "vol_z": 3.9669720544748244,
+      "rvol": 7.754312266227992,
+      "dollar_vol": 159475027.76010132,
+      "rv20_ann": 0.17110140634407547,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 87.16999816894531,
+      "ret_1d": -0.00663231929842749,
+      "ret_intra": -0.025815881776107275,
+      "vol_z": 3.801901553246464,
+      "rvol": 5.438538121117551,
+      "dollar_vol": 147548210.2306671,
+      "rv20_ann": 0.15079661972208444,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 471.75,
+      "ret_1d": 0.007787713327779242,
+      "ret_intra": 0.003104449230370232,
+      "vol_z": 2.6234177867349033,
+      "rvol": 3.18113796642238,
+      "dollar_vol": 134679435.75,
+      "rv20_ann": 0.3574124001701062,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 89.16000366210938,
+      "ret_1d": -0.003135838345534885,
+      "ret_intra": -0.008617267109830684,
+      "vol_z": 4.032550318471996,
+      "rvol": 5.706836076693886,
+      "dollar_vol": 237035525.29586792,
+      "rv20_ann": 0.0928796131011421,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.41000366210938,
+      "ret_1d": 0.0034886500850427418,
+      "ret_intra": -0.0033465126678871027,
+      "vol_z": 3.500399544918517,
+      "rvol": 5.577202532818749,
+      "dollar_vol": 346214035.4576111,
+      "rv20_ann": 0.02461659817131003,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 335.7799987792969,
+      "ret_1d": 8.930201397413849e-05,
+      "ret_intra": -0.017296390353483737,
+      "vol_z": 3.845499049624368,
+      "rvol": 4.661604993929332,
+      "dollar_vol": 32810406.800720215,
+      "rv20_ann": 0.37791516734437797,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 304.8500061035156,
+      "ret_1d": -0.0033723491697275577,
+      "ret_intra": -0.025236374196351163,
+      "vol_z": 3.6898425844578004,
+      "rvol": 4.25306182315985,
+      "dollar_vol": 26518902.030944824,
+      "rv20_ann": 0.22244099193664796,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 63.80500030517578,
+      "ret_1d": -0.011991059213745988,
+      "ret_intra": -0.057533187867707,
+      "vol_z": 3.9693265438357304,
+      "rvol": 5.200992005886434,
+      "dollar_vol": 37433181.38404083,
+      "rv20_ann": 0.5317540235466102,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 100.50599670410156,
+      "ret_1d": -0.02029423915518337,
+      "ret_intra": -0.06631984914855471,
+      "vol_z": 3.320432989467,
+      "rvol": 4.785332938768223,
+      "dollar_vol": 39331413.71420288,
+      "rv20_ann": 0.6650613833397241,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 103.0199966430664,
+      "ret_1d": -0.0025201344270545183,
+      "ret_intra": -0.025631387759617152,
+      "vol_z": 3.818688890669658,
+      "rvol": 4.824566132517702,
+      "dollar_vol": 76521399.14653015,
+      "rv20_ann": 0.3372760333929593,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 58.38999938964844,
+      "ret_1d": 0.01831105868456956,
+      "ret_intra": 0.05932511830786891,
+      "vol_z": 3.9651663654726232,
+      "rvol": 6.005264343652762,
+      "dollar_vol": 21867405.111419678,
+      "rv20_ann": 0.44853845016535093,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 331.6700134277344,
+      "ret_1d": -0.001295426341291973,
+      "ret_intra": -0.009082423904132941,
+      "vol_z": 4.062512483147474,
+      "rvol": 6.659930879720331,
+      "dollar_vol": 91493826.56414795,
+      "rv20_ann": 0.1743210426459067,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 78.07499694824219,
+      "ret_1d": -0.015752331620881157,
+      "ret_intra": -0.033366346500344535,
+      "vol_z": 4.0063987329961,
+      "rvol": 6.5296435040121255,
+      "dollar_vol": 94854250.69238281,
+      "rv20_ann": 0.18185858300785993,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 163.89999389648438,
+      "ret_1d": -0.006021399987165762,
+      "ret_intra": -0.03155289188935517,
+      "vol_z": 4.126243647210316,
+      "rvol": 8.622703480861412,
+      "dollar_vol": 85604966.81213379,
+      "rv20_ann": 0.22240179173155236,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 25.450000762939453,
+      "ret_1d": 0.039299344309700675,
+      "ret_intra": 0.16609392317435945,
+      "vol_z": 4.032104416500491,
+      "rvol": 8.044292054463437,
+      "dollar_vol": 65189820.65425873,
+      "rv20_ann": 0.7164751013941049,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 73209.74,
+      "ret_1h": -0.0013638027808590136,
+      "rv_ann": 0.7021222764307739,
+      "spread": 1.3659383726526176e-07,
+      "depth_0_5pct": 9.36619,
+      "dollar_vol_1h": 17551751.1112088,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2156.17,
+      "ret_1h": 0.0029350748420826633,
+      "rv_ann": 0.8565642316059887,
+      "spread": 4.637842475570643e-06,
+      "depth_0_5pct": 310.1673,
+      "dollar_vol_1h": 9939241.435431,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 92.38,
+      "ret_1h": 0.0004331817197313903,
+      "rv_ann": 0.9154964279839478,
+      "spread": 0.00010824268008881439,
+      "depth_0_5pct": 121244.40000000001,
+      "dollar_vol_1h": 3857888.38564,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 6.946307166440434,
+    "IWM": 6.609319001743245,
+    "XLF": 9.442822264592179,
+    "XLK": 6.2746730550219,
+    "XLE": 7.945426444354364,
+    "XLY": 10.180238853144983,
+    "XLP": 8.571382124221122,
+    "GLD": 5.962109237302785,
+    "TLT": 8.993687734668796,
+    "HYG": 8.247395952648526,
+    "MAR": 8.241295732037047,
+    "HLT": 7.671134319629084,
+    "DAL": 8.845178785769697,
+    "UAL": 7.92697939081538,
+    "DIS": 8.329554610363719,
+    "FOXA": 9.221158592493142,
+    "BTC/USDT": 1.9883860964617104,
+    "MCD": 9.604639110459507,
+    "ETH/USDT": 2.6066810825344087,
+    "SOL/USDT": 3.494219048225835,
+    "KO": 9.46750996805613,
+    "PEP": 10.892910743039673,
+    "DKNG": 10.810407581530054
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.006229225671969182,
+        "p50": 0.0003698514533687307,
+        "p95": 0.0069689285787066435,
+        "mu": 0.0003698514533687307,
+        "sigma": 0.004011962869160053
+      },
+      "1W": {
+        "p5": -0.012906727774175819,
+        "p50": 0.0018492572668436535,
+        "p95": 0.016605242307863127,
+        "mu": 0.0018492572668436535,
+        "sigma": 0.008971021698646973
+      },
+      "1M": {
+        "p5": -0.022815683374863165,
+        "p50": 0.008136731974112075,
+        "p95": 0.03908914732308731,
+        "mu": 0.008136731974112075,
+        "sigma": 0.018817773869334736
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.24337625381844533,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9599756128420704
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9059054342832689
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8190397085645563
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7263765944226263
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.7010150374783201
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6906893450285532
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6717920509691989
+      },
+      {
+        "a": "HYG",
+        "b": "XLY",
+        "corr": 0.6569861750218821
+      },
+      {
+        "a": "HYG",
+        "b": "QQQ",
+        "corr": 0.6551570652188811
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.6484707386343758
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": 3.6830746728742954,
+      "vol_z_p90": 4.035546534939543,
+      "vol_z_gt2_pct": 1.0
+    },
+    "regime": {
+      "label": "TENSION",
+      "triggers": [
+        "vol_z_gt2_pct>=0.25",
+        "vol_z_gt2_pct>=0.40",
+        "vol_z_gt2_pct>=0.75"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": -7.14291514269938e-08,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "TENSION",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 1183,
+    "by_keyword": {
+      "World Cup 2026": 250,
+      "FIFA 2026": 250,
+      "Guadalajara": 183,
+      "Monterrey": null,
+      "Mexico City": 250,
+      "security": 250
+    },
+    "samples": {
+      "World Cup 2026": [
+        {
+          "datetime": "20260304T214500Z",
+          "title": "| Westmeath Examiner",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.westmeathexaminer.ie/2026/03/04/123209/"
+        },
+        {
+          "datetime": "20260304T213000Z",
+          "title": "Jamie Lee Curtis on The Bear Ending After Season 5",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.eonline.com/news/1429313/jamie-lee-curtis-on-the-bear-ending-after-season-5"
+        },
+        {
+          "datetime": "20260304T213000Z",
+          "title": "The Latest : US submarine sinks Iranian navy ship as war expands",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.wkow.com/news/top-stories/the-latest-us-submarine-sinks-iranian-navy-ship-as-war-expands/article_41b4c651-0661-5096-a22c-300864c867e4.html"
+        }
+      ],
+      "FIFA 2026": [
+        {
+          "datetime": "20260304T213000Z",
+          "title": "The Latest : US submarine sinks Iranian navy ship as war expands",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.wkow.com/news/top-stories/the-latest-us-submarine-sinks-iranian-navy-ship-as-war-expands/article_41b4c651-0661-5096-a22c-300864c867e4.html"
+        },
+        {
+          "datetime": "20260304T213000Z",
+          "title": "Epl Scores : Transfer Alert Man Utd , Chelsea , Liverpool Eye Tyler Adams",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.el-balad.com/16867747"
+        },
+        {
+          "datetime": "20260304T213000Z",
+          "title": "With 100 days to go , World Cup faces new challenges with Iran war and Mexico violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://abc7chicago.com/post/100-days-go-world-cup-faces-new-challenges-iran-war-mexico-violence/18676357/"
+        }
+      ],
+      "Guadalajara": [
+        {
+          "datetime": "20260304T213000Z",
+          "title": "Where To Find Budget - Friendly Family Meals In Lubbock",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://kfyo.com/ixp/157/p/lubbock-family-meal-deals/"
+        },
+        {
+          "datetime": "20260304T213000Z",
+          "title": "With 100 days to go , World Cup faces new challenges with Iran war and Mexico violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://abc7chicago.com/post/100-days-go-world-cup-faces-new-challenges-iran-war-mexico-violence/18676357/"
+        },
+        {
+          "datetime": "20260304T210000Z",
+          "title": "Volaris Shares Sink as Earnings and Violence Collide",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.riotimesonline.com/volaris-shares-sink-as-earnings-and-violence-collide/"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260304T220000Z",
+          "title": "Harfuch sostiene reuni\u00f3n con representantes de la FIFA rumbo al Mundial 2026",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.eluniversal.com.mx/nacion/mundial-2026-harfuch-sostiene-reunion-con-representantes-de-la-fifa-coordina-labores-de-seguridad-rumbo-a-la-copa-del-mundo/"
+        },
+        {
+          "datetime": "20260304T220000Z",
+          "title": " \u00bf Qui\u00e9n es el nuevo novio de Shakira en 2026 ? Filtran detalles del hombre que la conquist\u00f3",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://us.marca.com/tiramillas/celebrities/2026/03/04/69a88e9822601ded598b456c.html"
+        },
+        {
+          "datetime": "20260304T220000Z",
+          "title": "SSC despliega programa Casa por Casa en \u00c1lvaro Obreg\u00f3n : \u00bf c\u00f3mo busca prevenir la violencia familiar ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.ejecentral.com.mx/nuestro-eje/ssc-despliega-programa-casa-por-casa-en-alvaro-obregon-como-busca-prevenir-la-violencia-familiar"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260304T220000Z",
+          "title": "Hollywood - Film zeigte vor 25 Jahren ein Dilemma , das die Polizei heute einholt",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.merkur.de/deutschland/hollywood-film-zeigte-vor-25-jahren-ein-dilemma-das-die-polizei-heute-einholt-zr-94198636.html"
+        },
+        {
+          "datetime": "20260304T220000Z",
+          "title": "Fitch , H\u00fcrm\u00fcz Bo\u011faz\u0131  ndaki kapanman\u0131n ge\u00e7ici oldu\u011funu ve petrol fiyatlar\u0131n\u0131 s\u0131n\u0131rl\u0131 etkileyebilece\u011fini belirtti - K\u0131br\u0131s Gazetesi",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://kibrisgazetesi.com/fitch-hurmuz-bogazindaki-kapanmanin-gecici-oldugunu-ve-petrol-fiyatlarini-sinirli-etkileyebilecegini-belirtti/"
+        },
+        {
+          "datetime": "20260304T220000Z",
+          "title": "Harfuch sostiene reuni\u00f3n con representantes de la FIFA rumbo al Mundial 2026",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.eluniversal.com.mx/nacion/mundial-2026-harfuch-sostiene-reunion-con-representantes-de-la-fifa-coordina-labores-de-seguridad-rumbo-a-la-copa-del-mundo/"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 49.653787,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

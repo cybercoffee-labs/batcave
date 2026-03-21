@@ -1,0 +1,556 @@
+{
+  "timestamp": "2026-03-01T05:08:31.618794+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 607.35498046875,
+      "ret_1d": -0.0032007291679606586,
+      "ret_intra": 0.007489472185236545,
+      "vol_z": 2.8203442548886164,
+      "rvol": 7.199097994205494,
+      "dollar_vol": 14583583677.027832,
+      "rv20_ann": 0.18611403211485933,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 261.42999267578125,
+      "ret_1d": -0.017218642582113697,
+      "ret_intra": -0.00192797788580934,
+      "vol_z": 3.697335994148721,
+      "rvol": 4.523798431316735,
+      "dollar_vol": 693015356.1044922,
+      "rv20_ann": 0.21177448513120326,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.439998626708984,
+      "ret_1d": -0.020380946568080316,
+      "ret_intra": -0.015692711475136067,
+      "vol_z": 3.653804168874188,
+      "rvol": 4.695417123145683,
+      "dollar_vol": 253239113.23928833,
+      "rv20_ann": 0.22147986642281525,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 138.74000549316406,
+      "ret_1d": -0.015956315776545327,
+      "ret_intra": -0.008362505455799418,
+      "vol_z": 3.730315082652158,
+      "rvol": 6.820864388227697,
+      "dollar_vol": 227078819.27078247,
+      "rv20_ann": 0.281931236542434,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 55.90999984741211,
+      "ret_1d": 0.015803795530283438,
+      "ret_intra": 0.0077450723427148205,
+      "vol_z": 1.3954836275555105,
+      "rvol": 2.976478256278761,
+      "dollar_vol": 180066037.81856918,
+      "rv20_ann": 0.23129674822037108,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 116.87000274658203,
+      "ret_1d": -0.0016232587479919625,
+      "ret_intra": 0.005679405105490254,
+      "vol_z": 3.62158388948341,
+      "rvol": 6.542441824991211,
+      "dollar_vol": 131581481.82231903,
+      "rv20_ann": 0.15285731707610636,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 89.98999786376953,
+      "ret_1d": 0.01294172313729347,
+      "ret_intra": 0.01929512280105028,
+      "vol_z": 3.2754638807889216,
+      "rvol": 4.311163528788417,
+      "dollar_vol": 117484101.97109985,
+      "rv20_ann": 0.1463052487773093,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 483.739990234375,
+      "ret_1d": 0.01313141674919538,
+      "ret_intra": 0.058604690301272244,
+      "vol_z": 3.10901704451615,
+      "rvol": 3.915046406594362,
+      "dollar_vol": 367057550.92993164,
+      "rv20_ann": 0.5594026368245383,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 90.77999877929688,
+      "ret_1d": 0.006092866646850048,
+      "ret_intra": 0.014898094088646952,
+      "vol_z": 4.102002133566996,
+      "rvol": 7.19765206494532,
+      "dollar_vol": 316213425.0679321,
+      "rv20_ann": 0.08555496776160504,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.70500183105469,
+      "ret_1d": -0.0016078819526457178,
+      "ret_intra": -0.0017934031639198489,
+      "vol_z": 2.651916268707591,
+      "rvol": 3.3101089407498723,
+      "dollar_vol": 258280782.29493713,
+      "rv20_ann": 0.020346143154455352,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 341.6300048828125,
+      "ret_1d": -0.025216065702149737,
+      "ret_intra": -0.03335976486043746,
+      "vol_z": 3.5906538333813955,
+      "rvol": 5.579848130387135,
+      "dollar_vol": 36789451.96582031,
+      "rv20_ann": 0.3676620039706357,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 311.69000244140625,
+      "ret_1d": -0.01857212928894081,
+      "ret_intra": -0.011668810390201512,
+      "vol_z": 3.9379626056311707,
+      "rvol": 5.800843601151289,
+      "dollar_vol": 39136108.39654541,
+      "rv20_ann": 0.21155134938953354,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 65.69999694824219,
+      "ret_1d": -0.0682173456567906,
+      "ret_intra": -0.057794438759204314,
+      "vol_z": 3.7220878551055243,
+      "rvol": 4.210973706143402,
+      "dollar_vol": 43352274.386291504,
+      "rv20_ann": 0.5626795373685356,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 106.31900024414062,
+      "ret_1d": -0.08700504360445016,
+      "ret_intra": -0.07080054233913957,
+      "vol_z": 3.9454133949867844,
+      "rvol": 6.432749802666436,
+      "dollar_vol": 47438474.718933105,
+      "rv20_ann": 0.6906455288401588,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 106.05000305175781,
+      "ret_1d": 0.004642329224085806,
+      "ret_intra": -0.00781212581544799,
+      "vol_z": 3.954411115898,
+      "rvol": 5.350441418482743,
+      "dollar_vol": 101385393.66752625,
+      "rv20_ann": 0.4256636587656293,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 56.349998474121094,
+      "ret_1d": -0.008447721661639762,
+      "ret_intra": -0.004680794780343445,
+      "vol_z": 3.4683991605658573,
+      "rvol": 5.644565530292448,
+      "dollar_vol": 13093260.24545288,
+      "rv20_ann": 0.4325267534945492,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 341.0,
+      "ret_1d": 0.019519919896944682,
+      "ret_intra": 0.03573439996321959,
+      "vol_z": 3.787018642956835,
+      "rvol": 4.911892023886163,
+      "dollar_vol": 75451706.0,
+      "rv20_ann": 0.15849574042348638,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 81.55000305175781,
+      "ret_1d": 0.013167671535326164,
+      "ret_intra": 0.027854888024638758,
+      "vol_z": 4.152372455768269,
+      "rvol": 8.560709631232625,
+      "dollar_vol": 179238099.30743408,
+      "rv20_ann": 0.16856907956456885,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 169.72999572753906,
+      "ret_1d": 0.01288938798489192,
+      "ret_intra": 0.0329864174394654,
+      "vol_z": 3.439029566456742,
+      "rvol": 5.5603140935556015,
+      "dollar_vol": 52347616.092300415,
+      "rv20_ann": 0.28196490824577486,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 23.861000061035156,
+      "ret_1d": 0.014899973813540246,
+      "ret_intra": 0.04424506182438859,
+      "vol_z": 3.379954719012094,
+      "rvol": 3.788960776476128,
+      "dollar_vol": 14034515.293899536,
+      "rv20_ann": 0.7158358664121314,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 67223.52,
+      "ret_1h": -0.0018260785638450905,
+      "rv_ann": 0.7259703089986055,
+      "spread": 1.4875746990191194e-07,
+      "depth_0_5pct": 8.57776,
+      "dollar_vol_1h": 4155569.780544,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2011.39,
+      "ret_1h": -0.0021382150121546095,
+      "rv_ann": 0.9077710984608447,
+      "spread": 4.971698605682604e-06,
+      "depth_0_5pct": 311.1198,
+      "dollar_vol_1h": 3117544.8792450004,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 87.53,
+      "ret_1h": -0.00022844089091944575,
+      "rv_ann": 1.1261399660004745,
+      "spread": 0.00011425307055132951,
+      "depth_0_5pct": 62319.271,
+      "dollar_vol_1h": 1885722.16172,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 8.777342766760258,
+    "IWM": 8.046613268571203,
+    "XLF": 8.039528787288875,
+    "XLK": 9.44786821546048,
+    "XLE": 4.283819476676079,
+    "XLY": 9.01153083197875,
+    "XLP": 7.244795838475287,
+    "GLD": 7.212080531224853,
+    "TLT": 9.984434819097606,
+    "HYG": 5.846455615395191,
+    "MAR": 8.485681579228007,
+    "HLT": 8.914189012695404,
+    "DAL": 7.988785062721566,
+    "UAL": 9.698081986173937,
+    "DIS": 8.896985425952254,
+    "FOXA": 8.362396883669193,
+    "MCD": 8.200004537793701,
+    "KO": 10.892142538795351,
+    "BTC/USDT": 1.9002442580170131,
+    "PEP": 8.24643039878565,
+    "ETH/USDT": 2.5725648787990703,
+    "SOL/USDT": 3.5146388025741753,
+    "DKNG": 7.37407043454839
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.006195014964271387,
+        "p50": 0.0004234060694097472,
+        "p95": 0.007041827103090882,
+        "mu": 0.0004234060694097472,
+        "sigma": 0.0040237231563249745
+      },
+      "1W": {
+        "p5": -0.012682208987976706,
+        "p50": 0.002117030347048736,
+        "p95": 0.01691626968207418,
+        "mu": 0.002117030347048736,
+        "sigma": 0.008997318500182656
+      },
+      "1M": {
+        "p5": -0.021728212794510426,
+        "p50": 0.009314933527014438,
+        "p95": 0.040358079848539306,
+        "mu": 0.009314933527014438,
+        "sigma": 0.018872934505593134
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.24462512606496026,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9581571796195386
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.899982924165921
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8138903554669482
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7398940486765601
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.6857659101560356
+      },
+      {
+        "a": "DAL",
+        "b": "IWM",
+        "corr": 0.6699669913408618
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6627540304520477
+      },
+      {
+        "a": "IWM",
+        "b": "XLF",
+        "corr": 0.6594567635842575
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6416449082287502
+      },
+      {
+        "a": "HYG",
+        "b": "QQQ",
+        "corr": 0.6350424201749382
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": 3.4717284847472465,
+      "vol_z_p90": 3.9691702176649,
+      "vol_z_gt2_pct": 0.95
+    },
+    "regime": {
+      "label": "TENSION",
+      "triggers": [
+        "vol_z_gt2_pct>=0.25",
+        "vol_z_gt2_pct>=0.40",
+        "vol_z_gt2_pct>=0.75"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": 2.0670164971314797e-07,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "TENSION",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 1002,
+    "by_keyword": {
+      "World Cup 2026": 250,
+      "FIFA 2026": 60,
+      "Guadalajara": 68,
+      "Monterrey": 124,
+      "Mexico City": 250,
+      "security": 250
+    },
+    "samples": {
+      "World Cup 2026": [
+        {
+          "datetime": "20260301T044500Z",
+          "title": "World Cup 2026 : Disappointed Sanath Jayasuriya plans to step down as head coach",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.nepalnational.com/news/278894924/world-cup-2026-disappointed-sanath-jayasuriya-plans-to-step-down-as-head-coach"
+        },
+        {
+          "datetime": "20260301T044500Z",
+          "title": "  It incredibly exciting : Wallabies strike major blow for World Cup with Crichton hopping codes",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.theroar.com.au/2026/01/21/wallabies-strike-major-blow-for-world-cup-with-crichton-hopping-codes/?comment_id=10581853"
+        },
+        {
+          "datetime": "20260301T044500Z",
+          "title": "World Cup 2026 : Disappointed Sanath Jayasuriya plans to step down as head coach",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.heraldglobe.com/news/278894924/world-cup-2026-disappointed-sanath-jayasuriya-plans-to-step-down-as-head-coach"
+        }
+      ],
+      "FIFA 2026": [
+        {
+          "datetime": "20260301T044500Z",
+          "title": "Batista named Costa Rica manager",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.argentinastar.com/news/278894830/batista-named-costa-rica-manager"
+        },
+        {
+          "datetime": "20260301T034500Z",
+          "title": "TKO Group Q4 Earnings Call Highlights",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.dailypolitical.com/2026/02/28/tko-group-q4-earnings-call-highlights.html"
+        },
+        {
+          "datetime": "20260301T034500Z",
+          "title": "TKO Group Q4 Earnings Call Highlights",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.tickerreport.com/banking-finance/13362903/tko-group-q4-earnings-call-highlights.html"
+        }
+      ],
+      "Guadalajara": [
+        {
+          "datetime": "20260301T043000Z",
+          "title": "Chivas v\u00edctima de los errores cay\u00f3 en Toluca 2 - 0 y pierde el dominio del torneo Clausura 2026",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://laopinion.com/2026/02/28/toluca-propina-la-segunda-derrota-al-hilo-a-chivas-2-0-y-arrebata-el-liderato-general/"
+        },
+        {
+          "datetime": "20260301T040000Z",
+          "title": " \u00a1 Guadalajara se queda con el Mundial ! Rommel Pacheco rescata la Copa de Clavados",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.publimetro.com.mx/deportes/2026/03/01/guadalajara-se-queda-con-el-mundial-rommel-pacheco-rescata-la-copa-de-clavados/"
+        },
+        {
+          "datetime": "20260301T034500Z",
+          "title": "Chivas pierde con Toluca y deja escapar el superliderato del Clausura 2026",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.eluniversal.com.mx/deportes/chivas-pierde-con-toluca-y-deja-escapar-el-superliderato-del-clausura-2026/"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260301T044500Z",
+          "title": "Watch Feb . 28 WWE Lucha Libre AAA : Grande Americano to expose original",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.cagesideseats.com/lucha-libre-aaa-cmll/421545/watch-wwe-lucha-libre-aaa-el-grande-americano-expose-original-ega-ethan-page-omos"
+        },
+        {
+          "datetime": "20260301T044500Z",
+          "title": "Chivas cae 2 - 0 ante Toluca",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://pulsoslp.com.mx/meta/chivas-cae-2-0-ante-toluca/2022749"
+        },
+        {
+          "datetime": "20260301T043000Z",
+          "title": "Homenajea Rayados a campeones de 1986",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://horacero.com.mx/deportes/homenajea-rayados-a-campeones-de-1986"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260301T044500Z",
+          "title": "\ub9e5\ub3c4\ub0a0\ub4dc \uc5c6\ub294 \ub3c4\uc2ec , \uc774\ub7f0 \ubc30\uacbd\uc774 \uc788\uc5c8\ub124",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003210429&PAGE_CD=N0002&CMPT_CD=M0117"
+        },
+        {
+          "datetime": "20260301T044500Z",
+          "title": "Old Town property owners weigh forming Business Improvement District",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.yahoo.com/news/articles/old-town-property-owners-weigh-040600228.html"
+        },
+        {
+          "datetime": "20260301T044500Z",
+          "title": "13 WK - wedstrijden plots onzeker",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.surinametimes.com/artikel/13-wk-wedstrijden-plots-onzeker"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260301T044500Z",
+          "title": "\u8054\u5408\u56fd\u5b89\u7406\u4f1a\u7d27\u6025\u5f00\u4f1a \uff0c \u4e2d\u65b9\u53d1\u58f0",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://baijiahao.baidu.com/s?id=1858431371920848793"
+        },
+        {
+          "datetime": "20260301T044500Z",
+          "title": "\u06a9\u0634\u062a\u0647 \u0634\u062f\u0646 \u0639\u0644\u06cc \u062e\u0627\u0645\u0646\u0647\u200c\u0627\u06cc \u061b \u0647\u0634\u062a \u062f\u0647\u0647 \u0632\u0646\u062f\u06af\u06cc \u0631\u0647\u0628\u0631 \u062c\u0645\u0647\u0648\u0631\u06cc \u0627\u0633\u0644\u0627\u0645\u06cc",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.bbc.com/persian/articles/c05zd1jv3rdo"
+        },
+        {
+          "datetime": "20260301T044500Z",
+          "title": "Los culpables de la epidemia de soledad son los  bustinduy , no el neoliberalismo",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.libertaddigital.com/libremercado/2026-03-01/domingo-soriano-los-culpables-de-la-epidemia-de-soledad-son-los-bustinduys-no-el-neoliberalismo-7366472/"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 103.106196,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

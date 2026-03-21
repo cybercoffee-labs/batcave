@@ -1,0 +1,569 @@
+{
+  "timestamp": "2026-02-26T17:12:08.523753+00:00",
+  "equities": {
+    "SPY": {
+      "symbol": "SPY",
+      "px": 686.9000244140625,
+      "ret_1d": -0.008930249186153927,
+      "ret_intra": 0.004974432207845547,
+      "vol_z": -1.828639523068809,
+      "rvol": 0.18552124695444022,
+      "dollar_vol": 92524746.3885498,
+      "rv20_ann": 0.13204205562395321,
+      "status": "ok"
+    },
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 607.22998046875,
+      "ret_1d": -0.015210490034081592,
+      "ret_intra": 0.010130694467035406,
+      "vol_z": 0.31425515167576135,
+      "rvol": 1.1911603251600533,
+      "dollar_vol": 13421160980.41504,
+      "rv20_ann": 0.1892650972644211,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 263.4100036621094,
+      "ret_1d": -0.004384205924110707,
+      "ret_intra": 0.0007218389200103204,
+      "vol_z": -2.14751333400138,
+      "rvol": 0.34159219437461497,
+      "dollar_vol": 40736093.65634155,
+      "rv20_ann": 0.20202704876304914,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 52.1150016784668,
+      "ret_1d": 0.004723399877138323,
+      "ret_intra": -0.005343998031311914,
+      "vol_z": -1.7309282598588935,
+      "rvol": 0.2650424400055421,
+      "dollar_vol": 8832763.174476624,
+      "rv20_ann": 0.21023482727837645,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 140.3699951171875,
+      "ret_1d": -0.0184602439763204,
+      "ret_intra": 0.007102813887884141,
+      "vol_z": -1.8906966292950491,
+      "rvol": 0.17571590675939922,
+      "dollar_vol": 4712501.476074219,
+      "rv20_ann": 0.28465766408426196,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 55.3849983215332,
+      "ret_1d": 0.009385810090642766,
+      "ret_intra": 0.014377286984434301,
+      "vol_z": -2.164509249336064,
+      "rvol": 0.24282992841588186,
+      "dollar_vol": 6358474.732303619,
+      "rv20_ann": 0.2289136511783995,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 116.58999633789062,
+      "ret_1d": -0.004270219622837246,
+      "ret_intra": 0.0027522121274896616,
+      "vol_z": -1.6152479821704724,
+      "rvol": 0.21803513918275574,
+      "dollar_vol": 2837217.5608825684,
+      "rv20_ann": 0.15331664827053634,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 88.80000305175781,
+      "ret_1d": -0.002359275131251559,
+      "ret_intra": 0.008747066717465835,
+      "vol_z": -1.3392325810128363,
+      "rvol": 0.17526645830691867,
+      "dollar_vol": 2841688.8976593018,
+      "rv20_ann": 0.1451856477098365,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 476.6499938964844,
+      "ret_1d": 0.006759286888368132,
+      "ret_intra": 0.04363722329329378,
+      "vol_z": -1.2117898919460501,
+      "rvol": 0.21605787667852241,
+      "dollar_vol": 13770894.97366333,
+      "rv20_ann": 0.556836698748705,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 90.1050033569336,
+      "ret_1d": 0.00216883201959428,
+      "ret_intra": 0.004178094165309565,
+      "vol_z": -1.5436218926352385,
+      "rvol": 0.002738819797942239,
+      "dollar_vol": 1502591.0359802246,
+      "rv20_ann": 0.083945978288695,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.79000091552734,
+      "ret_1d": -0.0016064910573349023,
+      "ret_intra": -0.0008656900110789456,
+      "vol_z": -0.7371494481648766,
+      "rvol": 0.5526590603109939,
+      "dollar_vol": 29315378.942207336,
+      "rv20_ann": 0.020067891669613078,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 349.1700134277344,
+      "ret_1d": 0.004979308583270781,
+      "ret_intra": -0.015951225541019798,
+      "vol_z": -0.6003607339324533,
+      "rvol": 0.018920764075627323,
+      "dollar_vol": 237086.43911743164,
+      "rv20_ann": 0.3577706416896606,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 315.6650085449219,
+      "ret_1d": 0.0073879125460794,
+      "ret_intra": 0.0005547507558538722,
+      "vol_z": -1.161515756167981,
+      "rvol": 0.47294662721622055,
+      "dollar_vol": 976351.8714294434,
+      "rv20_ann": 0.19486542043071603,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 70.37999725341797,
+      "ret_1d": 0.014413376183158189,
+      "ret_intra": 0.03151097450834128,
+      "vol_z": -1.3055204808187633,
+      "rvol": 0.10638069641627255,
+      "dollar_vol": 506032.1802520752,
+      "rv20_ann": 0.5005154487368542,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 115.94499969482422,
+      "ret_1d": 0.02724370402600451,
+      "ret_intra": 0.06371559353049738,
+      "vol_z": -0.6329839929019665,
+      "rvol": 0.0326696377967218,
+      "dollar_vol": 552709.813545227,
+      "rv20_ann": 0.6056826060932649,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 105.73999786376953,
+      "ret_1d": 0.0065682512324323206,
+      "ret_intra": -0.006809735585019405,
+      "vol_z": -2.146523923007512,
+      "rvol": 0.30961322577839795,
+      "dollar_vol": 2465751.0101852417,
+      "rv20_ann": 0.43177638858561923,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 56.29999923706055,
+      "ret_1d": 0.04028086378788598,
+      "ret_intra": 0.003565076085193075,
+      "vol_z": -0.4597274760132747,
+      "rvol": 0.06580645282384949,
+      "dollar_vol": 197387.79732513428,
+      "rv20_ann": 0.42258081252504326,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 333.8399963378906,
+      "ret_1d": 0.002492377249710298,
+      "ret_intra": 0.024866477394094533,
+      "vol_z": -2.216648279322171,
+      "rvol": 0.22265141138405187,
+      "dollar_vol": 1191141.1069335938,
+      "rv20_ann": 0.14870088934102335,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 80.42990112304688,
+      "ret_1d": -0.0004983235621714988,
+      "ret_intra": 0.00852540593162221,
+      "vol_z": -0.9623722876342397,
+      "rvol": 0.35409295983797673,
+      "dollar_vol": 3035987.4776916504,
+      "rv20_ann": 0.16634286975884832,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 168.52999877929688,
+      "ret_1d": -0.003783173119203398,
+      "ret_intra": 0.042432119057630224,
+      "vol_z": -0.7012593452562719,
+      "rvol": 0.04478576540511851,
+      "dollar_vol": 1022471.5025939941,
+      "rv20_ann": 0.2782023316747341,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 22.829999923706055,
+      "ret_1d": -0.004795144193142087,
+      "ret_intra": -0.012970136097947171,
+      "vol_z": -0.5483885510751845,
+      "rvol": 0.03196281281780564,
+      "dollar_vol": 161659.22945976257,
+      "rv20_ann": 0.6981504660538573,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 66985.53,
+      "ret_1h": 0.00513147934046132,
+      "rv_ann": 0.6119560089477544,
+      "spread": 1.4928596143572354e-07,
+      "depth_0_5pct": 10.88459,
+      "dollar_vol_1h": 23736744.564338997,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 1993.27,
+      "ret_1h": 0.004773666700272239,
+      "rv_ann": 0.8636206144290903,
+      "spread": 5.0168943918600415e-06,
+      "depth_0_5pct": 169.1125,
+      "dollar_vol_1h": 14908345.636416,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 85.29,
+      "ret_1h": 0.008394419484511806,
+      "rv_ann": 0.8731659553617455,
+      "spread": 0.00011724016648092977,
+      "depth_0_5pct": 55074.512,
+      "dollar_vol_1h": 5466177.2499,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "SPY": -1.3824823495063923,
+    "QQQ": 2.162382967750723,
+    "IWM": -1.6689421380972924,
+    "XLF": -1.307986098072136,
+    "XLK": -1.5346925549441326,
+    "XLE": -1.8480792787408307,
+    "XLY": -1.3168892805926424,
+    "XLP": -1.0177342244862446,
+    "GLD": -0.4081994604181727,
+    "TLT": -1.4570200776069724,
+    "HYG": -0.016865261412609245,
+    "MAR": -0.21662790183833147,
+    "HLT": -0.6557176402719588,
+    "DAL": -0.8467570797532142,
+    "UAL": 0.005941652424107602,
+    "DIS": -1.6858472783154301,
+    "BTC/USDT": 1.958754742452335,
+    "ETH/USDT": 2.5465215631875933,
+    "SOL/USDT": 3.3626560426982137,
+    "FOXA": 0.020173595606993278,
+    "MCD": -2.0960318949868038,
+    "KO": -0.4369716770624017,
+    "PEP": -0.29063020783723204,
+    "DKNG": 0.1009218749073878
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.009463359501643039,
+        "p50": 0.0006235530452651615,
+        "p95": 0.010710465592173363,
+        "mu": 0.0006235530452651615,
+        "sigma": 0.0061324209179610305
+      },
+      "1W": {
+        "p5": -0.019437256911656466,
+        "p50": 0.0031177652263258077,
+        "p95": 0.02567278736430808,
+        "mu": 0.0031177652263258077,
+        "sigma": 0.013712510039202526
+      },
+      "1M": {
+        "p5": -0.03359364658214536,
+        "p50": 0.013718166995833553,
+        "p95": 0.06102998057381246,
+        "mu": 0.013718166995833553,
+        "sigma": 0.02876360371947528
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.27839676941015074,
+    "n_assets": 19,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9629206475679479
+      },
+      {
+        "a": "QQQ",
+        "b": "SPY",
+        "corr": 0.9338327059615739
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.8825461535936339
+      },
+      {
+        "a": "SPY",
+        "b": "XLK",
+        "corr": 0.8815394490652698
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.806525375701048
+      },
+      {
+        "a": "IWM",
+        "b": "SPY",
+        "corr": 0.765147653658542
+      },
+      {
+        "a": "HYG",
+        "b": "SPY",
+        "corr": 0.7252230565957503
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7164161968007947
+      },
+      {
+        "a": "SPY",
+        "b": "XLY",
+        "corr": 0.7092393418703054
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6627351264687444
+      }
+    ],
+    "downside_corr_mean": 0.3434618497056682,
+    "downside_quantile": 0.2,
+    "tail_points": 12,
+    "downside_top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9603153478644297
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.9374281811015863
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.923679281503618
+      },
+      {
+        "a": "DIS",
+        "b": "DKNG",
+        "corr": 0.7939106891199637
+      },
+      {
+        "a": "IWM",
+        "b": "XLE",
+        "corr": 0.7626345156196596
+      },
+      {
+        "a": "MAR",
+        "b": "XLF",
+        "corr": 0.737022351957562
+      },
+      {
+        "a": "HLT",
+        "b": "XLF",
+        "corr": 0.7317751335559589
+      },
+      {
+        "a": "KO",
+        "b": "XLK",
+        "corr": -0.7114068983956942
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.6984508764957684
+      },
+      {
+        "a": "DAL",
+        "b": "SPY",
+        "corr": 0.6913874531692614
+      }
+    ],
+    "vol_shock": {
+      "vol_z_mean": -1.268113069806844,
+      "vol_z_p90": -0.5483885510751845,
+      "vol_z_gt2_pct": 0.0
+    },
+    "regime": {
+      "label": "NORMAL",
+      "triggers": []
+    },
+    "deltas": {
+      "corr_stress_delta": 0.0254686746845465,
+      "downside_corr_delta": 0.010228604829929822,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "NORMAL",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 1000,
+    "by_keyword": {
+      "World Cup 2026": 250,
+      "FIFA 2026": 250,
+      "Guadalajara": null,
+      "Monterrey": 250,
+      "Mexico City": 250,
+      "security": null
+    },
+    "samples": {
+      "World Cup 2026": [
+        {
+          "datetime": "20260226T164500Z",
+          "title": "U . S . Polo Assn . Returns as Official Apparel and Jersey Sponsor of the 2026 Dubai Polo Gold Cup for Third Consecutive Year",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.caribbeanherald.com/news/278889950/us-polo-assn-returns-as-official-apparel-and-jersey-sponsor-of-the-2026-dubai-polo-gold-cup-for-third-consecutive-year"
+        },
+        {
+          "datetime": "20260226T163000Z",
+          "title": "U . S . Polo Assn . Returns as Official Apparel and Jersey Sponsor of the 2026 Dubai Polo Gold Cup for Third Consecutive Year",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.parisguardian.com/news/278889950/us-polo-assn-returns-as-official-apparel-and-jersey-sponsor-of-the-2026-dubai-polo-gold-cup-for-third-consecutive-year"
+        },
+        {
+          "datetime": "20260226T160000Z",
+          "title": "Morning Minute : A Tale of Two Veeps",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://redstate.com/smoosieq/2026/02/26/morning-minute-a-tale-of-two-veeps-n2199584"
+        }
+      ],
+      "FIFA 2026": [
+        {
+          "datetime": "20260226T160000Z",
+          "title": "FIFA Infantino confident Mexico can co - host World Cup despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.wlrn.org/npr-breaking-news/2026-02-26/fifas-infantino-confident-mexico-can-co-host-world-cup-despite-cartel-violence"
+        },
+        {
+          "datetime": "20260226T160000Z",
+          "title": "Homeland Security shutdown complicates preparations for World Cup host cities in the United States",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://english.elpais.com/usa/2026-02-26/partial-shutdown-of-homeland-security-complicates-preparations-for-world-cup-host-cities-in-the-united-states.html"
+        },
+        {
+          "datetime": "20260226T153000Z",
+          "title": "Win FIFA World Cup 2026 Tickets : Toronto Ticket Draw Guide",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.bramptonguardian.com/news/win-fifa-world-cup-tickets-toronto-draw/article_bf86ff07-9538-5fc7-9d52-287839d5733f.html"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260226T163000Z",
+          "title": "FIFA Infantino has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://jammin983.com/news/030030-fifas-infantino-has-complete-confidence-in-mexico-to-host-world-cup-games-despite-cartel-violence/"
+        },
+        {
+          "datetime": "20260226T163000Z",
+          "title": "FIFA Infantino has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://kool98.com/news/030030-fifas-infantino-has-complete-confidence-in-mexico-to-host-world-cup-games-despite-cartel-violence/"
+        },
+        {
+          "datetime": "20260226T163000Z",
+          "title": "FIFA Infantino has  complete confidence  in Mexico to host World Cup games despite cartel violence",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://fm99.com/news/030030-fifas-infantino-has-complete-confidence-in-mexico-to-host-world-cup-games-despite-cartel-violence/"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260226T164500Z",
+          "title": "Baja gasto electoral y Senadores : Claudia Sheinbaum | El Ma\u00f1ana de Nuevo Laredo",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://elmanana.com.mx/nacional/2026/2/26/baja-gasto-electoral-senadores-claudia-sheinbaum-170763.html"
+        },
+        {
+          "datetime": "20260226T164500Z",
+          "title": "Diputados avalan jornada laboral de 40 horas",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://revistapuntodevista.com.mx/seccion/mexico/diputados-avalan-jornada-laboral-de-40-horas/898533/"
+        },
+        {
+          "datetime": "20260226T163000Z",
+          "title": "Pinnacle Silver and Gold gibt Projekt - Update f\u00fcr El Potrero bekannt , w\u00e4hrend man auf eine Produktionsentscheidung zusteuert",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.finanznachrichten.de/nachrichten-2026-02/67804061-pinnacle-silver-and-gold-gibt-projekt-update-fuer-el-potrero-bekannt-waehrend-man-auf-eine-produktionsentscheidung-zusteuert-248.htm"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 98.752597,
+    "equities_total": 21,
+    "crypto_total": 3,
+    "equities_ok": 21,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

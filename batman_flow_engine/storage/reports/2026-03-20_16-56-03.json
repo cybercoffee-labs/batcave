@@ -1,0 +1,568 @@
+{
+  "timestamp": "2026-03-20T16:53:22.940648+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 585.3900146484375,
+      "ret_1d": -0.012830257619636257,
+      "ret_intra": -0.03023325087325246,
+      "vol_z": -0.6744932232784732,
+      "rvol": 0.5007470283713233,
+      "dollar_vol": 215828615.28076172,
+      "rv20_ann": 0.1695760958418899,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 244.00999450683594,
+      "ret_1d": NaN,
+      "ret_intra": -0.017554457849445093,
+      "vol_z": -0.756657599766397,
+      "rvol": 0.8029327959313914,
+      "dollar_vol": 89491153.5053711,
+      "rv20_ann": NaN,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 49.220001220703125,
+      "ret_1d": NaN,
+      "ret_intra": 0.0057213445412998,
+      "vol_z": 0.22132251715225618,
+      "rvol": 1.1775160580659076,
+      "dollar_vol": 31497798.361175537,
+      "rv20_ann": NaN,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 136.22999572753906,
+      "ret_1d": -0.015763215042785158,
+      "ret_intra": -0.02393072595404322,
+      "vol_z": -0.09915574573784235,
+      "rvol": 0.9479321091038937,
+      "dollar_vol": 23362626.887298584,
+      "rv20_ann": 0.21723270592219376,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 60.14979934692383,
+      "ret_1d": 0.013217497395555463,
+      "ret_intra": 0.05304455383223816,
+      "vol_z": -1.3451201104641952,
+      "rvol": 0.2930565020203876,
+      "dollar_vol": 10807294.898059845,
+      "rv20_ann": 0.15663014077894724,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 108.4749984741211,
+      "ret_1d": -0.011229621844287932,
+      "ret_intra": -0.03927911650114124,
+      "vol_z": -1.6632350989519422,
+      "rvol": 0.2772450405173509,
+      "dollar_vol": 2592877.8885269165,
+      "rv20_ann": 0.192492293629174,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 81.6500015258789,
+      "ret_1d": -0.003911503452491592,
+      "ret_intra": -0.024725270719565207,
+      "vol_z": -1.4994133139620076,
+      "rvol": 0.4480630993319911,
+      "dollar_vol": 4275602.329902649,
+      "rv20_ann": 0.16039684081069278,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 420.3399963378906,
+      "ret_1d": -0.013837983940374471,
+      "ret_intra": -0.11423452291548308,
+      "vol_z": -0.7647754856699326,
+      "rvol": 0.37538059781644884,
+      "dollar_vol": 50537057.41970825,
+      "rv20_ann": 0.3042451659969918,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 86.03500366210938,
+      "ret_1d": -0.016712161661073036,
+      "ret_intra": -0.009669022594424481,
+      "vol_z": -1.088212757314618,
+      "rvol": 0.523143418604388,
+      "dollar_vol": 31025512.845611572,
+      "rv20_ann": 0.11259316648919407,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 79.28500366210938,
+      "ret_1d": -0.00471862189453148,
+      "ret_intra": -0.005144564079112124,
+      "vol_z": -0.6669366541010704,
+      "rvol": 0.3044664950645942,
+      "dollar_vol": 26477306.257965088,
+      "rv20_ann": 0.05513000246758498,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 320.739990234375,
+      "ret_1d": -0.012855912954123373,
+      "ret_intra": 0.007982331646458674,
+      "vol_z": -0.20868928049691005,
+      "rvol": 0.8022625666429519,
+      "dollar_vol": 2929639.0708007812,
+      "rv20_ann": 0.2778557576357801,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 293.7149963378906,
+      "ret_1d": -0.013912911886549681,
+      "ret_intra": 0.00941658278855817,
+      "vol_z": -0.7499078828708727,
+      "rvol": 0.48368653758194846,
+      "dollar_vol": 1863621.651763916,
+      "rv20_ann": 0.2307466948214681,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 63.56999969482422,
+      "ret_1d": -0.02239948092871404,
+      "ret_intra": 0.09773786672985185,
+      "vol_z": -0.6355798855642723,
+      "rvol": 0.7468351256514171,
+      "dollar_vol": 3597616.992729187,
+      "rv20_ann": 0.5081332811852745,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 91.11000061035156,
+      "ret_1d": -0.0328216968852242,
+      "ret_intra": 0.03787659405973631,
+      "vol_z": -1.1562273863430688,
+      "rvol": 0.2934094410543894,
+      "dollar_vol": 1282282.148590088,
+      "rv20_ann": 0.5862288346122965,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 99.54000091552734,
+      "ret_1d": 0.00342159910085135,
+      "ret_intra": -0.005892303546133237,
+      "vol_z": -1.2057793592705848,
+      "rvol": 0.5619875389564567,
+      "dollar_vol": 5568864.891220093,
+      "rv20_ann": 0.13908731154738227,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 57.970001220703125,
+      "ret_1d": 0.005015158141602847,
+      "ret_intra": 0.009490674634451635,
+      "vol_z": -1.0607942831807216,
+      "rvol": 0.5376412363432627,
+      "dollar_vol": 417210.0987854004,
+      "rv20_ann": 0.29396803891598905,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 309.45001220703125,
+      "ret_1d": -0.00041992913881610004,
+      "ret_intra": -0.042721020668800014,
+      "vol_z": -1.2424808653218455,
+      "rvol": 0.4703005132086329,
+      "dollar_vol": 4653509.283569336,
+      "rv20_ann": 0.19270943320351736,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 74.75499725341797,
+      "ret_1d": -0.010444876240423274,
+      "ret_intra": -0.03091783970833839,
+      "vol_z": -1.2347861982196375,
+      "rvol": 0.6060788692572098,
+      "dollar_vol": 3458091.417945862,
+      "rv20_ann": 0.14898697429227145,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 151.74000549316406,
+      "ret_1d": -0.006568599313297665,
+      "ret_intra": -0.04763695632124998,
+      "vol_z": -1.990617413915275,
+      "rvol": 0.30744245744414134,
+      "dollar_vol": 1870043.827697754,
+      "rv20_ann": 0.1741451259520129,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 24.09000015258789,
+      "ret_1d": -0.033472500187665455,
+      "ret_intra": -0.05672200969380525,
+      "vol_z": -1.001867757830274,
+      "rvol": 0.4407312411448916,
+      "dollar_vol": 1234588.4178199768,
+      "rv20_ann": 0.32725289497970944,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 69738.17,
+      "ret_1h": -0.0017452024467761174,
+      "rv_ann": 0.37671618028638704,
+      "spread": 1.4339348563052178e-07,
+      "depth_0_5pct": 9.92283,
+      "dollar_vol_1h": 58295249.3241932,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2135.08,
+      "ret_1h": 0.0005014034610895113,
+      "rv_ann": 0.5304345055813406,
+      "spread": 4.683654280845155e-06,
+      "depth_0_5pct": 226.42569999999998,
+      "dollar_vol_1h": 20674740.796019997,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 88.82,
+      "ret_1h": -0.0013492241960872953,
+      "rv_ann": 0.4695812684632699,
+      "spread": 0.00011258091753453551,
+      "depth_0_5pct": 82096.979,
+      "dollar_vol_1h": 4973809.8632,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 0.2768335794193568,
+    "IWM": NaN,
+    "XLF": NaN,
+    "XLK": 1.128836786285259,
+    "XLE": -0.8579485683917767,
+    "XLY": -1.3134739499029409,
+    "XLP": -1.0074910487478612,
+    "GLD": 0.10643540133461982,
+    "TLT": -0.3781368790687121,
+    "HYG": -0.06010901607886443,
+    "MAR": 0.8232371273354401,
+    "HLT": -0.08452651891563034,
+    "DAL": 0.47531407654402,
+    "UAL": -0.4262465918534113,
+    "DIS": -0.5866078563028649,
+    "FOXA": -0.47214074504760395,
+    "BTC/USDT": 1.8150331920157678,
+    "ETH/USDT": 2.345653434429082,
+    "MCD": -0.6544620962006795,
+    "KO": -0.6180810663636269,
+    "SOL/USDT": 3.094553857470769,
+    "PEP": -1.7241815537059977,
+    "DKNG": -0.3622719189722796
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.012261917532976377,
+        "p50": 0.001127647499919936,
+        "p95": 0.01451721253281625,
+        "mu": 0.001127647499919936,
+        "sigma": 0.008140295487671407
+      },
+      "1W": {
+        "p5": -0.024301740103110682,
+        "p50": 0.00563823749959968,
+        "p95": 0.035578215102310046,
+        "mu": 0.00563823749959968,
+        "sigma": 0.018202254067368067
+      },
+      "1M": {
+        "p5": -0.03799438184923899,
+        "p50": 0.024808244998238593,
+        "p95": 0.08761087184571618,
+        "mu": 0.024808244998238593,
+        "sigma": 0.03818137024499352
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.25122803287772827,
+    "n_assets": 19,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9552952861744177
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9240527511657662
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8138380740007911
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.7628802261488855
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.7502789360376427
+      },
+      {
+        "a": "KO",
+        "b": "XLP",
+        "corr": 0.7276159881198885
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.717084130709774
+      },
+      {
+        "a": "HYG",
+        "b": "IWM",
+        "corr": 0.7107373884189315
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.7106087930080509
+      },
+      {
+        "a": "IWM",
+        "b": "UAL",
+        "corr": 0.6800355553031942
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": -0.9411703892553842,
+      "vol_z_p90": -0.19773592702100312,
+      "vol_z_gt2_pct": 0.0
+    },
+    "regime": {
+      "label": "NORMAL",
+      "triggers": []
+    },
+    "deltas": {
+      "corr_stress_delta": -0.02532045226769014,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "NORMAL",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 777,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": null,
+      "Guadalajara": 36,
+      "Monterrey": 241,
+      "Mexico City": 250,
+      "security": 250
+    },
+    "samples": {
+      "Guadalajara": [
+        {
+          "datetime": "20260320T141500Z",
+          "title": "El Sat\u00e1nico y su gran sue\u00f1o cumplido al enfrentar al Santo",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.eluniversal.com.mx/deportes/el-satanico-y-su-gran-sueno-cumplido-al-enfrentar-al-santo/"
+        },
+        {
+          "datetime": "20260320T100000Z",
+          "title": "El 36 % dels pisos de lloguer a Girona es lloguen en menys de 24 hores",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.diaridegirona.cat/economia/2026/03/20/lloguer-expres-creix-girona-36-128175816.html"
+        },
+        {
+          "datetime": "20260320T100000Z",
+          "title": "Cruz Azul , a retomar liderato vs . Mazatl\u00e1n",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://pulsoslp.com.mx/meta/cruz-azul-a-retomar-liderato-vs-mazatlan-/2029148"
+        }
+      ],
+      "Monterrey": [
+        {
+          "datetime": "20260320T163000Z",
+          "title": "Rayados de Monterrey , Anselmi y un proyecto estilo Cruz Azul",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.futboltotal.com.mx/futbol-mexicano/liga-mx/rayados-monterrey-anselmi-ivan-alonso-proyecto/2026/03/"
+        },
+        {
+          "datetime": "20260320T163000Z",
+          "title": "Figuras sin equipo tras salir de Liga MX en 2026",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.futboltotal.com.mx/futbol-mexicano/liga-mx/figuras-sin-equipo-tras-salir-de-liga-mx-2026/2026/03/"
+        },
+        {
+          "datetime": "20260320T161500Z",
+          "title": "Asesino de Cumbres : \u00bf Qu\u00e9 pas\u00f3 con el y c\u00f3mo cambi\u00f3 su vida ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://laverdadnoticias.com/pulso-viral/curiosidades-y-hacks/asesino-cumbres"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260320T163000Z",
+          "title": "Irritu presenta en Bilbao la gira internacional de Carne y Arena , una instalaci\u00f3n inmersiva para  sentir  la migraci\u00f3n",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.europapress.es/euskadi/noticia-inarritu-presenta-bilbao-gira-internacional-carne-arena-instalacion-inmersiva-sentir-migracion-20260320140627.html"
+        },
+        {
+          "datetime": "20260320T163000Z",
+          "title": "Retirees and Remote Workers Are Chasing the Same Destinations",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.utv.ie/retirees-and-remote-workers-are-chasing-the-same-destinations/"
+        },
+        {
+          "datetime": "20260320T163000Z",
+          "title": "Manifestaciones hoy viernes 20 de marzo en CDMX : \u00bf D\u00f3nde y a qu\u00e9 hora habr\u00e1 marchas y bloqueos ? ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.ejecentral.com.mx/nuestro-eje/manifestaciones-hoy-viernes-20-de-marzo-en-cdmx-donde-y-a-que-hora-habra-marchas-y-bloqueos"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260320T163000Z",
+          "title": "The Taiwan - France tech pursuit - Taipei Times",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.taipeitimes.com/News/editorials/archives/2026/03/21/2003854192"
+        },
+        {
+          "datetime": "20260320T163000Z",
+          "title": "Coca - Cola FEMSA apuesta por una log\u00edstica m\u00e1s inclusiva enfocada en mujeres operadoras",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://t21.com.mx/coca-cola-femsa-apuesta-por-una-logistica-mas-inclusiva-enfocada-en-mujeres-operadoras/"
+        },
+        {
+          "datetime": "20260320T163000Z",
+          "title": "Schicksalswochen f\u00fcr Deutschland : Welche Reformen Union und SPD jetzt angehen m\u00fcssen",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.cz.de/politik/schicksalswochen-fuer-deutschland-welche-reformen-union-und-spd-jetzt-angehen-muessen-L3O34XOPDRG4HNGLTEUQXG5J34.html"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 133.307257,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  },
+  "ollama_status": "AVAILABLE",
+  "ollama_details": {
+    "available": true,
+    "model": "llama3.2:3b",
+    "model_installed": true,
+    "models_installed": [
+      "llava:latest",
+      "llama3.2:3b"
+    ],
+    "version": "0.15.5"
+  },
+  "intelligence": {
+    "summary": "Today's market data reveals a predominantly low-risk LATAM arbitrage landscape, with USDT/ARS and USDT/COP showing the highest active pair counts and best spreads. Notable patterns include the increasing adoption of USDT across various Latin American currencies, suggesting potential for future arbitrage opportunities. Data quality is relatively high at 77.56%, indicating a reliable foundation for market analysis.",
+    "risk_level": "LOW",
+    "notable_patterns": [
+      "Increasing USDT adoption",
+      "Concentrated pair activity"
+    ],
+    "recommendation": "Focus on capturing the spread between USDT/ARS and USDT/COP, as they exhibit the highest active pairs and best spreads. Monitor data quality to ensure reliable insights.",
+    "confidence": 0.82,
+    "status": "ok",
+    "date": "2026-03-20",
+    "market_summary": {
+      "count_by_type": {
+        "A": 1,
+        "B": 43,
+        "C": 192
+      },
+      "best_spread_by_type": {
+        "A": 0.0545,
+        "B": 0.1151,
+        "C": 7.249
+      },
+      "active_pairs": [
+        "BTC",
+        "USDT/ARS",
+        "USDT/COP",
+        "USDT/MXN",
+        "USDT/VES"
+      ],
+      "total_opportunities": 303,
+      "data_quality": 77.56
+    },
+    "opportunities_count": 303
+  },
+  "data_quality": {
+    "cycle_ts": "2026-03-20T16:56:03.188495+00:00",
+    "dq_score": 0.74,
+    "total_records": 50,
+    "valid_records": 37,
+    "issues": [
+      "unknown: has_spot_price failed 13x",
+      "unknown: has_valid_spread failed 13x"
+    ],
+    "breakdown": {
+      "has_spot_price": 0.74,
+      "has_valid_spread": 0.74,
+      "not_anomalous": 1.0,
+      "has_premium_quality": 1.0
+    },
+    "status": "WARNING"
+  }
+}

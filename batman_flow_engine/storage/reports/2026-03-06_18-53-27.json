@@ -1,0 +1,520 @@
+{
+  "timestamp": "2026-03-06T18:52:43.023057+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 603.489990234375,
+      "ret_1d": -0.0030172807043736738,
+      "ret_intra": -0.01690912565425351,
+      "vol_z": -1.3309959052207343,
+      "rvol": 0.6784853204380271,
+      "dollar_vol": 278271044.967041,
+      "rv20_ann": 0.17438804401910243,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 251.67999267578125,
+      "ret_1d": -0.019286256244298517,
+      "ret_intra": -0.05124870995570796,
+      "vol_z": -2.0310982731771867,
+      "rvol": 0.4060988015240092,
+      "dollar_vol": 53969502.589416504,
+      "rv20_ann": 0.22532443727025703,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 50.224998474121094,
+      "ret_1d": -0.019812408695516412,
+      "ret_intra": -0.041690543401116,
+      "vol_z": -1.234541665589118,
+      "rvol": 0.2727059763546828,
+      "dollar_vol": 7144757.157936096,
+      "rv20_ann": 0.22073097130901417,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 138.7050018310547,
+      "ret_1d": -0.010325541273126342,
+      "ret_intra": -0.02498940540596195,
+      "vol_z": -1.5696471195731336,
+      "rvol": 0.5094861296732359,
+      "dollar_vol": 9993695.38192749,
+      "rv20_ann": 0.24758878325368888,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 56.69499969482422,
+      "ret_1d": 0.0037994329609338825,
+      "ret_intra": 0.04151737419891188,
+      "vol_z": -1.2771532748254273,
+      "rvol": 0.3040513544469009,
+      "dollar_vol": 9707601.322746277,
+      "rv20_ann": 0.18463875186436013,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 114.7300033569336,
+      "ret_1d": -0.01560809272290088,
+      "ret_intra": -0.02307560480360804,
+      "vol_z": -2.071849543191261,
+      "rvol": 0.4195991870946412,
+      "dollar_vol": 4950829.104858398,
+      "rv20_ann": 0.16163307988329584,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 85.46499633789062,
+      "ret_1d": 0.0006436597241241063,
+      "ret_intra": -0.044550036291866824,
+      "vol_z": -0.6966574365240362,
+      "rvol": 0.42302256370186203,
+      "dollar_vol": 7042230.23324585,
+      "rv20_ann": 0.1610088918156064,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 473.9898986816406,
+      "ret_1d": 0.016552862323491464,
+      "ret_intra": -0.0012223879166931573,
+      "vol_z": -1.4622855584759589,
+      "rvol": 0.340636946915039,
+      "dollar_vol": 10672356.55871582,
+      "rv20_ann": 0.3483493508997688,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 88.79019927978516,
+      "ret_1d": 5.628013002279836e-05,
+      "ret_intra": -0.01442776235921317,
+      "vol_z": -1.516211381219715,
+      "rvol": 0.26010748231974057,
+      "dollar_vol": 12039951.022338867,
+      "rv20_ann": 0.08721434258291975,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 79.93499755859375,
+      "ret_1d": -0.0018123839978222093,
+      "ret_intra": -0.01174512644552661,
+      "vol_z": -1.6259489734854342,
+      "rvol": 0.15141121145767875,
+      "dollar_vol": 7060658.334350586,
+      "rv20_ann": 0.028633882618339674,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 322.6300048828125,
+      "ret_1d": -0.03175645762193052,
+      "ret_intra": -0.08356762939999696,
+      "vol_z": -0.75751967060068,
+      "rvol": 0.191833803631076,
+      "dollar_vol": 1038545.9857177734,
+      "rv20_ann": 0.39228175956405675,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 297.5299987792969,
+      "ret_1d": -0.032504595226367956,
+      "ret_intra": -0.06286809685037131,
+      "vol_z": -1.6815011479169555,
+      "rvol": 0.23819065707166628,
+      "dollar_vol": 813447.0166625977,
+      "rv20_ann": 0.24690674106279806,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 58.62950134277344,
+      "ret_1d": -0.04028034378066126,
+      "ret_intra": -0.17736068325636323,
+      "vol_z": -1.2254965124343522,
+      "rvol": 0.48727378285098527,
+      "dollar_vol": 3966168.5068359375,
+      "rv20_ann": 0.5445376288626789,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 91.29000091552734,
+      "ret_1d": -0.04468039871962856,
+      "ret_intra": -0.21974358191856969,
+      "vol_z": -1.0965718772677335,
+      "rvol": 0.385874603136188,
+      "dollar_vol": 3129421.2313842773,
+      "rv20_ann": 0.6929804080784175,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 100.64510345458984,
+      "ret_1d": -0.017383898178332226,
+      "ret_intra": -0.05150218758201186,
+      "vol_z": -1.727785467707683,
+      "rvol": 0.3510335421590407,
+      "dollar_vol": 2739358.4258270264,
+      "rv20_ann": 0.32023021041407956,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 59.34000015258789,
+      "ret_1d": 0.011014286262913047,
+      "ret_intra": 0.07812498483893515,
+      "vol_z": -2.631783589876029,
+      "rvol": 0.4550558534838247,
+      "dollar_vol": 557914.6814346313,
+      "rv20_ann": 0.4404733897515193,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 324.614990234375,
+      "ret_1d": -0.00869557429315065,
+      "ret_intra": -0.030102519147685247,
+      "vol_z": -1.5653107641699233,
+      "rvol": 0.5776259594799701,
+      "dollar_vol": 2588155.317138672,
+      "rv20_ann": 0.18039832311521148,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 76.8550033569336,
+      "ret_1d": -0.002274367162074243,
+      "ret_intra": -0.04858870366025825,
+      "vol_z": -1.5158670720225615,
+      "rvol": 0.4732073169133901,
+      "dollar_vol": 1943048.1948699951,
+      "rv20_ann": 0.17920702305877656,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 157.77999877929688,
+      "ret_1d": -0.018337603822861738,
+      "ret_intra": -0.06889736464313811,
+      "vol_z": -2.0232961876413214,
+      "rvol": 0.49347813010424807,
+      "dollar_vol": 1682723.6869812012,
+      "rv20_ann": 0.22468734533094645,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 25.03499984741211,
+      "ret_1d": -0.01683371748289432,
+      "ret_intra": 0.08423558605330839,
+      "vol_z": -1.1399205770027847,
+      "rvol": 0.18991572944285018,
+      "dollar_vol": 418184.6374511719,
+      "rv20_ann": 0.6767399565133179,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 1976.75,
+      "ret_1h": 0.005079419959730824,
+      "rv_ann": 0.6412675405014338,
+      "spread": 5.058821446363039e-06,
+      "depth_0_5pct": 360.7103,
+      "dollar_vol_1h": 28732084.971,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 85.42,
+      "ret_1h": 0.014368839805248834,
+      "rv_ann": 0.6611403737929333,
+      "spread": 0.00011707545513089173,
+      "depth_0_5pct": 60315.54000000001,
+      "dollar_vol_1h": 11279523.588520002,
+      "status": "ok"
+    },
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 68255.73,
+      "ret_1h": 0.0044239505202698926,
+      "rv_ann": 0.47020422620161706,
+      "spread": 1.4650785695648695e-07,
+      "depth_0_5pct": 9.68455,
+      "dollar_vol_1h": 31469060.6435439,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": -0.3839232559530532,
+    "IWM": -1.453576834771528,
+    "XLF": -0.7131435150156038,
+    "XLK": -0.9298549229457236,
+    "XLE": -0.7543753258046231,
+    "XLY": -1.700951785355975,
+    "XLP": -0.026211739236956966,
+    "GLD": -0.8174419723420787,
+    "TLT": -1.1315239859685096,
+    "HYG": -1.410058155742876,
+    "MAR": -0.17763405518134823,
+    "HLT": -1.390812199800891,
+    "DAL": -0.3528457678626984,
+    "UAL": -0.15565756067416814,
+    "DIS": -1.240890938568953,
+    "FOXA": -2.270742915467253,
+    "MCD": -1.0255301325563901,
+    "KO": -1.0484779419026395,
+    "ETH/USDT": 2.5265216529340124,
+    "SOL/USDT": 3.2540523669311505,
+    "PEP": -1.618216749619814,
+    "BTC/USDT": 1.8459664284654644,
+    "DKNG": -0.4693580783654653
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.014207775749795726,
+        "p50": 0.0007987497235765653,
+        "p95": 0.015805275196948857,
+        "mu": 0.0007987497235765653,
+        "sigma": 0.009123339802031973
+      },
+      "1W": {
+        "p5": -0.02956186244665983,
+        "p50": 0.003993748617882827,
+        "p95": 0.03754935968242548,
+        "mu": 0.003993748617882827,
+        "sigma": 0.020400407979172967
+      },
+      "1M": {
+        "p5": -0.05281434966181272,
+        "p50": 0.017572493918684436,
+        "p95": 0.08795933749918158,
+        "mu": 0.017572493918684436,
+        "sigma": 0.04279225678967514
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.23355176861748014,
+    "n_assets": 19,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9132368087452993
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8193920729906007
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7361983545083786
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.7173226108081342
+      },
+      {
+        "a": "KO",
+        "b": "XLP",
+        "corr": 0.6728574716329191
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6727656786709758
+      },
+      {
+        "a": "IWM",
+        "b": "XLF",
+        "corr": 0.6479397140995373
+      },
+      {
+        "a": "DAL",
+        "b": "IWM",
+        "corr": 0.6460147443471685
+      },
+      {
+        "a": "IWM",
+        "b": "UAL",
+        "corr": 0.6437050041131682
+      },
+      {
+        "a": "UAL",
+        "b": "XLF",
+        "corr": 0.6369476653207152
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": -1.5090720998961014,
+      "vol_z_p90": -1.0626666566010277,
+      "vol_z_gt2_pct": 0.0
+    },
+    "regime": {
+      "label": "NORMAL",
+      "triggers": []
+    },
+    "deltas": {
+      "corr_stress_delta": -0.004526723131233812,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": -1.0,
+      "prev_regime": "TENSION",
+      "regime_changed": true
+    }
+  },
+  "narrative": {
+    "total_hits": 500,
+    "by_keyword": {
+      "World Cup 2026": 250,
+      "FIFA 2026": null,
+      "Guadalajara": null,
+      "Monterrey": null,
+      "Mexico City": 250,
+      "security": null
+    },
+    "samples": {
+      "World Cup 2026": [
+        {
+          "datetime": "20260306T183000Z",
+          "title": "Varun Chakaravarthy confidence goes down once he gets attacked , says Ashwin",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.heraldglobe.com/news/278906067/varun-chakaravarthy-confidence-goes-down-once-he-gets-attacked-says-ashwin"
+        },
+        {
+          "datetime": "20260306T183000Z",
+          "title": "Downtown San Jose could be on the cusp of a transformation . Meet the new CEO of one its biggest stakeholders",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.siliconvalley.com/2026/03/06/downtown-san-jose-could-be-on-the-cusp-of-a-transformation-meet-the-new-ceo-of-one-its-biggest-stakeholders/"
+        },
+        {
+          "datetime": "20260306T181500Z",
+          "title": "Tampa Bay Lightning acquire forward Corey Perry from Los Angeles Kings for second - round pick",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.tsn.ca/nhl/article/lightning-acquire-f-perry-from-kings-for-second-round-pick/"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260306T183000Z",
+          "title": "Conflicto en Medio Oriente afecta a Juli\u00e1n Qui\u00f1ones , \u00bf qu\u00e9 pas\u00f3 con el mexicano ? - Noticias de Hoy Puebla | Contraparte | Periodismo en Equilibrio",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://contraparte.mx/deportes/74683-conflicto-en-medio-oriente-afecta-a-juli%c3%a1n-qui%c3%b1ones,-%c2%bfqu%c3%a9-pas%c3%b3-con-el-mexicano.html"
+        },
+        {
+          "datetime": "20260306T183000Z",
+          "title": "Cambio de horario en Tamaulipas : este domingo deberas adelantar el reloj si vives en estas ciudades",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://elmanana.com.mx/estado/2026/3/6/cambio-de-horario-en-tamaulipas-tengo-que-adelantar-retrasar-mi-reloj-este-domingo-171352.html"
+        },
+        {
+          "datetime": "20260306T183000Z",
+          "title": "Pron\u00f3sticos Gulfstream Park : picks gratis y el dato clave para el viernes 6 de marzo",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://meridiano.net/hipismo/pronosticos-gulfstream-park-picks-gratis-y-el-dato-clave-para-el-viernes-6-de-marzo-20263611160"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 34.323147,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  },
+  "ollama_status": "AVAILABLE",
+  "ollama_details": {
+    "available": true,
+    "model": "llama3.2:3b",
+    "model_installed": true,
+    "models_installed": [
+      "llama3.2:3b"
+    ],
+    "version": "0.15.5"
+  },
+  "intelligence": {
+    "summary": "Today's LATAM crypto market data indicates an overall positive trend, particularly for Type B and C assets, which experienced substantial price movements. The best spread by type is highest for C assets at 2.159%, presenting a lucrative arbitrage opportunity. Meanwhile, active pairs like USDT/COP, USDT/MXN, and USDT/VES provide promising potential for traders.",
+    "risk_level": "MEDIUM",
+    "notable_patterns": [
+      "Increased liquidity on USDT/COP due to high trading volume",
+      "Growing demand for VES as a store of value"
+    ],
+    "recommendation": "Focus on arbitrage strategies involving Type C assets, particularly during the next 24 hours.",
+    "confidence": 0.83,
+    "status": "ok",
+    "date": "2026-03-06",
+    "market_summary": {
+      "count_by_type": {
+        "A": 0,
+        "B": 29,
+        "C": 58
+      },
+      "best_spread_by_type": {
+        "A": 0.0,
+        "B": 0.0991,
+        "C": 2.159
+      },
+      "active_pairs": [
+        "BTC",
+        "USDT/COP",
+        "USDT/MXN",
+        "USDT/VES"
+      ],
+      "total_opportunities": 87,
+      "data_quality": 97.7
+    },
+    "opportunities_count": 87
+  },
+  "data_quality": {
+    "cycle_ts": "2026-03-06T18:53:27.994779+00:00",
+    "dq_score": 0.96,
+    "total_records": 50,
+    "valid_records": 48,
+    "issues": [
+      "VES: has_spot_price failed 2x",
+      "VES: has_premium_quality failed 2x"
+    ],
+    "breakdown": {
+      "has_spot_price": 0.96,
+      "has_valid_spread": 1.0,
+      "not_anomalous": 1.0,
+      "has_premium_quality": 0.96
+    },
+    "status": "OK"
+  }
+}

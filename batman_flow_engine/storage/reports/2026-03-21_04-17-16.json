@@ -1,0 +1,503 @@
+{
+  "timestamp": "2026-03-21T04:16:31.277735+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 582.0700073242188,
+      "ret_1d": -0.018654627170211248,
+      "ret_intra": -0.03573322974087667,
+      "vol_z": 3.4643831635750977,
+      "rvol": 3.4088473804763852,
+      "dollar_vol": 2928620050.0109863,
+      "rv20_ann": 0.17568050099951346,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 242.25,
+      "ret_1d": -0.022089307222802293,
+      "ret_intra": -0.024640637909180363,
+      "vol_z": 2.694849248580922,
+      "rvol": 2.850546914144425,
+      "dollar_vol": 764762901.0,
+      "rv20_ann": 0.20791252210678915,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 49.099998474121094,
+      "ret_1d": 0.0018354272383632921,
+      "ret_intra": 0.0032693063322806193,
+      "vol_z": 3.5214100959805736,
+      "rvol": 4.886052611735907,
+      "dollar_vol": 353636650.6100464,
+      "rv20_ann": 0.1894917768149068,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 135.33999633789062,
+      "ret_1d": -0.022944156800933674,
+      "ret_intra": -0.03030744976964772,
+      "vol_z": 3.907428922016246,
+      "rvol": 5.035972556743353,
+      "dollar_vol": 275734264.8390198,
+      "rv20_ann": 0.22477810401165532,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 59.34000015258789,
+      "ret_1d": -0.0008426601362329948,
+      "ret_intra": 0.038867372186547344,
+      "vol_z": 3.5712110885848856,
+      "rvol": 4.9240228680429405,
+      "dollar_vol": 282523674.7264862,
+      "rv20_ann": 0.15428562693027353,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 107.75,
+      "ret_1d": -0.018028442037318484,
+      "ret_intra": -0.04570014608759576,
+      "vol_z": 3.947443208274391,
+      "rvol": 6.454043830514262,
+      "dollar_vol": 143581077.25,
+      "rv20_ann": 0.19734265220377703,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 81.31999969482422,
+      "ret_1d": -0.008330322536045822,
+      "ret_intra": -0.02866700299671532,
+      "vol_z": 3.278280054689475,
+      "rvol": 5.5231726245557535,
+      "dollar_vol": 180727193.72177124,
+      "rv20_ann": 0.16124531114845336,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 413.54998779296875,
+      "ret_1d": -0.031034054726858728,
+      "ret_intra": -0.12854283335607708,
+      "vol_z": 2.828225995989396,
+      "rvol": 2.456550946580389,
+      "dollar_vol": 425480077.8408203,
+      "rv20_ann": 0.31644076171788776,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 85.86000061035156,
+      "ret_1d": -0.019155859637687057,
+      "ret_intra": -0.011683446211780524,
+      "vol_z": 3.309626782023742,
+      "rvol": 3.3901320354360647,
+      "dollar_vol": 265796374.58946228,
+      "rv20_ann": 0.11714102633417844,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 78.94999694824219,
+      "ret_1d": -0.009332965772232447,
+      "ret_intra": -0.009348174282387434,
+      "vol_z": 2.716117870325559,
+      "rvol": 3.2666892955072435,
+      "dollar_vol": 529551262.2305603,
+      "rv20_ann": 0.06151536782077334,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 319.9100036621094,
+      "ret_1d": -0.015915963644065494,
+      "ret_intra": 0.005373951569698665,
+      "vol_z": 3.8847268703979294,
+      "rvol": 7.673996196337372,
+      "dollar_vol": 68931648.30908203,
+      "rv20_ann": 0.2793616479536587,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 292.75,
+      "ret_1d": -0.0177847211860017,
+      "ret_intra": 0.0061001593238319,
+      "vol_z": 4.0922017500789245,
+      "rvol": 6.974817390351006,
+      "dollar_vol": 52148435.75,
+      "rv20_ann": 0.233429578312732,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 63.439998626708984,
+      "ret_1d": -0.024446581396897323,
+      "ret_intra": 0.09549298556152563,
+      "vol_z": 2.964843611530007,
+      "rvol": 4.668978490655324,
+      "dollar_vol": 64407902.68575668,
+      "rv20_ann": 0.509152370214261,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 89.95999908447266,
+      "ret_1d": -0.04563534484078063,
+      "ret_intra": 0.02477638926501613,
+      "vol_z": 3.6554118295628513,
+      "rvol": 4.11918692128859,
+      "dollar_vol": 41745037.97515869,
+      "rv20_ann": 0.5943275413065574,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 99.49500274658203,
+      "ret_1d": 0.0031201795674268974,
+      "ret_intra": -0.006341701031198799,
+      "vol_z": 4.051776974344987,
+      "rvol": 5.860659975592902,
+      "dollar_vol": 128007186.1886673,
+      "rv20_ann": 0.13890830347849484,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 57.84000015258789,
+      "ret_1d": 0.0024242330426326587,
+      "ret_intra": 0.007226833627183016,
+      "vol_z": 3.775571313494012,
+      "rvol": 5.165930356374181,
+      "dollar_vol": 13188618.994792938,
+      "rv20_ann": 0.2936506546461603,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 309.04998779296875,
+      "ret_1d": -0.002360754867714567,
+      "ret_intra": -0.04395849020408993,
+      "vol_z": 3.9471496361582523,
+      "rvol": 6.681422293093846,
+      "dollar_vol": 106960346.47521973,
+      "rv20_ann": 0.1925119530759871,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 74.77999877929688,
+      "ret_1d": -0.010645516841834355,
+      "ret_intra": -0.030593733847867455,
+      "vol_z": 3.722964498935338,
+      "rvol": 5.315323355826445,
+      "dollar_vol": 102654841.56427002,
+      "rv20_ann": 0.14912264307330633,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 150.11000061035156,
+      "ret_1d": -0.01783528495788249,
+      "ret_intra": -0.057867326396440655,
+      "vol_z": 3.57657341656623,
+      "rvol": 6.121584270838002,
+      "dollar_vol": 76881839.01260376,
+      "rv20_ann": 0.18104008908717556,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 23.649999618530273,
+      "ret_1d": -0.0510608963993949,
+      "ret_intra": -0.07395085223720954,
+      "vol_z": 3.923555072218099,
+      "rvol": 5.004518177023096,
+      "dollar_vol": 27656120.353912354,
+      "rv20_ann": 0.35832910138266194,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 70752.6,
+      "ret_1h": 0.001348055085564237,
+      "rv_ann": 0.38706561606662837,
+      "spread": 1.4133755209099805e-07,
+      "depth_0_5pct": 6.6791,
+      "dollar_vol_1h": 11465076.058434,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 2155.67,
+      "ret_1h": 0.00096118127786049,
+      "rv_ann": 0.478828728855532,
+      "spread": 4.6389182041650665e-06,
+      "depth_0_5pct": 250.79719999999998,
+      "dollar_vol_1h": 3326311.982675,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 90.53,
+      "ret_1h": 0.0008844665561082987,
+      "rv_ann": 0.43043756351878387,
+      "spread": 0.00011045452035130189,
+      "depth_0_5pct": 113421.071,
+      "dollar_vol_1h": 2197065.14654,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 7.163112080075198,
+    "IWM": 5.843006286262293,
+    "XLF": 7.991200693959345,
+    "XLK": 8.556394334404548,
+    "XLE": 8.030953755630883,
+    "XLY": 9.390796851111356,
+    "XLP": 8.015389415037056,
+    "GLD": 5.8152862570132084,
+    "TLT": 6.763026538700776,
+    "HYG": 5.977153517084526,
+    "MAR": 10.06532208017772,
+    "HLT": 9.839862389827697,
+    "DAL": 7.337862198019148,
+    "UAL": 7.876559110363489,
+    "DIS": 9.105740150027607,
+    "FOXA": 8.33319421205399,
+    "BTC/USDT": 1.6572032480298147,
+    "MCD": 9.503825921866076,
+    "ETH/USDT": 2.200888423461535,
+    "SOL/USDT": 3.0592465753515024,
+    "KO": 8.377756442234215,
+    "PEP": 8.692544298117495,
+    "DKNG": 8.513908962456902
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.01242805128136851,
+        "p50": 0.0010562260520164965,
+        "p95": 0.014540503385401506,
+        "mu": 0.0010562260520164965,
+        "sigma": 0.008197876604787676
+      },
+      "1W": {
+        "p5": -0.024870630484825993,
+        "p50": 0.005281130260082483,
+        "p95": 0.03543289100499096,
+        "mu": 0.005281130260082483,
+        "sigma": 0.018331009359460422
+      },
+      "1M": {
+        "p5": -0.04000989376997597,
+        "p50": 0.023236973144362925,
+        "p95": 0.08648384005870183,
+        "mu": 0.023236973144362925,
+        "sigma": 0.038451449624183905
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.2635943331866194,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9563077589697728
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9229405914985346
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.814644667056539
+      },
+      {
+        "a": "QQQ",
+        "b": "XLY",
+        "corr": 0.7696399135808426
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.7536467794267988
+      },
+      {
+        "a": "KO",
+        "b": "XLP",
+        "corr": 0.7320060557579979
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.7260228947285553
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.7184796915900992
+      },
+      {
+        "a": "HYG",
+        "b": "IWM",
+        "corr": 0.7121611566531253
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7066678180649707
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": 3.5416875701663457,
+      "vol_z_p90": 3.9578765848814506,
+      "vol_z_gt2_pct": 1.0
+    },
+    "regime": {
+      "label": "TENSION",
+      "triggers": [
+        "vol_z_gt2_pct>=0.25",
+        "vol_z_gt2_pct>=0.40",
+        "vol_z_gt2_pct>=0.75"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": 0.0,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "TENSION",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 250,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": null,
+      "Guadalajara": null,
+      "Monterrey": null,
+      "Mexico City": 250,
+      "security": null
+    },
+    "samples": {
+      "Mexico City": [
+        {
+          "datetime": "20260321T040000Z",
+          "title": "El periplo de Mar Flores y su libro en Latinoam\u00e9rica , de la mano del  rey Midas de Santo Domingo  ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.abc.es/gente/periplo-mar-flores-libro-latinoamerica-mano-rey-20260318043548-nt.html"
+        },
+        {
+          "datetime": "20260321T040000Z",
+          "title": "Cayman Islands , a global hub housing trillions of U . S . dollars",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.chinanationalnews.com/news/278934668/cayman-islands-a-global-hub-housing-trillions-of-u-s-dollars"
+        },
+        {
+          "datetime": "20260321T040000Z",
+          "title": "Cayman Islands , a global hub housing trillions of U . S . dollars",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.tucsonpost.com/news/278934668/cayman-islands-a-global-hub-housing-trillions-of-u-s-dollars"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 20.501598,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  },
+  "ollama_status": "AVAILABLE",
+  "ollama_details": {
+    "available": true,
+    "model": "llama3.2:3b",
+    "model_installed": true,
+    "models_installed": [
+      "llava:latest",
+      "llama3.2:3b"
+    ],
+    "version": "0.15.5"
+  },
+  "intelligence": {
+    "summary": "The market data indicates a high demand for USDT pairs in LATAM, particularly with VES and MXN, driven by increasing adoption of cryptocurrencies in the region. This is reflected in the best spread values for these pairs, which are relatively low compared to other assets like C. The total opportunities count is moderate at 182, suggesting a mix of established and emerging markets. Data quality is satisfactory at 81.87%, indicating reliable market data.",
+    "risk_level": "LOW",
+    "notable_patterns": [
+      "VES/MXN arbitrage opportunity",
+      "Regional USDT demand drivers"
+    ],
+    "recommendation": "Focus on VES/MXN pairs for potential arbitrage opportunities, taking advantage of relatively low spreads and high demand from LATAM traders.",
+    "confidence": 0.72,
+    "status": "ok",
+    "date": "2026-03-21",
+    "market_summary": {
+      "count_by_type": {
+        "A": 0,
+        "B": 29,
+        "C": 120
+      },
+      "best_spread_by_type": {
+        "A": 0.0,
+        "B": 0.0649,
+        "C": 4.301
+      },
+      "active_pairs": [
+        "BTC",
+        "USDT/ARS",
+        "USDT/COP",
+        "USDT/MXN",
+        "USDT/VES"
+      ],
+      "total_opportunities": 182,
+      "data_quality": 81.87
+    },
+    "opportunities_count": 182
+  },
+  "data_quality": {
+    "cycle_ts": "2026-03-21T04:17:16.895034+00:00",
+    "dq_score": 0.72,
+    "total_records": 50,
+    "valid_records": 36,
+    "issues": [
+      "unknown: has_spot_price failed 14x",
+      "unknown: has_valid_spread failed 8x"
+    ],
+    "breakdown": {
+      "has_spot_price": 0.72,
+      "has_valid_spread": 0.84,
+      "not_anomalous": 1.0,
+      "has_premium_quality": 1.0
+    },
+    "status": "WARNING"
+  }
+}

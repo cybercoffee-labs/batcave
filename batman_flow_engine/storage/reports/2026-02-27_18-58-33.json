@@ -1,0 +1,464 @@
+{
+  "timestamp": "2026-02-27T18:57:56.849366+00:00",
+  "equities": {
+    "SPY_FAKE_TEST": {
+      "symbol": "SPY_FAKE_TEST",
+      "status": "no_daily"
+    },
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 604.89501953125,
+      "ret_1d": -0.007107243712248801,
+      "ret_intra": 0.0034088524056714586,
+      "vol_z": 0.904228791281452,
+      "rvol": 1.724541507276751,
+      "dollar_vol": 9016697028.24707,
+      "rv20_ann": 0.18703957514982406,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 260.2998962402344,
+      "ret_1d": -0.02135415949591324,
+      "ret_intra": -0.006242393470134222,
+      "vol_z": -0.9363542121626237,
+      "rvol": 0.5775818406100397,
+      "dollar_vol": 41646161.29916382,
+      "rv20_ann": 0.21661272732483627,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.23500061035156,
+      "ret_1d": -0.02390478224981396,
+      "ret_intra": -0.019615360134169646,
+      "vol_z": -1.2984302082156487,
+      "rvol": 0.17440269152325313,
+      "dollar_vol": 7366670.857757568,
+      "rv20_ann": 0.22568780121587295,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 138.28500366210938,
+      "ret_1d": -0.01932480640295653,
+      "ret_intra": -0.011614609087742367,
+      "vol_z": -0.519155055913605,
+      "rvol": 0.661488471467996,
+      "dollar_vol": 10275267.197113037,
+      "rv20_ann": 0.2842778206041963,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 55.77000045776367,
+      "ret_1d": 0.013079041429276073,
+      "ret_intra": 0.0052216651627068345,
+      "vol_z": -1.5083138667165024,
+      "rvol": 0.32877958946554875,
+      "dollar_vol": 9792319.760375977,
+      "rv20_ann": 0.22983770803898845,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 116.2249984741211,
+      "ret_1d": -0.007048308894720079,
+      "ret_intra": 0.00012907142041651554,
+      "vol_z": -0.9356780778880022,
+      "rvol": 0.2480357336009689,
+      "dollar_vol": 2438632.917984009,
+      "rv20_ann": 0.1539954842735062,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 89.89430236816406,
+      "ret_1d": 0.011639677590684183,
+      "ret_intra": 0.01821120287372291,
+      "vol_z": -1.3488563829585374,
+      "rvol": 0.23929347892842667,
+      "dollar_vol": 2189106.0512695312,
+      "rv20_ann": 0.14539452933162425,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 481.92999267578125,
+      "ret_1d": 0.009340687259064895,
+      "ret_intra": 0.05464373618616425,
+      "vol_z": 0.2551283334057609,
+      "rvol": 1.115005067289476,
+      "dollar_vol": 53366517.73895264,
+      "rv20_ann": 0.5583262720226777,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 90.79989624023438,
+      "ret_1d": 0.005870163031723941,
+      "ret_intra": 0.015120542815835858,
+      "vol_z": -0.9717823738493296,
+      "rvol": 0.03479534186290876,
+      "dollar_vol": 21161369.818267822,
+      "rv20_ann": 0.08541720798879228,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.70999908447266,
+      "ret_1d": -0.001855306477549501,
+      "ret_intra": -0.0017315942150976094,
+      "vol_z": -0.35074263472884903,
+      "rvol": 0.7379606827983857,
+      "dollar_vol": 25725827.948181152,
+      "rv20_ann": 0.020631413372660175,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 341.32000732421875,
+      "ret_1d": -0.02603957108775312,
+      "ret_intra": -0.03423690126136503,
+      "vol_z": -0.3767265247418089,
+      "rvol": 0.1361525369948366,
+      "dollar_vol": 966618.2607421875,
+      "rv20_ann": 0.3685307118008441,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 309.2250061035156,
+      "ret_1d": -0.027074161760358262,
+      "ret_intra": -0.019485014772532394,
+      "vol_z": -0.6618967405297138,
+      "rvol": 0.6190572090280075,
+      "dollar_vol": 2661499.627532959,
+      "rv20_ann": 0.22436467102458707,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 65.7300033569336,
+      "ret_1d": -0.06779178321483481,
+      "ret_intra": -0.05736411598210911,
+      "vol_z": -1.0973413264514804,
+      "rvol": 0.5071085767796525,
+      "dollar_vol": 2491627.2372512817,
+      "rv20_ann": 0.5619958895590486,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 106.2699966430664,
+      "ret_1d": -0.08726276419719048,
+      "ret_intra": -0.07122882062841085,
+      "vol_z": 2.073047023987462,
+      "rvol": 4.850533862244318,
+      "dollar_vol": 188782697.91659546,
+      "rv20_ann": 0.6910866223887484,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 105.52999877929688,
+      "ret_1d": -0.0002842861944465369,
+      "ret_intra": -0.012677207558143389,
+      "vol_z": -0.9802488452553725,
+      "rvol": 0.5238117131293297,
+      "dollar_vol": 3727214.0268859863,
+      "rv20_ann": 0.4249728670786937,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 56.630001068115234,
+      "ret_1d": -0.0033438688442353204,
+      "ret_intra": 0.000264936663494586,
+      "vol_z": -0.28483547780961865,
+      "rvol": 0.4241149844188733,
+      "dollar_vol": 950308.0479240417,
+      "rv20_ann": 0.4334175003928202,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 339.75,
+      "ret_1d": 0.01560398541162522,
+      "ret_intra": 0.03193771961144831,
+      "vol_z": -1.813720116748047,
+      "rvol": 0.38141860300500335,
+      "dollar_vol": 1739180.25,
+      "rv20_ann": 0.15393691774497387,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 81.34500122070312,
+      "ret_1d": 0.010496909573951774,
+      "ret_intra": 0.02527104834078453,
+      "vol_z": -1.6357039070021775,
+      "rvol": 0.48690829553115744,
+      "dollar_vol": 3895042.6934509277,
+      "rv20_ann": 0.16718032146141493,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 169.50999450683594,
+      "ret_1d": 0.011516843625094086,
+      "ret_intra": 0.03164747748467245,
+      "vol_z": -0.5728445665271347,
+      "rvol": 0.03103820502578366,
+      "dollar_vol": 1124190.283569336,
+      "rv20_ann": 0.2816130282469596,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 23.395000457763672,
+      "ret_1d": -0.004044244967226329,
+      "ret_intra": 0.023851206441813266,
+      "vol_z": -1.1481628283744951,
+      "rvol": 0.5014027590016427,
+      "dollar_vol": 806963.7507896423,
+      "rv20_ann": 0.7101215335543758,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 65289.2,
+      "ret_1h": -0.006300911721333513,
+      "rv_ann": 0.44416764334126996,
+      "spread": 1.5318004456217762e-07,
+      "depth_0_5pct": 8.91255,
+      "dollar_vol_1h": 40388408.37576,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 81.47,
+      "ret_1h": -0.004521016617790918,
+      "rv_ann": 0.7448600594762692,
+      "spread": 0.00012275210212981178,
+      "depth_0_5pct": 58756.445,
+      "dollar_vol_1h": 14487661.8246,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 1917.09,
+      "ret_1h": -0.007897120086940768,
+      "rv_ann": 0.6782528958987908,
+      "spread": 5.216252800470978e-06,
+      "depth_0_5pct": 176.226,
+      "dollar_vol_1h": 18586240.461684,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 3.16268823558995,
+    "IWM": -0.060849521841885634,
+    "XLF": -0.8428337040650842,
+    "XLK": 0.4530982408751978,
+    "XLE": -0.9802058819634434,
+    "XLY": -0.49272390110927033,
+    "XLP": -1.0076959285060272,
+    "GLD": 1.980908387863817,
+    "TLT": -0.5780963105554255,
+    "HYG": 0.549945782821444,
+    "MAR": 0.22223251124205345,
+    "HLT": 0.12041893506044798,
+    "DAL": -0.2034752735682832,
+    "UAL": 6.592240372295581,
+    "DIS": -0.13632564298777505,
+    "FOXA": 0.5560800786759768,
+    "BTC/USDT": 1.8287656592495258,
+    "MCD": -1.4884117548554583,
+    "SOL/USDT": 3.333069616448915,
+    "ETH/USDT": 2.4188447310996146,
+    "KO": -1.1483786205661872,
+    "PEP": -0.13587416011776554,
+    "DKNG": -0.22282840783927682
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.006203687593905044,
+        "p50": 0.00041812164031240903,
+        "p95": 0.007039930874529863,
+        "mu": 0.00041812164031240903,
+        "sigma": 0.004025783040531024
+      },
+      "1W": {
+        "p5": -0.01271620738018401,
+        "p50": 0.002090608201562045,
+        "p95": 0.0168974237833081,
+        "mu": 0.002090608201562045,
+        "sigma": 0.009001924541293161
+      },
+      "1M": {
+        "p5": -0.021860362303844867,
+        "p50": 0.009198676086872998,
+        "p95": 0.04025771447759086,
+        "mu": 0.009198676086872998,
+        "sigma": 0.0188825962189366
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.24694323076505265,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9605653177254351
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.8999898049630364
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8148699572760343
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7471837002283863
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.6849474574786121
+      },
+      {
+        "a": "DAL",
+        "b": "IWM",
+        "corr": 0.6799125199501463
+      },
+      {
+        "a": "IWM",
+        "b": "XLF",
+        "corr": 0.6677430539876779
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6672869957698564
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6479147823390744
+      },
+      {
+        "a": "IWM",
+        "b": "UAL",
+        "corr": 0.6453269472932044
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": -0.6604194498599136,
+      "vol_z_p90": 0.32003837919333095,
+      "vol_z_gt2_pct": 0.05
+    },
+    "regime": {
+      "label": "NORMAL",
+      "triggers": []
+    },
+    "deltas": {
+      "corr_stress_delta": 0.0004558549892385022,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.05,
+      "prev_regime": "NORMAL",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 500,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": null,
+      "Guadalajara": null,
+      "Monterrey": null,
+      "Mexico City": 250,
+      "security": 250
+    },
+    "samples": {
+      "Mexico City": [
+        {
+          "datetime": "20260227T183000Z",
+          "title": "US Military Accidentally Shot Down Border Patrol Drone Near Texas Border",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://edgelittlerock.iheart.com/content/2026-02-27-us-military-accidentally-shot-down-border-patrol-drone-near-texas-border/"
+        },
+        {
+          "datetime": "20260227T183000Z",
+          "title": "Best Western Built a Luxury Hotel Empire and It About Time You Knew",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.suncommercial.com/banner_graphic/news/national/article_521aa865-4937-5079-828f-ed5f76965bb2.html"
+        },
+        {
+          "datetime": "20260227T183000Z",
+          "title": "Best Western Built a Luxury Hotel Empire and It About Time You Knew",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.suncommercial.com/news/national/article_521aa865-4937-5079-828f-ed5f76965bb2.html"
+        }
+      ],
+      "security": [
+        {
+          "datetime": "20260227T183000Z",
+          "title": "Retrouvez toutes les infos jean - pascal reyes sur macommune . info",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.macommune.info/tags/jean-pascal-reyes/"
+        },
+        {
+          "datetime": "20260227T183000Z",
+          "title": "  Absolute dream : candidate hope for sex abuse reform",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.hardenexpress.com.au/story/9185958/absolute-dream-candidates-hope-for-sex-abuse-reform/"
+        },
+        {
+          "datetime": "20260227T183000Z",
+          "title": "\u0421\u0442\u0430\u043b\u043e \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u043e , \u043f\u043e\u0447\u0435\u043c\u0443 \u043f\u0440\u043e\u0445\u043e\u0434\u0438\u043b\u0438 \u043e\u0431\u044b\u0441\u043a\u0438 \u0432 \u0414\u043e\u043c\u0435 \u043d\u0430\u0440\u043e\u0434\u043d\u043e\u0433\u043e \u0435\u0434\u0438\u043d\u0441\u0442\u0432\u0430",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "http://www.vgoroden.ru/novosti/stalo-izvestno-pochemu-prohodili-obyski-v-dome-narodnogo-edinstva-id427899"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 36.72162,
+    "equities_total": 21,
+    "crypto_total": 3,
+    "equities_ok": 21,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}

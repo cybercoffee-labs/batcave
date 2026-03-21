@@ -1,0 +1,173 @@
+{
+  "timestamp": "2026-03-04T04:52:50.044310+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "status": "no_daily"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "status": "no_daily"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "status": "no_daily"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "status": "no_daily"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "status": "no_daily"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "status": "no_daily"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "status": "no_daily"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "status": "no_daily"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "status": "no_daily"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "status": "no_daily"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "status": "no_daily"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "status": "no_daily"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "status": "no_daily"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "status": "no_daily"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "status": "no_daily"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "status": "no_daily"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "status": "no_daily"
+    },
+    "KO": {
+      "symbol": "KO",
+      "status": "no_daily"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "status": "no_daily"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "status": "no_daily"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "error": "binance GET https://api.binance.com/api/v3/exchangeInfo"
+    },
+    "SOL/USDT": {
+      "error": "binance GET https://api.binance.com/api/v3/exchangeInfo"
+    },
+    "ETH/USDT": {
+      "error": "binance GET https://api.binance.com/api/v3/exchangeInfo"
+    }
+  },
+  "flows": {},
+  "portfolio": {
+    "status": "no_data"
+  },
+  "stress": {
+    "status": "no_data",
+    "corr_stress": 0.0,
+    "top_edges": [],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": null,
+      "vol_z_p90": null,
+      "vol_z_gt2_pct": 0.0
+    },
+    "regime": {
+      "label": "DATA_DEGRADED",
+      "triggers": [
+        "dq_breaker"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": -0.2414360888094685,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": -0.95,
+      "prev_regime": "TENSION",
+      "regime_changed": true
+    }
+  },
+  "narrative": {
+    "total_hits": 0,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": null,
+      "Guadalajara": null,
+      "Monterrey": null,
+      "Mexico City": null,
+      "security": null
+    },
+    "samples": {}
+  },
+  "errors": [
+    {
+      "asset": "BTC/USDT",
+      "type": "crypto",
+      "error": "binance GET https://api.binance.com/api/v3/exchangeInfo",
+      "timestamp": "2026-03-04T04:52:50.969812+00:00"
+    },
+    {
+      "asset": "SOL/USDT",
+      "type": "crypto",
+      "error": "binance GET https://api.binance.com/api/v3/exchangeInfo",
+      "timestamp": "2026-03-04T04:52:50.978514+00:00"
+    },
+    {
+      "asset": "ETH/USDT",
+      "type": "crypto",
+      "error": "binance GET https://api.binance.com/api/v3/exchangeInfo",
+      "timestamp": "2026-03-04T04:52:50.986866+00:00"
+    }
+  ],
+  "dq": {
+    "equities_ok_ratio": 0.0,
+    "crypto_ok_ratio": 0.0,
+    "overall_status": "degraded",
+    "breaker_triggered": true
+  },
+  "meta": {
+    "duration_sec": 1.053833,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 0,
+    "crypto_ok": 0,
+    "errors": 3
+  }
+}

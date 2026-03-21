@@ -1,0 +1,68 @@
+# Batman Lab — Git Ignore
+# Generated for Batman Flow Engine + Nightwing Agent
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment / Secrets
+.env
+.env.local
+*.key
+*.pem
+
+# Storage (data files — too large for git, backed up separately)
+storage/reports/*.json
+storage/logs/*.jsonl
+storage/logs/*.log
+storage/logs/*.out
+storage/logs/*.err
+storage/batman.db
+storage/spread_lifetimes.db
+storage/latest.json
+storage/prev.json
+storage/alerts.json
+storage/patterns.json
+storage/engine.lock
+engine.log
+
+# Backup files
+*.bak
+*.bak.*
+*_backup.*
+*.corrupted
+
+# Streamlit
+.streamlit/
+
+# Claude local settings (keep CLAUDE.md, ignore local settings)
+.claude/settings.local.json
+
+# Pytest
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml

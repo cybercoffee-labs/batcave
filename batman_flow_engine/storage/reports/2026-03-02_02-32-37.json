@@ -1,0 +1,464 @@
+{
+  "timestamp": "2026-03-02T02:30:13.352225+00:00",
+  "equities": {
+    "QQQ": {
+      "symbol": "QQQ",
+      "px": 607.35498046875,
+      "ret_1d": -0.0032058624580046905,
+      "ret_intra": 0.007489472185236545,
+      "vol_z": 2.8203442548886164,
+      "rvol": 7.199097994205494,
+      "dollar_vol": 14583583677.027832,
+      "rv20_ann": 0.18633221650946274,
+      "status": "ok"
+    },
+    "IWM": {
+      "symbol": "IWM",
+      "px": 261.42999267578125,
+      "ret_1d": -0.017368607361293375,
+      "ret_intra": -0.00192797788580934,
+      "vol_z": 3.697335994148721,
+      "rvol": 4.523798431316735,
+      "dollar_vol": 693015356.1044922,
+      "rv20_ann": 0.21102503892934385,
+      "status": "ok"
+    },
+    "XLF": {
+      "symbol": "XLF",
+      "px": 51.439998626708984,
+      "ret_1d": -0.020591503876944507,
+      "ret_intra": -0.015692711475136067,
+      "vol_z": 3.653804168874188,
+      "rvol": 4.695417123145683,
+      "dollar_vol": 253239113.23928833,
+      "rv20_ann": 0.2226354924126875,
+      "status": "ok"
+    },
+    "XLK": {
+      "symbol": "XLK",
+      "px": 138.74000549316406,
+      "ret_1d": -0.016084988379260708,
+      "ret_intra": -0.008362505455799418,
+      "vol_z": 3.730315082652158,
+      "rvol": 6.820864388227697,
+      "dollar_vol": 227078819.27078247,
+      "rv20_ann": 0.28150317087760224,
+      "status": "ok"
+    },
+    "XLE": {
+      "symbol": "XLE",
+      "px": 55.90999984741211,
+      "ret_1d": 0.015680215871710146,
+      "ret_intra": 0.0077450723427148205,
+      "vol_z": 1.3954836275555105,
+      "rvol": 2.976478256278761,
+      "dollar_vol": 180066037.81856918,
+      "rv20_ann": 0.23008474376317645,
+      "status": "ok"
+    },
+    "XLY": {
+      "symbol": "XLY",
+      "px": 116.87000274658203,
+      "ret_1d": -0.0016245776599569245,
+      "ret_intra": 0.005679405105490254,
+      "vol_z": 3.62158388948341,
+      "rvol": 6.542441824991211,
+      "dollar_vol": 131581481.82231903,
+      "rv20_ann": 0.15348580873708956,
+      "status": "ok"
+    },
+    "XLP": {
+      "symbol": "XLP",
+      "px": 89.98999786376953,
+      "ret_1d": 0.012858694625800792,
+      "ret_intra": 0.01929512280105028,
+      "vol_z": 3.2754638807889216,
+      "rvol": 4.311163528788417,
+      "dollar_vol": 117484101.97109985,
+      "rv20_ann": 0.14588434416670934,
+      "status": "ok"
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "px": 483.739990234375,
+      "ret_1d": 0.01304594710817348,
+      "ret_intra": 0.058604690301272244,
+      "vol_z": 3.10901704451615,
+      "rvol": 3.915046406594362,
+      "dollar_vol": 367057550.92993164,
+      "rv20_ann": 0.5710669647431721,
+      "status": "ok"
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "px": 90.77999877929688,
+      "ret_1d": 0.006074380187214567,
+      "ret_intra": 0.014898094088646952,
+      "vol_z": 4.102002133566996,
+      "rvol": 7.19765206494532,
+      "dollar_vol": 316213425.0679321,
+      "rv20_ann": 0.08524812350684004,
+      "status": "ok"
+    },
+    "HYG": {
+      "symbol": "HYG",
+      "px": 80.70500183105469,
+      "ret_1d": -0.0016091759821163113,
+      "ret_intra": -0.0017934031639198489,
+      "vol_z": 2.651916268707591,
+      "rvol": 3.3101089407498723,
+      "dollar_vol": 258280782.29493713,
+      "rv20_ann": 0.020334582367121056,
+      "status": "ok"
+    },
+    "MAR": {
+      "symbol": "MAR",
+      "px": 341.6300048828125,
+      "ret_1d": -0.02553943839085282,
+      "ret_intra": -0.03335976486043746,
+      "vol_z": 3.5906538333813955,
+      "rvol": 5.579848130387135,
+      "dollar_vol": 36789451.96582031,
+      "rv20_ann": 0.3579993597158657,
+      "status": "ok"
+    },
+    "HLT": {
+      "symbol": "HLT",
+      "px": 311.69000244140625,
+      "ret_1d": -0.018746756798396918,
+      "ret_intra": -0.011668810390201512,
+      "vol_z": 3.9379626056311707,
+      "rvol": 5.800843601151289,
+      "dollar_vol": 39136108.39654541,
+      "rv20_ann": 0.21110284458060863,
+      "status": "ok"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "px": 65.69999694824219,
+      "ret_1d": -0.07065569498711953,
+      "ret_intra": -0.057794438759204314,
+      "vol_z": 3.7220878551055243,
+      "rvol": 4.210973706143402,
+      "dollar_vol": 43352274.386291504,
+      "rv20_ann": 0.5620029181409549,
+      "status": "ok"
+    },
+    "UAL": {
+      "symbol": "UAL",
+      "px": 106.31900024414062,
+      "ret_1d": -0.09102492261321588,
+      "ret_intra": -0.07080054233913957,
+      "vol_z": 3.9454133949867844,
+      "rvol": 6.432749802666436,
+      "dollar_vol": 47438474.718933105,
+      "rv20_ann": 0.6916368135541059,
+      "status": "ok"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "px": 106.05000305175781,
+      "ret_1d": 0.004631586847376304,
+      "ret_intra": -0.00781212581544799,
+      "vol_z": 3.954411115898,
+      "rvol": 5.350441418482743,
+      "dollar_vol": 101385393.66752625,
+      "rv20_ann": 0.4327910672655839,
+      "status": "ok"
+    },
+    "FOXA": {
+      "symbol": "FOXA",
+      "px": 56.349998474121094,
+      "ret_1d": -0.008483605898553234,
+      "ret_intra": -0.004680794780343445,
+      "vol_z": 3.4683991605658573,
+      "rvol": 5.644565530292448,
+      "dollar_vol": 13093260.24545288,
+      "rv20_ann": 0.43849711053674684,
+      "status": "ok"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "px": 341.0,
+      "ret_1d": 0.019331849730107875,
+      "ret_intra": 0.03573439996321959,
+      "vol_z": 3.787018642956835,
+      "rvol": 4.911892023886163,
+      "dollar_vol": 75451706.0,
+      "rv20_ann": 0.15743595700217924,
+      "status": "ok"
+    },
+    "KO": {
+      "symbol": "KO",
+      "px": 81.55000305175781,
+      "ret_1d": 0.013081731347868664,
+      "ret_intra": 0.027854888024638758,
+      "vol_z": 4.152372455768269,
+      "rvol": 8.560709631232625,
+      "dollar_vol": 179238099.30743408,
+      "rv20_ann": 0.16788097385146084,
+      "status": "ok"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "px": 169.72999572753906,
+      "ret_1d": 0.01280702679216366,
+      "ret_intra": 0.0329864174394654,
+      "vol_z": 3.439029566456742,
+      "rvol": 5.5603140935556015,
+      "dollar_vol": 52347616.092300415,
+      "rv20_ann": 0.27946559322035125,
+      "status": "ok"
+    },
+    "DKNG": {
+      "symbol": "DKNG",
+      "px": 23.861000061035156,
+      "ret_1d": 0.014790059670625291,
+      "ret_intra": 0.04424506182438859,
+      "vol_z": 3.379954719012094,
+      "rvol": 3.788960776476128,
+      "dollar_vol": 14034515.293899536,
+      "rv20_ann": 0.7444132297114421,
+      "status": "ok"
+    }
+  },
+  "crypto": {
+    "BTC/USDT": {
+      "symbol": "BTC/USDT",
+      "px": 66168.6,
+      "ret_1h": -0.005462332272490711,
+      "rv_ann": 0.7579062584925625,
+      "spread": 1.5113823351164208e-07,
+      "depth_0_5pct": 4.96495,
+      "dollar_vol_1h": 26559997.299366005,
+      "status": "ok"
+    },
+    "ETH/USDT": {
+      "symbol": "ETH/USDT",
+      "px": 1947.73,
+      "ret_1h": -0.00813765780079545,
+      "rv_ann": 0.9730758204074199,
+      "spread": 5.134405910723414e-06,
+      "depth_0_5pct": 210.99329999999998,
+      "dollar_vol_1h": 22881147.299583003,
+      "status": "ok"
+    },
+    "SOL/USDT": {
+      "symbol": "SOL/USDT",
+      "px": 84.07,
+      "ret_1h": -0.006382224323366104,
+      "rv_ann": 1.1711707134498355,
+      "spread": 0.0001189555700944615,
+      "depth_0_5pct": 56474.835999999996,
+      "dollar_vol_1h": 8100099.270339999,
+      "status": "ok"
+    }
+  },
+  "flows": {
+    "QQQ": 8.77751731427594,
+    "IWM": 8.046013711609717,
+    "XLF": 8.040453288080773,
+    "XLK": 9.447525762928615,
+    "XLE": 4.282849873110324,
+    "XLY": 9.012033625307536,
+    "XLP": 7.244459114786807,
+    "GLD": 7.2214119935597605,
+    "TLT": 9.984189343693794,
+    "HYG": 5.846446366765324,
+    "MAR": 8.47795146382419,
+    "HLT": 8.913830208848264,
+    "DAL": 7.988243767339501,
+    "UAL": 9.698875013945095,
+    "DIS": 8.902687352752219,
+    "FOXA": 8.367173169302951,
+    "MCD": 8.199156711056654,
+    "BTC/USDT": 1.9635218616002539,
+    "ETH/USDT": 2.6956196382097044,
+    "KO": 10.891592054224866,
+    "SOL/USDT": 3.6304115859117467,
+    "PEP": 8.244430946765311,
+    "DKNG": 7.396932325187839
+  },
+  "portfolio": {
+    "status": "ok",
+    "horizons": {
+      "1D": {
+        "p5": -0.00620564657320358,
+        "p50": 0.0003824094048316143,
+        "p95": 0.006970465382866809,
+        "mu": 0.0003824094048316143,
+        "sigma": 0.004005262472587284
+      },
+      "1W": {
+        "p5": -0.012819293982302485,
+        "p50": 0.0019120470241580714,
+        "p95": 0.016643388030618628,
+        "mu": 0.0019120470241580714,
+        "sigma": 0.008956039156434056
+      },
+      "1M": {
+        "p5": -0.022487714679679718,
+        "p50": 0.008413006906295515,
+        "p95": 0.039313728492270744,
+        "mu": 0.008413006906295515,
+        "sigma": 0.018786346223652755
+      }
+    }
+  },
+  "stress": {
+    "status": "ok",
+    "corr_stress": 0.2447653101445417,
+    "n_assets": 20,
+    "window": 60,
+    "top_edges": [
+      {
+        "a": "QQQ",
+        "b": "XLK",
+        "corr": 0.9586207943499169
+      },
+      {
+        "a": "DAL",
+        "b": "UAL",
+        "corr": 0.9005929835092968
+      },
+      {
+        "a": "HLT",
+        "b": "MAR",
+        "corr": 0.8165075077132978
+      },
+      {
+        "a": "DAL",
+        "b": "XLF",
+        "corr": 0.7417585283391458
+      },
+      {
+        "a": "PEP",
+        "b": "XLP",
+        "corr": 0.686516088068979
+      },
+      {
+        "a": "DAL",
+        "b": "IWM",
+        "corr": 0.6657556431620173
+      },
+      {
+        "a": "IWM",
+        "b": "XLK",
+        "corr": 0.6618911537000468
+      },
+      {
+        "a": "IWM",
+        "b": "XLF",
+        "corr": 0.6594729056500704
+      },
+      {
+        "a": "IWM",
+        "b": "QQQ",
+        "corr": 0.6415323840846198
+      },
+      {
+        "a": "HYG",
+        "b": "QQQ",
+        "corr": 0.6344914413237664
+      }
+    ],
+    "downside_corr_mean": null,
+    "downside_quantile": 0.2,
+    "tail_points": 0,
+    "downside_top_edges": [],
+    "vol_shock": {
+      "vol_z_mean": 3.4717284847472465,
+      "vol_z_p90": 3.9691702176649,
+      "vol_z_gt2_pct": 0.95
+    },
+    "regime": {
+      "label": "TENSION",
+      "triggers": [
+        "vol_z_gt2_pct>=0.25",
+        "vol_z_gt2_pct>=0.40",
+        "vol_z_gt2_pct>=0.75"
+      ]
+    },
+    "deltas": {
+      "corr_stress_delta": 0.0,
+      "downside_corr_delta": null,
+      "vol_z_gt2_pct_delta": 0.0,
+      "prev_regime": "TENSION",
+      "regime_changed": false
+    }
+  },
+  "narrative": {
+    "total_hits": 388,
+    "by_keyword": {
+      "World Cup 2026": null,
+      "FIFA 2026": null,
+      "Guadalajara": null,
+      "Monterrey": 138,
+      "Mexico City": 250,
+      "security": null
+    },
+    "samples": {
+      "Monterrey": [
+        {
+          "datetime": "20260302T004500Z",
+          "title": "Colapsa estructura en L4 del Metro de Monterrey",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://planoinformativo.com/1130444/colapsa-estructura-en-l4-del-metro-de-monterrey"
+        },
+        {
+          "datetime": "20260301T231500Z",
+          "title": "Sergio Canales alza la voz ante la ola de malos resultados de Rayados",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.eluniversal.com.mx/deportes/sergio-canales-alza-la-voz-ante-la-ola-de-malos-resultados-de-rayados/"
+        },
+        {
+          "datetime": "20260301T230000Z",
+          "title": "Colapsa estructura en obra del Metro de Monterrey y deja cuatro trabajadores heridos",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.elmanana.com.mx/nacional/2026/3/1/cuatro-obreros-heridos-tras-caida-de-varillas-en-obra-del-metro-de-monterrey-170999.html"
+        }
+      ],
+      "Mexico City": [
+        {
+          "datetime": "20260302T010000Z",
+          "title": "Shakira env\u00eda mensaje a fans que la esperan en el Z\u00f3calo de la CDMX",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://www.sdpnoticias.com/estados/cdmx/shakira-envia-mensaje-a-fans-que-la-esperan-en-el-zocalo-de-la-cdmx/"
+        },
+        {
+          "datetime": "20260302T010000Z",
+          "title": "Jalisco intenta regresar a la normalidad entre miedo y presencia militar en sus calles",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://eldeber.com.bo/mundo/jalisco-intenta-regresar-normalidad-miedo-presencia-militar-calles_1772394469"
+        },
+        {
+          "datetime": "20260302T010000Z",
+          "title": "\u041a\u0430\u043a\u043e\u0439 \u043f\u043e\u043b\u0438\u0442\u0438\u0447\u0435\u0441\u043a\u0438\u0439 \u0440\u0438\u0441\u043a \u0441\u043e\u0437\u0434\u0430\u043b \u0422\u0440\u0430\u043c\u043f , \u043d\u0430\u043d\u0435\u0441\u044f \u0443\u0434\u0430\u0440 \u043f\u043e \u0418\u0440\u0430\u043d\u0443 ? ( Der Spiegel , \u0413\u0435\u0440\u043c\u0430\u043d\u0438\u044f ) ",
+          "sourceCountry": null,
+          "sourceCommonName": null,
+          "url": "https://inosmi.ru/20260302/risk-277340071.html"
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "dq": {
+    "equities_ok_ratio": 1.0,
+    "crypto_ok_ratio": 1.0,
+    "overall_status": "ok",
+    "breaker_triggered": false
+  },
+  "meta": {
+    "duration_sec": 144.549258,
+    "equities_total": 20,
+    "crypto_total": 3,
+    "equities_ok": 20,
+    "crypto_ok": 3,
+    "errors": 0
+  }
+}
