@@ -1,8 +1,6 @@
 """
 BATMAN LAB — Binance API Connector (Live)
 
-Uses YOUR API key to pull real data and eventually execute trades.
-
 SETUP:
   1. Create .env: BINANCE_API_KEY=xxx  BINANCE_API_SECRET=xxx
   2. Test: python core/binance_live.py --test
@@ -28,6 +26,9 @@ if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
 logger = logging.getLogger("batman.binance_live")
+
+# Skip these — not real tradeable tokens
+SKIP_ASSETS = {"USDT", "BUSD", "USD", "FDUSD", "MXN", "BNB"}
 
 
 def _load_env():
@@ -175,16 +176,26 @@ def get_spot_trades(symbol, limit=500):
 
 
 def get_all_spot_trades(symbols=None, limit=500):
+    """Get trades for ALL of Erick's tokens."""
     if symbols is None:
-        symbols = ["XRPUSDT", "ENAUSDT", "BTCUSDT", "ETHUSDT", "SOLUSDT",
-                    "DOGEUSDT", "ADAUSDT", "AVAXUSDT", "VETUSDT", "VTHOUSDT",
-                    "SUIUSDT", "GUNUSDT", "HFTUSDT", "PYTHUSDT", "SOLVUSDT"]
+        # ALL tokens from Erick's actual portfolio
+        symbols = [
+            # Main holdings (Earn)
+            "XRPUSDT", "VETUSDT", "VTHOUSDT", "SUIUSDT", "SOLVUSDT",
+            "GUNUSDT", "HFTUSDT", "PYTHUSDT", "BMTUSDT", "ENAUSDT",
+            # Common pairs
+            "BTCUSDT", "ETHUSDT", "SOLUSDT", "DOGEUSDT", "ADAUSDT",
+            "AVAXUSDT", "PEPEUSDT", "HOMEUSDT",
+            # Possible BNB pairs (some tokens trade vs BNB)
+            "XRPBNB", "VETBNB", "SUIBNB",
+        ]
+
     all_trades = []
     for sym in symbols:
         trades = get_spot_trades(sym, limit)
         all_trades.extend(trades)
         if trades:
-            print(f"  got {sym}: {len(trades)} trades")
+            print(f"    {sym}: {len(trades)} trades")
         time.sleep(0.2)
     return sorted(all_trades, key=lambda x: x["ts"], reverse=True)
 
@@ -207,7 +218,8 @@ def sync_balances_to_db():
         asset = _real_token_name(raw_asset)
         is_earn = raw_asset != asset
 
-        if asset in ("USDT", "BUSD", "USD", "FDUSD"):
+        # Skip stablecoins, fiat, and dust
+        if asset in SKIP_ASSETS:
             continue
         if total < 0.00001:
             continue
@@ -262,8 +274,9 @@ def sync_trades_to_db(symbols=None):
     for t in trades:
         trade_data = {
             "trade_id": t["trade_id"], "agent": "binance-live", "ts": t["ts"],
-            "asset": t["symbol"].replace("USDT", "").replace("BUSD", ""),
-            "market": "USDT", "side": t["side"], "price": t["price"],
+            "asset": t["symbol"].replace("USDT", "").replace("BUSD", "").replace("BNB", ""),
+            "market": "USDT" if "USDT" in t["symbol"] else "BNB",
+            "side": t["side"], "price": t["price"],
             "quantity": t["quantity"], "fee": t["fee"], "status": "executed",
         }
         if save_trade(trade_data):
@@ -323,50 +336,45 @@ def full_sync():
     if conn["status"] != "ok":
         print(f"  ERROR: {conn.get('error', conn.get('message', '?'))}")
         return
-    print(f"  Connected! Assets with balance: {conn['balances_count']}")
+    print(f"  Connected! Assets: {conn['balances_count']}")
 
-    # Step 1: Balances
     print(f"\n  Step 1: Syncing balances...")
     balances = get_spot_balances()
     print(f"  Found {len(balances)} assets:")
     for b in balances[:15]:
         real = _real_token_name(b['asset'])
         tag = " (Earn)" if real != b['asset'] else ""
-        print(f"    {real:8s}{tag:8s} {b['total']:>15.6f}")
+        print(f"    {real:10s}{tag:8s} {b['total']:>15.6f}")
     if len(balances) > 15:
         print(f"    ... and {len(balances) - 15} more")
 
     synced = sync_balances_to_db()
-    print(f"  Synced {synced} positions to database")
+    print(f"  Synced {synced} positions")
 
-    # Step 2: Trades
-    print(f"\n  Step 2: Syncing trade history...")
+    print(f"\n  Step 2: Syncing trade history (21 pairs)...")
     imported = sync_trades_to_db()
     print(f"  Imported {imported} trades")
 
-    # Step 3: Avg prices
-    print(f"\n  Step 3: Calculating average buy prices...")
+    print(f"\n  Step 3: Calculating avg buy prices...")
     updated = update_hodl_avg_prices()
-    print(f"  Updated {updated} positions with avg buy price")
+    print(f"  Updated {updated} positions")
 
-    # Step 4: Futures
-    print(f"\n  Step 4: Checking futures...")
+    print(f"\n  Step 4: Futures...")
     futures = get_futures_positions()
     if futures:
         for f in futures:
             s = "+" if f["unrealized_pnl"] >= 0 else ""
-            print(f"    {f['symbol']} {f['side']} {f['quantity']} @ ${f['entry_price']:.2f} | PnL: {s}${f['unrealized_pnl']:.2f}")
+            print(f"    {f['symbol']} {f['side']} {f['quantity']} @ ${f['entry_price']:.2f} | {s}${f['unrealized_pnl']:.2f}")
     else:
         print(f"    No open futures")
 
-    # Step 5: Earn
-    print(f"\n  Step 5: Checking Earn...")
+    print(f"\n  Step 5: Earn...")
     earn = get_earn_positions()
     if earn:
         for e in earn:
-            print(f"    {e['asset']}: {e['quantity']:.4f} | APY: {e['apy']:.1f}% | Rewards: {e['accrued_reward']:.6f}")
+            print(f"    {e['asset']:10s} {e['quantity']:>10.4f} | APY: {e['apy']:>5.1f}% | Rewards: {e['accrued_reward']:.6f}")
     else:
-        print(f"    No Earn positions")
+        print(f"    No Earn")
 
     print(f"\n{'='*66}")
     print(f"  DONE. Run: python tools/command_center.py")
