@@ -138,10 +138,120 @@ def get_system_health() -> dict:
     }
 
 
+def check(result: dict | None = None) -> dict:
+    """
+    GORDON security gate for Batman signal production.
+
+    Called after ALFRED validation, before HARVEY ingestion.
+
+    Checks:
+        1. Kill switch       — hard BLOCK if flag file exists
+        2. DQ score gate     — hard BLOCK if dq_score < 0.60
+        3. Runtime guard     — ALERT if stale engine lock detected
+        4. Regime anomaly    — ALERT if DATA_DEGRADED or PANIC
+
+    Args:
+        result: Engine result dict produced by _build_engine_result +
+                _enrich_runtime_metadata. May be None in tests.
+
+    Returns:
+        {
+            "status":     "OK" | "BLOCKED" | "ALERT",
+            "checks":     [{"check": str, "passed": bool, ...}, ...],
+            "blocked_by": [str, ...],   # non-empty only when BLOCKED
+            "warnings":   [str, ...],   # non-empty only when ALERT
+            "timestamp":  str,
+        }
+    """
+    checks: list = []
+    blocked_by: list = []
+    warnings: list = []
+
+    # 1. Kill switch — hard block
+    if is_kill_switch_active():
+        checks.append({"check": "kill_switch", "passed": False, "reason": "kill_switch_active"})
+        blocked_by.append("kill_switch_active")
+    else:
+        checks.append({"check": "kill_switch", "passed": True})
+
+    # 2. DQ score gate — block if data is too degraded to emit reliable signals
+    dq_score = None
+    if result:
+        dq = result.get("data_quality") or {}
+        dq_score = dq.get("dq_score")
+
+    if dq_score is not None and dq_score < 0.60:
+        checks.append(
+            {
+                "check": "dq_gate",
+                "passed": False,
+                "dq_score": dq_score,
+                "reason": "dq_score_below_threshold",
+            }
+        )
+        blocked_by.append(f"dq_score_{dq_score:.2f}_below_0.60")
+    else:
+        checks.append({"check": "dq_gate", "passed": True, "dq_score": dq_score})
+
+    # 3. Runtime guard — alert on stale lock (previous run may have crashed)
+    guard = check_runtime_guard()
+    if guard["status"] == "stale_lock":
+        checks.append(
+            {
+                "check": "runtime_guard",
+                "passed": True,
+                "status": guard["status"],
+                "warning": "stale_engine_lock",
+            }
+        )
+        warnings.append("stale_engine_lock")
+    else:
+        checks.append({"check": "runtime_guard", "passed": True, "status": guard["status"]})
+
+    # 4. Regime anomaly — alert on degraded or panic market conditions
+    regime_label = None
+    if result:
+        regime = (result.get("stress") or {}).get("regime") or {}
+        regime_label = regime.get("label")
+
+    if regime_label in ("DATA_DEGRADED", "PANIC"):
+        checks.append(
+            {
+                "check": "regime",
+                "passed": True,
+                "regime": regime_label,
+                "warning": f"regime_{regime_label}",
+            }
+        )
+        warnings.append(f"regime_{regime_label}")
+    else:
+        checks.append({"check": "regime", "passed": True, "regime": regime_label})
+
+    # Determine final status and log
+    if blocked_by:
+        status = "BLOCKED"
+        log_gordon_event("gordon_check_blocked", {"blocked_by": blocked_by})
+    elif warnings:
+        status = "ALERT"
+        log_gordon_event("gordon_check_alert", {"warnings": warnings})
+    else:
+        status = "OK"
+        log_gordon_event("gordon_check_ok", {})
+
+    return {
+        "status": status,
+        "checks": checks,
+        "blocked_by": blocked_by,
+        "warnings": warnings,
+        "timestamp": _utc_timestamp(),
+    }
+
+
 __all__ = [
     "AUDIT_LOG_FILE",
     "DEFAULT_LOCK_FILE",
     "KILL_SWITCH_FILE",
+    "check",
     "check_runtime_guard",
     "get_system_health",
     "is_kill_switch_active",

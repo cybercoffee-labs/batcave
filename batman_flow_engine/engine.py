@@ -25,7 +25,8 @@ from alerts import write_alerts
 from core.scanner_cross_exchange import scan_cross_exchange
 from core.scanner_basis import scan_basis
 from core.p2p_latam import p2p_premium_analysis
-from core.harvey import ingest_opportunities
+from core.harvey import ingest_opportunities, DB_PATH as HARVEY_DB_PATH
+from core.gordon import check as gordon_check
 
 # Phase 2 scanners
 from core.scanner_multi_exchange import scan_multi_exchange
@@ -458,6 +459,13 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
     except Exception:
         pass
 
+    try:
+        from core.dual_writer import log_engine_run
+
+        log_engine_run(result)
+    except Exception:
+        pass
+
     # ───────────────────────── ALL 11 SCANNERS ─────────────────────────
     # Scanner A: Cross-Exchange
     try:
@@ -578,6 +586,102 @@ def _persist_run(result: dict[str, Any]) -> None:
     logger.info("Hash: %s", digest)
 
 
+# ───────────────────────── COMMANDER ─────────────────────────
+def _harvey_is_initialized() -> bool:
+    """Return True if HARVEY's SQLite DB exists and contains the signals table."""
+    if not HARVEY_DB_PATH.exists():
+        return False
+    try:
+        import sqlite3 as _sqlite3
+
+        with _sqlite3.connect(HARVEY_DB_PATH) as conn:
+            tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+            return "signals" in tables
+    except Exception:
+        return False
+
+
+def commander_decision(result: dict[str, Any]) -> dict[str, Any]:
+    """
+    COMMANDER gate — explicit viability decision for opportunity emission.
+
+    Called after GORDON check, before HARVEY ingestion. All three gates must
+    pass for viable=True. If any gate fails, viable=False and blocked_by lists
+    the failing reasons.
+
+    Gates:
+        1. alfred_dq   — data_quality.dq_score >= 0.80
+        2. gordon_ok   — gordon.status == "OK" (ALERT also blocks)
+        3. harvey_init — HARVEY DB exists with signals table
+
+    Returns:
+        {
+            "viable":     bool,
+            "blocked_by": [str, ...],   # empty when viable=True
+            "gates":      [{"gate": str, "passed": bool, ...}, ...],
+            "timestamp":  str,
+        }
+    """
+    gates: list[dict] = []
+    blocked_by: list[str] = []
+
+    # Gate 1: ALFRED dq_score >= 0.80
+    dq_score = (result.get("data_quality") or {}).get("dq_score")
+    if dq_score is None:
+        gates.append({"gate": "alfred_dq", "passed": False, "dq_score": None, "reason": "dq_score_missing"})
+        blocked_by.append("alfred_dq_score_missing")
+    elif dq_score < 0.80:
+        gates.append(
+            {
+                "gate": "alfred_dq",
+                "passed": False,
+                "dq_score": round(dq_score, 4),
+                "reason": f"dq_score_{dq_score:.2f}_below_0.80",
+            }
+        )
+        blocked_by.append(f"alfred_dq_score_{dq_score:.2f}_below_0.80")
+    else:
+        gates.append({"gate": "alfred_dq", "passed": True, "dq_score": round(dq_score, 4)})
+
+    # Gate 2: GORDON status must be exactly "OK" (ALERT is not sufficient)
+    gordon_status = (result.get("gordon") or {}).get("status")
+    if gordon_status != "OK":
+        gates.append(
+            {
+                "gate": "gordon_ok",
+                "passed": False,
+                "gordon_status": gordon_status,
+                "reason": f"gordon_status_{gordon_status}",
+            }
+        )
+        blocked_by.append(f"gordon_status_{gordon_status}")
+    else:
+        gates.append({"gate": "gordon_ok", "passed": True, "gordon_status": gordon_status})
+
+    # Gate 3: HARVEY initialized — DB file present + signals table exists
+    harvey_ready = _harvey_is_initialized()
+    if not harvey_ready:
+        gates.append({"gate": "harvey_init", "passed": False, "reason": "harvey_db_not_initialized"})
+        blocked_by.append("harvey_db_not_initialized")
+    else:
+        gates.append({"gate": "harvey_init", "passed": True})
+
+    viable = not blocked_by
+    ts = datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+    if viable:
+        logger.info("COMMANDER decision: viable=True — all gates passed")
+    else:
+        logger.warning("COMMANDER decision: viable=False — blocked_by=%s", blocked_by)
+
+    return {
+        "viable": viable,
+        "blocked_by": blocked_by,
+        "gates": gates,
+        "timestamp": ts,
+    }
+
+
 def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
     cfg = cfg or load_config()
     logger.info("ENGINE START — equities=%d crypto=%d scanners=11", len(cfg.equities), len(cfg.crypto))
@@ -590,8 +694,30 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
         LOCK_FILE.write_text(str(os.getpid()), encoding="utf-8")
         result = _build_engine_result(cfg)
         _enrich_runtime_metadata(result)
+
+        # GORDON gate — runs after ALFRED, before HARVEY
+        gordon_result = gordon_check(result)
+        result["gordon"] = gordon_result
+        if gordon_result["status"] == "BLOCKED":
+            logger.warning(
+                "GORDON BLOCKED — signal emission aborted: %s",
+                gordon_result["blocked_by"],
+            )
+            _persist_run(result)
+            return result
+
+        # COMMANDER gate — explicit viability decision
+        commander = commander_decision(result)
+        result["commander"] = commander
+
         _persist_run(result)
-        ingest_opportunities()
+        if commander["viable"]:
+            ingest_opportunities()
+        else:
+            logger.warning(
+                "COMMANDER blocked — opportunity ingestion skipped: %s",
+                commander["blocked_by"],
+            )
         return result
     finally:
         try:

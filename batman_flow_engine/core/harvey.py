@@ -104,8 +104,9 @@ def _load_opportunities() -> list[dict[str, Any]]:
     return opportunities
 
 
-def _insert_signals(conn: sqlite3.Connection, opportunities: list[dict[str, Any]]) -> int:
+def _insert_signals(conn: sqlite3.Connection, opportunities: list[dict[str, Any]]) -> tuple[int, list[dict[str, Any]]]:
     inserted = 0
+    new_records: list[dict[str, Any]] = []
     for record in opportunities:
         opp_id = record.get("opp_id")
         if not opp_id:
@@ -140,7 +141,8 @@ def _insert_signals(conn: sqlite3.Connection, opportunities: list[dict[str, Any]
         )
         if cursor.rowcount:
             inserted += 1
-    return inserted
+            new_records.append(record)
+    return inserted, new_records
 
 
 def _refresh_scanner_stats(conn: sqlite3.Connection) -> None:
@@ -163,11 +165,25 @@ def _refresh_scanner_stats(conn: sqlite3.Connection) -> None:
 
 def ingest_opportunities() -> dict[str, int]:
     opportunities = _load_opportunities()
+    new_records: list[dict[str, Any]] = []
     with _get_conn() as conn:
         _ensure_schema(conn)
-        inserted = _insert_signals(conn, opportunities)
+        inserted, new_records = _insert_signals(conn, opportunities)
         _refresh_scanner_stats(conn)
         conn.commit()
+
+    if new_records:
+        try:
+            import sys as _sys
+
+            _sys.path.insert(0, str(BASE_DIR))
+            from database.postgres import save_opportunity
+
+            for record in new_records:
+                save_opportunity(record)
+            logger.info("HARVEY→PG sync: %d new opportunities written", len(new_records))
+        except Exception as e:
+            logger.warning("HARVEY→PG sync failed (non-fatal): %s", e)
 
     logger.info(
         "HARVEY ingest complete: scanned=%d inserted=%d db=%s",
