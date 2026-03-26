@@ -198,15 +198,15 @@ def find_cross_currency_opportunities(
             {
                 "buy_fiat": buy_fiat,
                 "sell_fiat": sell_fiat,
-                "buy_premium_pct": buy_premium,
-                "sell_premium_pct": sell_premium,
-                "cross_premium_spread": round(cross_spread, 4),
-                "estimated_transfer_cost_pct": transfer_cost,
-                "edge_net": round(edge_net, 4),
-                "viable": edge_net > 0,
+                "buy_premium_pct": float(buy_premium),
+                "sell_premium_pct": float(sell_premium),
+                "cross_premium_spread": float(round(cross_spread, 4)),
+                "estimated_transfer_cost_pct": float(transfer_cost),
+                "edge_net": float(round(edge_net, 4)),
+                "viable": bool(edge_net > 0),
                 "route": f"{buy_fiat}→USDT(Binance P2P)→USDT→{sell_fiat}(Binance P2P)",
-                "buy_p2p_price": buy_data["p2p_buy"],
-                "sell_p2p_price": sell_data["p2p_buy"],
+                "buy_p2p_price": float(buy_data["p2p_buy"]),
+                "sell_p2p_price": float(sell_data["p2p_buy"]),
             }
         )
 

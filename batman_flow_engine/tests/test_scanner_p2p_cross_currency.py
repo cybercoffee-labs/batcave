@@ -4,6 +4,7 @@ Tests for Scanner F: P2P Cross-Currency Premium Scanner
 Mocks all HTTP calls for isolated testing.
 """
 
+import json
 from unittest.mock import patch
 
 from core.scanner_p2p_cross_currency import (
@@ -295,6 +296,39 @@ def test_load_threshold_default():
         mock_path.exists.return_value = False
         result = _load_threshold()
         assert result == 1.0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Test JSON serialization (numpy.bool_ / numpy.float64 regression)
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_find_opportunities_json_serializable():
+    """Regression: viable must be native bool, all floats native — no numpy types."""
+    try:
+        import numpy as np
+        buy_premium = np.float64(0.5)
+        sell_premium = np.float64(3.0)
+    except ImportError:
+        buy_premium = 0.5
+        sell_premium = 3.0
+
+    premiums = {
+        "MXN": {"status": "ok", "premium_pct": buy_premium, "p2p_buy": float(17.50)},
+        "ARS": {"status": "ok", "premium_pct": sell_premium, "p2p_buy": float(1050.0)},
+    }
+    opps = find_cross_currency_opportunities(premiums, threshold=1.0)
+    assert len(opps) == 1
+
+    # Must not raise TypeError: Object of type bool_ is not JSON serializable
+    serialized = json.dumps(opps[0])
+    parsed = json.loads(serialized)
+
+    assert isinstance(parsed["viable"], bool)
+    assert isinstance(parsed["edge_net"], float)
+    assert isinstance(parsed["buy_premium_pct"], float)
+    assert isinstance(parsed["sell_premium_pct"], float)
+    assert isinstance(parsed["buy_p2p_price"], float)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
