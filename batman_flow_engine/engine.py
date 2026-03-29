@@ -587,6 +587,26 @@ def _persist_run(result: dict[str, Any]) -> None:
     logger.info("Hash: %s", digest)
 
 
+def _viable_opportunity_ratio(n: int = 50) -> float | None:
+    """Return fraction of last *n* opportunity records where viable=True.
+
+    Reads from opportunities.jsonl. Returns None if the file is absent or
+    contains fewer than 5 records (too small a sample to be meaningful).
+    """
+    log = LOGS_DIR / "opportunities.jsonl"
+    if not log.exists():
+        return None
+    try:
+        lines = [ln for ln in log.read_text().splitlines() if ln.strip()]
+        records = [json.loads(ln) for ln in lines[-n:]]
+        if len(records) < 5:
+            return None
+        viable = sum(1 for r in records if r.get("viable") is True)
+        return round(viable / len(records), 4)
+    except Exception:
+        return None
+
+
 # ───────────────────────── COMMANDER ─────────────────────────
 def _harvey_is_initialized() -> bool:
     """Return True if HARVEY has recorded at least one signal in the last 2 hours.
@@ -769,7 +789,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             _dq = (result.get("data_quality") or {}).get("dq_score")
             _gordon_status = gordon_result.get("status")
             _regime_label = ((result.get("stress") or {}).get("regime") or {}).get("label")
-            _dq_ratio = (result.get("dq") or {}).get("equities_ok_ratio")  # proxy for fin. attractiveness
+            _dq_ratio = (result.get("dq") or {}).get("equities_ok_ratio")  # kept for dq reporting only
 
             # operational_readiness: data reliability + governance gate
             _gordon_ok = 1.0 if _gordon_status == "OK" else (0.5 if _gordon_status == "ALERT" else 0.0)
@@ -789,8 +809,9 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             # Reaches 1.0 only when GORDON=OK + perfect data + NORMAL regime.
             _governance_risk = round(_gordon_ok * 0.50 + (_dq or 0.0) * 0.30 + _market_behavior * 0.20, 4)
 
-            # financial_attractiveness: equities data completeness as proxy
-            _financial_attractiveness = round(_dq_ratio, 4) if _dq_ratio is not None else None
+            # financial_attractiveness: viable opportunity ratio (last 50 records)
+            # 1.0 = all recent opps are viable; 0.0 = none are; None = insufficient data
+            _financial_attractiveness = _viable_opportunity_ratio()
 
             # concentration_risk: from portfolio_positions via PG
             _conc = get_concentration_risk()
