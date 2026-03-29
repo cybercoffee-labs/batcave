@@ -136,7 +136,7 @@ def test_gordon_gate_entry_when_blocked():
 def test_blocked_when_harvey_not_initialized():
     r = _decide(harvey_init=False)
     assert r["viable"] is False
-    assert "harvey_db_not_initialized" in r["blocked_by"]
+    assert "harvey_no_recent_signals" in r["blocked_by"]
 
 
 def test_harvey_gate_entry_when_blocked():
@@ -183,14 +183,26 @@ def test_harvey_not_initialized_when_table_missing(tmp_path):
         assert _harvey_is_initialized() is False
 
 
-def test_harvey_initialized_when_signals_table_exists(tmp_path):
+def test_harvey_initialized_when_recent_signal_exists(tmp_path):
     import sqlite3
 
     db = tmp_path / "batman.db"
     with sqlite3.connect(db) as conn:
-        conn.execute("CREATE TABLE signals (id INTEGER PRIMARY KEY)")
+        conn.execute("CREATE TABLE signals (id INTEGER PRIMARY KEY, timestamp TEXT)")
+        conn.execute("INSERT INTO signals VALUES (1, datetime('now'))")
     with patch.object(eng_mod, "HARVEY_DB_PATH", db):
         assert _harvey_is_initialized() is True
+
+
+def test_harvey_not_initialized_when_signals_table_empty(tmp_path):
+    import sqlite3
+
+    db = tmp_path / "batman.db"
+    with sqlite3.connect(db) as conn:
+        conn.execute("CREATE TABLE signals (id INTEGER PRIMARY KEY, timestamp TEXT)")
+        # no rows → stale
+    with patch.object(eng_mod, "HARVEY_DB_PATH", db):
+        assert _harvey_is_initialized() is False
 
 
 # ─────────────────────────── run_engine integration ───────────────────────────

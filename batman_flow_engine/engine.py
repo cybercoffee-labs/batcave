@@ -1,5 +1,6 @@
 import json
 import hashlib
+import subprocess
 from core.database import init_db, save_engine_run
 from core.signals import compute_risk_score
 import logging
@@ -25,7 +26,7 @@ from alerts import write_alerts
 from core.scanner_cross_exchange import scan_cross_exchange
 from core.scanner_basis import scan_basis
 from core.p2p_latam import p2p_premium_analysis
-from core.harvey import ingest_opportunities, DB_PATH as HARVEY_DB_PATH
+from core.harvey import ingest_opportunities, daily_exposure as harvey_daily_exposure, DB_PATH as HARVEY_DB_PATH
 from core.gordon import check as gordon_check
 
 # Phase 2 scanners
@@ -588,7 +589,11 @@ def _persist_run(result: dict[str, Any]) -> None:
 
 # ───────────────────────── COMMANDER ─────────────────────────
 def _harvey_is_initialized() -> bool:
-    """Return True if HARVEY's SQLite DB exists and contains the signals table."""
+    """Return True if HARVEY has recorded at least one signal in the last 2 hours.
+
+    A 2-hour window covers 6 missed engine cycles (engine runs every 20 min).
+    Returns False if the DB is absent, the table is missing, or no recent row exists.
+    """
     if not HARVEY_DB_PATH.exists():
         return False
     try:
@@ -596,7 +601,12 @@ def _harvey_is_initialized() -> bool:
 
         with _sqlite3.connect(HARVEY_DB_PATH) as conn:
             tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-            return "signals" in tables
+            if "signals" not in tables:
+                return False
+            (count,) = conn.execute(
+                "SELECT COUNT(*) FROM signals WHERE timestamp >= datetime('now', '-2 hours')"
+            ).fetchone()
+            return count > 0
     except Exception:
         return False
 
@@ -612,7 +622,7 @@ def commander_decision(result: dict[str, Any]) -> dict[str, Any]:
     Gates:
         1. alfred_dq   — data_quality.dq_score >= 0.80
         2. gordon_ok   — gordon.status == "OK" (ALERT also blocks)
-        3. harvey_init — HARVEY DB exists with signals table
+        3. harvey_init — HARVEY has recorded a signal in the last 2 hours
 
     Returns:
         {
@@ -658,11 +668,11 @@ def commander_decision(result: dict[str, Any]) -> dict[str, Any]:
     else:
         gates.append({"gate": "gordon_ok", "passed": True, "gordon_status": gordon_status})
 
-    # Gate 3: HARVEY initialized — DB file present + signals table exists
+    # Gate 3: HARVEY freshness — at least one signal recorded in the last 2 hours
     harvey_ready = _harvey_is_initialized()
     if not harvey_ready:
-        gates.append({"gate": "harvey_init", "passed": False, "reason": "harvey_db_not_initialized"})
-        blocked_by.append("harvey_db_not_initialized")
+        gates.append({"gate": "harvey_init", "passed": False, "reason": "harvey_no_recent_signals"})
+        blocked_by.append("harvey_no_recent_signals")
     else:
         gates.append({"gate": "harvey_init", "passed": True})
 
@@ -687,16 +697,58 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
     logger.info("ENGINE START — equities=%d crypto=%d scanners=11", len(cfg.equities), len(cfg.crypto))
 
     if LOCK_FILE.exists():
-        logger.warning("Engine already running. Aborting.")
-        return {"status": "already_running", "lock_file": str(LOCK_FILE)}
+        try:
+            stored_pid = int(LOCK_FILE.read_text(encoding="utf-8").strip())
+        except (ValueError, OSError):
+            stored_pid = None
+
+        pid_is_engine = False
+        if stored_pid is not None:
+            try:
+                os.kill(stored_pid, 0)  # signal 0 = existence check only
+                # PID exists — verify it is actually our engine process, not a recycled PID.
+                # PermissionError means the process is owned by another user → definitely not us.
+                result = subprocess.run(
+                    ["ps", "-p", str(stored_pid), "-o", "args="],
+                    capture_output=True,
+                    text=True,
+                    timeout=2,
+                )
+                cmdline = result.stdout.strip()
+                pid_is_engine = bool(cmdline) and any(kw in cmdline for kw in ("engine.py", "run_loop.py", "runner.py"))
+            except ProcessLookupError:
+                pid_is_engine = False  # process is gone
+            except PermissionError:
+                pid_is_engine = False  # owned by another user — PID was recycled
+            except Exception:
+                # ps failed for an unexpected reason; be conservative
+                pid_is_engine = True
+
+        if pid_is_engine:
+            logger.warning("Engine already running (PID %s). Aborting.", stored_pid)
+            return {"status": "already_running", "lock_file": str(LOCK_FILE), "pid": stored_pid}
+
+        logger.warning(
+            "Stale lock file found (PID %s — not an engine process) — removing and continuing.",
+            stored_pid,
+        )
+        LOCK_FILE.unlink(missing_ok=True)
 
     try:
         LOCK_FILE.write_text(str(os.getpid()), encoding="utf-8")
         result = _build_engine_result(cfg)
         _enrich_runtime_metadata(result)
 
+        # Compute HARVEY daily exposure (single source of truth) before gate checks
+        harvey_exposure: dict[str, float] = {}
+        for _fiat in ("MXN", "ARS"):
+            try:
+                harvey_exposure[_fiat] = harvey_daily_exposure(_fiat)
+            except Exception as _exc:
+                logger.warning("HARVEY daily_exposure(%s) failed: %s", _fiat, _exc)
+
         # GORDON gate — runs after ALFRED, before HARVEY
-        gordon_result = gordon_check(result)
+        gordon_result = gordon_check(result, exposure=harvey_exposure)
         result["gordon"] = gordon_result
         if gordon_result["status"] == "BLOCKED":
             logger.warning(
@@ -709,6 +761,78 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
         # COMMANDER gate — explicit viability decision
         commander = commander_decision(result)
         result["commander"] = commander
+
+        # ───────────── RISK SCORES — computed after all gates, persisted per cycle ─────────────
+        try:
+            from database.postgres import get_concentration_risk, save_risk_score
+
+            _dq = (result.get("data_quality") or {}).get("dq_score")
+            _gordon_status = gordon_result.get("status")
+            _regime_label = ((result.get("stress") or {}).get("regime") or {}).get("label")
+            _dq_ratio = (result.get("dq") or {}).get("equities_ok_ratio")  # proxy for fin. attractiveness
+
+            # operational_readiness: data reliability + governance gate
+            _gordon_ok = 1.0 if _gordon_status == "OK" else (0.5 if _gordon_status == "ALERT" else 0.0)
+            _operational_readiness = round((_dq or 0.0) * 0.6 + _gordon_ok * 0.4, 4)
+
+            # governance_risk: direct from GORDON
+            _governance_risk = round(_gordon_ok, 4)
+
+            # technical_risk: ALFRED dq_score (1.0 = clean data)
+            _technical_risk = round(_dq or 0.0, 4)
+
+            # market_behavior: regime label lookup
+            _regime_map = {"NORMAL": 1.0, "TENSION": 0.85, "STRESS": 0.5, "DATA_DEGRADED": 0.3, "PANIC": 0.1}
+            _market_behavior = _regime_map.get(_regime_label, 0.7)
+
+            # financial_attractiveness: equities data completeness as proxy
+            _financial_attractiveness = round(_dq_ratio, 4) if _dq_ratio is not None else None
+
+            # concentration_risk: from portfolio_positions via PG
+            _conc = get_concentration_risk()
+            _concentration_risk = _conc.get("score")
+
+            # composite: weighted average of available scores
+            _score_weights = [
+                (_operational_readiness, 0.20),
+                (_technical_risk, 0.15),
+                (_governance_risk, 0.15),
+                (_market_behavior, 0.15),
+                (_financial_attractiveness, 0.15) if _financial_attractiveness is not None else None,
+                (_concentration_risk, 0.20) if _concentration_risk is not None else None,
+            ]
+            _valid = [(s, w) for item in _score_weights if item is not None for s, w in [item]]
+            _total_w = sum(w for _, w in _valid)
+            _composite = round(sum(s * w for s, w in _valid) / _total_w, 4) if _total_w > 0 else None
+
+            _cycle_id = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d_%H%M%S")
+            _risk_payload = {
+                "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "cycle_id": _cycle_id,
+                "operational_readiness": _operational_readiness,
+                "concentration_risk": _concentration_risk,
+                "technical_risk": _technical_risk,
+                "governance_risk": _governance_risk,
+                "market_behavior": _market_behavior,
+                "financial_attractiveness": _financial_attractiveness,
+                "composite_score": _composite,
+                "dq_score": _dq,
+                "gordon_status": _gordon_status,
+                "regime_label": _regime_label,
+                "top_position_pct": _conc.get("top_position_pct"),
+                "hhi": _conc.get("hhi"),
+            }
+            result["risk_scores"] = _risk_payload
+            save_risk_score(_risk_payload)
+            logger.info(
+                "RISK SCORES — operational_readiness=%.3f concentration=%.3f composite=%s",
+                _operational_readiness,
+                _concentration_risk if _concentration_risk is not None else 0.0,
+                f"{_composite:.3f}" if _composite is not None else "N/A",
+            )
+        except Exception as _exc:
+            logger.warning("Risk score computation failed (non-fatal): %s", _exc)
+            result.setdefault("risk_scores", {"error": str(_exc)})
 
         _persist_run(result)
         if commander["viable"]:
