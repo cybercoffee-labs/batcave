@@ -775,15 +775,19 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             _gordon_ok = 1.0 if _gordon_status == "OK" else (0.5 if _gordon_status == "ALERT" else 0.0)
             _operational_readiness = round((_dq or 0.0) * 0.6 + _gordon_ok * 0.4, 4)
 
-            # governance_risk: direct from GORDON
-            _governance_risk = round(_gordon_ok, 4)
-
             # technical_risk: ALFRED dq_score (1.0 = clean data)
             _technical_risk = round(_dq or 0.0, 4)
 
             # market_behavior: regime label lookup
             _regime_map = {"NORMAL": 1.0, "TENSION": 0.85, "STRESS": 0.5, "DATA_DEGRADED": 0.3, "PANIC": 0.1}
             _market_behavior = _regime_map.get(_regime_label, 0.7)
+
+            # governance_risk: control-state composite
+            #   gordon_ok (0/0.5/1.0) × 0.50 — gate health is the primary signal
+            #   dq_score            × 0.30 — poor data quality degrades governance confidence
+            #   market_behavior     × 0.20 — market stress elevates governance risk
+            # Reaches 1.0 only when GORDON=OK + perfect data + NORMAL regime.
+            _governance_risk = round(_gordon_ok * 0.50 + (_dq or 0.0) * 0.30 + _market_behavior * 0.20, 4)
 
             # financial_attractiveness: equities data completeness as proxy
             _financial_attractiveness = round(_dq_ratio, 4) if _dq_ratio is not None else None
