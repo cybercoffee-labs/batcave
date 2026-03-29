@@ -14,7 +14,7 @@ import json
 import logging
 from datetime import datetime, timezone
 from contextlib import contextmanager
-from typing import Any, Optional
+from typing import Optional
 
 logger = logging.getLogger("batman.postgres")
 
@@ -32,8 +32,8 @@ _pool = None
 def get_pool():
     global _pool
     if _pool is None:
-        import psycopg2
         from psycopg2 import pool as pg_pool
+
         _pool = pg_pool.ThreadedConnectionPool(minconn=2, maxconn=10, **DB_CONFIG)
         logger.info("PostgreSQL pool created: %s@%s/%s", DB_CONFIG["user"], DB_CONFIG["host"], DB_CONFIG["dbname"])
     return _pool
@@ -77,17 +77,32 @@ def check_connection() -> dict:
 
 # ─────────────────────── OPPORTUNITIES ───────────────────────
 
+
 def save_opportunity(opp: dict) -> bool:
     try:
         standard_keys = {
-            "opp_id", "ts", "type", "scanner_id", "asset", "market", "venue",
-            "buy_price", "sell_price", "spot_price", "gross_spread_pct",
-            "total_friction_pct", "edge_net", "viable", "depth_estimate", "observe_only"
+            "opp_id",
+            "ts",
+            "type",
+            "scanner_id",
+            "asset",
+            "market",
+            "venue",
+            "buy_price",
+            "sell_price",
+            "spot_price",
+            "gross_spread_pct",
+            "total_friction_pct",
+            "edge_net",
+            "viable",
+            "depth_estimate",
+            "observe_only",
         }
         metadata = {k: v for k, v in opp.items() if k not in standard_keys}
 
         with get_cursor() as cur:
-            cur.execute("""
+            cur.execute(
+                """
                 INSERT INTO opportunities
                     (opp_id, ts, scanner_type, scanner_id, asset, market, venue,
                      buy_price, sell_price, spot_price, gross_spread_pct,
@@ -95,16 +110,27 @@ def save_opportunity(opp: dict) -> bool:
                      observe_only, metadata)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (opp_id) DO NOTHING
-            """, (
-                opp.get("opp_id"), opp.get("ts", datetime.now(timezone.utc).isoformat()),
-                opp.get("type", "?"), opp.get("scanner_id", "unknown"),
-                opp.get("asset", "USDT"), opp.get("market"), opp.get("venue"),
-                opp.get("buy_price"), opp.get("sell_price"), opp.get("spot_price"),
-                opp.get("gross_spread_pct"), opp.get("total_friction_pct"),
-                opp.get("edge_net"), opp.get("viable", False),
-                opp.get("depth_estimate"), opp.get("observe_only", True),
-                json.dumps(metadata, default=str),
-            ))
+            """,
+                (
+                    opp.get("opp_id"),
+                    opp.get("ts", datetime.now(timezone.utc).isoformat()),
+                    opp.get("type", "?"),
+                    opp.get("scanner_id", "unknown"),
+                    opp.get("asset", "USDT"),
+                    opp.get("market"),
+                    opp.get("venue"),
+                    opp.get("buy_price"),
+                    opp.get("sell_price"),
+                    opp.get("spot_price"),
+                    opp.get("gross_spread_pct"),
+                    opp.get("total_friction_pct"),
+                    opp.get("edge_net"),
+                    opp.get("viable", False),
+                    opp.get("depth_estimate"),
+                    opp.get("observe_only", True),
+                    json.dumps(metadata, default=str),
+                ),
+            )
         return True
     except Exception as e:
         logger.error("Failed to save opportunity %s: %s", opp.get("opp_id"), e)
@@ -140,29 +166,50 @@ def get_best_opportunity() -> Optional[dict]:
 
 # ─────────────────────── TRADES ───────────────────────
 
+
 def save_trade(trade: dict) -> bool:
     try:
         standard_keys = {
-            "trade_id", "agent", "ts", "opp_id", "asset", "market",
-            "side", "price", "quantity", "fee", "pnl", "status"
+            "trade_id",
+            "agent",
+            "ts",
+            "opp_id",
+            "asset",
+            "market",
+            "side",
+            "price",
+            "quantity",
+            "fee",
+            "pnl",
+            "status",
         }
         metadata = {k: v for k, v in trade.items() if k not in standard_keys}
 
         with get_cursor() as cur:
-            cur.execute("""
+            cur.execute(
+                """
                 INSERT INTO trades
                     (trade_id, agent, ts, opp_id, asset, market,
                      side, price, quantity, fee, pnl, status, metadata)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (trade_id) DO NOTHING
-            """, (
-                trade.get("trade_id"), trade.get("agent", "unknown"),
-                trade.get("ts", datetime.now(timezone.utc).isoformat()),
-                trade.get("opp_id"), trade.get("asset", "USDT"), trade.get("market"),
-                trade.get("side", "BUY"), trade.get("price", 0), trade.get("quantity", 0),
-                trade.get("fee", 0), trade.get("pnl"), trade.get("status", "executed"),
-                json.dumps(metadata, default=str),
-            ))
+            """,
+                (
+                    trade.get("trade_id"),
+                    trade.get("agent", "unknown"),
+                    trade.get("ts", datetime.now(timezone.utc).isoformat()),
+                    trade.get("opp_id"),
+                    trade.get("asset", "USDT"),
+                    trade.get("market"),
+                    trade.get("side", "BUY"),
+                    trade.get("price", 0),
+                    trade.get("quantity", 0),
+                    trade.get("fee", 0),
+                    trade.get("pnl"),
+                    trade.get("status", "executed"),
+                    json.dumps(metadata, default=str),
+                ),
+            )
         return True
     except Exception as e:
         logger.error("Failed to save trade %s: %s", trade.get("trade_id"), e)
@@ -192,20 +239,30 @@ def get_daily_pnl(agent: str = None, days: int = 30) -> list:
 
 # ─────────────────────── HODL POSITIONS ───────────────────────
 
+
 def save_hodl_position(pos: dict) -> bool:
     try:
         with get_cursor() as cur:
-            cur.execute("""
+            cur.execute(
+                """
                 INSERT INTO hodl_positions
                     (token, exchange, quantity, avg_buy_price,
                      take_profit_1, take_profit_2, take_profit_3,
                      stop_loss, trailing_stop_pct)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (
-                pos["token"], pos["exchange"], pos["quantity"], pos["avg_buy_price"],
-                pos.get("take_profit_1"), pos.get("take_profit_2"), pos.get("take_profit_3"),
-                pos.get("stop_loss"), pos.get("trailing_stop_pct", 15.0),
-            ))
+            """,
+                (
+                    pos["token"],
+                    pos["exchange"],
+                    pos["quantity"],
+                    pos["avg_buy_price"],
+                    pos.get("take_profit_1"),
+                    pos.get("take_profit_2"),
+                    pos.get("take_profit_3"),
+                    pos.get("stop_loss"),
+                    pos.get("trailing_stop_pct", 15.0),
+                ),
+            )
         return True
     except Exception as e:
         logger.error("Failed to save HODL position: %s", e)
@@ -217,13 +274,16 @@ def update_hodl_prices(prices: dict) -> int:
     try:
         with get_cursor() as cur:
             for token, price in prices.items():
-                cur.execute("""
+                cur.execute(
+                    """
                     UPDATE hodl_positions
                     SET current_price = %s,
                         peak_price = GREATEST(COALESCE(peak_price, 0), %s),
                         updated_at = NOW()
                     WHERE token = %s AND status = 'active'
-                """, (price, price, token))
+                """,
+                    (price, price, token),
+                )
                 updated += cur.rowcount
     except Exception as e:
         logger.error("Failed to update HODL prices: %s", e)
@@ -254,19 +314,27 @@ def get_all_hodl() -> list:
 
 # ─────────────────────── VENTURE POSITIONS ───────────────────────
 
+
 def save_venture_position(pos: dict) -> bool:
     try:
         with get_cursor() as cur:
-            cur.execute("""
+            cur.execute(
+                """
                 INSERT INTO venture_positions
                     (token, chain, wallet_address, dexscreener_pair,
                      quantity, avg_buy_price, notes)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
-            """, (
-                pos["token"], pos["chain"], pos.get("wallet_address"),
-                pos.get("dexscreener_pair"), pos["quantity"],
-                pos.get("avg_buy_price", 0), pos.get("notes"),
-            ))
+            """,
+                (
+                    pos["token"],
+                    pos["chain"],
+                    pos.get("wallet_address"),
+                    pos.get("dexscreener_pair"),
+                    pos["quantity"],
+                    pos.get("avg_buy_price", 0),
+                    pos.get("notes"),
+                ),
+            )
         return True
     except Exception as e:
         logger.error("Failed to save venture position: %s", e)
@@ -286,21 +354,29 @@ def get_all_ventures() -> list:
 
 # ─────────────────────── PORTFOLIO BALANCES ───────────────────────
 
+
 def save_portfolio_snapshot(balances: list) -> int:
     saved = 0
     today = datetime.now().date()
     try:
         with get_cursor() as cur:
             for b in balances:
-                cur.execute("""
+                cur.execute(
+                    """
                     INSERT INTO portfolio_balances
                         (platform, instrument, balance, currency, interest_rate, category, snapshot_date)
                     VALUES (%s, %s, %s, %s, %s, %s, %s)
-                """, (
-                    b["platform"], b["instrument"], b["balance"],
-                    b.get("currency", "MXN"), b.get("interest_rate"),
-                    b.get("category", "other"), today,
-                ))
+                """,
+                    (
+                        b["platform"],
+                        b["instrument"],
+                        b["balance"],
+                        b.get("currency", "MXN"),
+                        b.get("interest_rate"),
+                        b.get("category", "other"),
+                        today,
+                    ),
+                )
                 saved += 1
     except Exception as e:
         logger.error("Failed to save portfolio snapshot: %s", e)
@@ -320,18 +396,28 @@ def get_portfolio_overview() -> list:
 
 # ─────────────────────── SCANNER RUNS ───────────────────────
 
-def log_scanner_run(scanner_type: str, scanner_name: str, duration_sec: float,
-                    opps_found: int, viable_found: int, errors: int = 0,
-                    status: str = "ok", error_msg: str = None) -> bool:
+
+def log_scanner_run(
+    scanner_type: str,
+    scanner_name: str,
+    duration_sec: float,
+    opps_found: int,
+    viable_found: int,
+    errors: int = 0,
+    status: str = "ok",
+    error_msg: str = None,
+) -> bool:
     try:
         with get_cursor() as cur:
-            cur.execute("""
+            cur.execute(
+                """
                 INSERT INTO scanner_runs
                     (scanner_type, scanner_name, duration_sec,
                      opportunities_found, viable_found, errors, status, error_message)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-            """, (scanner_type, scanner_name, duration_sec,
-                  opps_found, viable_found, errors, status, error_msg))
+            """,
+                (scanner_type, scanner_name, duration_sec, opps_found, viable_found, errors, status, error_msg),
+            )
         return True
     except Exception as e:
         logger.error("Failed to log scanner run: %s", e)
@@ -351,6 +437,7 @@ def get_scanner_performance(days: int = 7) -> list:
 
 # ─────────────────────── ENGINE RUNS ───────────────────────
 
+
 def save_engine_run_pg(result: dict) -> bool:
     try:
         meta = result.get("meta", {})
@@ -358,20 +445,28 @@ def save_engine_run_pg(result: dict) -> bool:
         regime = stress.get("regime", {}) if isinstance(stress, dict) else {}
 
         with get_cursor() as cur:
-            cur.execute("""
+            cur.execute(
+                """
                 INSERT INTO engine_runs
                     (ts, duration_sec, equities_total, equities_ok,
                      crypto_total, crypto_ok, regime, dq_score,
                      corr_stress, errors, full_report)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (
-                result.get("timestamp", datetime.now(timezone.utc).isoformat()),
-                meta.get("duration_sec"), meta.get("equities_total"), meta.get("equities_ok"),
-                meta.get("crypto_total"), meta.get("crypto_ok"),
-                regime.get("label") if isinstance(regime, dict) else None,
-                None, stress.get("corr_stress") if isinstance(stress, dict) else None,
-                meta.get("errors", 0), json.dumps(result, default=str),
-            ))
+            """,
+                (
+                    result.get("timestamp", datetime.now(timezone.utc).isoformat()),
+                    meta.get("duration_sec"),
+                    meta.get("equities_total"),
+                    meta.get("equities_ok"),
+                    meta.get("crypto_total"),
+                    meta.get("crypto_ok"),
+                    regime.get("label") if isinstance(regime, dict) else None,
+                    None,
+                    stress.get("corr_stress") if isinstance(stress, dict) else None,
+                    meta.get("errors", 0),
+                    json.dumps(result, default=str),
+                ),
+            )
         return True
     except Exception as e:
         logger.error("Failed to save engine run: %s", e)
@@ -380,14 +475,17 @@ def save_engine_run_pg(result: dict) -> bool:
 
 # ─────────────────────── ALERTS ───────────────────────
 
-def save_alert(source: str, title: str, message: str = None,
-               severity: str = "info", metadata: dict = None) -> bool:
+
+def save_alert(source: str, title: str, message: str = None, severity: str = "info", metadata: dict = None) -> bool:
     try:
         with get_cursor() as cur:
-            cur.execute("""
+            cur.execute(
+                """
                 INSERT INTO alerts (source, severity, title, message, metadata)
                 VALUES (%s, %s, %s, %s, %s)
-            """, (source, severity, title, message, json.dumps(metadata or {}, default=str)))
+            """,
+                (source, severity, title, message, json.dumps(metadata or {}, default=str)),
+            )
         return True
     except Exception as e:
         logger.error("Failed to save alert: %s", e)
@@ -407,13 +505,116 @@ def get_unread_alerts(limit: int = 50) -> list:
 
 # ─────────────────────── STATS ───────────────────────
 
+
+def get_concentration_risk() -> dict:
+    """
+    Compute portfolio concentration risk from active portfolio_positions.
+
+    Returns:
+        hhi              — Herfindahl-Hirschman Index (sum of squared position shares)
+        top_position_pct — largest single position as share of total (0.0–1.0)
+        score            — 1.0 − HHI  (1.0 = perfectly diversified, 0.0 = single position)
+        positions        — number of active positions included
+    """
+    try:
+        with get_cursor() as cur:
+            cur.execute("""
+                SELECT position_id,
+                       cost_basis_native * fx_rate_entry AS cost_basis_usd
+                FROM portfolio_positions
+                WHERE status = 'active'
+            """)
+            rows = cur.fetchall()
+
+        if not rows:
+            # No active positions → no concentration risk by definition
+            return {"hhi": 0.0, "top_position_pct": 0.0, "score": 1.0, "positions": 0}
+
+        values = [float(r[1]) for r in rows if r[1] is not None and float(r[1]) > 0]
+        if not values:
+            # Rows exist but all have zero/null cost basis → treat as empty
+            return {"hhi": 0.0, "top_position_pct": 0.0, "score": 1.0, "positions": len(rows)}
+
+        total = sum(values)
+        if total <= 0:
+            return {"hhi": 0.0, "top_position_pct": 0.0, "score": 1.0, "positions": len(values)}
+
+        shares = [v / total for v in values]
+        hhi = sum(s**2 for s in shares)
+        top_pct = max(shares)
+        score = round(max(0.0, 1.0 - hhi), 4)
+
+        return {
+            "hhi": round(hhi, 6),
+            "top_position_pct": round(top_pct, 4),
+            "score": score,
+            "positions": len(values),
+        }
+    except Exception as e:
+        logger.error("Failed to compute concentration risk: %s", e)
+        return {"hhi": None, "top_position_pct": None, "score": None, "positions": 0, "error": str(e)}
+
+
+def save_risk_score(scores: dict) -> bool:
+    """
+    Persist one risk_scores row per engine cycle.
+
+    Args:
+        scores: Dict produced by engine.py's _compute_risk_scores() block.
+                Keys mirror risk_scores table columns.
+    """
+    try:
+        with get_cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO risk_scores
+                    (ts, cycle_id,
+                     operational_readiness, concentration_risk, technical_risk,
+                     governance_risk, market_behavior, financial_attractiveness,
+                     composite_score,
+                     dq_score, gordon_status, regime_label, viable_pct,
+                     top_position_pct, hhi, metadata)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """,
+                (
+                    scores.get("ts", datetime.now(timezone.utc).isoformat()),
+                    scores.get("cycle_id"),
+                    scores.get("operational_readiness"),
+                    scores.get("concentration_risk"),
+                    scores.get("technical_risk"),
+                    scores.get("governance_risk"),
+                    scores.get("market_behavior"),
+                    scores.get("financial_attractiveness"),
+                    scores.get("composite_score"),
+                    scores.get("dq_score"),
+                    scores.get("gordon_status"),
+                    scores.get("regime_label"),
+                    scores.get("viable_pct"),
+                    scores.get("top_position_pct"),
+                    scores.get("hhi"),
+                    json.dumps(scores.get("metadata", {}), default=str),
+                ),
+            )
+        return True
+    except Exception as e:
+        logger.error("Failed to save risk score: %s", e)
+        return False
+
+
 def get_database_stats() -> dict:
     try:
         stats = {}
         with get_cursor() as cur:
-            for table in ["opportunities", "trades", "hodl_positions",
-                          "venture_positions", "portfolio_balances",
-                          "scanner_runs", "engine_runs", "alerts"]:
+            for table in [
+                "opportunities",
+                "trades",
+                "hodl_positions",
+                "venture_positions",
+                "portfolio_balances",
+                "scanner_runs",
+                "engine_runs",
+                "alerts",
+            ]:
                 cur.execute(f"SELECT COUNT(*) FROM {table}")
                 stats[table] = cur.fetchone()[0]
         return stats
