@@ -199,15 +199,8 @@ def check(result: dict | None = None, exposure: dict | None = None) -> dict:
     # 3. Runtime guard — alert on stale lock (previous run may have crashed)
     guard = check_runtime_guard()
     if guard["status"] == "stale_lock":
-        checks.append(
-            {
-                "check": "runtime_guard",
-                "passed": True,
-                "status": guard["status"],
-                "warning": "stale_engine_lock",
-            }
-        )
-        warnings.append("stale_engine_lock")
+        checks.append({"check": "runtime_guard", "passed": False, "status": guard["status"]})
+        blocked_by.append("stale_engine_lock")
     else:
         checks.append({"check": "runtime_guard", "passed": True, "status": guard["status"]})
 

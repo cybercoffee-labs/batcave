@@ -118,10 +118,10 @@ def test_check_ok_when_result_is_none():
 # ─────────────────────────── runtime guard ───────────────────────────
 
 
-def test_check_alert_on_stale_lock():
+def test_check_blocked_on_stale_lock():
     r = _patched_check(_result(), guard_status="stale_lock")
-    assert r["status"] == "ALERT"
-    assert "stale_engine_lock" in r["warnings"]
+    assert r["status"] == "BLOCKED"
+    assert "stale_engine_lock" in r["blocked_by"]
 
 
 # ─────────────────────────── regime anomaly ───────────────────────────
