@@ -127,10 +127,10 @@ def test_check_alert_on_stale_lock():
 # ─────────────────────────── regime anomaly ───────────────────────────
 
 
-def test_check_alert_on_panic_regime():
+def test_check_blocked_on_panic_regime():
     r = _patched_check(_result(regime_label="PANIC"))
-    assert r["status"] == "ALERT"
-    assert "regime_PANIC" in r["warnings"]
+    assert r["status"] == "BLOCKED"
+    assert "regime_panic" in r["blocked_by"]
 
 
 def test_check_alert_on_data_degraded_regime():
@@ -143,7 +143,7 @@ def test_check_alert_on_data_degraded_regime():
 
 
 def test_check_blocked_takes_priority_over_alert():
-    # kill switch (BLOCKED) + PANIC regime (ALERT) → must be BLOCKED
+    # kill switch (BLOCKED) + PANIC regime (BLOCKED) → must be BLOCKED
     r = _patched_check(_result(regime_label="PANIC"), kill_switch=True)
     assert r["status"] == "BLOCKED"
 

@@ -544,7 +544,9 @@ def scan_cross_platform_mxn(log_to_file: bool = True) -> List[Dict[str, Any]]:
             "scanner_id": SCANNER_ID,
             "asset": "USDT",
             "fiat": "MXN",
+            "market": "MXN",
             **opp,
+            "spot_price": opp["buy_price_mxn"],
             "observe_only": True,
         }
         results.append(full_opp)

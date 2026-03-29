@@ -138,7 +138,7 @@ def get_system_health() -> dict:
     }
 
 
-def check(result: dict | None = None) -> dict:
+def check(result: dict | None = None, exposure: dict | None = None) -> dict:
     """
     GORDON security gate for Batman signal production.
 
@@ -151,8 +151,10 @@ def check(result: dict | None = None) -> dict:
         4. Regime anomaly    — ALERT if DATA_DEGRADED or PANIC
 
     Args:
-        result: Engine result dict produced by _build_engine_result +
-                _enrich_runtime_metadata. May be None in tests.
+        result:   Engine result dict produced by _build_engine_result +
+                  _enrich_runtime_metadata. May be None in tests.
+        exposure: HARVEY daily exposure by fiat, e.g. {"MXN": 800.0, "ARS": 0.0}.
+                  Passed for logging and downstream context. Does not block.
 
     Returns:
         {
@@ -160,6 +162,7 @@ def check(result: dict | None = None) -> dict:
             "checks":     [{"check": str, "passed": bool, ...}, ...],
             "blocked_by": [str, ...],   # non-empty only when BLOCKED
             "warnings":   [str, ...],   # non-empty only when ALERT
+            "exposure":   {str: float}, # harvey daily exposure by fiat
             "timestamp":  str,
         }
     """
@@ -214,16 +217,19 @@ def check(result: dict | None = None) -> dict:
         regime = (result.get("stress") or {}).get("regime") or {}
         regime_label = regime.get("label")
 
-    if regime_label in ("DATA_DEGRADED", "PANIC"):
+    if regime_label == "PANIC":
+        checks.append({"check": "regime", "passed": False, "regime": regime_label})
+        blocked_by.append("regime_panic")
+    elif regime_label == "DATA_DEGRADED":
         checks.append(
             {
                 "check": "regime",
                 "passed": True,
                 "regime": regime_label,
-                "warning": f"regime_{regime_label}",
+                "warning": "regime_DATA_DEGRADED",
             }
         )
-        warnings.append(f"regime_{regime_label}")
+        warnings.append("regime_DATA_DEGRADED")
     else:
         checks.append({"check": "regime", "passed": True, "regime": regime_label})
 
@@ -243,6 +249,7 @@ def check(result: dict | None = None) -> dict:
         "checks": checks,
         "blocked_by": blocked_by,
         "warnings": warnings,
+        "exposure": exposure or {},
         "timestamp": _utc_timestamp(),
     }
 
