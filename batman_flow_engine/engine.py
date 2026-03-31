@@ -537,10 +537,14 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
         logger.error("Scanner K (futures vs futures) failed: %s", e)
 
     current_cycle_opportunities = _current_cycle_opportunities(scanner_results)
-    result["meta"]["opportunities_total_cycle"] = len(current_cycle_opportunities)
-    result["meta"]["opportunities_viable_cycle"] = sum(
-        1 for opportunity in current_cycle_opportunities if opportunity.get("viable") is True
-    )
+    current_cycle_total = len(current_cycle_opportunities)
+    current_cycle_viable = sum(1 for opportunity in current_cycle_opportunities if opportunity.get("viable") is True)
+    result["_current_cycle_opportunity_counts"] = {
+        "total": current_cycle_total,
+        "viable": current_cycle_viable,
+    }
+    result["meta"]["opportunities_total_cycle"] = current_cycle_total
+    result["meta"]["opportunities_viable_cycle"] = current_cycle_viable
 
     return result
 
@@ -637,6 +641,24 @@ def _current_cycle_opportunities(scanner_results: list[Any]) -> list[dict[str, A
         opportunities.append(scanner_result)
 
     return opportunities
+
+
+def _current_cycle_opportunity_counts(result: dict[str, Any]) -> tuple[int, int]:
+    """Return same-cycle counts, preferring in-memory scanner output over persisted state."""
+    direct_counts = result.get("_current_cycle_opportunity_counts")
+    if isinstance(direct_counts, dict):
+        total = direct_counts.get("total")
+        viable = direct_counts.get("viable")
+        if isinstance(total, int) and isinstance(viable, int):
+            return total, viable
+
+    meta = result.get("meta") or {}
+    total = meta.get("opportunities_total_cycle")
+    viable = meta.get("opportunities_viable_cycle")
+    if isinstance(total, int) and isinstance(viable, int):
+        return total, viable
+
+    return 0, 0
 
 
 # ───────────────────────── COMMANDER ─────────────────────────
@@ -808,6 +830,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 "GORDON BLOCKED — signal emission aborted: %s",
                 gordon_result["blocked_by"],
             )
+            result.pop("_current_cycle_opportunity_counts", None)
             _persist_run(result)
             return result
 
@@ -822,8 +845,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             _dq = (result.get("data_quality") or {}).get("dq_score")
             _gordon_status = gordon_result.get("status")
             _regime_label = ((result.get("stress") or {}).get("regime") or {}).get("label")
-            _cycle_opps_total = ((result.get("meta") or {}).get("opportunities_total_cycle")) or 0
-            _cycle_opps_viable = ((result.get("meta") or {}).get("opportunities_viable_cycle")) or 0
+            _cycle_opps_total, _cycle_opps_viable = _current_cycle_opportunity_counts(result)
 
             # operational_readiness: data reliability + governance gate
             _gordon_ok = 1.0 if _gordon_status == "OK" else (0.5 if _gordon_status == "ALERT" else 0.0)
@@ -895,6 +917,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             logger.warning("Risk score computation failed (non-fatal): %s", _exc)
             result.setdefault("risk_scores", {"error": str(_exc)})
 
+        result.pop("_current_cycle_opportunity_counts", None)
         _persist_run(result)
         if commander["viable"]:
             ingest_opportunities()

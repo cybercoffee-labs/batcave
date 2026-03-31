@@ -250,7 +250,8 @@ def test_run_engine_financial_attractiveness_uses_same_cycle_counts(tmp_path):
         "data_quality": {"dq_score": 1.0, "status": "ok"},
         "stress": {"regime": {"label": "NORMAL", "triggers": []}},
         "dq": {"equities_ok_ratio": 0.25},
-        "meta": {"opportunities_total_cycle": 5, "opportunities_viable_cycle": 4},
+        "_current_cycle_opportunity_counts": {"total": 5, "viable": 4},
+        "meta": {"opportunities_total_cycle": 50, "opportunities_viable_cycle": 0},
         "errors": [],
     }
 
@@ -278,6 +279,7 @@ def test_run_engine_financial_attractiveness_uses_same_cycle_counts(tmp_path):
         result = eng_mod.run_engine(MagicMock(equities=[], crypto=[]))
 
     assert result["risk_scores"]["financial_attractiveness"] == 0.8
+    assert "_current_cycle_opportunity_counts" not in result
 
 
 # ──────────────────────── concentration_risk ───────────────────
