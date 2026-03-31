@@ -315,3 +315,51 @@ def test_find_arbitrage_same_best_buy_sell_exchange():
     if result:
         assert result["buy_exchange"] == "binance"
         assert result["sell_exchange"] == "binance"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Test ALFRED data contract (Type D)
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_find_arbitrage_has_spot_price():
+    """Type D must emit spot_price == buy_price for ALFRED has_spot_price check."""
+    prices = {
+        "binance": {"bid": 84500.00, "ask": 84000.00, "price": 84250.00},
+        "okx": {"bid": 84600.00, "ask": 84700.00, "price": 84650.00},
+    }
+    result = find_arbitrage_opportunity("BTC", prices, threshold=0.0)
+    assert result is not None
+    assert "spot_price" in result
+    assert result["spot_price"] == result["buy_price"]
+    assert result["spot_price"] > 0
+
+
+def test_find_arbitrage_has_market_field():
+    """Type D must emit market == asset so DQ issues show the asset, not 'unknown'."""
+    prices = {
+        "binance": {"bid": 84500.00, "ask": 84000.00, "price": 84250.00},
+        "okx": {"bid": 84600.00, "ask": 84700.00, "price": 84650.00},
+    }
+    result = find_arbitrage_opportunity("BTC", prices, threshold=0.0)
+    assert result is not None
+    assert result["market"] == "BTC"
+
+
+def test_type_d_record_passes_alfred_validation():
+    """Full Type D record must pass all ALFRED _validate_record checks."""
+    from core.alfred import _validate_record
+
+    prices = {
+        "binance": {"bid": 84500.00, "ask": 84000.00, "price": 84250.00},
+        "okx": {"bid": 84600.00, "ask": 84700.00, "price": 84650.00},
+    }
+    inner = find_arbitrage_opportunity("BTC", prices, threshold=0.0)
+    assert inner is not None
+
+    record = {"type": "D", **inner}
+    result = _validate_record(record)
+    assert result["has_spot_price"] is True, "has_spot_price must pass"
+    assert result["has_valid_spread"] is True, "has_valid_spread must pass"
+    assert result["not_anomalous"] is True
+    assert result["has_premium_quality"] is True

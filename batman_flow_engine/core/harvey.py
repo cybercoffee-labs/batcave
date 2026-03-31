@@ -304,3 +304,53 @@ def get_signal_type_statistics() -> list[dict[str, Any]]:
         ).fetchall()
 
     return [dict(row) for row in rows]
+
+
+def daily_exposure(fiat: str, date: str | None = None) -> float:
+    """
+    Return total USD exposure for a given fiat market from batman.db for the given date.
+
+    Aggregates depth_estimate (capped at $1,000 per opportunity) from today's signals.
+    This is the single source of truth for exposure in Batman Lab.
+
+    Args:
+        fiat: Currency code (e.g., "MXN", "ARS").
+        date: ISO date string YYYY-MM-DD. Defaults to today UTC.
+
+    Returns:
+        Total USD exposure rounded to 2 decimal places.
+
+    Example output:
+        >>> daily_exposure("MXN")
+        800.0
+        >>> daily_exposure("ARS", date="2026-03-26")
+        300.0
+    """
+    import datetime as _dt
+
+    if date is None:
+        date = _dt.datetime.now(_dt.timezone.utc).date().isoformat()
+
+    fiat_upper = fiat.upper()
+    total_usd = 0.0
+
+    with _get_conn() as conn:
+        _ensure_schema(conn)
+        rows = conn.execute(
+            "SELECT raw_json FROM signals WHERE timestamp LIKE ?",
+            (f"{date}%",),
+        ).fetchall()
+
+    for row in rows:
+        try:
+            record = json.loads(row["raw_json"])
+        except (json.JSONDecodeError, TypeError):
+            continue
+        market = record.get("market", "")
+        if market.upper() != fiat_upper:
+            continue
+        depth = record.get("depth_estimate", 0)
+        if depth and depth > 0:
+            total_usd += min(float(depth), 1000.0)
+
+    return round(total_usd, 2)

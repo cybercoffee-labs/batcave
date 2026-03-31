@@ -192,22 +192,12 @@ def is_operating_hours(fiat: str) -> bool:
         return current_time >= start or current_time <= end
 
 
-def get_daily_exposure(fiat: str, session: Optional[Any] = None) -> float:
+def _get_daily_exposure_jsonl(fiat: str) -> float:
     """
-    Calculate total USD traded today for a specific fiat pair.
+    Read daily USD exposure from opportunities.jsonl (JSONL path).
 
-    Reads from opportunities.jsonl to sum all opportunities logged today.
-
-    Args:
-        fiat: Currency code (MXN, COP, VES, ARS)
-        session: Optional session object (for future database integration)
-
-    Returns:
-        Total USD equivalent traded today for this pair
-
-    Example:
-        >>> get_daily_exposure("MXN")
-        1250.50
+    Used internally as a divergence-check reference against batman.db.
+    Not intended as a primary source of truth.
     """
     today = datetime.now(timezone.utc).date().isoformat()
     total_usd = 0.0
@@ -223,33 +213,63 @@ def get_daily_exposure(fiat: str, session: Optional[Any] = None) -> float:
                     continue
                 try:
                     opp = json.loads(line)
-
-                    # Check if this opportunity is for the specified fiat
                     market = opp.get("market", "")
                     if market.upper() != fiat.upper():
                         continue
-
-                    # Check if it's from today
                     ts = opp.get("ts", "")
                     if not ts.startswith(today):
                         continue
-
-                    # Only count non-observe-only opportunities for exposure
-                    # For now, count all opportunities as potential exposure
-                    # In production, this would filter by actual executions
-
-                    # Estimate USD value from depth_estimate (approximate)
                     depth = opp.get("depth_estimate", 0)
                     if depth and depth > 0:
-                        total_usd += min(depth, 1000)  # Cap at 1000 per opportunity
-
+                        total_usd += min(depth, 1000)
                 except json.JSONDecodeError:
                     continue
-
     except Exception as e:
-        logger.error(f"Error reading executions file: {e}")
+        logger.error("Error reading executions file: %s", e)
 
     return round(total_usd, 2)
+
+
+def get_daily_exposure(fiat: str, session: Optional[Any] = None) -> float:
+    """
+    Return daily USD exposure for the given fiat market.
+
+    Uses HARVEY (batman.db) as single source of truth.
+    Compares against JSONL and logs a warning if sources diverge by more than $1.
+    Falls back to JSONL if HARVEY is unavailable.
+
+    Args:
+        fiat: Currency code (MXN, COP, VES, ARS)
+        session: Reserved for future database integration (currently unused).
+
+    Returns:
+        Total USD equivalent exposure today for this pair.
+
+    Example:
+        >>> get_daily_exposure("MXN")
+        800.0
+    """
+    db_exposure: Optional[float] = None
+    try:
+        from core.harvey import daily_exposure as _harvey_daily_exposure
+
+        db_exposure = _harvey_daily_exposure(fiat)
+    except Exception as exc:
+        logger.warning("HARVEY daily_exposure unavailable (%s) — falling back to JSONL", exc)
+
+    jsonl_exposure = _get_daily_exposure_jsonl(fiat)
+
+    if db_exposure is not None:
+        if abs(db_exposure - jsonl_exposure) > 1.0:
+            logger.warning(
+                "EXPOSURE DIVERGENCE [%s]: harvey_db=%.2f jsonl=%.2f — using harvey_db as source of truth",
+                fiat.upper(),
+                db_exposure,
+                jsonl_exposure,
+            )
+        return db_exposure
+
+    return jsonl_exposure
 
 
 def check_jurisdiction(

@@ -281,9 +281,14 @@ def scan_merchant_spread(log_to_file: bool = True) -> List[Dict[str, Any]]:
                 "type": "G",
                 "scanner_id": SCANNER_ID,
                 "fiat": fiat,
+                "market": fiat,
                 "best_buy_price": analysis["best_buy_price"],
                 "best_sell_price": analysis["best_sell_price"],
+                # spot_price: best buy price is the normalized price reference for ALFRED.
+                "spot_price": analysis["best_buy_price"],
                 "merchant_spread_pct": spread_pct,
+                # edge_net: raw merchant spread used as the ALFRED-compatible edge field.
+                "edge_net": round(spread_pct, 4),
                 "num_buy_ads": analysis["num_buy_ads"],
                 "num_sell_ads": analysis["num_sell_ads"],
                 "depth_buy_usd": analysis["depth_buy_usd"],

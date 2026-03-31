@@ -289,7 +289,7 @@ def test_scan_funding_rates_logs_to_file(mock_fetch_all, mock_log):
     mock_log.return_value = True
 
     with patch("core.scanner_funding_rate._load_threshold", return_value=0.01):
-        results = scan_funding_rates(log_to_file=True)
+        scan_funding_rates(log_to_file=True)
 
     # Should have called append_to_log for each opportunity
     assert mock_log.called
@@ -333,3 +333,76 @@ def test_analyze_funding_rates_no_opportunity_below_threshold():
     # No high funding (0.001% < 0.01%)
     # No cross-exchange (spread 0% < 0.02%)
     assert len(opportunities) == 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Test ALFRED data contract (Type E)
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_high_funding_opp_has_reference_price():
+    """Type E high_funding must emit reference_price=1.0 for ALFRED has_spot_price check."""
+    rates = {
+        "binance": {"exchange": "binance", "funding_rate": 0.0005, "funding_rate_pct": 0.05, "next_funding_time": None},
+    }
+    opps = analyze_funding_rates("BTC", rates, threshold=0.01)
+    high = [o for o in opps if o["opportunity_type"] == "high_funding"]
+    assert len(high) >= 1
+    assert "reference_price" in high[0]
+    assert high[0]["reference_price"] == 1.0
+
+
+def test_high_funding_opp_has_edge_net():
+    """Type E high_funding must emit edge_net == abs(funding_rate_pct) for ALFRED has_valid_spread."""
+    rates = {
+        "binance": {"exchange": "binance", "funding_rate": 0.0005, "funding_rate_pct": 0.05, "next_funding_time": None},
+    }
+    opps = analyze_funding_rates("BTC", rates, threshold=0.01)
+    high = [o for o in opps if o["opportunity_type"] == "high_funding"]
+    assert len(high) >= 1
+    assert "edge_net" in high[0]
+    assert high[0]["edge_net"] == round(abs(0.05), 6)
+    assert high[0]["edge_net"] > 0
+
+
+def test_high_funding_opp_has_market():
+    """Type E must emit market=asset so DQ reports show asset name, not 'unknown'."""
+    rates = {
+        "okx": {"exchange": "okx", "funding_rate": 0.0005, "funding_rate_pct": 0.05, "next_funding_time": None},
+    }
+    opps = analyze_funding_rates("SOL", rates, threshold=0.01)
+    high = [o for o in opps if o["opportunity_type"] == "high_funding"]
+    assert len(high) >= 1
+    assert high[0]["market"] == "SOL"
+
+
+def test_cross_exchange_funding_opp_has_reference_price_and_edge_net():
+    """Type E cross_exchange_funding must emit reference_price and edge_net."""
+    rates = {
+        "binance": {"exchange": "binance", "funding_rate": 0.0001, "funding_rate_pct": 0.01, "next_funding_time": None},
+        "okx": {"exchange": "okx", "funding_rate": 0.0004, "funding_rate_pct": 0.04, "next_funding_time": None},
+    }
+    opps = analyze_funding_rates("BTC", rates, threshold=0.01)
+    cross = [o for o in opps if o["opportunity_type"] == "cross_exchange_funding"]
+    assert len(cross) >= 1
+    assert cross[0]["reference_price"] == 1.0
+    assert cross[0]["edge_net"] == round(0.03, 4)
+
+
+def test_type_e_record_passes_alfred_validation():
+    """Full Type E record must pass all ALFRED _validate_record checks."""
+    from core.alfred import _validate_record
+
+    rates = {
+        "binance": {"exchange": "binance", "funding_rate": 0.0005, "funding_rate_pct": 0.05, "next_funding_time": None},
+    }
+    opps = analyze_funding_rates("BTC", rates, threshold=0.01)
+    high = [o for o in opps if o["opportunity_type"] == "high_funding"]
+    assert len(high) >= 1
+
+    record = {"type": "E", **high[0]}
+    result = _validate_record(record)
+    assert result["has_spot_price"] is True, "has_spot_price must pass (reference_price=1.0)"
+    assert result["has_valid_spread"] is True, "has_valid_spread must pass (edge_net present)"
+    assert result["not_anomalous"] is True
+    assert result["has_premium_quality"] is True

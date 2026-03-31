@@ -89,8 +89,10 @@ def _validate_record(record: dict) -> Dict[str, bool]:
         "has_premium_quality": False,
     }
 
-    # Check spot_price is present and valid (not null, not zero)
-    spot_price = record.get("spot_price")
+    # Check spot_price is present and valid (not null, not zero).
+    # Type F records carry reference_price instead of spot_price because the pair
+    # is synthetic (no direct market quote). Either field satisfies the check.
+    spot_price = record.get("spot_price") or record.get("reference_price")
     if spot_price is not None and spot_price > 0:
         validations["has_spot_price"] = True
 

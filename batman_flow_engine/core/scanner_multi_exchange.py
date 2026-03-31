@@ -340,10 +340,13 @@ def find_arbitrage_opportunity(asset, prices, threshold=0.08):
 
     return {
         "asset": asset,
+        "market": asset,
         "buy_exchange": best_buy_exchange,
         "sell_exchange": best_sell_exchange,
         "buy_price": round(lowest_ask, 6),
         "sell_price": round(highest_bid, 6),
+        # spot_price: buy-side ask is the normalized price reference for ALFRED validation.
+        "spot_price": round(lowest_ask, 6),
         "spread_pct": round(spread_pct, 4),
         "estimated_fees_pct": round(total_fees, 2),
         "edge_net": round(edge_net, 4),

@@ -212,3 +212,243 @@ SELECT token, exchange, quantity, avg_buy_price, current_price,
         ELSE 'HOLD'
     END as signal
 FROM hodl_positions WHERE status = 'active';
+
+-- ─────────────────────── PORTFOLIO POSITIONS (Portfolio OS v1) ───────────────────────
+-- Added: 2026-03-26
+-- Single canonical table for all asset classes.
+-- hodl_positions / venture_positions / portfolio_balances remain intact (read-only legacy).
+-- Run migration: python tools/portfolio_migrate_legacy.py --dry-run
+
+CREATE TABLE IF NOT EXISTS portfolio_positions (
+    id                     SERIAL PRIMARY KEY,
+    position_id            VARCHAR(50)   UNIQUE NOT NULL,
+    -- Convention: PP-{TICKER}-{SOURCE}-{legacy_id:03d}
+    -- e.g. PP-AAPL-GBM-001, PP-BTC-BINANCE-001, PP-CETES28D-CETESDIRECTO-001
+
+    -- Two-level classification
+    asset_class            VARCHAR(20)   NOT NULL
+        CHECK (asset_class IN (
+            'crypto', 'venture', 'equity', 'fund',
+            'fixed_income', 'real_estate', 'cash', 'other'
+        )),
+    instrument_type        VARCHAR(30)   NOT NULL,
+    -- Valid pairs enforced in Python layer (database/portfolio.py):
+    --   crypto        → spot | staking | lp_token | defi
+    --   venture       → pre_tge | early_token | presale | vested
+    --   equity        → common_stock | adr | preferred_stock
+    --   fund          → etf | index_fund | mutual_fund
+    --   fixed_income  → cetes | government_bond | corporate_bond | sofipo | cd | money_market
+    --   real_estate   → fibra | reit | direct
+    --   cash          → checking | savings | stablecoin | wallet
+    --   other         → commodity | collectible | structured | mixed
+
+    -- Identity
+    ticker                 VARCHAR(30)   NOT NULL,
+    name                   VARCHAR(100),
+    source                 VARCHAR(40)   NOT NULL,
+    -- e.g. binance | gbm | web3_manual | nu | cetesdirecto | manual | broker
+
+    -- Position size (always in native currency)
+    quantity               DECIMAL(24,8) NOT NULL,
+    native_currency        VARCHAR(5)    NOT NULL DEFAULT 'USD',
+
+    -- Cost basis — native currency, supplied by caller, NEVER computed here
+    -- Cash-like rule (asset_class = cash):
+    --   quantity = balance, avg_entry_price_native = 1.0, cost_basis_native = quantity
+    cost_basis_native      DECIMAL(18,4) NOT NULL,
+    avg_entry_price_native DECIMAL(18,8),
+
+    -- FX convention: 1 unit of native_currency = fx_rate_entry USD
+    --   USD positions:  fx_rate_entry = 1.0  (exact, no approximation)
+    --   MXN positions:  fx_rate_entry = 0.05  (~20 MXN/USD, approximated at entry)
+    --   EUR positions:  fx_rate_entry = 1.08  (approximated at entry)
+    fx_rate_entry          DECIMAL(14,8) NOT NULL DEFAULT 1.0,
+
+    -- Current price and FX (native currency) — NULL until first external update
+    current_price_native   DECIMAL(18,8),
+    fx_rate_current        DECIMAL(14,8),
+
+    -- Fixed income only — NULL for all other asset classes
+    annual_yield_pct       DECIMAL(6,4),
+    maturity_date          DATE,
+
+    -- Lifecycle
+    status                 VARCHAR(20)   NOT NULL DEFAULT 'active'
+        CHECK (status IN ('active', 'closed', 'exited')),
+    notes                  TEXT,
+
+    -- Flexible bag for per-class extra fields:
+    -- crypto/venture: tp levels, stop_loss, chain, wallet, dexscreener
+    -- legacy migration: {legacy_table, legacy_id}
+    metadata               JSONB         NOT NULL DEFAULT '{}',
+
+    created_at             TIMESTAMPTZ   NOT NULL DEFAULT NOW(),
+    updated_at             TIMESTAMPTZ   NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_pp_asset_class     ON portfolio_positions(asset_class);
+CREATE INDEX IF NOT EXISTS idx_pp_status          ON portfolio_positions(status)
+    WHERE status = 'active';
+CREATE INDEX IF NOT EXISTS idx_pp_ticker          ON portfolio_positions(ticker);
+CREATE INDEX IF NOT EXISTS idx_pp_source          ON portfolio_positions(source);
+CREATE INDEX IF NOT EXISTS idx_pp_instrument_type ON portfolio_positions(instrument_type);
+
+-- ─────────────────────── PORTFOLIO VIEWS (v1) ───────────────────────
+
+-- Full consolidated position list.
+-- current_value_usd fallback hierarchy:
+--   Tier 1: price known + fx_current known  → quantity × price × fx_current
+--   Tier 2: no price   + fx_current known   → cost_basis_native × fx_current  (approximate)
+--   Tier 3: no price,  no fx_current        → cost_basis_native × fx_entry    (entry cost floor)
+CREATE OR REPLACE VIEW v_portfolio_consolidated AS
+WITH valued AS (
+    SELECT
+        *,
+        cost_basis_native * fx_rate_entry                                   AS cost_basis_usd,
+        quantity * current_price_native                                      AS current_value_native,
+        CASE
+            WHEN current_price_native IS NOT NULL AND fx_rate_current IS NOT NULL
+                THEN quantity * current_price_native * fx_rate_current
+            WHEN current_price_native IS NULL AND fx_rate_current IS NOT NULL
+                THEN cost_basis_native * fx_rate_current
+            ELSE
+                cost_basis_native * fx_rate_entry
+        END                                                                  AS current_value_usd
+    FROM portfolio_positions
+    WHERE status = 'active'
+),
+portfolio_total AS (
+    SELECT SUM(current_value_usd) AS total_usd FROM valued
+)
+SELECT
+    v.position_id,
+    v.asset_class,
+    v.instrument_type,
+    v.ticker,
+    v.name,
+    v.source,
+    v.quantity,
+    v.native_currency,
+    v.cost_basis_native,
+    ROUND(v.cost_basis_usd::DECIMAL, 2)                                      AS cost_basis_usd,
+    v.avg_entry_price_native,
+    v.current_price_native,
+    v.fx_rate_entry,
+    v.fx_rate_current,
+    ROUND(v.current_value_native::DECIMAL, 4)                                AS current_value_native,
+    ROUND(v.current_value_usd::DECIMAL, 2)                                   AS current_value_usd,
+    ROUND((v.current_value_usd - v.cost_basis_usd)::DECIMAL, 2)             AS unrealized_pnl_usd,
+    CASE WHEN v.cost_basis_usd > 0
+        THEN ROUND(
+            (v.current_value_usd - v.cost_basis_usd) / v.cost_basis_usd * 100,
+        2)
+        ELSE 0
+    END                                                                      AS unrealized_pnl_pct,
+    CASE WHEN t.total_usd > 0
+        THEN ROUND(v.current_value_usd / t.total_usd * 100, 2)
+        ELSE 0
+    END                                                                      AS allocation_pct,
+    v.annual_yield_pct,
+    v.maturity_date,
+    v.notes,
+    v.metadata,
+    v.updated_at
+FROM valued v
+CROSS JOIN portfolio_total t
+ORDER BY v.current_value_usd DESC;
+
+-- Allocation summary by asset class bucket.
+CREATE OR REPLACE VIEW v_portfolio_by_class AS
+WITH valued AS (
+    SELECT
+        asset_class,
+        cost_basis_native * fx_rate_entry                                   AS cost_basis_usd,
+        CASE
+            WHEN current_price_native IS NOT NULL AND fx_rate_current IS NOT NULL
+                THEN quantity * current_price_native * fx_rate_current
+            WHEN current_price_native IS NULL AND fx_rate_current IS NOT NULL
+                THEN cost_basis_native * fx_rate_current
+            ELSE
+                cost_basis_native * fx_rate_entry
+        END                                                                  AS current_value_usd
+    FROM portfolio_positions
+    WHERE status = 'active'
+),
+portfolio_total AS (
+    SELECT SUM(current_value_usd) AS total_usd FROM valued
+)
+SELECT
+    v.asset_class,
+    COUNT(*)                                                                  AS positions,
+    ROUND(SUM(v.cost_basis_usd)::DECIMAL, 2)                                 AS total_cost_basis_usd,
+    ROUND(SUM(v.current_value_usd)::DECIMAL, 2)                              AS total_current_value_usd,
+    ROUND(SUM(v.current_value_usd - v.cost_basis_usd)::DECIMAL, 2)          AS total_unrealized_pnl_usd,
+    ROUND(
+        SUM(v.current_value_usd) / NULLIF(t.total_usd, 0) * 100,
+    2)                                                                        AS allocation_pct
+FROM valued v
+CROSS JOIN portfolio_total t
+GROUP BY v.asset_class, t.total_usd
+ORDER BY total_current_value_usd DESC;
+
+-- ─────────────────────── ASSETS ───────────────────────
+-- Added: 2026-03-26
+-- Minimal ticker registry. One row per unique instrument in portfolio_positions.
+-- Populated automatically on upsert in database/portfolio.py.
+-- Does NOT store prices (those live in portfolio_positions.current_price_native).
+
+CREATE TABLE IF NOT EXISTS assets (
+    id               SERIAL       PRIMARY KEY,
+    ticker           VARCHAR(30)  UNIQUE NOT NULL,
+    name             VARCHAR(100),
+    asset_class      VARCHAR(20),          -- mirrors portfolio_positions.asset_class
+    primary_exchange VARCHAR(40),          -- e.g. binance, gbm, cetesdirecto
+    created_at       TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
+    updated_at       TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_assets_asset_class ON assets(asset_class);
+
+-- ─────────────────────── RISK SCORES ───────────────────────
+-- Added: 2026-03-26
+-- One row per engine cycle. Written by engine.py after COMMANDER gate.
+-- Scores: 0.0–1.0 where 1.0 = best outcome (low risk / high quality).
+--
+-- 6-score framework:
+--   operational_readiness    — dq_score × 0.6 + gordon_ok × 0.4
+--   concentration_risk       — 1.0 − HHI (portfolio_positions)
+--   technical_risk           — ALFRED dq_score (data reliability)
+--   governance_risk          — GORDON gate result (1.0 = OK, 0.5 = ALERT, 0.0 = BLOCKED)
+--   market_behavior          — regime-based (1.0 = NORMAL, 0.5 = STRESS, 0.1 = PANIC)
+--   financial_attractiveness — equities/crypto data completeness ratio (proxy until scanner wiring)
+--
+-- composite_score: weighted average of available scores (weights defined in engine.py)
+
+CREATE TABLE IF NOT EXISTS risk_scores (
+    id                       SERIAL      PRIMARY KEY,
+    ts                       TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    cycle_id                 VARCHAR(30),             -- ISO timestamp of the engine cycle
+
+    -- 6-score framework
+    operational_readiness    DECIMAL(5,4),
+    concentration_risk       DECIMAL(5,4),
+    technical_risk           DECIMAL(5,4),
+    governance_risk          DECIMAL(5,4),
+    market_behavior          DECIMAL(5,4),
+    financial_attractiveness DECIMAL(5,4),
+
+    composite_score          DECIMAL(5,4),
+
+    -- Auditable inputs stored alongside scores
+    dq_score                 DECIMAL(5,4),
+    gordon_status            VARCHAR(10),
+    regime_label             VARCHAR(30),
+    viable_pct               DECIMAL(5,4),            -- reserved for future scanner wiring
+    top_position_pct         DECIMAL(5,4),            -- largest single position share
+    hhi                      DECIMAL(8,6),            -- Herfindahl-Hirschman Index
+
+    metadata                 JSONB       NOT NULL DEFAULT '{}',
+    created_at               TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_risk_scores_ts ON risk_scores(ts DESC);
