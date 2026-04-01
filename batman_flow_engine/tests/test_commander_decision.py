@@ -135,14 +135,15 @@ def test_gordon_gate_entry_when_blocked():
 
 def test_blocked_when_harvey_not_initialized():
     r = _decide(harvey_init=False)
-    assert r["viable"] is False
-    assert "harvey_no_recent_signals" in r["blocked_by"]
+    assert r["viable"] is True
+    assert "harvey_no_recent_signals" not in r["blocked_by"]
 
 
 def test_harvey_gate_entry_when_blocked():
     r = _decide(harvey_init=False)
     gate = next(g for g in r["gates"] if g["gate"] == "harvey_init")
     assert gate["passed"] is False
+    assert gate["reason"] == "harvey_no_recent_signals"
 
 
 def test_harvey_gate_passed_when_initialized():
@@ -154,16 +155,24 @@ def test_harvey_gate_passed_when_initialized():
 # ─────────────────────────── combined failures ───────────────────────────
 
 
-def test_all_three_gates_fail():
+def test_harvey_stale_logs_warning_only(caplog):
+    with caplog.at_level("WARNING"):
+        r = _decide(harvey_init=False)
+    assert r["viable"] is True
+    assert "harvey_no_recent_signals" not in r["blocked_by"]
+    assert "COMMANDER warning: HARVEY stale before ingestion" in caplog.text
+
+
+def test_two_hard_gates_fail_with_harvey_stale():
     r = _decide(dq_score=0.5, gordon_status="ALERT", harvey_init=False)
     assert r["viable"] is False
-    assert len(r["blocked_by"]) == 3
+    assert len(r["blocked_by"]) == 2
 
 
 def test_two_gates_fail_dq_and_harvey():
     r = _decide(dq_score=0.5, gordon_status="OK", harvey_init=False)
     assert r["viable"] is False
-    assert len(r["blocked_by"]) == 2
+    assert r["blocked_by"] == ["alfred_dq_score_0.50_below_0.80"]
 
 
 # ─────────────────────────── _harvey_is_initialized unit ───────────────────────────
@@ -267,6 +276,34 @@ def test_ingest_skipped_when_commander_blocked_by_dq(tmp_path):
 
     mock_ingest.assert_not_called()
     assert result["commander"]["viable"] is False
+
+
+def test_ingest_runs_when_harvey_is_stale_pre_ingestion(tmp_path):
+    import core.gordon as gordon_mod
+
+    with (
+        patch.object(eng_mod, "_build_engine_result", return_value=_base_result()),
+        patch.object(eng_mod, "_enrich_runtime_metadata"),
+        patch.object(eng_mod, "_persist_run"),
+        patch.object(eng_mod, "_harvey_is_initialized", return_value=False),
+        patch.object(eng_mod, "ingest_opportunities") as mock_ingest,
+        patch.object(eng_mod, "LOCK_FILE", tmp_path / "engine.lock"),
+        patch.object(gordon_mod, "is_kill_switch_active", return_value=False),
+        patch.object(
+            gordon_mod,
+            "check_runtime_guard",
+            return_value={"active": False, "status": "not_found", "pid": None, "path": ""},
+        ),
+        patch.object(gordon_mod, "log_gordon_event"),
+        patch.object(gordon_mod, "AUDIT_LOG_FILE", tmp_path / "gordon_audit.jsonl"),
+    ):
+        result = eng_mod.run_engine(MagicMock(equities=[], crypto=[]))
+
+    mock_ingest.assert_called_once()
+    assert result["commander"]["viable"] is True
+    assert result["commander"]["blocked_by"] == []
+    gate = next(g for g in result["commander"]["gates"] if g["gate"] == "harvey_init")
+    assert gate["passed"] is False
 
 
 def test_commander_result_stored_in_engine_output(tmp_path):

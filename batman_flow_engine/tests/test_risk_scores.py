@@ -9,7 +9,7 @@ Formulas under test (all live in engine.py risk-scores block):
     technical_risk        = dq
     market_behavior       = regime_map[label]  (default 0.7)
     governance_risk       = gordon_ok×0.50 + dq×0.30 + market_behavior×0.20
-    financial_attractiveness = viable / total  (last 50 opps, None if <5)
+    financial_attractiveness = viable / total  (current cycle opps, None if <5)
     concentration_risk    = 1.0 − HHI  (1.0 when no positions)
     composite             = weighted mean of non-None components
                             weights: op=0.20, tech=0.15, gov=0.15,
@@ -17,6 +17,7 @@ Formulas under test (all live in engine.py risk-scores block):
 """
 
 import json
+from unittest.mock import MagicMock
 from unittest.mock import patch
 
 import pytest
@@ -215,6 +216,70 @@ def test_viable_opportunity_ratio_uses_last_n(tmp_path):
     with patch("engine.LOGS_DIR", tmp_path):
         result = _viable_opportunity_ratio(n=10)
     assert result == 1.0
+
+
+def test_current_cycle_opportunities_normalizes_mixed_scanner_outputs():
+    from engine import _current_cycle_opportunities
+
+    scanner_results = [
+        [{"viable": True}, {"viable": False}],
+        {"viable": True},
+        {
+            "results": {
+                "USDT/MXN": {"status": "ok", "viable": True},
+                "USDT/ARS": {"status": "error", "viable": False},
+            }
+        },
+        None,
+    ]
+
+    result = _current_cycle_opportunities(scanner_results)
+    assert result == [
+        {"viable": True},
+        {"viable": False},
+        {"viable": True},
+        {"status": "ok", "viable": True},
+    ]
+
+
+def test_run_engine_financial_attractiveness_uses_same_cycle_counts(tmp_path):
+    import core.gordon as gordon_mod
+    import engine as eng_mod
+
+    fake_result = {
+        "data_quality": {"dq_score": 1.0, "status": "ok"},
+        "stress": {"regime": {"label": "NORMAL", "triggers": []}},
+        "dq": {"equities_ok_ratio": 0.25},
+        "_current_cycle_opportunity_counts": {"total": 5, "viable": 4},
+        "meta": {"opportunities_total_cycle": 50, "opportunities_viable_cycle": 0},
+        "errors": [],
+    }
+
+    with (
+        patch.object(eng_mod, "_build_engine_result", return_value=fake_result),
+        patch.object(eng_mod, "_enrich_runtime_metadata"),
+        patch.object(eng_mod, "_persist_run"),
+        patch.object(eng_mod, "_harvey_is_initialized", return_value=True),
+        patch.object(eng_mod, "_viable_opportunity_ratio", return_value=0.0),
+        patch.object(eng_mod, "ingest_opportunities"),
+        patch.object(eng_mod, "LOCK_FILE", tmp_path / "engine.lock"),
+        patch(
+            "database.postgres.get_concentration_risk", return_value={"score": 1.0, "top_position_pct": 1.0, "hhi": 0.0}
+        ),
+        patch("database.postgres.save_risk_score"),
+        patch.object(gordon_mod, "is_kill_switch_active", return_value=False),
+        patch.object(
+            gordon_mod,
+            "check_runtime_guard",
+            return_value={"active": False, "status": "not_found", "pid": None, "path": ""},
+        ),
+        patch.object(gordon_mod, "log_gordon_event"),
+        patch.object(gordon_mod, "AUDIT_LOG_FILE", tmp_path / "gordon_audit.jsonl"),
+    ):
+        result = eng_mod.run_engine(MagicMock(equities=[], crypto=[]))
+
+    assert result["risk_scores"]["financial_attractiveness"] == 0.8
+    assert "_current_cycle_opportunity_counts" not in result
 
 
 # ──────────────────────── concentration_risk ───────────────────

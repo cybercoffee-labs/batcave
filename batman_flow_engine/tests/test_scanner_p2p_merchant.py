@@ -395,3 +395,108 @@ def test_fiats_list():
     """Test expected fiats are included."""
     assert "MXN" in FIATS
     assert "ARS" in FIATS
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Test ALFRED data contract (Type G)
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+@patch("core.scanner_p2p_merchant._append_to_log")
+@patch("core.scanner_p2p_merchant.analyze_fiat")
+def test_type_g_opp_has_spot_price(mock_analyze, mock_log):
+    """Type G must emit spot_price == best_buy_price for ALFRED has_spot_price check."""
+    mock_analyze.return_value = {
+        "fiat": "MXN",
+        "status": "ok",
+        "best_buy_price": 17.50,
+        "best_sell_price": 17.65,
+        "merchant_spread_pct": 0.86,
+        "num_buy_ads": 5,
+        "num_sell_ads": 5,
+        "depth_buy_usd": 8000.0,
+        "depth_sell_usd": 6500.0,
+    }
+    mock_log.return_value = True
+
+    result = scan_merchant_spread(log_to_file=False)
+    assert len(result) >= 1
+    opp = result[0]
+    assert "spot_price" in opp
+    assert opp["spot_price"] == opp["best_buy_price"]
+    assert opp["spot_price"] > 0
+
+
+@patch("core.scanner_p2p_merchant._append_to_log")
+@patch("core.scanner_p2p_merchant.analyze_fiat")
+def test_type_g_opp_has_edge_net(mock_analyze, mock_log):
+    """Type G must emit edge_net == merchant_spread_pct for ALFRED has_valid_spread check."""
+    mock_analyze.return_value = {
+        "fiat": "MXN",
+        "status": "ok",
+        "best_buy_price": 17.50,
+        "best_sell_price": 17.65,
+        "merchant_spread_pct": 0.86,
+        "num_buy_ads": 5,
+        "num_sell_ads": 5,
+        "depth_buy_usd": 8000.0,
+        "depth_sell_usd": 6500.0,
+    }
+    mock_log.return_value = True
+
+    result = scan_merchant_spread(log_to_file=False)
+    assert len(result) >= 1
+    opp = result[0]
+    assert "edge_net" in opp
+    assert opp["edge_net"] == round(opp["merchant_spread_pct"], 4)
+
+
+@patch("core.scanner_p2p_merchant._append_to_log")
+@patch("core.scanner_p2p_merchant.analyze_fiat")
+def test_type_g_opp_has_market(mock_analyze, mock_log):
+    """Type G must emit market == fiat so DQ reports show currency, not 'unknown'."""
+    mock_analyze.return_value = {
+        "fiat": "MXN",
+        "status": "ok",
+        "best_buy_price": 17.50,
+        "best_sell_price": 17.65,
+        "merchant_spread_pct": 0.86,
+        "num_buy_ads": 5,
+        "num_sell_ads": 5,
+        "depth_buy_usd": 8000.0,
+        "depth_sell_usd": 6500.0,
+    }
+    mock_log.return_value = True
+
+    result = scan_merchant_spread(log_to_file=False)
+    assert len(result) >= 1
+    assert result[0]["market"] == "MXN"
+
+
+@patch("core.scanner_p2p_merchant._append_to_log")
+@patch("core.scanner_p2p_merchant.analyze_fiat")
+def test_type_g_record_passes_alfred_validation(mock_analyze, mock_log):
+    """Full Type G record must pass all ALFRED _validate_record checks."""
+    from core.alfred import _validate_record
+
+    mock_analyze.return_value = {
+        "fiat": "MXN",
+        "status": "ok",
+        "best_buy_price": 17.50,
+        "best_sell_price": 17.65,
+        "merchant_spread_pct": 0.86,
+        "num_buy_ads": 5,
+        "num_sell_ads": 5,
+        "depth_buy_usd": 8000.0,
+        "depth_sell_usd": 6500.0,
+    }
+    mock_log.return_value = True
+
+    result = scan_merchant_spread(log_to_file=False)
+    assert len(result) >= 1
+    record = result[0]
+    validations = _validate_record(record)
+    assert validations["has_spot_price"] is True, "has_spot_price must pass"
+    assert validations["has_valid_spread"] is True, "has_valid_spread must pass"
+    assert validations["not_anomalous"] is True
+    assert validations["has_premium_quality"] is True

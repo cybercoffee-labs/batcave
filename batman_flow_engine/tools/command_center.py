@@ -14,9 +14,7 @@ Usage:
   python tools/command_center.py --portfolio  # Portfolio allocation
 """
 
-import json
 import sys
-import os
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -28,6 +26,7 @@ def _db_query(query, params=None):
     """Execute a PostgreSQL query and return results as list of dicts."""
     try:
         from database.postgres import get_cursor
+
         with get_cursor() as cur:
             cur.execute(query, params or [])
             if cur.description:
@@ -53,7 +52,7 @@ def show_header():
 def show_system_health():
     """Show Batman engine and database health."""
     print(f"{'═'*66}")
-    print(f"  🏥 SYSTEM HEALTH")
+    print("  🏥 SYSTEM HEALTH")
     print(f"{'═'*66}")
 
     # Database stats
@@ -67,23 +66,25 @@ def show_system_health():
     if rows:
         r = rows[0]
         print(f"  📊 Database: {r['opps']} opportunities | {r['trades']} trades | {r['runs']} engine runs")
-        if r['unread_alerts'] > 0:
+        if r["unread_alerts"] > 0:
             print(f"  🔔 {r['unread_alerts']} unread alerts!")
 
     # Latest engine run
     runs = _db_query("SELECT ts, regime, duration_sec, errors FROM engine_runs ORDER BY ts DESC LIMIT 1")
     if runs:
         r = runs[0]
-        age_str = str(datetime.now(timezone.utc) - r['ts']).split('.')[0] if r.get('ts') else "?"
-        regime_icon = {"NORMAL": "🟢", "TENSION": "🟡", "STRESS": "🟠", "PANIC": "🔴"}.get(r.get('regime', ''), '⚪')
-        print(f"  {regime_icon} Regime: {r.get('regime', 'UNKNOWN')} | Last run: {age_str} ago | Duration: {r.get('duration_sec', '?')}s")
+        age_str = str(datetime.now(timezone.utc) - r["ts"]).split(".")[0] if r.get("ts") else "?"
+        regime_icon = {"NORMAL": "🟢", "TENSION": "🟡", "STRESS": "🟠", "PANIC": "🔴"}.get(r.get("regime", ""), "⚪")
+        print(
+            f"  {regime_icon} Regime: {r.get('regime', 'UNKNOWN')} | Last run: {age_str} ago | Duration: {r.get('duration_sec', '?')}s"
+        )
     print()
 
 
 def show_scanner_performance():
     """Show scanner performance from PostgreSQL."""
     print(f"{'═'*66}")
-    print(f"  🔍 SCANNER PERFORMANCE (all time)")
+    print("  🔍 SCANNER PERFORMANCE (all time)")
     print(f"{'═'*66}")
 
     rows = _db_query("""
@@ -98,20 +99,29 @@ def show_scanner_performance():
     """)
 
     scanner_names = {
-        "A": "Cross-Exchange", "B": "Basis", "C": "P2P LATAM",
-        "D": "Multi-Exchange", "E": "Funding Rate", "F": "Cross-Currency",
-        "G": "Merchant Spread", "H": "Stablecoin", "I": "Cross-Platform MXN",
-        "J": "DEX vs CEX", "K": "Futures vs Futures",
+        "A": "Cross-Exchange",
+        "B": "Basis",
+        "C": "P2P LATAM",
+        "D": "Multi-Exchange",
+        "E": "Funding Rate",
+        "F": "Cross-Currency",
+        "G": "Merchant Spread",
+        "H": "Stablecoin",
+        "I": "Cross-Platform MXN",
+        "J": "DEX vs CEX",
+        "K": "Futures vs Futures",
     }
 
     for r in rows:
-        st = r['scanner_type'].strip()
+        st = r["scanner_type"].strip()
         name = scanner_names.get(st, f"Scanner {st}")
-        total = r['total']
-        viable = r['viable'] or 0
+        total = r["total"]
+        viable = r["viable"] or 0
         rate = (viable / total * 100) if total > 0 else 0
         icon = "✅" if viable > 0 else "⚪"
-        print(f"  {icon} [{st}] {name:<22s} | {total:>5} total | {viable:>5} viable ({rate:.0f}%) | best: {r['best_edge'] or 0:+.3f}%")
+        print(
+            f"  {icon} [{st}] {name:<22s} | {total:>5} total | {viable:>5} viable ({rate:.0f}%) | best: {r['best_edge'] or 0:+.3f}%"
+        )
 
     print()
 
@@ -119,7 +129,7 @@ def show_scanner_performance():
 def show_pnl():
     """Show P&L from trades."""
     print(f"{'═'*66}")
-    print(f"  💰 P&L SUMMARY")
+    print("  💰 P&L SUMMARY")
     print(f"{'═'*66}")
 
     # Overall
@@ -132,13 +142,13 @@ def show_pnl():
         FROM trades WHERE pnl IS NOT NULL
     """)
 
-    if rows and rows[0]['total_trades'] > 0:
+    if rows and rows[0]["total_trades"] > 0:
         r = rows[0]
-        pnl_sign = "+" if (r['total_pnl'] or 0) >= 0 else ""
+        pnl_sign = "+" if (r["total_pnl"] or 0) >= 0 else ""
         print(f"  📈 Total trades: {r['total_trades']} | P&L: {pnl_sign}${r['total_pnl']} USD")
         print(f"     Avg per trade: ${r['avg_pnl']} | Best: ${r['best_trade']} | Worst: ${r['worst_trade']}")
     else:
-        print(f"  No trades with P&L recorded yet.")
+        print("  No trades with P&L recorded yet.")
 
     # By agent
     agent_rows = _db_query("""
@@ -149,9 +159,9 @@ def show_pnl():
     """)
 
     if agent_rows:
-        print(f"\n  Per agent:")
+        print("\n  Per agent:")
         for r in agent_rows:
-            pnl_sign = "+" if (r['total_pnl'] or 0) >= 0 else ""
+            pnl_sign = "+" if (r["total_pnl"] or 0) >= 0 else ""
             print(f"    {r['agent']:<15s} | {r['trades']:>4} trades | {pnl_sign}${r['total_pnl']} USD")
 
     # Last 7 days daily
@@ -163,9 +173,9 @@ def show_pnl():
     """)
 
     if daily:
-        print(f"\n  Last 7 days:")
+        print("\n  Last 7 days:")
         for r in daily:
-            pnl_sign = "+" if (r['pnl'] or 0) >= 0 else ""
+            pnl_sign = "+" if (r["pnl"] or 0) >= 0 else ""
             print(f"    {r['day']} | {r['trades']:>3} trades | {pnl_sign}${r['pnl']} USD")
 
     print()
@@ -174,17 +184,18 @@ def show_pnl():
 def show_hodl():
     """Show HODL positions from ORACLE module."""
     print(f"{'═'*66}")
-    print(f"  🔮 HODL POSITIONS (Oracle)")
+    print("  🔮 HODL POSITIONS (Oracle)")
     print(f"{'═'*66}")
 
     try:
         from core.oracle import check_all_positions
+
         results = check_all_positions()
 
         if not results:
-            print(f"  No HODL positions. Add with:")
-            print(f"  python core/oracle.py --add XRP 100 0.55 1.00 1.50 2.50 0.40")
-            print(f"  python core/oracle.py --add ENA 500 0.80 1.50 3.00 5.00 0.50")
+            print("  No HODL positions. Add with:")
+            print("  python core/oracle.py --add XRP 100 0.55 1.00 1.50 2.50 0.40")
+            print("  python core/oracle.py --add ENA 500 0.80 1.50 3.00 5.00 0.50")
             print()
             return
 
@@ -210,7 +221,9 @@ def show_hodl():
                 icon = "⚪"
 
             pnl_s = f"+{pnl_pct:.1f}" if pnl_pct >= 0 else f"{pnl_pct:.1f}"
-            print(f"  {icon} {token:6s} ${price:<10.4f} | {pnl_s:>7s}% | ${pnl_usd:>8.2f} | {r['multiplier']:.2f}x | {signal}")
+            print(
+                f"  {icon} {token:6s} ${price:<10.4f} | {pnl_s:>7s}% | ${pnl_usd:>8.2f} | {r['multiplier']:.2f}x | {signal}"
+            )
 
             if r.get("action"):
                 print(f"     ⚡ {r['action']}")
@@ -227,7 +240,7 @@ def show_hodl():
 def show_alerts():
     """Show unacknowledged alerts."""
     print(f"{'═'*66}")
-    print(f"  🔔 ACTIVE ALERTS")
+    print("  🔔 ACTIVE ALERTS")
     print(f"{'═'*66}")
 
     rows = _db_query("""
@@ -237,13 +250,13 @@ def show_alerts():
     """)
 
     if not rows:
-        print(f"  ✅ No active alerts")
+        print("  ✅ No active alerts")
     else:
         for r in rows:
-            sev_icon = {"critical": "🔴", "warning": "🟡", "info": "🔵"}.get(r['severity'], "⚪")
-            ts_str = r['ts'].strftime('%m/%d %H:%M') if r.get('ts') else "?"
+            sev_icon = {"critical": "🔴", "warning": "🟡", "info": "🔵"}.get(r["severity"], "⚪")
+            ts_str = r["ts"].strftime("%m/%d %H:%M") if r.get("ts") else "?"
             print(f"  {sev_icon} [{ts_str}] [{r['source']}] {r['title']}")
-            if r.get('message'):
+            if r.get("message"):
                 print(f"     {r['message'][:80]}")
 
     print()
@@ -252,29 +265,28 @@ def show_alerts():
 def show_portfolio():
     """Show portfolio allocation (Omar Financiero style)."""
     print(f"{'═'*66}")
-    print(f"  📊 PORTFOLIO ALLOCATION")
+    print("  📊 PORTFOLIO ALLOCATION")
     print(f"{'═'*66}")
 
     rows = _db_query("SELECT * FROM v_portfolio_overview")
 
     if not rows:
-        print(f"  No portfolio data yet. Add with:")
-        print(f"  python tools/command_center.py --add-balance")
+        print("  No portfolio data yet. Add with:")
+        print("  python tools/command_center.py --add-balance")
         print()
         return
 
-    total = sum(float(r.get('total_balance', 0) or 0) for r in rows)
+    total = sum(float(r.get("total_balance", 0) or 0) for r in rows)
     if total <= 0:
-        print(f"  No balances recorded.")
+        print("  No balances recorded.")
         print()
         return
 
     for r in rows:
-        cat = r['category']
-        balance = float(r.get('total_balance', 0) or 0)
-        pct = (balance / total * 100)
-        count = r.get('instrument_count', 0)
-        rate = r.get('avg_rate')
+        cat = r["category"]
+        balance = float(r.get("total_balance", 0) or 0)
+        pct = balance / total * 100
+        rate = r.get("avg_rate")
         rate_str = f"{float(rate):.1f}% APY" if rate else ""
 
         bar_len = int(pct / 2)
@@ -290,21 +302,38 @@ def show_portfolio():
 def show_top_opportunities():
     """Show current best opportunities."""
     print(f"{'═'*66}")
-    print(f"  ⭐ TOP OPPORTUNITIES (last 24h)")
+    print("  ⭐ TOP OPPORTUNITIES (last 24h)")
     print(f"{'═'*66}")
 
     rows = _db_query("""
-        SELECT opp_id, scanner_type, asset, market, edge_net, venue
+        SELECT opp_id, scanner_type, asset, market, edge_net, venue, metadata
         FROM opportunities
         WHERE viable = TRUE AND ts > NOW() - INTERVAL '24 hours'
         ORDER BY edge_net DESC LIMIT 5
     """)
 
     if not rows:
-        print(f"  No viable opportunities in last 24h")
+        print("  No viable opportunities in last 24h")
     else:
         for r in rows:
-            print(f"  [{r['scanner_type'].strip()}] {r['asset']}/{r['market'] or '?'} | Edge: {float(r['edge_net'] or 0):+.3f}% | {r['venue'] or ''}")
+            asset = r["asset"] or "USDT"
+            market = r["market"]
+            if not market:
+                # Derive from metadata for scanners that embed pair info (e.g. type F)
+                meta = r.get("metadata") or {}
+                if isinstance(meta, str):
+                    try:
+                        import json as _json
+
+                        meta = _json.loads(meta)
+                    except Exception:
+                        meta = {}
+                bf = meta.get("buy_fiat", "")
+                sf = meta.get("sell_fiat", "")
+                market = f"{bf}/{sf}" if bf and sf else "?"
+            print(
+                f"  [{r['scanner_type'].strip()}] {asset}/{market} | Edge: {float(r['edge_net'] or 0):+.3f}% | {r['venue'] or ''}"
+            )
 
     print()
 

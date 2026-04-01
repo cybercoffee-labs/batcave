@@ -252,12 +252,17 @@ def analyze_funding_rates(
                 {
                     "opportunity_type": "high_funding",
                     "asset": asset,
+                    "market": asset,
                     "exchange": exchange,
                     "funding_rate": data["funding_rate"],
                     "funding_rate_pct": rate_pct,
                     "annualized_pct": round(annualized_pct, 2),
                     "next_funding_time": data.get("next_funding_time"),
                     "direction": "short" if rate_pct > 0 else "long",
+                    # edge_net: funding rate magnitude is the periodic edge for this strategy.
+                    "edge_net": round(abs(rate_pct), 6),
+                    # reference_price: USDT-margined perps settle at 1:1 USDT — no direct spot price.
+                    "reference_price": 1.0,
                 }
             )
 
@@ -277,6 +282,7 @@ def analyze_funding_rates(
                 {
                     "opportunity_type": "cross_exchange_funding",
                     "asset": asset,
+                    "market": asset,
                     "high_exchange": highest_ex,
                     "low_exchange": lowest_ex,
                     "high_rate_pct": highest_rate,
@@ -284,6 +290,10 @@ def analyze_funding_rates(
                     "cross_exchange_spread": round(cross_spread, 4),
                     "annualized_spread_pct": round(cross_spread * 3 * 365, 2),
                     "strategy": f"Long {lowest_ex} + Short {highest_ex}",
+                    # edge_net: cross-exchange spread is the arb edge.
+                    "edge_net": round(cross_spread, 4),
+                    # reference_price: USDT-margined perps settle at 1:1 USDT.
+                    "reference_price": 1.0,
                 }
             )
 

@@ -255,6 +255,8 @@ def test_scan_cross_currency_opportunity_format(mock_fetch, mock_log):
     assert "sell_fiat" in opp
     assert "edge_net" in opp
     assert opp["observe_only"] is True
+    assert opp["asset"] == "USDT"
+    assert opp["market"] == f"{opp['buy_fiat']}/{opp['sell_fiat']}"
 
 
 @patch("core.scanner_p2p_cross_currency._append_to_log")
@@ -307,6 +309,7 @@ def test_find_opportunities_json_serializable():
     """Regression: viable must be native bool, all floats native — no numpy types."""
     try:
         import numpy as np
+
         buy_premium = np.float64(0.5)
         sell_premium = np.float64(3.0)
     except ImportError:
@@ -329,6 +332,47 @@ def test_find_opportunities_json_serializable():
     assert isinstance(parsed["buy_premium_pct"], float)
     assert isinstance(parsed["sell_premium_pct"], float)
     assert isinstance(parsed["buy_p2p_price"], float)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Test reference_price output contract (Patch C — normalized schema)
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_find_opportunities_has_reference_price():
+    """reference_price must be present and equal buy_data spot_rate."""
+    premiums = {
+        "MXN": {"status": "ok", "premium_pct": 0.5, "p2p_buy": 17.50, "spot_rate": 17.00},
+        "ARS": {"status": "ok", "premium_pct": 3.0, "p2p_buy": 1050.0, "spot_rate": 1000.0},
+    }
+    opps = find_cross_currency_opportunities(premiums, threshold=1.0)
+    assert len(opps) == 1
+    opp = opps[0]
+    assert "reference_price" in opp
+    # buy_fiat is MXN (lower premium), reference_price = MXN spot_rate
+    assert opp["reference_price"] == 17.00
+    assert opp["reference_price"] > 0
+
+
+@patch("core.scanner_p2p_cross_currency._append_to_log")
+@patch("core.scanner_p2p_cross_currency.fetch_all_premiums")
+def test_scan_cross_currency_record_has_reference_price(mock_fetch, mock_log):
+    """Full scan output records must carry reference_price for ALFRED validation."""
+    mock_fetch.return_value = {
+        "MXN": {"status": "ok", "premium_pct": 0.5, "p2p_buy": 17.50, "spot_rate": 17.00},
+        "ARS": {"status": "ok", "premium_pct": 3.5, "p2p_buy": 1050.0, "spot_rate": 1000.0},
+    }
+    mock_log.return_value = True
+
+    result = scan_cross_currency(log_to_file=False)
+
+    assert len(result) == 1
+    opp = result[0]
+    assert "reference_price" in opp
+    assert isinstance(opp["reference_price"], float)
+    assert opp["reference_price"] > 0
+    # spot_price is absent — reference_price is the sole price reference
+    assert "spot_price" not in opp
 
 
 # ─────────────────────────────────────────────────────────────────────────────

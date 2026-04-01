@@ -207,6 +207,10 @@ def find_cross_currency_opportunities(
                 "route": f"{buy_fiat}→USDT(Binance P2P)→USDT→{sell_fiat}(Binance P2P)",
                 "buy_p2p_price": float(buy_data["p2p_buy"]),
                 "sell_p2p_price": float(sell_data["p2p_buy"]),
+                # reference_price: official FX rate of the buy currency (local per USDT).
+                # Used as the normalized price reference for ALFRED validation since
+                # Type F records have no direct spot_price — the pair is synthetic.
+                "reference_price": float(buy_data.get("spot_rate", 0.0)),
             }
         )
 
@@ -247,6 +251,8 @@ def scan_cross_currency(log_to_file: bool = True) -> List[Dict[str, Any]]:
             "ts": datetime.now(timezone.utc).isoformat(),
             "type": "F",
             "scanner_id": SCANNER_ID,
+            "asset": "USDT",
+            "market": f"{opp['buy_fiat']}/{opp['sell_fiat']}",
             **opp,
             "observe_only": True,
         }

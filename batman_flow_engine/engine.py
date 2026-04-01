@@ -468,71 +468,83 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
         pass
 
     # ───────────────────────── ALL 11 SCANNERS ─────────────────────────
+    scanner_results: list[Any] = []
+
     # Scanner A: Cross-Exchange
     try:
-        scan_cross_exchange(log_to_file=True)
+        scanner_results.append(scan_cross_exchange(log_to_file=True))
     except Exception as e:
         logger.error("Scanner A (cross-exchange) failed: %s", e)
 
     # Scanner B: Spot vs Futures Basis
     try:
-        scan_basis(log_to_file=True)
+        scanner_results.append(scan_basis(log_to_file=True))
     except Exception as e:
         logger.error("Scanner B (basis) failed: %s", e)
 
     # Scanner C: P2P Premium
     try:
-        p2p_premium_analysis(log_to_file=True)
+        scanner_results.append(p2p_premium_analysis(log_to_file=True))
     except Exception as e:
         logger.error("Scanner C (p2p premium) failed: %s", e)
 
     # Scanner D: Multi-Exchange (20 coins × 5 exchanges)
     try:
-        scan_multi_exchange(log_to_file=True)
+        scanner_results.append(scan_multi_exchange(log_to_file=True))
     except Exception as e:
         logger.error("Scanner D (multi-exchange) failed: %s", e)
 
     # Scanner E: Funding Rate
     try:
-        scan_funding_rates(log_to_file=True)
+        scanner_results.append(scan_funding_rates(log_to_file=True))
     except Exception as e:
         logger.error("Scanner E (funding rate) failed: %s", e)
 
     # Scanner F: Cross-Currency P2P
     try:
-        scan_cross_currency(log_to_file=True)
+        scanner_results.append(scan_cross_currency(log_to_file=True))
     except Exception as e:
         logger.error("Scanner F (cross-currency) failed: %s", e)
 
     # Scanner G: P2P Merchant Spread
     try:
-        scan_merchant_spread(log_to_file=True)
+        scanner_results.append(scan_merchant_spread(log_to_file=True))
     except Exception as e:
         logger.error("Scanner G (merchant spread) failed: %s", e)
 
     # Scanner H: Stablecoin Depeg
     try:
-        scan_stablecoin_depeg(log_to_file=True)
+        scanner_results.append(scan_stablecoin_depeg(log_to_file=True))
     except Exception as e:
         logger.error("Scanner H (stablecoin depeg) failed: %s", e)
 
     # Scanner I: Cross-Platform MXN
     try:
-        scan_cross_platform_mxn(log_to_file=True)
+        scanner_results.append(scan_cross_platform_mxn(log_to_file=True))
     except Exception as e:
         logger.error("Scanner I (cross-platform MXN) failed: %s", e)
 
     # Scanner J: DEX vs CEX (Uniswap/PancakeSwap/Raydium vs Binance)
     try:
-        scan_dex_cex(log_to_file=True)
+        scanner_results.append(scan_dex_cex(log_to_file=True))
     except Exception as e:
         logger.error("Scanner J (DEX vs CEX) failed: %s", e)
 
     # Scanner K: Futures vs Futures (Binance/OKX/Bybit perpetuals)
     try:
-        scan_futures_futures(log_to_file=True)
+        scanner_results.append(scan_futures_futures(log_to_file=True))
     except Exception as e:
         logger.error("Scanner K (futures vs futures) failed: %s", e)
+
+    current_cycle_opportunities = _current_cycle_opportunities(scanner_results)
+    current_cycle_total = len(current_cycle_opportunities)
+    current_cycle_viable = sum(1 for opportunity in current_cycle_opportunities if opportunity.get("viable") is True)
+    result["_current_cycle_opportunity_counts"] = {
+        "total": current_cycle_total,
+        "viable": current_cycle_viable,
+    }
+    result["meta"]["opportunities_total_cycle"] = current_cycle_total
+    result["meta"]["opportunities_viable_cycle"] = current_cycle_viable
 
     return result
 
@@ -607,6 +619,48 @@ def _viable_opportunity_ratio(n: int = 50) -> float | None:
         return None
 
 
+def _current_cycle_opportunities(scanner_results: list[Any]) -> list[dict[str, Any]]:
+    """Normalize scanner return values into current-cycle opportunity records."""
+    opportunities: list[dict[str, Any]] = []
+
+    for scanner_result in scanner_results:
+        if isinstance(scanner_result, list):
+            opportunities.extend(item for item in scanner_result if isinstance(item, dict))
+            continue
+
+        if not isinstance(scanner_result, dict):
+            continue
+
+        nested_results = scanner_result.get("results")
+        if isinstance(nested_results, dict):
+            opportunities.extend(
+                item for item in nested_results.values() if isinstance(item, dict) and item.get("status") == "ok"
+            )
+            continue
+
+        opportunities.append(scanner_result)
+
+    return opportunities
+
+
+def _current_cycle_opportunity_counts(result: dict[str, Any]) -> tuple[int, int]:
+    """Return same-cycle counts, preferring in-memory scanner output over persisted state."""
+    direct_counts = result.get("_current_cycle_opportunity_counts")
+    if isinstance(direct_counts, dict):
+        total = direct_counts.get("total")
+        viable = direct_counts.get("viable")
+        if isinstance(total, int) and isinstance(viable, int):
+            return total, viable
+
+    meta = result.get("meta") or {}
+    total = meta.get("opportunities_total_cycle")
+    viable = meta.get("opportunities_viable_cycle")
+    if isinstance(total, int) and isinstance(viable, int):
+        return total, viable
+
+    return 0, 0
+
+
 # ───────────────────────── COMMANDER ─────────────────────────
 def _harvey_is_initialized() -> bool:
     """Return True if HARVEY has recorded at least one signal in the last 2 hours.
@@ -635,14 +689,15 @@ def commander_decision(result: dict[str, Any]) -> dict[str, Any]:
     """
     COMMANDER gate — explicit viability decision for opportunity emission.
 
-    Called after GORDON check, before HARVEY ingestion. All three gates must
-    pass for viable=True. If any gate fails, viable=False and blocked_by lists
-    the failing reasons.
+    Called after GORDON check, before HARVEY ingestion. ALFRED and GORDON are
+    hard pre-ingestion blockers. HARVEY freshness is warning-only here so the
+    ingestion step can self-heal a stale ledger.
 
     Gates:
         1. alfred_dq   — data_quality.dq_score >= 0.80
         2. gordon_ok   — gordon.status == "OK" (ALERT also blocks)
         3. harvey_init — HARVEY has recorded a signal in the last 2 hours
+                          (warning-only pre-ingestion)
 
     Returns:
         {
@@ -692,7 +747,7 @@ def commander_decision(result: dict[str, Any]) -> dict[str, Any]:
     harvey_ready = _harvey_is_initialized()
     if not harvey_ready:
         gates.append({"gate": "harvey_init", "passed": False, "reason": "harvey_no_recent_signals"})
-        blocked_by.append("harvey_no_recent_signals")
+        logger.warning("COMMANDER warning: HARVEY stale before ingestion — harvey_no_recent_signals")
     else:
         gates.append({"gate": "harvey_init", "passed": True})
 
@@ -775,6 +830,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 "GORDON BLOCKED — signal emission aborted: %s",
                 gordon_result["blocked_by"],
             )
+            result.pop("_current_cycle_opportunity_counts", None)
             _persist_run(result)
             return result
 
@@ -789,7 +845,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             _dq = (result.get("data_quality") or {}).get("dq_score")
             _gordon_status = gordon_result.get("status")
             _regime_label = ((result.get("stress") or {}).get("regime") or {}).get("label")
-            _dq_ratio = (result.get("dq") or {}).get("equities_ok_ratio")  # kept for dq reporting only
+            _cycle_opps_total, _cycle_opps_viable = _current_cycle_opportunity_counts(result)
 
             # operational_readiness: data reliability + governance gate
             _gordon_ok = 1.0 if _gordon_status == "OK" else (0.5 if _gordon_status == "ALERT" else 0.0)
@@ -809,9 +865,11 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             # Reaches 1.0 only when GORDON=OK + perfect data + NORMAL regime.
             _governance_risk = round(_gordon_ok * 0.50 + (_dq or 0.0) * 0.30 + _market_behavior * 0.20, 4)
 
-            # financial_attractiveness: viable opportunity ratio (last 50 records)
-            # 1.0 = all recent opps are viable; 0.0 = none are; None = insufficient data
-            _financial_attractiveness = _viable_opportunity_ratio()
+            # financial_attractiveness: viable opportunity ratio from this engine run
+            # 1.0 = all current-cycle opps are viable; 0.0 = none are; None = insufficient data
+            _financial_attractiveness = (
+                round(_cycle_opps_viable / _cycle_opps_total, 4) if _cycle_opps_total >= 5 else None
+            )
 
             # concentration_risk: from portfolio_positions via PG
             _conc = get_concentration_risk()
@@ -859,6 +917,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             logger.warning("Risk score computation failed (non-fatal): %s", _exc)
             result.setdefault("risk_scores", {"error": str(_exc)})
 
+        result.pop("_current_cycle_opportunity_counts", None)
         _persist_run(result)
         if commander["viable"]:
             ingest_opportunities()

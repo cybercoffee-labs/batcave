@@ -6,3 +6,7 @@ streamlit>=1.31
 plotly>=5.18
 pyyaml>=6.0
 requests>=2.31
+pydantic>=1.10,<3
+psycopg2-binary>=2.9
+pytest>=8.0
+pytest-timeout>=2.3

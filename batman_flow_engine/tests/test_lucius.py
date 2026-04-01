@@ -252,18 +252,19 @@ def test_check_jurisdiction_ars_approved():
 
 
 def test_get_daily_exposure_no_file(tmp_path):
-    """Test daily exposure returns 0 when no file exists."""
-    with patch("core.lucius.EXECUTIONS_FILE", tmp_path / "nonexistent.jsonl"):
-        exposure = get_daily_exposure("MXN")
+    """Test daily exposure returns 0 when harvey DB has no data."""
+    with patch("core.harvey.daily_exposure", return_value=0.0):
+        with patch("core.lucius.EXECUTIONS_FILE", tmp_path / "nonexistent.jsonl"):
+            exposure = get_daily_exposure("MXN")
     assert exposure == 0.0
 
 
 def test_get_daily_exposure_with_data(tmp_path):
-    """Test daily exposure calculation from log file."""
+    """Test daily exposure returns HARVEY DB value as single source of truth."""
     log_file = tmp_path / "opportunities.jsonl"
     today = datetime.now(timezone.utc).date().isoformat()
 
-    # Write test data
+    # Write JSONL data (mirrors what would be in harvey DB)
     test_data = [
         {"ts": f"{today}T10:00:00+00:00", "market": "MXN", "depth_estimate": 500},
         {"ts": f"{today}T11:00:00+00:00", "market": "MXN", "depth_estimate": 300},
@@ -275,10 +276,11 @@ def test_get_daily_exposure_with_data(tmp_path):
         for record in test_data:
             f.write(json.dumps(record) + "\n")
 
-    with patch("core.lucius.EXECUTIONS_FILE", log_file):
-        exposure = get_daily_exposure("MXN")
+    # Harvey DB is the source of truth: returns 800.0 (500 + 300 for MXN today)
+    with patch("core.harvey.daily_exposure", return_value=800.0):
+        with patch("core.lucius.EXECUTIONS_FILE", log_file):
+            exposure = get_daily_exposure("MXN")
 
-    # Should sum 500 + 300 = 800 (capped at 1000 per opp)
     assert exposure == 800.0
 
 
