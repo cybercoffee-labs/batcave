@@ -11,7 +11,6 @@ Usage:
 
 import sys
 from pathlib import Path
-from datetime import datetime
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR))
@@ -28,11 +27,9 @@ def setup_hodl_positions():
         # {"token": "XRP",  "exchange": "binance", "quantity": 100, "avg_buy_price": 0.55,
         #  "take_profit_1": 1.00, "take_profit_2": 1.50, "take_profit_3": 2.50,
         #  "stop_loss": 0.40, "trailing_stop_pct": 15.0},
-
         # {"token": "ENA",  "exchange": "binance", "quantity": 500, "avg_buy_price": 0.80,
         #  "take_profit_1": 1.50, "take_profit_2": 3.00, "take_profit_3": 5.00,
         #  "stop_loss": 0.50, "trailing_stop_pct": 20.0},
-
         # ──── UNCOMMENT AND EDIT THE ABOVE, OR ADD YOUR OWN ────
     ]
 
@@ -104,7 +101,7 @@ def setup_portfolio_balances():
 
 
 def main():
-    print(f"""
+    print("""
 ╔══════════════════════════════════════════════════════════════════╗
 ║       🦇 BATMAN LAB — Portfolio Setup                            ║
 ╚══════════════════════════════════════════════════════════════════╝
@@ -117,7 +114,7 @@ def main():
     print(f"""
 {'═'*66}
   Summary: {hodl} HODL + {venture} Venture + {portfolio} Portfolio records
-  
+
   Next steps:
   1. Edit this file with your REAL positions
   2. Run: python tools/command_center.py

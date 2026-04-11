@@ -1,10 +1,11 @@
 """Tests for dual writer module."""
-import pytest
+
 from unittest.mock import patch
 
 
 def test_dual_writer_imports():
     from core.dual_writer import log_opportunity, log_scanner_run, log_engine_run
+
     assert callable(log_opportunity)
     assert callable(log_scanner_run)
     assert callable(log_engine_run)
@@ -17,8 +18,7 @@ def test_log_opportunity_writes_jsonl(tmp_path):
 
     log_file = tmp_path / "test.jsonl"
 
-    with patch("core.dual_writer.LOG_FILE", log_file), \
-         patch("core.dual_writer._pg_available", False):
+    with patch("core.dual_writer.LOG_FILE", log_file), patch("core.dual_writer._pg_available", False):
         opp = {"opp_id": "TEST-001", "type": "C", "edge_net": 0.5, "viable": True}
         result = log_opportunity(opp)
         assert result is True

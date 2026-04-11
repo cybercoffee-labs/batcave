@@ -19,7 +19,6 @@ import urllib.parse
 import ssl
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
@@ -39,6 +38,7 @@ def _load_env():
             if line and not line.startswith("#") and "=" in line:
                 key, value = line.split("=", 1)
                 os.environ.setdefault(key.strip(), value.strip())
+
 
 _load_env()
 
@@ -93,6 +93,7 @@ def _real_token_name(asset):
 
 # ─────────────────────── ACCOUNT ───────────────────────
 
+
 def test_connection():
     server_time = _request("GET", f"{BASE_URL}/api/v3/time")
     if not server_time:
@@ -108,11 +109,14 @@ def test_connection():
         "can_trade": account.get("canTrade", False),
         "can_withdraw": account.get("canWithdraw", False),
         "account_type": account.get("accountType", "UNKNOWN"),
-        "balances_count": len([b for b in account.get("balances", []) if float(b["free"]) > 0 or float(b["locked"]) > 0]),
+        "balances_count": len(
+            [b for b in account.get("balances", []) if float(b["free"]) > 0 or float(b["locked"]) > 0]
+        ),
     }
 
 
 # ─────────────────────── BALANCES ───────────────────────
+
 
 def get_spot_balances():
     account = _request("GET", f"{BASE_URL}/api/v3/account", signed=True)
@@ -135,13 +139,17 @@ def get_futures_positions():
     for p in data:
         amt = float(p.get("positionAmt", 0))
         if abs(amt) > 0:
-            positions.append({
-                "symbol": p["symbol"], "side": "LONG" if amt > 0 else "SHORT",
-                "quantity": abs(amt), "entry_price": float(p.get("entryPrice", 0)),
-                "mark_price": float(p.get("markPrice", 0)),
-                "unrealized_pnl": float(p.get("unRealizedProfit", 0)),
-                "leverage": int(p.get("leverage", 1)),
-            })
+            positions.append(
+                {
+                    "symbol": p["symbol"],
+                    "side": "LONG" if amt > 0 else "SHORT",
+                    "quantity": abs(amt),
+                    "entry_price": float(p.get("entryPrice", 0)),
+                    "mark_price": float(p.get("markPrice", 0)),
+                    "unrealized_pnl": float(p.get("unRealizedProfit", 0)),
+                    "leverage": int(p.get("leverage", 1)),
+                }
+            )
     return positions
 
 
@@ -150,29 +158,38 @@ def get_earn_positions():
     positions = []
     if data and data.get("rows"):
         for row in data["rows"]:
-            positions.append({
-                "asset": row.get("asset", ""),
-                "quantity": float(row.get("totalAmount", 0)),
-                "apy": float(row.get("latestAnnualPercentageRate", 0)) * 100,
-                "type": "flexible",
-                "accrued_reward": float(row.get("cumulativeTotalRewards", 0)),
-            })
+            positions.append(
+                {
+                    "asset": row.get("asset", ""),
+                    "quantity": float(row.get("totalAmount", 0)),
+                    "apy": float(row.get("latestAnnualPercentageRate", 0)) * 100,
+                    "type": "flexible",
+                    "accrued_reward": float(row.get("cumulativeTotalRewards", 0)),
+                }
+            )
     return positions
 
 
 # ─────────────────────── TRADE HISTORY ───────────────────────
 
+
 def get_spot_trades(symbol, limit=500):
     data = _request("GET", f"{BASE_URL}/api/v3/myTrades", params={"symbol": symbol, "limit": limit}, signed=True)
     if not data:
         return []
-    return [{
-        "trade_id": f"BN-{t['id']}", "symbol": t["symbol"],
-        "side": "BUY" if t["isBuyer"] else "SELL",
-        "price": float(t["price"]), "quantity": float(t["qty"]),
-        "fee": float(t["commission"]), "fee_asset": t["commissionAsset"],
-        "ts": datetime.fromtimestamp(t["time"] / 1000, tz=timezone.utc).isoformat(),
-    } for t in data]
+    return [
+        {
+            "trade_id": f"BN-{t['id']}",
+            "symbol": t["symbol"],
+            "side": "BUY" if t["isBuyer"] else "SELL",
+            "price": float(t["price"]),
+            "quantity": float(t["qty"]),
+            "fee": float(t["commission"]),
+            "fee_asset": t["commissionAsset"],
+            "ts": datetime.fromtimestamp(t["time"] / 1000, tz=timezone.utc).isoformat(),
+        }
+        for t in data
+    ]
 
 
 def get_all_spot_trades(symbols=None, limit=500):
@@ -181,13 +198,29 @@ def get_all_spot_trades(symbols=None, limit=500):
         # ALL tokens from Erick's actual portfolio
         symbols = [
             # Main holdings (Earn)
-            "XRPUSDT", "VETUSDT", "VTHOUSDT", "SUIUSDT", "SOLVUSDT",
-            "GUNUSDT", "HFTUSDT", "PYTHUSDT", "BMTUSDT", "ENAUSDT",
+            "XRPUSDT",
+            "VETUSDT",
+            "VTHOUSDT",
+            "SUIUSDT",
+            "SOLVUSDT",
+            "GUNUSDT",
+            "HFTUSDT",
+            "PYTHUSDT",
+            "BMTUSDT",
+            "ENAUSDT",
             # Common pairs
-            "BTCUSDT", "ETHUSDT", "SOLUSDT", "DOGEUSDT", "ADAUSDT",
-            "AVAXUSDT", "PEPEUSDT", "HOMEUSDT",
+            "BTCUSDT",
+            "ETHUSDT",
+            "SOLUSDT",
+            "DOGEUSDT",
+            "ADAUSDT",
+            "AVAXUSDT",
+            "PEPEUSDT",
+            "HOMEUSDT",
             # Possible BNB pairs (some tokens trade vs BNB)
-            "XRPBNB", "VETBNB", "SUIBNB",
+            "XRPBNB",
+            "VETBNB",
+            "SUIBNB",
         ]
 
     all_trades = []
@@ -201,6 +234,7 @@ def get_all_spot_trades(symbols=None, limit=500):
 
 
 # ─────────────────────── SYNC TO POSTGRESQL ───────────────────────
+
 
 def sync_balances_to_db():
     from database.postgres import save_hodl_position, get_cursor
@@ -241,10 +275,13 @@ def sync_balances_to_db():
         if exists:
             try:
                 with get_cursor() as cur:
-                    cur.execute("""
+                    cur.execute(
+                        """
                         UPDATE hodl_positions SET quantity = %s, current_price = %s, updated_at = NOW()
                         WHERE token = %s AND status = 'active'
-                    """, (total, price, asset))
+                    """,
+                        (total, price, asset),
+                    )
                 synced += 1
             except Exception:
                 pass
@@ -267,17 +304,23 @@ def sync_balances_to_db():
 
 def sync_trades_to_db(symbols=None):
     from database.postgres import save_trade
+
     trades = get_all_spot_trades(symbols)
     if not trades:
         return 0
     imported = 0
     for t in trades:
         trade_data = {
-            "trade_id": t["trade_id"], "agent": "binance-live", "ts": t["ts"],
+            "trade_id": t["trade_id"],
+            "agent": "binance-live",
+            "ts": t["ts"],
             "asset": t["symbol"].replace("USDT", "").replace("BUSD", "").replace("BNB", ""),
             "market": "USDT" if "USDT" in t["symbol"] else "BNB",
-            "side": t["side"], "price": t["price"],
-            "quantity": t["quantity"], "fee": t["fee"], "status": "executed",
+            "side": t["side"],
+            "price": t["price"],
+            "quantity": t["quantity"],
+            "fee": t["fee"],
+            "status": "executed",
         }
         if save_trade(trade_data):
             imported += 1
@@ -287,6 +330,7 @@ def sync_trades_to_db(symbols=None):
 def calculate_avg_buy_prices():
     try:
         from database.postgres import get_cursor
+
         with get_cursor() as cur:
             cur.execute("""
                 SELECT asset,
@@ -296,8 +340,14 @@ def calculate_avg_buy_prices():
                     SUM(CASE WHEN side = 'SELL' THEN quantity ELSE 0 END) as sold
                 FROM trades WHERE agent = 'binance-live' GROUP BY asset
             """)
-            return {row[0]: {"avg_buy_price": float(row[1]) if row[1] else 0,
-                             "total_bought": float(row[2]), "total_sold": float(row[3])} for row in cur.fetchall()}
+            return {
+                row[0]: {
+                    "avg_buy_price": float(row[1]) if row[1] else 0,
+                    "total_bought": float(row[2]),
+                    "total_sold": float(row[3]),
+                }
+                for row in cur.fetchall()
+            }
     except Exception:
         return {}
 
@@ -309,13 +359,17 @@ def update_hodl_avg_prices():
     updated = 0
     try:
         from database.postgres import get_cursor
+
         with get_cursor() as cur:
             for asset, data in avg_prices.items():
                 if data["avg_buy_price"] > 0:
-                    cur.execute("""
+                    cur.execute(
+                        """
                         UPDATE hodl_positions SET avg_buy_price = %s, updated_at = NOW()
                         WHERE token = %s AND status = 'active' AND avg_buy_price = 0
-                    """, (data["avg_buy_price"], asset))
+                    """,
+                        (data["avg_buy_price"], asset),
+                    )
                     updated += cur.rowcount
     except Exception:
         pass
@@ -323,6 +377,7 @@ def update_hodl_avg_prices():
 
 
 # ─────────────────────── FULL SYNC ───────────────────────
+
 
 def full_sync():
     print(f"""
@@ -338,12 +393,12 @@ def full_sync():
         return
     print(f"  Connected! Assets: {conn['balances_count']}")
 
-    print(f"\n  Step 1: Syncing balances...")
+    print("\n  Step 1: Syncing balances...")
     balances = get_spot_balances()
     print(f"  Found {len(balances)} assets:")
     for b in balances[:15]:
-        real = _real_token_name(b['asset'])
-        tag = " (Earn)" if real != b['asset'] else ""
+        real = _real_token_name(b["asset"])
+        tag = " (Earn)" if real != b["asset"] else ""
         print(f"    {real:10s}{tag:8s} {b['total']:>15.6f}")
     if len(balances) > 15:
         print(f"    ... and {len(balances) - 15} more")
@@ -351,33 +406,37 @@ def full_sync():
     synced = sync_balances_to_db()
     print(f"  Synced {synced} positions")
 
-    print(f"\n  Step 2: Syncing trade history (21 pairs)...")
+    print("\n  Step 2: Syncing trade history (21 pairs)...")
     imported = sync_trades_to_db()
     print(f"  Imported {imported} trades")
 
-    print(f"\n  Step 3: Calculating avg buy prices...")
+    print("\n  Step 3: Calculating avg buy prices...")
     updated = update_hodl_avg_prices()
     print(f"  Updated {updated} positions")
 
-    print(f"\n  Step 4: Futures...")
+    print("\n  Step 4: Futures...")
     futures = get_futures_positions()
     if futures:
         for f in futures:
             s = "+" if f["unrealized_pnl"] >= 0 else ""
-            print(f"    {f['symbol']} {f['side']} {f['quantity']} @ ${f['entry_price']:.2f} | {s}${f['unrealized_pnl']:.2f}")
+            print(
+                f"    {f['symbol']} {f['side']} {f['quantity']} @ ${f['entry_price']:.2f} | {s}${f['unrealized_pnl']:.2f}"
+            )
     else:
-        print(f"    No open futures")
+        print("    No open futures")
 
-    print(f"\n  Step 5: Earn...")
+    print("\n  Step 5: Earn...")
     earn = get_earn_positions()
     if earn:
         for e in earn:
-            print(f"    {e['asset']:10s} {e['quantity']:>10.4f} | APY: {e['apy']:>5.1f}% | Rewards: {e['accrued_reward']:.6f}")
+            print(
+                f"    {e['asset']:10s} {e['quantity']:>10.4f} | APY: {e['apy']:>5.1f}% | Rewards: {e['accrued_reward']:.6f}"
+            )
     else:
-        print(f"    No Earn")
+        print("    No Earn")
 
     print(f"\n{'='*66}")
-    print(f"  DONE. Run: python tools/command_center.py")
+    print("  DONE. Run: python tools/command_center.py")
     print(f"{'='*66}\n")
 
 
@@ -387,7 +446,7 @@ if __name__ == "__main__":
         print(json.dumps(test_connection(), indent=2))
     elif "--balances" in args:
         for b in get_spot_balances():
-            real = _real_token_name(b['asset'])
+            real = _real_token_name(b["asset"])
             print(f"  {real:8s} {b['total']:>15.8f}")
     elif "--sync-all" in args:
         full_sync()

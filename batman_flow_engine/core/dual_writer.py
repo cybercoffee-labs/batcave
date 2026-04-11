@@ -5,19 +5,17 @@ Drop-in replacement for _append_to_log in all scanners.
 
 Usage in scanners:
   from core.dual_writer import log_opportunity, log_scanner_run
-  
+
   # Instead of _append_to_log(opp):
   log_opportunity(opp)
-  
+
   # At end of scanner:
   log_scanner_run("C", "P2P LATAM", duration, found, viable)
 """
 
 import json
-import time
 import logging
 from pathlib import Path
-from datetime import datetime, timezone
 
 logger = logging.getLogger("batman.writer")
 
@@ -33,6 +31,7 @@ def _check_pg():
     if _pg_available is None:
         try:
             from database.postgres import check_connection
+
             result = check_connection()
             _pg_available = result.get("status") == "ok"
             if _pg_available:
@@ -62,6 +61,7 @@ def log_opportunity(opp: dict, log_to_file: bool = True) -> bool:
     if _check_pg():
         try:
             from database.postgres import save_opportunity
+
             save_opportunity(opp)
         except Exception as e:
             logger.warning("PostgreSQL write failed (JSONL still saved): %s", e)
@@ -69,15 +69,22 @@ def log_opportunity(opp: dict, log_to_file: bool = True) -> bool:
     return success
 
 
-def log_scanner_run(scanner_type: str, scanner_name: str, duration_sec: float,
-                    opps_found: int, viable_found: int, errors: int = 0,
-                    status: str = "ok", error_msg: str = None) -> bool:
+def log_scanner_run(
+    scanner_type: str,
+    scanner_name: str,
+    duration_sec: float,
+    opps_found: int,
+    viable_found: int,
+    errors: int = 0,
+    status: str = "ok",
+    error_msg: str = None,
+) -> bool:
     """Log scanner execution to PostgreSQL."""
     if _check_pg():
         try:
             from database.postgres import log_scanner_run as pg_log
-            return pg_log(scanner_type, scanner_name, duration_sec,
-                          opps_found, viable_found, errors, status, error_msg)
+
+            return pg_log(scanner_type, scanner_name, duration_sec, opps_found, viable_found, errors, status, error_msg)
         except Exception as e:
             logger.warning("Scanner run log failed: %s", e)
     return False
@@ -88,6 +95,7 @@ def log_engine_run(result: dict) -> bool:
     if _check_pg():
         try:
             from database.postgres import save_engine_run_pg
+
             return save_engine_run_pg(result)
         except Exception as e:
             logger.warning("Engine run log failed: %s", e)

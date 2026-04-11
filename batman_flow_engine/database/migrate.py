@@ -11,7 +11,6 @@ Usage:
 import json
 import sys
 import os
-import re
 import math
 import uuid
 from pathlib import Path
@@ -65,15 +64,29 @@ def migrate_opportunities(conn):
                     continue
 
                 standard_keys = {
-                    "opp_id", "ts", "type", "scanner_id", "asset", "market", "venue",
-                    "buy_price", "sell_price", "spot_price", "gross_spread_pct",
-                    "total_friction_pct", "edge_net", "viable", "depth_estimate", "observe_only"
+                    "opp_id",
+                    "ts",
+                    "type",
+                    "scanner_id",
+                    "asset",
+                    "market",
+                    "venue",
+                    "buy_price",
+                    "sell_price",
+                    "spot_price",
+                    "gross_spread_pct",
+                    "total_friction_pct",
+                    "edge_net",
+                    "viable",
+                    "depth_estimate",
+                    "observe_only",
                 }
                 metadata = {k: v for k, v in opp.items() if k not in standard_keys}
 
                 cur = conn.cursor()
                 try:
-                    cur.execute("""
+                    cur.execute(
+                        """
                         INSERT INTO opportunities
                             (opp_id, ts, scanner_type, scanner_id, asset, market, venue,
                              buy_price, sell_price, spot_price, gross_spread_pct,
@@ -81,16 +94,27 @@ def migrate_opportunities(conn):
                              observe_only, metadata)
                         VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                         ON CONFLICT (opp_id) DO NOTHING
-                    """, (
-                        opp_id, opp.get("ts", datetime.now(timezone.utc).isoformat()),
-                        opp.get("type", "?"), opp.get("scanner_id", "unknown"),
-                        opp.get("asset", "USDT"), opp.get("market"), opp.get("venue"),
-                        opp.get("buy_price"), opp.get("sell_price"), opp.get("spot_price"),
-                        opp.get("gross_spread_pct"), opp.get("total_friction_pct"),
-                        opp.get("edge_net"), opp.get("viable", False),
-                        opp.get("depth_estimate"), opp.get("observe_only", True),
-                        _safe_json_dumps(metadata),
-                    ))
+                    """,
+                        (
+                            opp_id,
+                            opp.get("ts", datetime.now(timezone.utc).isoformat()),
+                            opp.get("type", "?"),
+                            opp.get("scanner_id", "unknown"),
+                            opp.get("asset", "USDT"),
+                            opp.get("market"),
+                            opp.get("venue"),
+                            opp.get("buy_price"),
+                            opp.get("sell_price"),
+                            opp.get("spot_price"),
+                            opp.get("gross_spread_pct"),
+                            opp.get("total_friction_pct"),
+                            opp.get("edge_net"),
+                            opp.get("viable", False),
+                            opp.get("depth_estimate"),
+                            opp.get("observe_only", True),
+                            _safe_json_dumps(metadata),
+                        ),
+                    )
                     conn.commit()
                     if cur.rowcount == 0:
                         dupes += 1
@@ -118,7 +142,7 @@ def migrate_trades(conn):
         return 0
 
     total, errors = 0, 0
-    print(f"  Reading trades.jsonl...")
+    print("  Reading trades.jsonl...")
     for line in NW_TRADES_FILE.read_text().strip().split("\n"):
         if not line.strip():
             continue
@@ -150,24 +174,46 @@ def migrate_trades(conn):
 
             # Everything else goes to metadata
             standard_keys = {
-                "trade_id", "timestamp", "ts", "opp_id", "fiat", "amount_usd",
-                "p2p_buy_price", "price", "quantity", "edge_net", "mode"
+                "trade_id",
+                "timestamp",
+                "ts",
+                "opp_id",
+                "fiat",
+                "amount_usd",
+                "p2p_buy_price",
+                "price",
+                "quantity",
+                "edge_net",
+                "mode",
             }
             metadata = {k: v for k, v in trade.items() if k not in standard_keys}
 
             cur = conn.cursor()
             try:
-                cur.execute("""
+                cur.execute(
+                    """
                     INSERT INTO trades
                         (trade_id, agent, ts, opp_id, asset, market,
                          side, price, quantity, fee, pnl, status, metadata)
                     VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                     ON CONFLICT (trade_id) DO NOTHING
-                """, (
-                    trade_id, agent, ts, opp_id, asset, market,
-                    side, price, quantity, fee, pnl, status,
-                    _safe_json_dumps(metadata),
-                ))
+                """,
+                    (
+                        trade_id,
+                        agent,
+                        ts,
+                        opp_id,
+                        asset,
+                        market,
+                        side,
+                        price,
+                        quantity,
+                        fee,
+                        pnl,
+                        status,
+                        _safe_json_dumps(metadata),
+                    ),
+                )
                 conn.commit()
                 total += 1
             except Exception as e:
@@ -210,20 +256,29 @@ def migrate_engine_reports(conn):
 
             cur = conn.cursor()
             try:
-                cur.execute("""
+                cur.execute(
+                    """
                     INSERT INTO engine_runs
                         (ts, duration_sec, equities_total, equities_ok,
                          crypto_total, crypto_ok, regime, corr_stress, errors, full_report)
                     VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-                """, (
-                    result.get("timestamp", fpath.stem.replace("_", "T", 1)),
-                    meta.get("duration_sec"), meta.get("equities_total"), meta.get("equities_ok"),
-                    meta.get("crypto_total"), meta.get("crypto_ok"),
-                    regime.get("label") if isinstance(regime, dict) else None,
-                    stress.get("corr_stress") if isinstance(stress, dict) and not (isinstance(stress.get("corr_stress"), float) and math.isnan(stress.get("corr_stress"))) else None,
-                    meta.get("errors", 0),
-                    clean_report,
-                ))
+                """,
+                    (
+                        result.get("timestamp", fpath.stem.replace("_", "T", 1)),
+                        meta.get("duration_sec"),
+                        meta.get("equities_total"),
+                        meta.get("equities_ok"),
+                        meta.get("crypto_total"),
+                        meta.get("crypto_ok"),
+                        regime.get("label") if isinstance(regime, dict) else None,
+                        stress.get("corr_stress")
+                        if isinstance(stress, dict)
+                        and not (isinstance(stress.get("corr_stress"), float) and math.isnan(stress.get("corr_stress")))
+                        else None,
+                        meta.get("errors", 0),
+                        clean_report,
+                    ),
+                )
                 conn.commit()
                 total += 1
             except Exception as e:
@@ -242,7 +297,7 @@ def migrate_engine_reports(conn):
 
 
 def run_migration(dry_run=False):
-    print(f"""
+    print("""
 ╔══════════════════════════════════════════════════════════════════╗
 ║       🦇 BATMAN LAB — PostgreSQL Migration v2                    ║
 ╚══════════════════════════════════════════════════════════════════╝
@@ -259,10 +314,11 @@ def run_migration(dry_run=False):
             print(f"  📄 trades.jsonl: {len(lines)} records")
         if REPORTS_DIR.exists():
             print(f"  📄 reports/: {len(list(REPORTS_DIR.glob('*.json')))} files")
-        print(f"\n  Run without --dry-run to execute.")
+        print("\n  Run without --dry-run to execute.")
         return
 
     import psycopg2
+
     db_config = {
         "host": os.environ.get("BATMAN_DB_HOST", "localhost"),
         "port": int(os.environ.get("BATMAN_DB_PORT", 5432)),

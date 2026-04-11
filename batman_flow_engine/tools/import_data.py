@@ -38,11 +38,9 @@ HOW TO EXPORT FROM BINANCE:
 import csv
 import json
 import sys
-import os
 import uuid
 from pathlib import Path
-from datetime import datetime, timezone
-from decimal import Decimal
+from datetime import datetime
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR))
@@ -55,7 +53,19 @@ IMPORT_DIR.mkdir(exist_ok=True)
 
 KNOWN_HEADERS = {
     "binance-spot": ["Date(UTC)", "Pair", "Side", "Price", "Executed", "Amount", "Fee"],
-    "binance-spot-v2": ["Date(UTC)", "OrderNo", "Pair", "Type", "Order Price", "Order Amount", "AvgTrading Price", "Filled", "Total", "Trigger Conditions", "status"],
+    "binance-spot-v2": [
+        "Date(UTC)",
+        "OrderNo",
+        "Pair",
+        "Type",
+        "Order Price",
+        "Order Amount",
+        "AvgTrading Price",
+        "Filled",
+        "Total",
+        "Trigger Conditions",
+        "status",
+    ],
     "binance-statement": ["User_ID", "UTC_Time", "Account", "Operation", "Coin", "Change", "Remark"],
     "binance-p2p": ["Order Number", "Order Type", "Asset Type", "Fiat Type", "Total Price", "Price", "Quantity"],
     "bitso": ["tid", "oid", "book", "side", "price", "amount", "value", "fee_amount", "fee_currency", "created_at"],
@@ -88,6 +98,7 @@ def detect_format(filepath: Path) -> str:
 
 # ─────────────────────── PARSERS ───────────────────────
 
+
 def parse_binance_spot(filepath: Path) -> list:
     """Parse Binance Spot Trade History CSV."""
     trades = []
@@ -109,19 +120,21 @@ def parse_binance_spot(filepath: Path) -> list:
                 if not price or not quantity:
                     continue
 
-                trades.append({
-                    "trade_id": f"BN-{uuid.uuid4().hex[:10].upper()}",
-                    "agent": "import-binance",
-                    "ts": ts,
-                    "asset": asset,
-                    "market": market,
-                    "side": side,
-                    "price": price,
-                    "quantity": quantity,
-                    "fee": fee,
-                    "status": "executed",
-                    "metadata": {"source": "binance-spot-csv", "pair": pair},
-                })
+                trades.append(
+                    {
+                        "trade_id": f"BN-{uuid.uuid4().hex[:10].upper()}",
+                        "agent": "import-binance",
+                        "ts": ts,
+                        "asset": asset,
+                        "market": market,
+                        "side": side,
+                        "price": price,
+                        "quantity": quantity,
+                        "fee": fee,
+                        "status": "executed",
+                        "metadata": {"source": "binance-spot-csv", "pair": pair},
+                    }
+                )
             except Exception as e:
                 print(f"  ⚠️  Skip row: {e}")
     return trades
@@ -140,24 +153,36 @@ def parse_binance_statement(filepath: Path) -> list:
                 ts = row.get("UTC_Time", "")
 
                 # Only process buy/sell/trade operations
-                if operation.lower() not in ("buy", "sell", "trade", "transaction related", "small assets exchange bnb"):
+                if operation.lower() not in (
+                    "buy",
+                    "sell",
+                    "trade",
+                    "transaction related",
+                    "small assets exchange bnb",
+                ):
                     continue
 
                 side = "BUY" if change > 0 else "SELL"
 
-                trades.append({
-                    "trade_id": f"BNS-{uuid.uuid4().hex[:10].upper()}",
-                    "agent": "import-binance-statement",
-                    "ts": ts,
-                    "asset": coin,
-                    "market": "USDT",
-                    "side": side,
-                    "price": 0,  # Statement doesn't have price per unit
-                    "quantity": abs(change),
-                    "fee": 0,
-                    "status": "executed",
-                    "metadata": {"source": "binance-statement", "operation": operation, "remark": row.get("Remark", "")},
-                })
+                trades.append(
+                    {
+                        "trade_id": f"BNS-{uuid.uuid4().hex[:10].upper()}",
+                        "agent": "import-binance-statement",
+                        "ts": ts,
+                        "asset": coin,
+                        "market": "USDT",
+                        "side": side,
+                        "price": 0,  # Statement doesn't have price per unit
+                        "quantity": abs(change),
+                        "fee": 0,
+                        "status": "executed",
+                        "metadata": {
+                            "source": "binance-statement",
+                            "operation": operation,
+                            "remark": row.get("Remark", ""),
+                        },
+                    }
+                )
             except Exception as e:
                 print(f"  ⚠️  Skip row: {e}")
     return trades
@@ -181,22 +206,25 @@ def parse_binance_p2p(filepath: Path) -> list:
                 if "completed" not in status.lower():
                     continue
 
-                trades.append({
-                    "trade_id": f"P2P-{row.get('Order Number', uuid.uuid4().hex[:10].upper())}",
-                    "agent": "import-p2p",
-                    "ts": row.get("Created Time", ""),
-                    "asset": asset,
-                    "market": fiat,
-                    "side": "BUY" if "buy" in order_type.lower() else "SELL",
-                    "price": price,
-                    "quantity": quantity,
-                    "fee": 0,  # P2P has no fees on Binance
-                    "status": "executed",
-                    "metadata": {
-                        "source": "binance-p2p", "total_price_fiat": total_price,
-                        "order_number": row.get("Order Number", ""),
-                    },
-                })
+                trades.append(
+                    {
+                        "trade_id": f"P2P-{row.get('Order Number', uuid.uuid4().hex[:10].upper())}",
+                        "agent": "import-p2p",
+                        "ts": row.get("Created Time", ""),
+                        "asset": asset,
+                        "market": fiat,
+                        "side": "BUY" if "buy" in order_type.lower() else "SELL",
+                        "price": price,
+                        "quantity": quantity,
+                        "fee": 0,  # P2P has no fees on Binance
+                        "status": "executed",
+                        "metadata": {
+                            "source": "binance-p2p",
+                            "total_price_fiat": total_price,
+                            "order_number": row.get("Order Number", ""),
+                        },
+                    }
+                )
             except Exception as e:
                 print(f"  ⚠️  Skip row: {e}")
     return trades
@@ -214,19 +242,21 @@ def parse_bitso(filepath: Path) -> list:
                 asset = parts[0].upper() if parts else "?"
                 market = parts[1].upper() if len(parts) > 1 else "MXN"
 
-                trades.append({
-                    "trade_id": f"BIT-{row.get('tid', uuid.uuid4().hex[:10].upper())}",
-                    "agent": "import-bitso",
-                    "ts": row.get("created_at", ""),
-                    "asset": asset,
-                    "market": market,
-                    "side": row.get("side", "buy").upper(),
-                    "price": float(row.get("price", 0)),
-                    "quantity": float(row.get("amount", 0)),
-                    "fee": float(row.get("fee_amount", 0)),
-                    "status": "executed",
-                    "metadata": {"source": "bitso", "oid": row.get("oid", "")},
-                })
+                trades.append(
+                    {
+                        "trade_id": f"BIT-{row.get('tid', uuid.uuid4().hex[:10].upper())}",
+                        "agent": "import-bitso",
+                        "ts": row.get("created_at", ""),
+                        "asset": asset,
+                        "market": market,
+                        "side": row.get("side", "buy").upper(),
+                        "price": float(row.get("price", 0)),
+                        "quantity": float(row.get("amount", 0)),
+                        "fee": float(row.get("fee_amount", 0)),
+                        "status": "executed",
+                        "metadata": {"source": "bitso", "oid": row.get("oid", "")},
+                    }
+                )
             except Exception as e:
                 print(f"  ⚠️  Skip row: {e}")
     return trades
@@ -239,19 +269,21 @@ def parse_generic(filepath: Path) -> list:
         reader = csv.DictReader(f)
         for row in reader:
             try:
-                trades.append({
-                    "trade_id": f"GEN-{uuid.uuid4().hex[:10].upper()}",
-                    "agent": "import-generic",
-                    "ts": row.get("date", row.get("timestamp", row.get("Date", ""))),
-                    "asset": row.get("asset", row.get("Asset", row.get("coin", "?"))).upper(),
-                    "market": row.get("market", row.get("Market", "USDT")).upper(),
-                    "side": row.get("side", row.get("Side", "BUY")).upper(),
-                    "price": float(row.get("price", row.get("Price", 0))),
-                    "quantity": float(row.get("quantity", row.get("Quantity", row.get("amount", 0)))),
-                    "fee": float(row.get("fee", row.get("Fee", 0))),
-                    "status": "executed",
-                    "metadata": {"source": "generic-csv"},
-                })
+                trades.append(
+                    {
+                        "trade_id": f"GEN-{uuid.uuid4().hex[:10].upper()}",
+                        "agent": "import-generic",
+                        "ts": row.get("date", row.get("timestamp", row.get("Date", ""))),
+                        "asset": row.get("asset", row.get("Asset", row.get("coin", "?"))).upper(),
+                        "market": row.get("market", row.get("Market", "USDT")).upper(),
+                        "side": row.get("side", row.get("Side", "BUY")).upper(),
+                        "price": float(row.get("price", row.get("Price", 0))),
+                        "quantity": float(row.get("quantity", row.get("Quantity", row.get("amount", 0)))),
+                        "fee": float(row.get("fee", row.get("Fee", 0))),
+                        "status": "executed",
+                        "metadata": {"source": "generic-csv"},
+                    }
+                )
             except Exception as e:
                 print(f"  ⚠️  Skip row: {e}")
     return trades
@@ -277,9 +309,11 @@ def parse_hodl_json(filepath: Path) -> list:
 
 # ─────────────────────── IMPORT TO DATABASE ───────────────────────
 
+
 def import_trades(trades: list) -> int:
     """Import parsed trades into PostgreSQL."""
     from database.postgres import save_trade
+
     imported = 0
     for trade in trades:
         if save_trade(trade):
@@ -290,6 +324,7 @@ def import_trades(trades: list) -> int:
 def import_hodl_positions(positions: list) -> int:
     """Import HODL positions into PostgreSQL."""
     from database.postgres import save_hodl_position
+
     imported = 0
     for pos in positions:
         if save_hodl_position(pos):
@@ -298,6 +333,7 @@ def import_hodl_positions(positions: list) -> int:
 
 
 # ─────────────────────── MAIN ───────────────────────
+
 
 def run_import(filepath: str, fmt: str = None):
     path = Path(filepath)
@@ -311,8 +347,8 @@ def run_import(filepath: str, fmt: str = None):
         print(f"  🔍 Detected format: {fmt}")
 
     if fmt == "unknown":
-        print(f"  ❌ Could not detect format. Use --format to specify.")
-        print(f"  Supported: binance-spot, binance-statement, binance-p2p, bitso, generic, hodl")
+        print("  ❌ Could not detect format. Use --format to specify.")
+        print("  Supported: binance-spot, binance-statement, binance-p2p, bitso, generic, hodl")
         return
 
     # Parse
@@ -338,22 +374,24 @@ def run_import(filepath: str, fmt: str = None):
     print(f"  📊 Parsed {len(records)} records")
 
     if not records:
-        print(f"  ⚠️  No records to import")
+        print("  ⚠️  No records to import")
         return
 
     # Show preview
-    print(f"\n  Preview (first 3 records):")
+    print("\n  Preview (first 3 records):")
     for r in records[:3]:
         if fmt in ("hodl-json", "hodl"):
             print(f"    {r.get('token', '?')}: {r.get('quantity', 0)} @ ${r.get('avg_buy_price', 0)}")
         else:
-            print(f"    {r.get('side', '?')} {r.get('quantity', 0)} {r.get('asset', '?')} @ ${r.get('price', 0)} [{r.get('ts', '?')}]")
+            print(
+                f"    {r.get('side', '?')} {r.get('quantity', 0)} {r.get('asset', '?')} @ ${r.get('price', 0)} [{r.get('ts', '?')}]"
+            )
 
     # Confirm
     print(f"\n  Import {len(records)} records? (y/n): ", end="")
     confirm = input().strip().lower()
     if confirm != "y":
-        print(f"  Cancelled.")
+        print("  Cancelled.")
         return
 
     # Import
@@ -367,12 +405,13 @@ def run_import(filepath: str, fmt: str = None):
     # Backup original file
     backup = IMPORT_DIR / f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{path.name}"
     import shutil
+
     shutil.copy2(path, backup)
     print(f"  💾 Backup saved: {backup.name}")
 
 
 def show_formats():
-    print(f"""
+    print("""
 ╔══════════════════════════════════════════════════════════════════╗
 ║       🦇 BATMAN LAB — Supported Import Formats                   ║
 ╚══════════════════════════════════════════════════════════════════╝
@@ -395,7 +434,7 @@ def show_formats():
 
   POSITIONS:
     hodl               JSON file with HODL positions
-                       Format: {{"positions": [{{"token":"XRP","quantity":100,"avg_buy_price":0.55,...}}]}}
+                       Format: {"positions": [{"token":"XRP","quantity":100,"avg_buy_price":0.55,...}]}
 
   USAGE:
     python tools/import_data.py ~/Downloads/binance_trades.csv

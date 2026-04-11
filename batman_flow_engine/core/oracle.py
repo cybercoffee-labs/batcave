@@ -16,7 +16,6 @@ import logging
 import sys
 import urllib.request
 import ssl
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -30,14 +29,30 @@ logger = logging.getLogger("batman.oracle")
 # ─────────────────────── PRICE FETCHING ───────────────────────
 
 BINANCE_SYMBOLS = {
-    "BTC": "BTCUSDT", "ETH": "ETHUSDT", "SOL": "SOLUSDT",
-    "XRP": "XRPUSDT", "ENA": "ENAUSDT", "DOGE": "DOGEUSDT",
-    "ADA": "ADAUSDT", "AVAX": "AVAXUSDT", "LINK": "LINKUSDT",
-    "DOT": "DOTUSDT", "MATIC": "MATICUSDT", "UNI": "UNIUSDT",
-    "ATOM": "ATOMUSDT", "NEAR": "NEARUSDT", "APT": "APTUSDT",
-    "ARB": "ARBUSDT", "OP": "OPUSDT", "FIL": "FILUSDT",
-    "LTC": "LTCUSDT", "BCH": "BCHUSDT", "XLM": "XLMUSDT",
-    "PEPE": "PEPEUSDT", "SHIB": "SHIBUSDT", "WIF": "WIFUSDT",
+    "BTC": "BTCUSDT",
+    "ETH": "ETHUSDT",
+    "SOL": "SOLUSDT",
+    "XRP": "XRPUSDT",
+    "ENA": "ENAUSDT",
+    "DOGE": "DOGEUSDT",
+    "ADA": "ADAUSDT",
+    "AVAX": "AVAXUSDT",
+    "LINK": "LINKUSDT",
+    "DOT": "DOTUSDT",
+    "MATIC": "MATICUSDT",
+    "UNI": "UNIUSDT",
+    "ATOM": "ATOMUSDT",
+    "NEAR": "NEARUSDT",
+    "APT": "APTUSDT",
+    "ARB": "ARBUSDT",
+    "OP": "OPUSDT",
+    "FIL": "FILUSDT",
+    "LTC": "LTCUSDT",
+    "BCH": "BCHUSDT",
+    "XLM": "XLMUSDT",
+    "PEPE": "PEPEUSDT",
+    "SHIB": "SHIBUSDT",
+    "WIF": "WIFUSDT",
 }
 
 
@@ -66,6 +81,7 @@ def fetch_all_prices(tokens: list) -> dict:
 
 
 # ─────────────────────── SIGNAL LOGIC ───────────────────────
+
 
 def evaluate_position(pos: dict, current_price: float) -> dict:
     """Evaluate a HODL position and generate signal."""
@@ -141,9 +157,11 @@ def evaluate_position(pos: dict, current_price: float) -> dict:
 
 # ─────────────────────── DATABASE OPERATIONS ───────────────────────
 
+
 def load_positions_from_db():
     try:
         from database.postgres import get_all_hodl
+
         return get_all_hodl()
     except Exception:
         return []
@@ -152,6 +170,7 @@ def load_positions_from_db():
 def save_position_to_db(pos: dict):
     try:
         from database.postgres import save_hodl_position
+
         return save_hodl_position(pos)
     except Exception as e:
         logger.error("Failed to save position: %s", e)
@@ -162,6 +181,7 @@ def save_position_to_db(pos: dict):
 def update_prices_in_db(prices: dict):
     try:
         from database.postgres import update_hodl_prices
+
         return update_hodl_prices(prices)
     except Exception as e:
         logger.error("Failed to update prices: %s", e)
@@ -171,12 +191,14 @@ def update_prices_in_db(prices: dict):
 def save_alert_to_db(source, title, message, severity="info", metadata=None):
     try:
         from database.postgres import save_alert
+
         return save_alert(source, title, message, severity, metadata)
     except Exception:
         return False
 
 
 # ─────────────────────── CHECK CYCLE ───────────────────────
+
 
 def check_all_positions():
     positions = load_positions_from_db()
@@ -220,12 +242,13 @@ def check_all_positions():
 
 # ─────────────────────── CLI ───────────────────────
 
+
 def print_status():
     results = check_all_positions()
     if not results:
         return
 
-    print(f"""
+    print("""
 ╔══════════════════════════════════════════════════════════════════╗
 ║          🔮 ORACLE — HODL Portfolio Status                       ║
 ╚══════════════════════════════════════════════════════════════════╝
@@ -255,7 +278,9 @@ def print_status():
             icon = "⚪"
 
         pnl_sign = "+" if pnl_pct >= 0 else ""
-        print(f"  {icon} {token:6s} | ${price:<10.4f} | {pnl_sign}{pnl_pct:.1f}% | ${pnl_sign}{pnl_usd:.2f} | {r['multiplier']:.2f}x | {signal}")
+        print(
+            f"  {icon} {token:6s} | ${price:<10.4f} | {pnl_sign}{pnl_pct:.1f}% | ${pnl_sign}{pnl_usd:.2f} | {r['multiplier']:.2f}x | {signal}"
+        )
 
         if r.get("action"):
             print(f"     ⚡ ACTION: {r['action']}")
@@ -295,7 +320,7 @@ if __name__ == "__main__":
 
     if "--add" in args:
         idx = args.index("--add")
-        remaining = args[idx + 1:]
+        remaining = args[idx + 1 :]
         if len(remaining) >= 3:
             token, qty, price = remaining[0], remaining[1], remaining[2]
             tp1 = remaining[3] if len(remaining) > 3 else None
