@@ -1,79 +1,15 @@
-# Batman Lab — Git Ignore
-
-# Python
+._*
+.DS_Store
+.env
+*.env.local
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-*.egg-info/
-dist/
-build/
-eggs/
-*.egg
-
-# Virtual environments
+*.pyc
+*.pyo
 .venv/
-venv/
-ENV/
-
-# IDE
+env/
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Environment / Secrets
-.env
-.env.local
-*.key
-*.pem
-
-# Storage — ALL storage directories anywhere in the repo
-**/storage/reports/
-**/storage/logs/
-**/storage/batman.db
-**/storage/spread_lifetimes.db
-**/storage/latest.json
-**/storage/prev.json
-**/storage/alerts.json
-**/storage/patterns.json
-**/storage/engine.lock
-**/storage/ledger/trades.jsonl
-
-# Keep storage directories but ignore contents
-!**/storage/.gitkeep
-!**/storage/reports/.gitkeep
-!**/storage/logs/.gitkeep
-!**/storage/ledger/.gitkeep
-
-# Engine log at root of batman_flow_engine
-**/engine.log
-
-# Backup files
 *.bak
-*.bak.*
-*_backup.*
-*.corrupted
-
-# Streamlit
-.streamlit/
-
-# Claude local settings
-.claude/settings.local.json
-
-# Pytest
-.pytest_cache/
-htmlcov/
-.coverage
-coverage.xml
-
-# Journal entries (personal data)
-**/journal/*.md
-
-# Large library files (vendored)
-# Keep them but note they're large
+*.bak_syntax
+*.jsonl
+batman.db
