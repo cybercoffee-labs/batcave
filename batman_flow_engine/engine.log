@@ -1,0 +1,114 @@
+2026-04-13 16:26:24,022 [INFO] engine — ENGINE START — equities=13 crypto=3 scanners=11
+2026-04-13 16:26:25,688 [INFO] engine — ✓ equity SPY
+2026-04-13 16:26:25,841 [INFO] engine — ✓ equity QQQ
+2026-04-13 16:26:26,147 [INFO] engine — ✓ equity XLE
+2026-04-13 16:26:26,308 [INFO] engine — ✓ equity XLK
+2026-04-13 16:26:26,447 [INFO] engine — ✓ equity XLF
+2026-04-13 16:26:26,608 [INFO] engine — ✓ equity GLD
+2026-04-13 16:26:26,781 [INFO] engine — ✓ equity TLT
+2026-04-13 16:26:26,932 [INFO] engine — ✓ equity UAL
+2026-04-13 16:26:28,248 [INFO] engine — ✓ equity DAL
+2026-04-13 16:26:28,454 [INFO] engine — ✓ equity DIS
+2026-04-13 16:26:28,589 [INFO] engine — ✓ equity KO
+2026-04-13 16:26:28,737 [INFO] engine — ✓ equity HLT
+2026-04-13 16:26:28,965 [INFO] engine — ✓ crypto BTC/USDT
+2026-04-13 16:26:29,104 [INFO] engine — ✓ equity MCD
+2026-04-13 16:26:29,452 [INFO] engine — ✓ crypto ETH/USDT
+2026-04-13 16:26:29,510 [INFO] engine — ✓ crypto SOL/USDT
+2026-04-13 16:26:38,348 [INFO] batman.writer — PostgreSQL unavailable — JSONL only
+2026-04-13 16:26:40,571 [INFO] scanner_p2p — Pre-fetching spot rates for all LATAM currencies...
+2026-04-13 16:26:40,572 [INFO] scanner_p2p — Fetching fresh spot rates for: MXN, COP, VES, ARS
+2026-04-13 16:26:40,847 [INFO] scanner_p2p — Fetched 3/4 rates from open.er-api.com
+2026-04-13 16:26:41,367 [INFO] scanner_p2p — VES parallel rate: 636.5 (dolarapi.com)
+2026-04-13 16:26:41,930 [INFO] scanner_p2p — Using cached spot rates (age: 1s)
+2026-04-13 16:26:42,498 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-04-13 16:26:43,069 [INFO] scanner_p2p — Using cached spot rates (age: 2s)
+2026-04-13 16:26:43,867 [INFO] scanner_p2p — Using cached spot rates (age: 3s)
+2026-04-13 16:27:17,464 [INFO] scanner_p2p — Using cached spot rates (age: 37s)
+2026-04-13 16:28:00,597 [INFO] engine — Ollama unavailable - skipping intelligence generation
+2026-04-13 16:28:00,598 [INFO] engine — Running ALFRED data quality check...
+2026-04-13 16:28:00,598 [INFO] alfred — ALFRED: Running quality check on last 50 records...
+2026-04-13 16:28:00,599 [INFO] alfred — ALFRED: dq_score 92.31% - OK
+2026-04-13 16:28:00,603 [INFO] engine — Data quality: 92.31% (OK)
+2026-04-13 16:28:00,610 [WARNING] engine — COMMANDER warning: HARVEY stale before ingestion — harvey_no_recent_signals
+2026-04-13 16:28:00,611 [INFO] engine — COMMANDER decision: viable=True — all gates passed
+2026-04-13 16:28:00,635 [ERROR] batman.postgres — Failed to compute concentration risk: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,636 [ERROR] batman.postgres — Failed to save risk score: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,636 [INFO] engine — RISK SCORES — operational_readiness=0.954 concentration=0.000 composite=0.808
+2026-04-13 16:28:00,642 [INFO] engine — Report: /Volumes/Sonnet/Finance2026/batcave/batman_flow_engine/storage/reports/2026-04-13_21-28-00.json
+2026-04-13 16:28:00,642 [INFO] engine — Hash: 8394025184af2e318f330f367f6916a5972041b6ed98ed854ce00647a818786d
+2026-04-13 16:28:00,649 [ERROR] batman.postgres — Failed to save opportunity OPP-B-004E9C702B: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,650 [ERROR] batman.postgres — Failed to save opportunity OPP-C-6391A7AEF3: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,651 [ERROR] batman.postgres — Failed to save opportunity OPP-C-C110153EAF: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,651 [ERROR] batman.postgres — Failed to save opportunity OPP-C-3E712CDC46: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,652 [ERROR] batman.postgres — Failed to save opportunity OPP-C-A0C6C42BFF: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,652 [ERROR] batman.postgres — Failed to save opportunity OPP-D-522A3E6CDE: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,653 [ERROR] batman.postgres — Failed to save opportunity OPP-E-C8007B032D: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,654 [ERROR] batman.postgres — Failed to save opportunity OPP-E-DD00767ED9: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,655 [ERROR] batman.postgres — Failed to save opportunity OPP-F-FE45F586E9: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,656 [ERROR] batman.postgres — Failed to save opportunity OPP-F-92E7B55C96: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,657 [ERROR] batman.postgres — Failed to save opportunity OPP-F-B4C0F2FBEE: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,657 [ERROR] batman.postgres — Failed to save opportunity OPP-F-7159D65CD3: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,658 [ERROR] batman.postgres — Failed to save opportunity OPP-F-A029110B74: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2026-04-13 16:28:00,658 [INFO] harvey — HARVEY→PG sync: 13 new opportunities written
+2026-04-13 16:28:00,658 [INFO] harvey — HARVEY ingest complete: scanned=13 inserted=13 db=/Volumes/Sonnet/Finance2026/batcave/batman_flow_engine/storage/batman.db

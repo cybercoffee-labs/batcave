@@ -13,3 +13,4 @@ env/
 *.bak_syntax
 *.jsonl
 batman.db
+Batcave/
