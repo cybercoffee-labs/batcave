@@ -38,10 +38,16 @@ def _load_env() -> None:
 class ClarkKent:
     """Short-form publisher for Binance Square opportunities."""
 
+    TEMPLATES = {
+        "p2p": "🦇 P2P Alert\n${asset} detectado: {edge_net:.1f}% edge neto\n{buy_exchange} → {sell_exchange}\nVentana: ~{window} min\n#crypto #P2P",
+        "cross": "🦇 Spread Alert\n${asset}: {spread:.2f}% entre exchanges\nOportunidad de arbitraje detectada\n#crypto #arbitrage",
+        "funding": "🦇 Funding Rate\n${asset}: {rate:.4f}% ({apy:.1f}% APY)\nExchange: {exchange}\n#crypto #DeFi",
+        "general": "🦇 Batcave Intel\n{summary}\n#crypto #trading",
+    }
+
     def __init__(self, dry_run: bool = True):
         _load_env()
         self.api_key = os.environ.get("BINANCE_SQUARE_API_KEY", "")
-        self.referral_link = os.environ.get("BINANCE_REFERRAL_LINK", "").strip()
         self.dry_run = dry_run
         self.storage_file = PUBLISHED_FILE
         self.storage_file.parent.mkdir(parents=True, exist_ok=True)
@@ -88,27 +94,28 @@ class ClarkKent:
         """Choose the post template based on opportunity type."""
         normalized = opp_type.upper().strip()
         if normalized in {"C", "P2P", "P2P_LATAM", "P2P_CROSS"}:
-            return "🦇 P2P Alert | {market} {edge_net:.1f}% edge | Buy {buy_exchange} → Sell {sell_exchange} | {referral} #crypto #P2P"
+            return self.TEMPLATES["p2p"]
         if normalized in {"D", "CROSS", "CROSS_EXCHANGE", "MULTI_EXCHANGE"}:
-            return "🦇 Spread Alert | {asset} {spread:.2f}% across exchanges | {referral} #crypto #arbitrage"
+            return self.TEMPLATES["cross"]
         if normalized in {"F", "FUNDING", "FUNDING_RATE"}:
-            return "🦇 Funding | {asset} {rate:.4f}% ({apy:.1f}% APY) on {exchange} | {referral} #crypto #funding"
-        return "🦇 Market Intel | {summary} | {referral} #crypto #trading"
+            return self.TEMPLATES["funding"]
+        return self.TEMPLATES["general"]
 
     def _format_post(self, template: str, data: dict) -> str:
         """Format a Binance Square post and keep it under 280 characters."""
+        asset = str(data.get("asset", "UNKNOWN")).lstrip("$")
         payload = {
             "market": data.get("market", data.get("asset", "UNKNOWN")),
             "edge_net": float(data.get("edge_net", data.get("spread", 0.0)) or 0.0),
             "buy_exchange": data.get("buy_exchange", "N/A"),
             "sell_exchange": data.get("sell_exchange", "N/A"),
-            "asset": data.get("asset", "UNKNOWN"),
+            "asset": asset,
             "spread": float(data.get("spread", data.get("edge_net", 0.0)) or 0.0),
             "rate": float(data.get("rate", data.get("funding_rate", 0.0)) or 0.0),
             "apy": float(data.get("apy", data.get("annualized_pct", 0.0)) or 0.0),
             "exchange": data.get("exchange", "UNKNOWN"),
+            "window": data.get("window", "N/A"),
             "summary": self._summary_from_data(data),
-            "referral": self.referral_link or "Referral unavailable",
         }
 
         post = template.format(**payload)
