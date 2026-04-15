@@ -14,6 +14,7 @@ from pathlib import Path
 import yaml
 from pydantic import BaseModel, validator
 
+from clark_kent.publisher import ClarkKent
 from core.equities import equity_metrics, returns_matrix
 from core.crypto import crypto_metrics
 from core.ollama_intel import get_market_intelligence, get_ollama_status
@@ -65,6 +66,7 @@ CONFIG_FILE = BASE_DIR / "config.yaml"
 
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
+clark_kent = ClarkKent(dry_run=True)
 
 
 # ───────────────────────── CONFIG ─────────────────────────
@@ -921,6 +923,14 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
         _persist_run(result)
         if commander["viable"]:
             ingest_opportunities()
+            try:
+                lines = Path("storage/logs/opportunities.jsonl").read_text().strip().split("\n")
+                recent = [json.loads(l) for l in lines[-10:] if l]
+                for opp in recent:
+                    if float(opp.get("edge_net", 0)) >= 3.0:
+                        clark_kent.publish(opp)
+            except Exception as e:
+                logger.warning(f"Clark Kent skipped: {e}")
         else:
             logger.warning(
                 "COMMANDER blocked — opportunity ingestion skipped: %s",
