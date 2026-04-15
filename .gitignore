@@ -1,16 +1,38 @@
+# macOS artifacts
 ._*
 .DS_Store
+.AppleDouble
+
+# Environment
 .env
 *.env.local
+*.env.*.local
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 .venv/
 env/
+*.egg-info/
+
+# IDE
 .vscode/
 .idea/
+.claude/settings.local.json
+
+# Backups
 *.bak
 *.bak_syntax
+
+# Office documents (should never be in repo)
+*.docx
+*.xlsx
+*.pdf
+
 *.jsonl
 batman.db
+
+# Obsidian vault (already handled, keep entry)
 Batcave/
