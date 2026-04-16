@@ -32,7 +32,7 @@ class PostScheduler:
         return current_hour in self.OPTIMAL_HOURS
 
     def posts_today(self) -> int:
-        today = datetime.now().date()
+        today_str = datetime.now().date().isoformat()
         count = 0
         if not self.storage_file.exists():
             return 0
@@ -46,10 +46,12 @@ class PostScheduler:
                     record = json.loads(line)
                     if record.get("status") not in {"ok", "sent"}:
                         continue
+                    if record.get("dry_run") is not False:
+                        continue
                     ts = record.get("ts")
                     if not ts:
                         continue
-                    if datetime.fromisoformat(ts.replace("Z", "+00:00")).date() == today:
+                    if str(ts).startswith(today_str):
                         count += 1
                 except (ValueError, TypeError, json.JSONDecodeError):
                     continue

@@ -178,7 +178,7 @@ class ClarkKent:
             "rate": rate,
             "apy": apy,
             "exchange": self._exchange_label(data),
-            "window": self._window_minutes(data),
+            "window": self._calculate_window(data),
             "summary": self._summary_from_data(data),
         }
 
@@ -305,6 +305,31 @@ class ClarkKent:
             return str(value)
         return "N/A"
 
+    def _calculate_window(self, opp: dict[str, Any]) -> str:
+        """Resolve posting window minutes from explicit fields or opportunity type."""
+        window = self._window_minutes(opp)
+        if window != "N/A":
+            return window
+
+        opp_type = str(opp.get("type", "")).upper()
+        scanner = str(opp.get("scanner_id", "")).upper()
+        windows = {
+            "C": "10",
+            "B": "5",
+            "D": "2",
+            "E": "2",
+            "F": "15",
+            "G": "3",
+        }
+
+        if opp_type in windows:
+            return windows[opp_type]
+        if scanner:
+            scanner_type = scanner.split("-", 1)[0]
+            if scanner_type in windows:
+                return windows[scanner_type]
+        return "8"
+
     def _buy_exchange(self, data: dict[str, Any]) -> str:
         """Resolve a human-readable buy venue."""
         exchange = self._first_text(data, "buy_exchange", "exchange_buy")
@@ -422,6 +447,7 @@ class ClarkKent:
         analytics = {
             "ts": datetime.now(UTC).isoformat(),
             "type": opportunity_type,
+            "dry_run": self.dry_run,
             "platform": platform,
             "char_count": len(post_text),
             "cashtags": cashtags,
