@@ -7,6 +7,7 @@ Publishes short Batcave opportunity posts in dry-run mode by default.
 import json
 import logging
 import os
+import re
 import ssl
 import urllib.error
 import urllib.request
@@ -14,15 +15,20 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from clark_kent.content_calendar import ContentCalendar
+from clark_kent.scheduler import PostScheduler
+
 logger = logging.getLogger("batman.clark_kent")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODULE_DIR = Path(__file__).resolve().parent
 STORAGE_DIR = MODULE_DIR / "storage"
 PUBLISHED_FILE = STORAGE_DIR / "published.jsonl"
+ANALYTICS_FILE = STORAGE_DIR / "analytics.jsonl"
 BINANCE_SQUARE_URL = "https://www.binance.com/bapi/composite/v1/public/cms/article/publish"
 MAX_POST_LEN = 280
 MIN_EDGE_THRESHOLD = 3.0
+ALLOWED_STABLECOINS = {"USDT", "USDC", "DAI"}
 
 
 def _load_env() -> None:
@@ -39,10 +45,10 @@ class ClarkKent:
     """Short-form publisher for Binance Square opportunities."""
 
     TEMPLATES = {
-        "p2p": "🦇 P2P Alert\n${asset} detectado: {edge_net:.1f}% edge neto\n{buy_exchange} → {sell_exchange}\nVentana: ~{window} min\n#crypto #P2P",
-        "cross": "🦇 Spread Alert\n${asset}: {spread:.2f}% entre exchanges\nOportunidad de arbitraje detectada\n#crypto #arbitrage",
-        "funding": "🦇 Funding Rate\n${asset}: {rate:.4f}% ({apy:.1f}% APY)\nExchange: {exchange}\n#crypto #DeFi",
-        "general": "🦇 Batcave Intel\n{summary}\n#crypto #trading",
+        "p2p": "🦇 P2P Alert\n{primary_cashtag} detectado: {edge_net:.1f}% edge neto\n{buy_exchange} → {sell_exchange}\nVentana: ~{window} min\n#crypto #P2P",
+        "cross": "🦇 Spread Alert\n{primary_cashtag}: {spread:.2f}% entre exchanges\nOportunidad de arbitraje detectada\n#crypto #arbitrage",
+        "funding": "🦇 Funding Rate\n{primary_cashtag}: {rate:.4f}% ({apy:.1f}% APY)\nExchange: {exchange}\n#crypto #DeFi",
+        "general": "🦇 Batcave Intel\n{primary_cashtag} {summary}\n#crypto #trading",
     }
 
     def __init__(self, dry_run: bool = True):
@@ -50,6 +56,9 @@ class ClarkKent:
         self.api_key = os.environ.get("BINANCE_SQUARE_API_KEY", "")
         self.dry_run = dry_run
         self.storage_file = PUBLISHED_FILE
+        self.analytics_file = ANALYTICS_FILE
+        self.scheduler = PostScheduler(storage_file=self.storage_file)
+        self.calendar = ContentCalendar(storage_file=self.storage_file)
         self.storage_file.parent.mkdir(parents=True, exist_ok=True)
 
     def publish(self, opportunity: dict) -> bool:
@@ -69,8 +78,51 @@ class ClarkKent:
             )
             return False
 
+        if not self.scheduler.can_post_now():
+            next_window = self.scheduler.next_optimal_hour()
+            logger.info("Queued for next window: %s", next_window)
+            self._append_log(
+                {
+                    "ts": datetime.now(UTC).isoformat(),
+                    "status": "queued",
+                    "reason": "outside_optimal_window",
+                    "next_window": next_window,
+                    "dry_run": self.dry_run,
+                    "opportunity": opportunity,
+                }
+            )
+            return False
+
+        if not self.scheduler.can_post_today():
+            logger.info("Daily post limit reached: %s", self.scheduler.posts_today())
+            self._append_log(
+                {
+                    "ts": datetime.now(UTC).isoformat(),
+                    "status": "queued",
+                    "reason": "daily_limit_reached",
+                    "posts_today": self.scheduler.posts_today(),
+                    "dry_run": self.dry_run,
+                    "opportunity": opportunity,
+                }
+            )
+            return False
+
         template = self._select_template(str(opportunity.get("type", "")))
         post_text = self._format_post(template, opportunity)
+        if not self.calendar.validate_post(post_text):
+            logger.error("Rejected post due to cashtag/hashtag compliance: %s", post_text)
+            self._append_log(
+                {
+                    "ts": datetime.now(UTC).isoformat(),
+                    "status": "rejected",
+                    "reason": "invalid_post_format",
+                    "dry_run": self.dry_run,
+                    "post": post_text,
+                    "opportunity": opportunity,
+                }
+            )
+            return False
+
         record = {
             "ts": datetime.now(UTC).isoformat(),
             "status": "ok",
@@ -83,11 +135,14 @@ class ClarkKent:
             print(post_text)
             logger.info("Dry run post generated (%d chars)", len(post_text))
             self._append_log(record)
+            self._append_analytics(post_text, opportunity, platform="binance_square")
             return True
 
         success = self._post_to_square(post_text)
         record["status"] = "sent" if success else "error"
         self._append_log(record)
+        if success:
+            self._append_analytics(post_text, opportunity, platform="binance_square")
         return success
 
     def _select_template(self, opp_type: str) -> str:
@@ -104,12 +159,14 @@ class ClarkKent:
     def _format_post(self, template: str, data: dict) -> str:
         """Format a Binance Square post and keep it under 280 characters."""
         asset = str(data.get("asset", "UNKNOWN")).lstrip("$")
+        stablecoin = self._stablecoin_cashtag(data)
         payload = {
             "market": data.get("market", data.get("asset", "UNKNOWN")),
             "edge_net": float(data.get("edge_net", data.get("spread", 0.0)) or 0.0),
             "buy_exchange": data.get("buy_exchange", "N/A"),
             "sell_exchange": data.get("sell_exchange", "N/A"),
             "asset": asset,
+            "primary_cashtag": stablecoin,
             "spread": float(data.get("spread", data.get("edge_net", 0.0)) or 0.0),
             "rate": float(data.get("rate", data.get("funding_rate", 0.0)) or 0.0),
             "apy": float(data.get("apy", data.get("annualized_pct", 0.0)) or 0.0),
@@ -136,6 +193,15 @@ class ClarkKent:
             return fallback_template.format(**payload)[:MAX_POST_LEN]
 
         return post[: MAX_POST_LEN - 3].rstrip() + "..."
+
+    def _stablecoin_cashtag(self, data: dict) -> str:
+        """Return a compliant stablecoin cashtag for every Clark Kent post."""
+        asset = str(data.get("asset", "")).upper().lstrip("$")
+        preferred = str(data.get("stablecoin", "")).upper().lstrip("$")
+        for candidate in (preferred, asset, "USDT"):
+            if candidate in ALLOWED_STABLECOINS:
+                return f"${candidate}"
+        return "$USDT"
 
     def _summary_from_data(self, data: dict) -> str:
         """Build a concise summary for the fallback template."""
@@ -210,4 +276,27 @@ class ClarkKent:
             return True
         except Exception as exc:
             logger.error("Failed to write Clark Kent log: %s", exc)
+            return False
+
+    def _append_analytics(self, post_text: str, opportunity: dict[str, Any], platform: str) -> bool:
+        """Append lightweight analytics estimates for downstream reporting."""
+        cashtags = re.findall(r"\$[A-Z0-9]+", post_text)
+        hashtags = re.findall(r"(?<!\$)#[A-Za-z][A-Za-z0-9_]*", post_text)
+        opportunity_type = str(opportunity.get("type", "general")).lower() or "general"
+        analytics = {
+            "ts": datetime.now(UTC).isoformat(),
+            "type": opportunity_type,
+            "platform": platform,
+            "char_count": len(post_text),
+            "cashtags": cashtags,
+            "hashtags": hashtags,
+            "estimated_views": 120 + (25 * len(hashtags)) + (15 * len(cashtags)),
+            "engagement_estimate": round(0.8 + (0.15 * len(hashtags)) + (0.1 * len(cashtags)), 2),
+        }
+        try:
+            with open(self.analytics_file, "a", encoding="utf-8") as handle:
+                handle.write(json.dumps(analytics, default=str) + "\n")
+            return True
+        except Exception as exc:
+            logger.error("Failed to write Clark Kent analytics: %s", exc)
             return False
