@@ -158,20 +158,27 @@ class ClarkKent:
 
     def _format_post(self, template: str, data: dict) -> str:
         """Format a Binance Square post and keep it under 280 characters."""
-        asset = str(data.get("asset", "UNKNOWN")).lstrip("$")
+        asset = self._asset_symbol(data)
         stablecoin = self._stablecoin_cashtag(data)
+        edge_net = self._float_value(data, "edge_net", "spread_pct", "spread", "merchant_spread_pct")
+        spread = self._float_value(data, "spread", "spread_pct", "cross_premium_spread", "edge_net", "merchant_spread_pct")
+        rate = self._float_value(data, "funding_rate", "rate")
+        apy = self._float_value(data, "apy", "annualized_pct")
+        if not apy and rate:
+            apy = rate * 3 * 365 * 100
+
         payload = {
-            "market": data.get("market", data.get("asset", "UNKNOWN")),
-            "edge_net": float(data.get("edge_net", data.get("spread", 0.0)) or 0.0),
-            "buy_exchange": data.get("buy_exchange", "N/A"),
-            "sell_exchange": data.get("sell_exchange", "N/A"),
+            "market": self._market_label(data),
+            "edge_net": edge_net,
+            "buy_exchange": self._buy_exchange(data),
+            "sell_exchange": self._sell_exchange(data),
             "asset": asset,
             "primary_cashtag": stablecoin,
-            "spread": float(data.get("spread", data.get("edge_net", 0.0)) or 0.0),
-            "rate": float(data.get("rate", data.get("funding_rate", 0.0)) or 0.0),
-            "apy": float(data.get("apy", data.get("annualized_pct", 0.0)) or 0.0),
-            "exchange": data.get("exchange", "UNKNOWN"),
-            "window": data.get("window", "N/A"),
+            "spread": spread,
+            "rate": rate,
+            "apy": apy,
+            "exchange": self._exchange_label(data),
+            "window": self._window_minutes(data),
             "summary": self._summary_from_data(data),
         }
 
@@ -196,7 +203,7 @@ class ClarkKent:
 
     def _stablecoin_cashtag(self, data: dict) -> str:
         """Return a compliant stablecoin cashtag for every Clark Kent post."""
-        asset = str(data.get("asset", "")).upper().lstrip("$")
+        asset = self._asset_symbol(data).upper().lstrip("$")
         preferred = str(data.get("stablecoin", "")).upper().lstrip("$")
         for candidate in (preferred, asset, "USDT"):
             if candidate in ALLOWED_STABLECOINS:
@@ -206,31 +213,160 @@ class ClarkKent:
     def _summary_from_data(self, data: dict) -> str:
         """Build a concise summary for the fallback template."""
         parts = []
-        if data.get("market"):
-            parts.append(str(data["market"]))
-        if data.get("asset"):
-            parts.append(str(data["asset"]))
-        if data.get("edge_net") is not None:
-            parts.append(f"{float(data['edge_net']):.1f}% edge")
-        elif data.get("spread") is not None:
-            parts.append(f"{float(data['spread']):.2f}% spread")
-        if data.get("buy_exchange") and data.get("sell_exchange"):
-            parts.append(f"{data['buy_exchange']} -> {data['sell_exchange']}")
-        elif data.get("exchange"):
-            parts.append(str(data["exchange"]))
+        market = self._market_label(data)
+        asset = self._asset_symbol(data)
+        edge_net = self._float_value(data, "edge_net", "spread_pct", "spread", "merchant_spread_pct")
+        spread = self._float_value(data, "spread", "spread_pct", "cross_premium_spread", "merchant_spread_pct")
+        buy_exchange = self._buy_exchange(data)
+        sell_exchange = self._sell_exchange(data)
+        exchange = self._exchange_label(data)
+
+        if market:
+            parts.append(market)
+        if asset:
+            parts.append(asset)
+        if edge_net:
+            parts.append(f"{edge_net:.1f}% edge")
+        elif spread:
+            parts.append(f"{spread:.2f}% spread")
+        if buy_exchange and sell_exchange:
+            parts.append(f"{buy_exchange} -> {sell_exchange}")
+        elif exchange:
+            parts.append(exchange)
         summary = " ".join(parts).strip()
         return summary or "Opportunity detected"
 
     def _edge_value(self, opportunity: dict) -> float:
         """Extract a comparable edge percentage from the opportunity payload."""
-        for key in ("edge_net", "spread", "edge_pct", "profit_pct"):
-            value = opportunity.get(key)
+        return self._float_value(
+            opportunity,
+            "edge_net",
+            "spread_pct",
+            "spread",
+            "edge_pct",
+            "profit_pct",
+            "cross_premium_spread",
+            "merchant_spread_pct",
+        )
+
+    def _float_value(self, data: dict[str, Any], *keys: str) -> float:
+        """Return the first numeric value from a list of candidate keys."""
+        for key in keys:
+            value = data.get(key)
             if value is not None:
                 try:
                     return float(value)
                 except (TypeError, ValueError):
                     continue
         return 0.0
+
+    def _first_text(self, data: dict[str, Any], *keys: str) -> str:
+        """Return the first non-empty string value from candidate keys."""
+        for key in keys:
+            value = data.get(key)
+            if value is None:
+                continue
+            text = str(value).strip()
+            if text:
+                return text
+        return ""
+
+    def _asset_symbol(self, data: dict[str, Any]) -> str:
+        """Normalize the asset symbol from Batman opportunity payloads."""
+        asset = self._first_text(data, "asset")
+        if asset:
+            return asset.lstrip("$")
+
+        market = self._first_text(data, "market")
+        if "/" in market:
+            return market.split("/", 1)[0].lstrip("$")
+        if market:
+            return market.lstrip("$")
+        return "UNKNOWN"
+
+    def _market_label(self, data: dict[str, Any]) -> str:
+        """Return the best available market label."""
+        market = self._first_text(data, "market")
+        if market:
+            return market
+
+        asset = self._asset_symbol(data)
+        fiat = self._first_text(data, "fiat", "sell_fiat", "buy_fiat")
+        if asset != "UNKNOWN" and fiat:
+            return f"{asset}/{fiat}"
+        return asset
+
+    def _window_minutes(self, data: dict[str, Any]) -> str:
+        """Resolve the opportunity time window."""
+        for key in ("network_time_mins", "window"):
+            value = data.get(key)
+            if value is None:
+                continue
+            return str(value)
+        return "N/A"
+
+    def _buy_exchange(self, data: dict[str, Any]) -> str:
+        """Resolve a human-readable buy venue."""
+        exchange = self._first_text(data, "buy_exchange", "exchange_buy")
+        if exchange:
+            return exchange
+
+        route_exchange = self._route_exchange(data, index=0)
+        if route_exchange:
+            return route_exchange
+
+        venue = self._first_text(data, "venue")
+        if venue:
+            return venue.replace("_", " ").title()
+
+        buy_fiat = self._first_text(data, "buy_fiat")
+        if buy_fiat:
+            return f"Local {buy_fiat}"
+        return "N/A"
+
+    def _sell_exchange(self, data: dict[str, Any]) -> str:
+        """Resolve a human-readable sell venue."""
+        exchange = self._first_text(data, "sell_exchange", "exchange_sell")
+        if exchange:
+            return exchange
+
+        route_exchange = self._route_exchange(data, index=-1)
+        if route_exchange:
+            sell_fiat = self._first_text(data, "sell_fiat", "fiat", "market")
+            if sell_fiat and sell_fiat not in route_exchange:
+                return f"{route_exchange} {sell_fiat}".strip()
+            return route_exchange
+
+        sell_fiat = self._first_text(data, "sell_fiat", "fiat")
+        if sell_fiat:
+            return f"Local {sell_fiat}"
+
+        market = self._first_text(data, "market")
+        if market:
+            return market
+        return "N/A"
+
+    def _exchange_label(self, data: dict[str, Any]) -> str:
+        """Resolve the best exchange label for funding and general posts."""
+        exchange = self._first_text(data, "exchange", "scanner_id")
+        if exchange:
+            return exchange
+
+        route_exchange = self._route_exchange(data, index=0)
+        if route_exchange:
+            return route_exchange
+        return "UNKNOWN"
+
+    def _route_exchange(self, data: dict[str, Any], index: int) -> str:
+        """Extract exchange labels from route strings like USDT(Binance P2P)."""
+        route = self._first_text(data, "route")
+        matches = re.findall(r"\(([^)]+)\)", route)
+        if not matches:
+            return ""
+        try:
+            return matches[index].strip()
+        except IndexError:
+            return matches[0].strip()
 
     def _post_to_square(self, post_text: str) -> bool:
         """Send a live post to Binance Square."""
