@@ -107,7 +107,7 @@ class ClarkKent:
             )
             return False
 
-        template = self._select_template(str(opportunity.get("type", "")))
+        template = self._select_template(opportunity)
         post_text = self._format_post(template, opportunity)
         if not self.calendar.validate_post(post_text):
             logger.error("Rejected post due to cashtag/hashtag compliance: %s", post_text)
@@ -145,16 +145,21 @@ class ClarkKent:
             self._append_analytics(post_text, opportunity, platform="binance_square")
         return success
 
-    def _select_template(self, opp_type: str) -> str:
-        """Choose the post template based on opportunity type."""
-        normalized = opp_type.upper().strip()
-        if normalized in {"C", "P2P", "P2P_LATAM", "P2P_CROSS"}:
-            return self.TEMPLATES["p2p"]
-        if normalized in {"D", "CROSS", "CROSS_EXCHANGE", "MULTI_EXCHANGE"}:
-            return self.TEMPLATES["cross"]
-        if normalized in {"F", "FUNDING", "FUNDING_RATE"}:
-            return self.TEMPLATES["funding"]
-        return self.TEMPLATES["general"]
+    def _select_template(self, opp: dict[str, Any]) -> str:
+        """Choose the post template based on scanner semantics and opportunity type."""
+        scanner = str(opp.get("scanner_id", "")).strip()
+        opp_type = str(opp.get("type", "")).strip().upper()
+        scanner_lower = scanner.lower()
+
+        if "funding" in scanner_lower:
+            return "funding"
+        if "p2p" in scanner_lower or opp_type == "C":
+            return "p2p"
+        if "cross" in scanner_lower or opp_type == "F":
+            return "cross"
+        if "basis" in scanner_lower or opp_type == "B":
+            return "cross"
+        return "p2p"
 
     def _format_post(self, template: str, data: dict) -> str:
         """Format a Binance Square post and keep it under 280 characters."""
