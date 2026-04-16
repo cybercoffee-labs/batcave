@@ -25,7 +25,7 @@ MODULE_DIR = Path(__file__).resolve().parent
 STORAGE_DIR = MODULE_DIR / "storage"
 PUBLISHED_FILE = STORAGE_DIR / "published.jsonl"
 ANALYTICS_FILE = STORAGE_DIR / "analytics.jsonl"
-BINANCE_SQUARE_URL = "https://www.binance.com/bapi/composite/v1/public/cms/article/publish"
+BINANCE_SQUARE_URL = "https://www.binance.com/bapi/composite/v1/public/pgc/openApi/content/add"
 MAX_POST_LEN = 280
 MIN_EDGE_THRESHOLD = 3.0
 ALLOWED_STABLECOINS = {"USDT", "USDC", "DAI"}
@@ -404,11 +404,12 @@ class ClarkKent:
             logger.error("BINANCE_SQUARE_API_KEY is not configured")
             return False
 
-        payload = json.dumps({"content": post_text}).encode("utf-8")
+        payload = json.dumps({"bodyTextOnly": post_text}).encode("utf-8")
         headers = {
             "Content-Type": "application/json",
             "User-Agent": "batman-flow-engine/1.0",
-            "X-MBX-APIKEY": self.api_key,
+            "X-Square-OpenAPI-Key": self.api_key,
+            "clienttype": "binanceSkill",
         }
 
         try:
@@ -421,11 +422,24 @@ class ClarkKent:
             context = ssl.create_default_context()
             with urllib.request.urlopen(request, timeout=15, context=context) as response:  # noqa: S310
                 status_code = getattr(response, "status", 200)
-                success = 200 <= status_code < 300
+                body = response.read().decode("utf-8", errors="ignore")
+                response_data = json.loads(body) if body else {}
+                success = 200 <= status_code < 300 and response_data.get("code") == "000000"
                 if success:
-                    logger.info("Published post to Binance Square")
+                    content_id = response_data.get("data", {}).get("id")
+                    share_link = response_data.get("data", {}).get("shareLink")
+                    logger.info(
+                        "Published post to Binance Square (id=%s, share_link=%s)",
+                        content_id,
+                        share_link,
+                    )
                 else:
-                    logger.error("Binance Square publish failed with status %s", status_code)
+                    logger.error(
+                        "Binance Square publish failed with status %s: code=%s message=%s",
+                        status_code,
+                        response_data.get("code"),
+                        response_data.get("message"),
+                    )
                 return success
         except urllib.error.HTTPError as exc:
             body = exc.read().decode("utf-8", errors="ignore") if exc.fp else ""
