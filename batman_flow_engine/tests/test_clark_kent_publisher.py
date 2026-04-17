@@ -87,4 +87,5 @@ def test_publish_resolves_template_key_to_real_post_text(tmp_path):
     last_line = publisher.storage_file.read_text(encoding="utf-8").strip().splitlines()[-1]
     payload = json.loads(last_line)
     assert payload["post"] != "p2p"
-    assert "P2P Alert" in payload["post"]
+    assert "Fear & Greed" in payload["post"]
+    assert "?" in payload["post"] or "¿" in payload["post"]

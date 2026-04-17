@@ -298,14 +298,14 @@ def _initialize_optional_modules() -> None:
             logger.warning("ORACLE_V2 init skipped: %s", exc)
 
 
-def _publish_with_engine_override(opportunity: dict[str, Any]) -> bool:
+def _publish_with_engine_override(opportunity: dict[str, Any], hawk_data: dict[str, Any] | None = None) -> bool:
     current_hour = datetime.datetime.now().hour
     original_hours = list(clark_kent.scheduler.OPTIMAL_HOURS)
     original_max_posts = clark_kent.scheduler.MAX_POSTS_PER_DAY
     try:
         clark_kent.scheduler.OPTIMAL_HOURS = sorted(set(original_hours + [current_hour]))
         clark_kent.scheduler.MAX_POSTS_PER_DAY = 100
-        return clark_kent.publish(opportunity)
+        return clark_kent.publish(opportunity, hawk_data=hawk_data)
     finally:
         clark_kent.scheduler.OPTIMAL_HOURS = original_hours
         clark_kent.scheduler.MAX_POSTS_PER_DAY = original_max_posts
@@ -1031,7 +1031,12 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 verified_opportunities.append(opportunity)
                 try:
                     if edge_value >= 4.0:
-                        published, publish_elapsed = _timed_call("CLARK_KENT", _publish_with_engine_override, opportunity)
+                        published, publish_elapsed = _timed_call(
+                            "CLARK_KENT",
+                            _publish_with_engine_override,
+                            opportunity,
+                            hawk_data,
+                        )
                         module_timings["clark_kent_sec"] = module_timings.get("clark_kent_sec", 0.0) + publish_elapsed
                         if published:
                             posts_published += 1

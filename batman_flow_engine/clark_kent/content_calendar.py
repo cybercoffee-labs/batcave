@@ -8,11 +8,10 @@ from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
 
-
 MODULE_DIR = Path(__file__).resolve().parent
 STORAGE_DIR = MODULE_DIR / "storage"
 PUBLISHED_FILE = STORAGE_DIR / "published.jsonl"
-MAX_POST_LEN = 280
+MAX_POST_LEN = 500
 
 
 class ContentCalendar:
@@ -134,9 +133,8 @@ class ContentCalendar:
                     if not ts:
                         continue
                     parsed = datetime.fromisoformat(ts.replace("Z", "+00:00")).replace(tzinfo=None)
-                    if parsed >= cutoff:
-                        if isinstance(opportunity, dict):
-                            records.append({**opportunity, "ts": ts})
+                    if parsed >= cutoff and isinstance(opportunity, dict):
+                        records.append({**opportunity, "ts": ts})
                 except (ValueError, TypeError, json.JSONDecodeError):
                     continue
         return records

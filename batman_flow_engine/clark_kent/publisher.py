@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from clark_kent.content_calendar import ContentCalendar
+from clark_kent.content_generator import ContentGenerator
 from clark_kent.scheduler import PostScheduler
 
 logger = logging.getLogger("batman.clark_kent")
@@ -26,7 +27,7 @@ STORAGE_DIR = MODULE_DIR / "storage"
 PUBLISHED_FILE = STORAGE_DIR / "published.jsonl"
 ANALYTICS_FILE = STORAGE_DIR / "analytics.jsonl"
 BINANCE_SQUARE_URL = "https://www.binance.com/bapi/composite/v1/public/pgc/openApi/content/add"
-MAX_POST_LEN = 280
+MAX_POST_LEN = 500
 MIN_EDGE_THRESHOLD = 3.0
 ALLOWED_STABLECOINS = {"USDT", "USDC", "DAI"}
 
@@ -45,7 +46,7 @@ class ClarkKent:
     """Short-form publisher for Binance Square opportunities."""
 
     TEMPLATES = {
-        "p2p": "🦇 P2P Alert\n{primary_cashtag} detectado: {edge_net:.1f}% edge neto\n{buy_exchange} → {sell_exchange}\nVentana: ~{window} min\n#crypto #P2P",
+        "p2p": "professional_p2p",
         "cross": "🦇 Spread Alert\n{primary_cashtag}: {spread:.2f}% entre exchanges\nOportunidad de arbitraje detectada\n#crypto #arbitrage",
         "funding": "🦇 Funding Rate\n{primary_cashtag}: {rate:.4f}% ({apy:.1f}% APY)\nExchange: {exchange}\n#crypto #DeFi",
         "general": "🦇 Batcave Intel\n{primary_cashtag} {summary}\n#crypto #trading",
@@ -59,9 +60,10 @@ class ClarkKent:
         self.analytics_file = ANALYTICS_FILE
         self.scheduler = PostScheduler(storage_file=self.storage_file)
         self.calendar = ContentCalendar(storage_file=self.storage_file)
+        self.content_generator = ContentGenerator()
         self.storage_file.parent.mkdir(parents=True, exist_ok=True)
 
-    def publish(self, opportunity: dict) -> bool:
+    def publish(self, opportunity: dict, hawk_data: dict[str, Any] | None = None) -> bool:
         """Publish a qualifying opportunity to Binance Square or print it in dry-run mode."""
         edge_value = self._edge_value(opportunity)
         if edge_value < MIN_EDGE_THRESHOLD:
@@ -108,7 +110,12 @@ class ClarkKent:
             return False
 
         template_key = self._select_template(opportunity)
-        post_text = self._format_post(self.TEMPLATES[template_key], opportunity)
+        chart_data: dict[str, Any] = {}
+        if template_key == "p2p":
+            chart_data = self.content_generator.generate_spread_chart(opportunity)
+            post_text = self.content_generator.generate_professional_post(opportunity, hawk_data)
+        else:
+            post_text = self._format_post(self.TEMPLATES[template_key], opportunity)
         if not self.calendar.validate_post(post_text):
             logger.error("Rejected post due to cashtag/hashtag compliance: %s", post_text)
             self._append_log(
@@ -118,6 +125,7 @@ class ClarkKent:
                     "reason": "invalid_post_format",
                     "dry_run": self.dry_run,
                     "post": post_text,
+                    "chart": chart_data,
                     "opportunity": opportunity,
                 }
             )
@@ -128,6 +136,7 @@ class ClarkKent:
             "status": "ok",
             "dry_run": self.dry_run,
             "post": post_text,
+            "chart": chart_data,
             "opportunity": opportunity,
         }
 
