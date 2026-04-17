@@ -71,13 +71,19 @@ CONFIG_FILE = BASE_DIR / "config.yaml"
 
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
-clark_kent = ClarkKent(dry_run=True)
+clark_kent = ClarkKent(dry_run=False)
 hawkgirl: HawkgirlAgent | None = None
 dex_scanner: DexArbitrageScanner | None = None
 zatanna: ZatannaPredictor | None = None
 aquaman: Aquaman | None = None
 oracle_backtester: Backtester | None = None
 CYCLE_COUNTER = 0
+P2P_SCANNERS = {
+    "C-P2P-LATAM",
+    "F-P2P-CROSS-CURRENCY",
+    "G-P2P-MERCHANT",
+    "I-CROSS-PLATFORM-MXN",
+}
 
 
 # ───────────────────────── CONFIG ─────────────────────────
@@ -290,6 +296,44 @@ def _initialize_optional_modules() -> None:
             oracle_backtester = Backtester(capital=1000.0)
         except Exception as exc:
             logger.warning("ORACLE_V2 init skipped: %s", exc)
+
+
+def _publish_with_engine_override(opportunity: dict[str, Any]) -> bool:
+    current_hour = datetime.datetime.now().hour
+    original_hours = list(clark_kent.scheduler.OPTIMAL_HOURS)
+    original_max_posts = clark_kent.scheduler.MAX_POSTS_PER_DAY
+    try:
+        clark_kent.scheduler.OPTIMAL_HOURS = sorted(set(original_hours + [current_hour]))
+        clark_kent.scheduler.MAX_POSTS_PER_DAY = 100
+        return clark_kent.publish(opportunity)
+    finally:
+        clark_kent.scheduler.OPTIMAL_HOURS = original_hours
+        clark_kent.scheduler.MAX_POSTS_PER_DAY = original_max_posts
+
+
+def _verify_p2p_opportunity(opportunity: dict[str, Any], edge_value: float) -> tuple[bool, str, int]:
+    scanner_id = str(opportunity.get("scanner_id", "") or "")
+    if scanner_id == "C-P2P-LATAM":
+        liquidity_count = int(opportunity.get("merchant_count", 0) or 0)
+        return liquidity_count >= 3 and edge_value >= 2.0, "p2p_merchant_count", liquidity_count
+
+    if scanner_id == "G-P2P-MERCHANT":
+        buy_ads = int(opportunity.get("num_buy_ads", 0) or 0)
+        sell_ads = int(opportunity.get("num_sell_ads", 0) or 0)
+        liquidity_count = min(buy_ads, sell_ads)
+        return liquidity_count >= 3 and edge_value >= 2.0, "p2p_ad_depth", liquidity_count
+
+    if scanner_id == "F-P2P-CROSS-CURRENCY":
+        liquidity_count = str(opportunity.get("route", "")).count("P2P")
+        return liquidity_count >= 2 and edge_value >= 2.0, "p2p_route_hops", liquidity_count
+
+    if scanner_id == "I-CROSS-PLATFORM-MXN":
+        buy_platform = str(opportunity.get("buy_platform", "") or "").strip()
+        sell_platform = str(opportunity.get("sell_platform", "") or "").strip()
+        liquidity_count = int(bool(buy_platform)) + int(bool(sell_platform))
+        return bool(opportunity.get("viable")) and liquidity_count >= 2 and edge_value >= 2.0, "p2p_platform_route", liquidity_count
+
+    return False, "p2p_unknown", 0
 
 
 # ───────────────────────── ENGINE ─────────────────────────
@@ -916,7 +960,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             logger.warning("CYBORG DEX skipped: %s", e)
             result["cyborg_dex"] = {"error": str(e)}
 
-        # PHASE 3: FILTER
+        # PHASE 3 + 4: FILTER / PUBLISH
         for opportunity in cycle_opportunities:
             try:
                 edge_value = float(opportunity.get("edge_net", 0) or 0.0)
@@ -925,6 +969,10 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
 
             if edge_value <= 2.0:
                 continue
+
+            scanner_id = str(opportunity.get("scanner_id", "") or "")
+            opportunity["verified"] = False
+            opportunity["verify_method"] = "unverified"
 
             try:
                 if zatanna is None:
@@ -943,22 +991,57 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             except Exception as e:
                 logger.warning("ZATANNA scoring skipped: %s", e)
 
-            try:
-                if aquaman is None:
-                    raise RuntimeError("module_unavailable")
-                verification, aqua_elapsed = _timed_call("AQUAMAN", aquaman.verify_opportunity, opportunity)
-                module_timings["aquaman_sec"] = module_timings.get("aquaman_sec", 0.0) + aqua_elapsed
-                if verification:
-                    opportunity["aquaman"] = verification
-                    verified_opportunities.append(opportunity)
-                    logger.info(
-                        "AQUAMAN: %s verified depth=%s slippage=%s",
-                        opportunity.get("opp_id", "unknown"),
-                        verification.get("depth_usd"),
-                        verification.get("slippage_pct"),
-                    )
-            except Exception as e:
-                logger.warning("AQUAMAN verification skipped: %s", e)
+            is_verified = False
+            verify_method = "failed"
+            if scanner_id in P2P_SCANNERS:
+                is_verified, verify_method, liquidity_count = _verify_p2p_opportunity(opportunity, edge_value)
+                logger.info(
+                    "P2P verified=%s opp=%s method=%s liquidity=%d edge=%.2f",
+                    is_verified,
+                    opportunity.get("opp_id", "unknown"),
+                    verify_method,
+                    liquidity_count,
+                    edge_value,
+                )
+            else:
+                try:
+                    if aquaman is None:
+                        raise RuntimeError("module_unavailable")
+                    aquaman_result, aqua_elapsed = _timed_call("AQUAMAN", aquaman.verify_opportunity, opportunity)
+                    module_timings["aquaman_sec"] = module_timings.get("aquaman_sec", 0.0) + aqua_elapsed
+                    is_verified = bool(aquaman_result)
+                    verify_method = "aquaman_orderbook"
+                    if aquaman_result:
+                        opportunity["aquaman"] = aquaman_result
+                        logger.info(
+                            "AQUAMAN verified=%s opp=%s depth=%s slippage=%s",
+                            is_verified,
+                            opportunity.get("opp_id", "unknown"),
+                            aquaman_result.get("depth_usd"),
+                            aquaman_result.get("slippage_pct"),
+                        )
+                except Exception as e:
+                    logger.warning("AQUAMAN check failed: %s", e)
+                    is_verified = False
+                    verify_method = "failed"
+
+            if is_verified:
+                opportunity["verified"] = True
+                opportunity["verify_method"] = verify_method
+                verified_opportunities.append(opportunity)
+                try:
+                    if edge_value >= 4.0:
+                        published, publish_elapsed = _timed_call("CLARK_KENT", _publish_with_engine_override, opportunity)
+                        module_timings["clark_kent_sec"] = module_timings.get("clark_kent_sec", 0.0) + publish_elapsed
+                        if published:
+                            posts_published += 1
+                            logger.info(
+                                "CLARK KENT published: %s edge=%.1f%%",
+                                opportunity.get("opp_id", "unknown"),
+                                edge_value,
+                            )
+                except Exception as e:
+                    logger.warning("Clark Kent skipped: %s", e)
 
         _enrich_runtime_metadata(result)
 
@@ -1099,16 +1182,6 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
 
         if commander["viable"]:
             ingest_opportunities()
-            for opp in verified_opportunities:
-                try:
-                    if float(opp.get("edge_net", 0) or 0.0) > 4.0:
-                        published, publish_elapsed = _timed_call("CLARK_KENT", clark_kent.publish, opp)
-                        module_timings["clark_kent_sec"] = module_timings.get("clark_kent_sec", 0.0) + publish_elapsed
-                        if published:
-                            posts_published += 1
-                            logger.info("CLARK: published %s", opp.get("opp_id", "unknown"))
-                except Exception as e:
-                    logger.warning("CLARK_KENT skipped: %s", e)
         else:
             logger.warning(
                 "COMMANDER blocked — opportunity ingestion skipped: %s",

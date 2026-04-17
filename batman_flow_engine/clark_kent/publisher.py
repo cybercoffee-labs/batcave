@@ -107,8 +107,8 @@ class ClarkKent:
             )
             return False
 
-        template = self._select_template(opportunity)
-        post_text = self._format_post(template, opportunity)
+        template_key = self._select_template(opportunity)
+        post_text = self._format_post(self.TEMPLATES[template_key], opportunity)
         if not self.calendar.validate_post(post_text):
             logger.error("Rejected post due to cashtag/hashtag compliance: %s", post_text)
             self._append_log(

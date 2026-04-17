@@ -56,3 +56,35 @@ def test_post_to_square_requires_api_key():
     publisher = ClarkKent(dry_run=False)
 
     assert publisher._post_to_square("Test post from Batcave API") is False
+
+
+def test_publish_resolves_template_key_to_real_post_text(tmp_path):
+    """P2P scanners should render the template body, not the template key."""
+    publisher = ClarkKent(dry_run=True)
+    publisher.storage_file = tmp_path / "published.jsonl"
+    publisher.analytics_file = tmp_path / "analytics.jsonl"
+    publisher.scheduler.storage_file = publisher.storage_file
+    publisher.calendar.storage_file = publisher.storage_file
+    publisher.scheduler.can_post_now = lambda: True
+    publisher.scheduler.can_post_today = lambda: True
+    publisher.calendar.validate_post = lambda text: True
+
+    published = publisher.publish(
+        {
+            "opp_id": "OPP-F-TEST",
+            "scanner_id": "F-P2P-CROSS-CURRENCY",
+            "type": "F",
+            "asset": "USDT",
+            "market": "MXN/ARS",
+            "buy_fiat": "MXN",
+            "sell_fiat": "ARS",
+            "edge_net": 4.8,
+            "route": "MXN→USDT(Binance P2P)→USDT→ARS(Binance P2P)",
+        }
+    )
+
+    assert published is True
+    last_line = publisher.storage_file.read_text(encoding="utf-8").strip().splitlines()[-1]
+    payload = json.loads(last_line)
+    assert payload["post"] != "p2p"
+    assert "P2P Alert" in payload["post"]
