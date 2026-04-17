@@ -9,12 +9,11 @@ Setup:
   pip install psycopg2-binary --break-system-packages
 """
 
-import os
 import json
 import logging
-from datetime import datetime, timezone
+import os
 from contextlib import contextmanager
-from typing import Optional
+from datetime import UTC, datetime
 
 logger = logging.getLogger("batman.postgres")
 
@@ -27,6 +26,26 @@ DB_CONFIG = {
 }
 
 _pool = None
+
+
+def _is_expected_connection_error(exc: Exception) -> bool:
+    message = str(exc).lower()
+    return any(
+        token in message
+        for token in (
+            "connection refused",
+            "could not connect to server",
+            "connection to server at",
+            "server closed the connection unexpectedly",
+        )
+    )
+
+
+def _log_db_error(message: str, exc: Exception) -> None:
+    if _is_expected_connection_error(exc):
+        logger.debug("%s: %s", message, exc)
+    else:
+        logger.error("%s: %s", message, exc)
 
 
 def get_pool():
@@ -113,7 +132,7 @@ def save_opportunity(opp: dict) -> bool:
             """,
                 (
                     opp.get("opp_id"),
-                    opp.get("ts", datetime.now(timezone.utc).isoformat()),
+                    opp.get("ts", datetime.now(UTC).isoformat()),
                     opp.get("type", "?"),
                     opp.get("scanner_id", "unknown"),
                     opp.get("asset", "USDT"),
@@ -133,7 +152,7 @@ def save_opportunity(opp: dict) -> bool:
             )
         return True
     except Exception as e:
-        logger.error("Failed to save opportunity %s: %s", opp.get("opp_id"), e)
+        _log_db_error(f"Failed to save opportunity {opp.get('opp_id')}", e)
         return False
 
 
@@ -153,13 +172,13 @@ def get_viable_opportunities(hours: int = 24, scanner: str = None, limit: int = 
             params.append(limit)
             cur.execute(query, params)
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get opportunities: %s", e)
+        _log_db_error("Failed to get opportunities", e)
         return []
 
 
-def get_best_opportunity() -> Optional[dict]:
+def get_best_opportunity() -> dict | None:
     results = get_viable_opportunities(hours=1, limit=1)
     return results[0] if results else None
 
@@ -197,7 +216,7 @@ def save_trade(trade: dict) -> bool:
                 (
                     trade.get("trade_id"),
                     trade.get("agent", "unknown"),
-                    trade.get("ts", datetime.now(timezone.utc).isoformat()),
+                    trade.get("ts", datetime.now(UTC).isoformat()),
                     trade.get("opp_id"),
                     trade.get("asset", "USDT"),
                     trade.get("market"),
@@ -212,7 +231,7 @@ def save_trade(trade: dict) -> bool:
             )
         return True
     except Exception as e:
-        logger.error("Failed to save trade %s: %s", trade.get("trade_id"), e)
+        _log_db_error(f"Failed to save trade {trade.get('trade_id')}", e)
         return False
 
 
@@ -231,9 +250,9 @@ def get_daily_pnl(agent: str = None, days: int = 30) -> list:
             query += " GROUP BY agent, DATE(ts) ORDER BY trade_date DESC"
             cur.execute(query, params)
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get daily P&L: %s", e)
+        _log_db_error("Failed to get daily P&L", e)
         return []
 
 
@@ -295,9 +314,9 @@ def get_hodl_alerts() -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM v_hodl_alerts WHERE signal != 'HOLD' AND signal != 'NO_PRICE'")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get HODL alerts: %s", e)
+        _log_db_error("Failed to get HODL alerts", e)
         return []
 
 
@@ -306,9 +325,9 @@ def get_all_hodl() -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM v_hodl_alerts ORDER BY unrealized_pnl_pct DESC")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get HODL positions: %s", e)
+        _log_db_error("Failed to get HODL positions", e)
         return []
 
 
@@ -346,9 +365,9 @@ def get_all_ventures() -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM venture_positions WHERE status = 'active' ORDER BY updated_at DESC")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get ventures: %s", e)
+        _log_db_error("Failed to get ventures", e)
         return []
 
 
@@ -388,9 +407,9 @@ def get_portfolio_overview() -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM v_portfolio_overview")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get portfolio overview: %s", e)
+        _log_db_error("Failed to get portfolio overview", e)
         return []
 
 
@@ -429,9 +448,9 @@ def get_scanner_performance(days: int = 7) -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM v_scanner_performance")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get scanner performance: %s", e)
+        _log_db_error("Failed to get scanner performance", e)
         return []
 
 
@@ -454,7 +473,7 @@ def save_engine_run_pg(result: dict) -> bool:
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """,
                 (
-                    result.get("timestamp", datetime.now(timezone.utc).isoformat()),
+                    result.get("timestamp", datetime.now(UTC).isoformat()),
                     meta.get("duration_sec"),
                     meta.get("equities_total"),
                     meta.get("equities_ok"),
@@ -469,7 +488,7 @@ def save_engine_run_pg(result: dict) -> bool:
             )
         return True
     except Exception as e:
-        logger.error("Failed to save engine run: %s", e)
+        _log_db_error("Failed to save engine run", e)
         return False
 
 
@@ -488,7 +507,7 @@ def save_alert(source: str, title: str, message: str = None, severity: str = "in
             )
         return True
     except Exception as e:
-        logger.error("Failed to save alert: %s", e)
+        _log_db_error("Failed to save alert", e)
         return False
 
 
@@ -497,9 +516,9 @@ def get_unread_alerts(limit: int = 50) -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM alerts WHERE acknowledged = FALSE ORDER BY ts DESC LIMIT %s", (limit,))
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get alerts: %s", e)
+        _log_db_error("Failed to get alerts", e)
         return []
 
 
@@ -551,7 +570,7 @@ def get_concentration_risk() -> dict:
             "positions": len(values),
         }
     except Exception as e:
-        logger.error("Failed to compute concentration risk: %s", e)
+        _log_db_error("Failed to compute concentration risk", e)
         return {"hhi": None, "top_position_pct": None, "score": None, "positions": 0, "error": str(e)}
 
 
@@ -577,7 +596,7 @@ def save_risk_score(scores: dict) -> bool:
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """,
                 (
-                    scores.get("ts", datetime.now(timezone.utc).isoformat()),
+                    scores.get("ts", datetime.now(UTC).isoformat()),
                     scores.get("cycle_id"),
                     scores.get("operational_readiness"),
                     scores.get("concentration_risk"),
@@ -597,7 +616,7 @@ def save_risk_score(scores: dict) -> bool:
             )
         return True
     except Exception as e:
-        logger.error("Failed to save risk score: %s", e)
+        _log_db_error("Failed to save risk score", e)
         return False
 
 
@@ -615,9 +634,9 @@ def get_database_stats() -> dict:
                 "engine_runs",
                 "alerts",
             ]:
-                cur.execute(f"SELECT COUNT(*) FROM {table}")
+                cur.execute(f"SELECT COUNT(*) FROM {table}")  # noqa: S608
                 stats[table] = cur.fetchone()[0]
         return stats
     except Exception as e:
-        logger.error("Failed to get stats: %s", e)
+        _log_db_error("Failed to get stats", e)
         return {}

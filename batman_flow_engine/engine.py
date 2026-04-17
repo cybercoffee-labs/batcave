@@ -1,47 +1,51 @@
-import json
-import hashlib
-import subprocess
-from core.database import init_db, save_engine_run
-from core.signals import compute_risk_score
-import logging
+import asyncio
 import datetime
+import hashlib
+import json
+import logging
+import os
+import subprocess
 import time
-import numpy as np
 from concurrent.futures import ThreadPoolExecutor, TimeoutError, as_completed
-from typing import Any
+from contextlib import suppress
 from pathlib import Path
+from typing import Any
 
+import numpy as np
 import yaml
-from pydantic import BaseModel, validator
-
-from clark_kent.publisher import ClarkKent
-from core.equities import equity_metrics, returns_matrix
-from core.crypto import crypto_metrics
-from core.ollama_intel import get_market_intelligence, get_ollama_status
-from core.alfred import run_quality_check
-from core.flows import flow_score_equity, flow_score_crypto
-from core.portfolio import portfolio_projection
-from core.news_intel import narrative_intensity
-from core.correlations import rolling_corr_stress, top_corr_edges, downside_corr_mean, top_downside_edges
 from alerts import write_alerts
-from core.scanner_cross_exchange import scan_cross_exchange
-from core.scanner_basis import scan_basis
-from core.p2p_latam import p2p_premium_analysis
-from core.harvey import ingest_opportunities, daily_exposure as harvey_daily_exposure, DB_PATH as HARVEY_DB_PATH
+from clark_kent.publisher import ClarkKent
+from core.alfred import run_quality_check
+from core.aquaman import Aquaman
+from core.correlations import downside_corr_mean, rolling_corr_stress, top_corr_edges, top_downside_edges
+from core.crypto import crypto_metrics
+from core.database import init_db, save_engine_run
+from core.equities import equity_metrics, returns_matrix
+from core.flows import flow_score_crypto, flow_score_equity
 from core.gordon import check as gordon_check
-
-# Phase 2 scanners
-from core.scanner_multi_exchange import scan_multi_exchange
+from core.harvey import DB_PATH as HARVEY_DB_PATH
+from core.harvey import daily_exposure as harvey_daily_exposure
+from core.harvey import ingest_opportunities
+from core.news_intel import narrative_intensity
+from core.ollama_intel import get_market_intelligence, get_ollama_status
+from core.p2p_latam import p2p_premium_analysis
+from core.portfolio import portfolio_projection
+from core.scanner_basis import scan_basis
+from core.scanner_cross_exchange import scan_cross_exchange
+from core.scanner_cross_platform_mxn import scan_cross_platform_mxn
+from core.scanner_dex import scan_dex_cex
 from core.scanner_funding_rate import scan_funding_rates
+from core.scanner_futures_futures import scan_futures_futures
+from core.scanner_multi_exchange import scan_multi_exchange
 from core.scanner_p2p_cross_currency import scan_cross_currency
 from core.scanner_p2p_merchant import scan_merchant_spread
 from core.scanner_stablecoin_depeg import scan_stablecoin_depeg
-
-# Phase 3 scanners
-from core.scanner_cross_platform_mxn import scan_cross_platform_mxn
-from core.scanner_dex import scan_dex_cex
-from core.scanner_futures_futures import scan_futures_futures
-import os
+from core.signals import compute_risk_score
+from cyborg.core.dex_arbitrage import DexArbitrageScanner
+from hawkgirl.agent import HawkgirlAgent
+from oracle_v2.backtester import Backtester
+from pydantic import BaseModel, ConfigDict, field_validator
+from zatanna.predictor import ZatannaPredictor
 
 # ───────────────────────── LOGGING ─────────────────────────
 logging.basicConfig(
@@ -57,6 +61,7 @@ STORAGE_DIR = BASE_DIR / "storage"
 REPORTS_DIR = STORAGE_DIR / "reports"
 LOGS_DIR = STORAGE_DIR / "logs"
 AUDIT_LOG = LOGS_DIR / "audit.log"
+CYCLE_STATS_FILE = LOGS_DIR / "cycle_stats.jsonl"
 MAX_AUDIT_SIZE = 5 * 1024 * 1024  # 5 MB
 
 LOCK_FILE = STORAGE_DIR / "engine.lock"
@@ -67,10 +72,18 @@ CONFIG_FILE = BASE_DIR / "config.yaml"
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 clark_kent = ClarkKent(dry_run=True)
+hawkgirl: HawkgirlAgent | None = None
+dex_scanner: DexArbitrageScanner | None = None
+zatanna: ZatannaPredictor | None = None
+aquaman: Aquaman | None = None
+oracle_backtester: Backtester | None = None
+CYCLE_COUNTER = 0
 
 
 # ───────────────────────── CONFIG ─────────────────────────
 class EngineConfig(BaseModel):
+    model_config = ConfigDict()
+
     equities: list[str] = []
     crypto: list[str] = []
     portfolio_weights: dict[str, float] = {}
@@ -89,14 +102,16 @@ class EngineConfig(BaseModel):
     corr_window: int = 60
     top_edges_k: int = 10
 
-    @validator("equities", "crypto")
+    @field_validator("equities", "crypto")
+    @classmethod
     def no_duplicates(cls, v):
         if len(v) != len(set(v)):
             dupes = [x for x in v if v.count(x) > 1]
             raise ValueError(f"Duplicados: {set(dupes)}")
         return v
 
-    @validator("max_workers")
+    @field_validator("max_workers")
+    @classmethod
     def reasonable_workers(cls, v):
         if v < 1:
             raise ValueError("max_workers debe ser >= 1")
@@ -104,7 +119,8 @@ class EngineConfig(BaseModel):
             logger.warning("max_workers > 32 puede saturar APIs")
         return v
 
-    @validator("corr_window")
+    @field_validator("corr_window")
+    @classmethod
     def corr_window_reasonable(cls, v):
         if v < 20:
             logger.warning("corr_window < 20 puede ser muy ruidoso")
@@ -221,16 +237,64 @@ def write_audit(ts: str, digest: str, filename: str):
             if rotated.exists():
                 rotated.unlink()
             AUDIT_LOG.rename(rotated)
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.debug("Audit rotation skipped: %s", exc)
 
     with AUDIT_LOG.open("a", encoding="utf-8") as f:
         f.write(f"{ts} | {digest} | {filename}\n")
 
 
+def _append_jsonl(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(payload, default=str) + "\n")
+
+
+def _timed_call(name: str, func, *args, **kwargs):
+    start = time.perf_counter()
+    value = func(*args, **kwargs)
+    elapsed = time.perf_counter() - start
+    logger.info("%s completed in %.2fs", name, elapsed)
+    return value, elapsed
+
+
+def _initialize_optional_modules() -> None:
+    global hawkgirl, dex_scanner, zatanna, aquaman, oracle_backtester
+
+    if hawkgirl is None:
+        try:
+            hawkgirl = HawkgirlAgent()
+        except Exception as exc:
+            logger.warning("HAWKGIRL init skipped: %s", exc)
+
+    if dex_scanner is None:
+        try:
+            dex_scanner = DexArbitrageScanner()
+        except Exception as exc:
+            logger.warning("CYBORG DEX init skipped: %s", exc)
+
+    if zatanna is None:
+        try:
+            zatanna = ZatannaPredictor()
+        except Exception as exc:
+            logger.warning("ZATANNA init skipped: %s", exc)
+
+    if aquaman is None:
+        try:
+            aquaman = Aquaman()
+        except Exception as exc:
+            logger.warning("AQUAMAN init skipped: %s", exc)
+
+    if oracle_backtester is None:
+        try:
+            oracle_backtester = Backtester(capital=1000.0)
+        except Exception as exc:
+            logger.warning("ORACLE_V2 init skipped: %s", exc)
+
+
 # ───────────────────────── ENGINE ─────────────────────────
 def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
-    start = datetime.datetime.now(datetime.timezone.utc)
+    start = datetime.datetime.now(datetime.UTC)
 
     result: dict[str, Any] = {
         "timestamp": start.isoformat(),
@@ -271,7 +335,7 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
                         "asset": name,
                         "type": kind,
                         "error": str(exc),
-                        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                        "timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
                     }
                 )
 
@@ -290,7 +354,7 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
             down_edges = down_edges_df.to_dict(orient="records") if not down_edges_df.empty else []
 
             vol_z_vals = []
-            for sym, data in result.get("equities", {}).items():
+            for _sym, data in result.get("equities", {}).items():
                 if isinstance(data, dict):
                     vz = data.get("vol_z")
                     if vz is not None:
@@ -361,10 +425,8 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
             prev_stress = None
             prev_path = STORAGE_DIR / "prev.json"
             if prev_path.exists():
-                try:
-                    prev_stress = json.load(open(prev_path)).get("stress")
-                except Exception:
-                    pass
+                with suppress(Exception), prev_path.open(encoding="utf-8") as handle:
+                    prev_stress = json.load(handle).get("stress")
 
             cs_curr = result["stress"].get("corr_stress")
             dc_curr = result["stress"].get("downside_corr_mean")
@@ -392,7 +454,7 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
                     "asset": "portfolio/stress",
                     "type": "portfolio/stress",
                     "error": str(exc),
-                    "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                    "timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
                 }
             )
 
@@ -411,11 +473,11 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
                 "asset": "narrative",
                 "type": "narrative",
                 "error": str(exc),
-                "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
             }
         )
 
-    end = datetime.datetime.now(datetime.timezone.utc)
+    end = datetime.datetime.now(datetime.UTC)
 
     # ───────────────────────── DATA QUALITY ─────────────────────────
     equities_total = len(cfg.equities)
@@ -459,15 +521,15 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
         init_db()
         save_engine_run(result)
         compute_risk_score(result)
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.debug("SQLite persistence skipped: %s", exc)
 
     try:
         from core.dual_writer import log_engine_run
 
         log_engine_run(result)
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.debug("Dual writer skipped: %s", exc)
 
     # ───────────────────────── ALL 11 SCANNERS ─────────────────────────
     scanner_results: list[Any] = []
@@ -541,6 +603,7 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
     current_cycle_opportunities = _current_cycle_opportunities(scanner_results)
     current_cycle_total = len(current_cycle_opportunities)
     current_cycle_viable = sum(1 for opportunity in current_cycle_opportunities if opportunity.get("viable") is True)
+    result["_current_cycle_opportunities"] = current_cycle_opportunities
     result["_current_cycle_opportunity_counts"] = {
         "total": current_cycle_total,
         "viable": current_cycle_viable,
@@ -586,7 +649,7 @@ def _enrich_runtime_metadata(result: dict[str, Any]) -> None:
 
 
 def _persist_run(result: dict[str, Any]) -> None:
-    ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d_%H-%M-%S")
+    ts = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d_%H-%M-%S")
     digest = hash_data(result)
     report_path = REPORTS_DIR / f"{ts}.json"
     payload = json.dumps(result, indent=2, default=str)
@@ -754,7 +817,7 @@ def commander_decision(result: dict[str, Any]) -> dict[str, Any]:
         gates.append({"gate": "harvey_init", "passed": True})
 
     viable = not blocked_by
-    ts = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    ts = datetime.datetime.now(datetime.UTC).isoformat()
 
     if viable:
         logger.info("COMMANDER decision: viable=True — all gates passed")
@@ -770,7 +833,11 @@ def commander_decision(result: dict[str, Any]) -> dict[str, Any]:
 
 
 def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
+    global CYCLE_COUNTER
     cfg = cfg or load_config()
+    _initialize_optional_modules()
+    cycle_started = time.perf_counter()
+    CYCLE_COUNTER += 1
     logger.info("ENGINE START — equities=%d crypto=%d scanners=11", len(cfg.equities), len(cfg.crypto))
 
     if LOCK_FILE.exists():
@@ -785,8 +852,8 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 os.kill(stored_pid, 0)  # signal 0 = existence check only
                 # PID exists — verify it is actually our engine process, not a recycled PID.
                 # PermissionError means the process is owned by another user → definitely not us.
-                result = subprocess.run(
-                    ["ps", "-p", str(stored_pid), "-o", "args="],
+                result = subprocess.run(  # noqa: S603,S607
+                    ["ps", "-p", str(stored_pid), "-o", "args="],  # noqa: S607
                     capture_output=True,
                     text=True,
                     timeout=2,
@@ -814,6 +881,85 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
     try:
         LOCK_FILE.write_text(str(os.getpid()), encoding="utf-8")
         result = _build_engine_result(cfg)
+        module_timings: dict[str, float] = {}
+        cycle_opportunities = list(result.get("_current_cycle_opportunities", []))
+        hawk_data: dict[str, Any] = {}
+        dex_opps: list[dict[str, Any]] = []
+        verified_opportunities: list[dict[str, Any]] = []
+        posts_published = 0
+        ml_scores: list[float] = []
+        # PHASE 2: INTELLIGENCE
+        try:
+            if hawkgirl is None:
+                raise RuntimeError("module_unavailable")
+            hawk_data, module_timings["hawkgirl_sec"] = _timed_call("HAWKGIRL", hawkgirl.full_scan)
+            result["hawkgirl"] = hawk_data
+            logger.info(
+                "HAWKGIRL: Fear=%s Trending=%s",
+                hawk_data.get("sentiment", {}).get("fear_greed_index"),
+                hawk_data.get("trending", [{}])[0].get("name") if hawk_data.get("trending") else "N/A",
+            )
+        except Exception as e:
+            logger.warning("HAWKGIRL skipped: %s", e)
+            result["hawkgirl"] = {"error": str(e)}
+
+        try:
+            if dex_scanner is None:
+                raise RuntimeError("module_unavailable")
+            dex_opps, module_timings["cyborg_dex_sec"] = _timed_call(
+                "CYBORG DEX",
+                lambda: asyncio.run(dex_scanner.scan_all_pairs()),
+            )
+            result["cyborg_dex"] = dex_opps
+            logger.info("CYBORG DEX: %d opportunities found", len(dex_opps))
+        except Exception as e:
+            logger.warning("CYBORG DEX skipped: %s", e)
+            result["cyborg_dex"] = {"error": str(e)}
+
+        # PHASE 3: FILTER
+        for opportunity in cycle_opportunities:
+            try:
+                edge_value = float(opportunity.get("edge_net", 0) or 0.0)
+            except (TypeError, ValueError):
+                edge_value = 0.0
+
+            if edge_value <= 2.0:
+                continue
+
+            try:
+                if zatanna is None:
+                    raise RuntimeError("module_unavailable")
+                ml_result, ml_elapsed = _timed_call("ZATANNA", zatanna.predict, opportunity)
+                module_timings["zatanna_sec"] = module_timings.get("zatanna_sec", 0.0) + ml_elapsed
+                opportunity["ml_score"] = ml_result["probability"]
+                opportunity["ml_recommendation"] = ml_result["recommendation"]
+                ml_scores.append(float(ml_result["probability"]))
+                logger.info(
+                    "ZATANNA: %s → %s (%.2f)",
+                    opportunity.get("opp_id", "unknown"),
+                    ml_result["recommendation"],
+                    ml_result["probability"],
+                )
+            except Exception as e:
+                logger.warning("ZATANNA scoring skipped: %s", e)
+
+            try:
+                if aquaman is None:
+                    raise RuntimeError("module_unavailable")
+                verification, aqua_elapsed = _timed_call("AQUAMAN", aquaman.verify_opportunity, opportunity)
+                module_timings["aquaman_sec"] = module_timings.get("aquaman_sec", 0.0) + aqua_elapsed
+                if verification:
+                    opportunity["aquaman"] = verification
+                    verified_opportunities.append(opportunity)
+                    logger.info(
+                        "AQUAMAN: %s verified depth=%s slippage=%s",
+                        opportunity.get("opp_id", "unknown"),
+                        verification.get("depth_usd"),
+                        verification.get("slippage_pct"),
+                    )
+            except Exception as e:
+                logger.warning("AQUAMAN verification skipped: %s", e)
+
         _enrich_runtime_metadata(result)
 
         # Compute HARVEY daily exposure (single source of truth) before gate checks
@@ -832,8 +978,40 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 "GORDON BLOCKED — signal emission aborted: %s",
                 gordon_result["blocked_by"],
             )
+            try:
+                if oracle_backtester is None:
+                    raise RuntimeError("module_unavailable")
+                _, module_timings["oracle_backtester_sec"] = _timed_call("ORACLE_V2", oracle_backtester.run)
+                result["oracle_v2_backtest"] = oracle_backtester.generate_report()
+            except Exception as exc:
+                logger.warning("ORACLE_V2 skipped: %s", exc)
+                result["oracle_v2_backtest"] = {"error": str(exc)}
+            cycle_duration = time.perf_counter() - cycle_started
+            result["integrated_cycle"] = {
+                "verified_opportunities": verified_opportunities,
+                "posts_published": posts_published,
+                "module_timings": module_timings,
+                "cycle_duration_sec": round(cycle_duration, 4),
+            }
             result.pop("_current_cycle_opportunity_counts", None)
+            result.pop("_current_cycle_opportunities", None)
             _persist_run(result)
+            _append_jsonl(
+                CYCLE_STATS_FILE,
+                {
+                    "cycle_number": CYCLE_COUNTER,
+                    "timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
+                    "duration_seconds": round(cycle_duration, 4),
+                    "opportunities_detected": len(cycle_opportunities),
+                    "opportunities_verified": len(verified_opportunities),
+                    "posts_published": posts_published,
+                    "hawk_fear_greed": hawk_data.get("sentiment", {}).get("fear_greed_index"),
+                    "hawk_trending_top": hawk_data.get("trending", [{}])[0].get("name") if hawk_data.get("trending") else "",
+                    "zatanna_avg_score": round(sum(ml_scores) / len(ml_scores), 4) if ml_scores else 0.0,
+                    "dex_opportunities": len(dex_opps),
+                },
+            )
+            logger.info("CYCLE %d completed in %.2fs", CYCLE_COUNTER, cycle_duration)
             return result
 
         # COMMANDER gate — explicit viability decision
@@ -890,9 +1068,9 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             _total_w = sum(w for _, w in _valid)
             _composite = round(sum(s * w for s, w in _valid) / _total_w, 4) if _total_w > 0 else None
 
-            _cycle_id = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d_%H%M%S")
+            _cycle_id = datetime.datetime.now(datetime.UTC).strftime("%Y%m%d_%H%M%S")
             _risk_payload = {
-                "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "ts": datetime.datetime.now(datetime.UTC).isoformat(),
                 "cycle_id": _cycle_id,
                 "operational_readiness": _operational_readiness,
                 "concentration_risk": _concentration_risk,
@@ -919,30 +1097,65 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             logger.warning("Risk score computation failed (non-fatal): %s", _exc)
             result.setdefault("risk_scores", {"error": str(_exc)})
 
-        result.pop("_current_cycle_opportunity_counts", None)
-        _persist_run(result)
         if commander["viable"]:
             ingest_opportunities()
-            try:
-                lines = Path("storage/logs/opportunities.jsonl").read_text().strip().split("\n")
-                recent = [json.loads(l) for l in lines[-10:] if l]
-                for opp in recent:
-                    if float(opp.get("edge_net", 0)) >= 3.0:
-                        clark_kent.publish(opp)
-            except Exception as e:
-                logger.warning(f"Clark Kent skipped: {e}")
+            for opp in verified_opportunities:
+                try:
+                    if float(opp.get("edge_net", 0) or 0.0) > 4.0:
+                        published, publish_elapsed = _timed_call("CLARK_KENT", clark_kent.publish, opp)
+                        module_timings["clark_kent_sec"] = module_timings.get("clark_kent_sec", 0.0) + publish_elapsed
+                        if published:
+                            posts_published += 1
+                            logger.info("CLARK: published %s", opp.get("opp_id", "unknown"))
+                except Exception as e:
+                    logger.warning("CLARK_KENT skipped: %s", e)
         else:
             logger.warning(
                 "COMMANDER blocked — opportunity ingestion skipped: %s",
                 commander["blocked_by"],
             )
+        try:
+            if oracle_backtester is None:
+                raise RuntimeError("module_unavailable")
+            _, module_timings["oracle_backtester_sec"] = _timed_call("ORACLE_V2", oracle_backtester.run)
+            result["oracle_v2_backtest"] = oracle_backtester.generate_report()
+        except Exception as exc:
+            logger.warning("ORACLE_V2 skipped: %s", exc)
+            result["oracle_v2_backtest"] = {"error": str(exc)}
+
+        cycle_duration = time.perf_counter() - cycle_started
+        result["integrated_cycle"] = {
+            "verified_opportunities": verified_opportunities,
+            "posts_published": posts_published,
+            "module_timings": module_timings,
+            "cycle_duration_sec": round(cycle_duration, 4),
+        }
+        result.pop("_current_cycle_opportunity_counts", None)
+        result.pop("_current_cycle_opportunities", None)
+        _persist_run(result)
+        _append_jsonl(
+            CYCLE_STATS_FILE,
+            {
+                "cycle_number": CYCLE_COUNTER,
+                "timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
+                "duration_seconds": round(cycle_duration, 4),
+                "opportunities_detected": len(cycle_opportunities),
+                "opportunities_verified": len(verified_opportunities),
+                "posts_published": posts_published,
+                "hawk_fear_greed": hawk_data.get("sentiment", {}).get("fear_greed_index"),
+                "hawk_trending_top": hawk_data.get("trending", [{}])[0].get("name") if hawk_data.get("trending") else "",
+                "zatanna_avg_score": round(sum(ml_scores) / len(ml_scores), 4) if ml_scores else 0.0,
+                "dex_opportunities": len(dex_opps),
+            },
+        )
+        logger.info("CYCLE %d completed in %.2fs", CYCLE_COUNTER, cycle_duration)
         return result
     finally:
         try:
             if LOCK_FILE.exists():
                 LOCK_FILE.unlink()
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.debug("Engine lock cleanup skipped: %s", exc)
 
 
 def main():
