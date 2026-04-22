@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import logging
+import threading
+import time
 from typing import Any
 
 import ccxt
@@ -17,6 +19,9 @@ SUPPORTED_EXCHANGES = ("binance", "bybit", "bitget")
 FIAT_CODES = {"MXN", "ARS", "COP", "VES", "BRL", "CLP", "PEN", "USD", "EUR"}
 STABLECOINS = {"USDT", "USDC", "DAI"}
 
+# Cache TTL for liquidity snapshots. Success-only — error paths are never cached.
+CACHE_TTL_SECONDS = 60.0
+
 
 class Aquaman:
     """Market Depth & Liquidity Analyzer."""
@@ -28,7 +33,9 @@ class Aquaman:
             "bybit": ccxt.bybit({"enableRateLimit": True}),
             "bitget": ccxt.bitget({"enableRateLimit": True}),
         }
-        self._liquidity_cache: dict[tuple[str, str, float], dict[str, Any]] = {}
+        # Cache entry: (monotonic_timestamp, result_dict). Only success results are stored.
+        self._liquidity_cache: dict[tuple[str, str, float], tuple[float, dict[str, Any]]] = {}
+        self._cache_lock = threading.Lock()
 
     def check_liquidity(self, exchange_id: str, symbol: str, amount_usd: float = DEFAULT_TRADE_USD) -> dict[str, Any]:
         """
@@ -49,8 +56,16 @@ class Aquaman:
         if exchange is None:
             return self._error_result(f"unsupported_exchange:{exchange_id}")
         cache_key = (exchange_id, symbol, float(amount_usd))
-        if cache_key in self._liquidity_cache:
-            return dict(self._liquidity_cache[cache_key])
+        now = time.monotonic()
+
+        with self._cache_lock:
+            cached = self._liquidity_cache.get(cache_key)
+            if cached is not None:
+                ts, payload = cached
+                if now - ts <= CACHE_TTL_SECONDS:
+                    return dict(payload)
+                # Expired — drop and fall through to a fresh fetch.
+                del self._liquidity_cache[cache_key]
 
         try:
             order_book = exchange.fetch_order_book(symbol, limit=50)
@@ -83,13 +98,14 @@ class Aquaman:
                 "exchange_id": exchange_id,
                 "symbol": symbol,
             }
-            self._liquidity_cache[cache_key] = dict(result)
+            with self._cache_lock:
+                self._liquidity_cache[cache_key] = (time.monotonic(), dict(result))
             return result
         except Exception as exc:
             logger.warning("AQUAMAN liquidity check failed for %s %s: %s", exchange_id, symbol, exc)
-            result = self._error_result(str(exc), exchange_id=exchange_id, symbol=symbol)
-            self._liquidity_cache[cache_key] = dict(result)
-            return result
+            # Do NOT cache error results — a one-off exchange hiccup must not
+            # poison the cache with a permanent "error" verdict.
+            return self._error_result(str(exc), exchange_id=exchange_id, symbol=symbol)
 
     def verify_opportunity(self, opportunity: dict[str, Any]) -> dict[str, Any] | None:
         """
@@ -99,7 +115,7 @@ class Aquaman:
         - Min $500 USD depth within 1% of price
         - Max 0.5% slippage for $100 USD trade
         """
-        exchange_id = self._infer_exchange_id(opportunity)
+        exchange_id = self.infer_exchange_id(opportunity)
         symbol = self._infer_symbol(opportunity)
         if not exchange_id or not symbol:
             return None
@@ -147,8 +163,14 @@ class Aquaman:
             "best_market": best,
         }
 
-    def _infer_exchange_id(self, opportunity: dict[str, Any]) -> str | None:
-        """Resolve the best supported exchange from opportunity metadata."""
+    def infer_exchange_id(self, opportunity: dict[str, Any]) -> str | None:
+        """Resolve the best supported exchange from opportunity metadata.
+
+        Returns None when the opportunity's metadata doesn't name a supported
+        venue. Historically this silently returned "binance", which meant
+        Bitso / Kucoin / MEXC / OKX opportunities got a Binance depth verdict
+        they never asked for. Callers must now handle None explicitly.
+        """
         candidates = [
             opportunity.get("exchange"),
             opportunity.get("venue"),
@@ -162,9 +184,9 @@ class Aquaman:
         for exchange_id in SUPPORTED_EXCHANGES:
             if exchange_id in joined:
                 return exchange_id
-        if "okx" in joined:
-            return None
-        return "binance"
+        # No silent fallback. If the opportunity doesn't carry a supported
+        # venue, we refuse to guess — the caller must treat this as unverified.
+        return None
 
     def _infer_symbol(self, opportunity: dict[str, Any]) -> str | None:
         """Map Batman opportunities to a tradeable spot symbol when possible."""

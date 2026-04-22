@@ -1022,19 +1022,32 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 try:
                     if aquaman is None:
                         raise RuntimeError("module_unavailable")
-                    aquaman_result, aqua_elapsed = _timed_call("AQUAMAN", aquaman.verify_opportunity, opportunity)
-                    module_timings["aquaman_sec"] = module_timings.get("aquaman_sec", 0.0) + aqua_elapsed
-                    is_verified = bool(aquaman_result)
-                    verify_method = "aquaman_orderbook"
-                    if aquaman_result:
-                        opportunity["aquaman"] = aquaman_result
-                        logger.info(
-                            "AQUAMAN verified=%s opp=%s depth=%s slippage=%s",
-                            is_verified,
+                    # Preflight: if we can't map the opportunity to a supported
+                    # exchange, refuse to verify. The old silent "binance"
+                    # fallback produced Binance depth verdicts for Bitso /
+                    # Kucoin / MEXC opportunities — gone as of 2026-04-22.
+                    if aquaman.infer_exchange_id(opportunity) is None:
+                        logger.error(
+                            "AQUAMAN could not infer exchange for opp=%s scanner=%s",
                             opportunity.get("opp_id", "unknown"),
-                            aquaman_result.get("depth_usd"),
-                            aquaman_result.get("slippage_pct"),
+                            scanner_id or "unknown",
                         )
+                        is_verified = False
+                        verify_method = "unknown_exchange"
+                    else:
+                        aquaman_result, aqua_elapsed = _timed_call("AQUAMAN", aquaman.verify_opportunity, opportunity)
+                        module_timings["aquaman_sec"] = module_timings.get("aquaman_sec", 0.0) + aqua_elapsed
+                        is_verified = bool(aquaman_result)
+                        verify_method = "aquaman_orderbook"
+                        if aquaman_result:
+                            opportunity["aquaman"] = aquaman_result
+                            logger.info(
+                                "AQUAMAN verified=%s opp=%s depth=%s slippage=%s",
+                                is_verified,
+                                opportunity.get("opp_id", "unknown"),
+                                aquaman_result.get("depth_usd"),
+                                aquaman_result.get("slippage_pct"),
+                            )
                 except Exception as e:
                     logger.error("AQUAMAN check failed: %s", e, exc_info=True)
                     is_verified = False
