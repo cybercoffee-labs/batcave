@@ -244,7 +244,7 @@ def write_audit(ts: str, digest: str, filename: str):
                 rotated.unlink()
             AUDIT_LOG.rename(rotated)
     except Exception as exc:
-        logger.debug("Audit rotation skipped: %s", exc)
+        logger.error("Audit log rotation failed: %s", exc, exc_info=True)
 
     with AUDIT_LOG.open("a", encoding="utf-8") as f:
         f.write(f"{ts} | {digest} | {filename}\n")
@@ -289,7 +289,9 @@ def _initialize_optional_modules() -> None:
         try:
             aquaman = Aquaman()
         except Exception as exc:
-            logger.warning("AQUAMAN init skipped: %s", exc)
+            logger.error(
+                "AQUAMAN init failed — liquidity verification disabled for this process: %s", exc, exc_info=True
+            )
 
     if oracle_backtester is None:
         try:
@@ -331,7 +333,11 @@ def _verify_p2p_opportunity(opportunity: dict[str, Any], edge_value: float) -> t
         buy_platform = str(opportunity.get("buy_platform", "") or "").strip()
         sell_platform = str(opportunity.get("sell_platform", "") or "").strip()
         liquidity_count = int(bool(buy_platform)) + int(bool(sell_platform))
-        return bool(opportunity.get("viable")) and liquidity_count >= 2 and edge_value >= 2.0, "p2p_platform_route", liquidity_count
+        return (
+            bool(opportunity.get("viable")) and liquidity_count >= 2 and edge_value >= 2.0,
+            "p2p_platform_route",
+            liquidity_count,
+        )
 
     return False, "p2p_unknown", 0
 
@@ -491,6 +497,7 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
             }
 
         except Exception as exc:
+            logger.error("Portfolio/stress computation failed: %s", exc, exc_info=True)
             result["portfolio"] = {"error": str(exc)}
             result["stress"] = {"error": str(exc)}
             result["errors"].append(
@@ -511,6 +518,7 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
         else:
             result["narrative"] = {"status": "disabled_or_no_keywords"}
     except Exception as exc:
+        logger.error("Narrative computation failed: %s", exc, exc_info=True)
         result["narrative"] = {"error": str(exc)}
         result["errors"].append(
             {
@@ -566,14 +574,21 @@ def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
         save_engine_run(result)
         compute_risk_score(result)
     except Exception as exc:
-        logger.debug("SQLite persistence skipped: %s", exc)
+        logger.error("SQLite persistence failed: %s", exc, exc_info=True)
 
     try:
         from core.dual_writer import log_engine_run
 
-        log_engine_run(result)
+        persist = log_engine_run(result)
+        if persist.get("pg_ok") is False:
+            # PG was believed up but the specific write failed. dual_writer
+            # already logged the underlying cause; surface a run-level ERROR too
+            # so the engine cycle record itself flags this as non-durable.
+            logger.error("Engine-run PostgreSQL persistence FAILED — run not durable in primary store")
+        # pg_ok is None  -> PG genuinely unavailable; dual_writer logs state transitions.
+        # pg_ok is True  -> success; no log.
     except Exception as exc:
-        logger.debug("Dual writer skipped: %s", exc)
+        logger.error("Dual writer failed: %s", exc, exc_info=True)
 
     # ───────────────────────── ALL 11 SCANNERS ─────────────────────────
     scanner_results: list[Any] = []
@@ -1021,7 +1036,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                             aquaman_result.get("slippage_pct"),
                         )
                 except Exception as e:
-                    logger.warning("AQUAMAN check failed: %s", e)
+                    logger.error("AQUAMAN check failed: %s", e, exc_info=True)
                     is_verified = False
                     verify_method = "failed"
 
@@ -1031,7 +1046,9 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 verified_opportunities.append(opportunity)
                 try:
                     if edge_value >= 4.0:
-                        published, publish_elapsed = _timed_call("CLARK_KENT", _publish_with_engine_override, opportunity)
+                        published, publish_elapsed = _timed_call(
+                            "CLARK_KENT", _publish_with_engine_override, opportunity
+                        )
                         module_timings["clark_kent_sec"] = module_timings.get("clark_kent_sec", 0.0) + publish_elapsed
                         if published:
                             posts_published += 1
@@ -1089,7 +1106,9 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                     "opportunities_verified": len(verified_opportunities),
                     "posts_published": posts_published,
                     "hawk_fear_greed": hawk_data.get("sentiment", {}).get("fear_greed_index"),
-                    "hawk_trending_top": hawk_data.get("trending", [{}])[0].get("name") if hawk_data.get("trending") else "",
+                    "hawk_trending_top": hawk_data.get("trending", [{}])[0].get("name")
+                    if hawk_data.get("trending")
+                    else "",
                     "zatanna_avg_score": round(sum(ml_scores) / len(ml_scores), 4) if ml_scores else 0.0,
                     "dex_opportunities": len(dex_opps),
                 },
@@ -1103,7 +1122,16 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
 
         # ───────────── RISK SCORES — computed after all gates, persisted per cycle ─────────────
         try:
-            from database.postgres import get_concentration_risk, save_risk_score
+            # All PG interaction here goes through the shared availability gate
+            # (unification 2026-04-21). Without this gate, get_concentration_risk
+            # and save_risk_score would hit PG blind and either raise or silently
+            # no-op regardless of dual_writer's view of PG state.
+            from database.postgres import (
+                get_concentration_risk,
+                mark_pg_unavailable,
+                pg_available,
+                save_risk_score,
+            )
 
             _dq = (result.get("data_quality") or {}).get("dq_score")
             _gordon_status = gordon_result.get("status")
@@ -1135,7 +1163,11 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             )
 
             # concentration_risk: from portfolio_positions via PG
-            _conc = get_concentration_risk()
+            if pg_available():
+                _conc = get_concentration_risk()
+            else:
+                _conc = {"score": None, "top_position_pct": None, "hhi": None}
+                logger.info("Risk scores: concentration_risk skipped (PG unavailable)")
             _concentration_risk = _conc.get("score")
 
             # composite: weighted average of available scores
@@ -1169,7 +1201,23 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 "hhi": _conc.get("hhi"),
             }
             result["risk_scores"] = _risk_payload
-            save_risk_score(_risk_payload)
+            if pg_available():
+                try:
+                    if not save_risk_score(_risk_payload):
+                        logger.error("Risk scores PostgreSQL persistence FAILED — score not durable")
+                        mark_pg_unavailable("save_risk_score returned False")
+                except Exception as _save_exc:
+                    logger.error(
+                        "Risk scores PostgreSQL write raised: %s",
+                        _save_exc,
+                        exc_info=True,
+                    )
+                    mark_pg_unavailable(
+                        f"save_risk_score raised {type(_save_exc).__name__}",
+                        exc=_save_exc,
+                    )
+            else:
+                logger.info("Risk scores: save_risk_score skipped (PG unavailable)")
             logger.info(
                 "RISK SCORES — operational_readiness=%.3f concentration=%.3f composite=%s",
                 _operational_readiness,
@@ -1177,7 +1225,7 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 f"{_composite:.3f}" if _composite is not None else "N/A",
             )
         except Exception as _exc:
-            logger.warning("Risk score computation failed (non-fatal): %s", _exc)
+            logger.error("Risk score computation failed: %s", _exc, exc_info=True)
             result.setdefault("risk_scores", {"error": str(_exc)})
 
         if commander["viable"]:
@@ -1216,7 +1264,9 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 "opportunities_verified": len(verified_opportunities),
                 "posts_published": posts_published,
                 "hawk_fear_greed": hawk_data.get("sentiment", {}).get("fear_greed_index"),
-                "hawk_trending_top": hawk_data.get("trending", [{}])[0].get("name") if hawk_data.get("trending") else "",
+                "hawk_trending_top": hawk_data.get("trending", [{}])[0].get("name")
+                if hawk_data.get("trending")
+                else "",
                 "zatanna_avg_score": round(sum(ml_scores) / len(ml_scores), 4) if ml_scores else 0.0,
                 "dex_opportunities": len(dex_opps),
             },

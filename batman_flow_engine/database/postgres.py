@@ -12,6 +12,8 @@ Setup:
 import json
 import logging
 import os
+import threading
+import time
 from contextlib import contextmanager
 from datetime import UTC, datetime
 
@@ -92,6 +94,134 @@ def check_connection() -> dict:
             return {"status": "ok", "version": version, "tables": tables}
     except Exception as e:
         return {"status": "error", "error": str(e)}
+
+
+# ─────────────────────── SHARED AVAILABILITY STATE ───────────────────────
+#
+# This block is the single, canonical source of truth for PostgreSQL
+# availability across the Batman process.
+#
+# BEFORE (2026-04-20 dry-cycle audit): dual_writer owned its own
+# _pg_available / _pg_last_check_ts cache. HARVEY and engine.py's
+# risk-scores block had no availability cache at all — they called
+# save_opportunity / save_risk_score directly and discarded the return
+# value. Observed divergence: dual_writer marked PG DOWN early in a
+# cycle; a few seconds later PG was started; HARVEY wrote successfully
+# at the end of the same cycle while dual_writer still believed PG was
+# DOWN. Two views of the same external resource in one process.
+#
+# AFTER (2026-04-21): all consumers go through pg_available() and
+# mark_pg_unavailable() below. No module-local availability state.
+# See tests/test_dual_writer.py and tests/test_harvey_pg_gate.py.
+
+PG_RECHECK_INTERVAL_SEC = 60.0
+
+_pg_available: bool | None = None
+_pg_last_check_ts: float | None = None
+_pg_state_lock = threading.Lock()
+
+
+def pg_reset_pool() -> None:
+    """Close and discard the pool. The next get_pool() rebuilds from scratch."""
+    global _pool
+    if _pool is None:
+        return
+    try:
+        _pool.closeall()
+    except Exception as exc:
+        logger.debug("Pool closeall failed (non-fatal): %s", exc)
+    _pool = None
+
+
+def _pg_probe_locked(now: float) -> None:
+    """
+    Probe PG availability and update cached state + timestamp.
+
+    MUST be called while holding _pg_state_lock.
+    """
+    global _pg_available, _pg_last_check_ts
+    previous = _pg_available
+    _pg_last_check_ts = now
+    try:
+        result = check_connection()
+        is_ok = result.get("status") == "ok"
+    except Exception as exc:
+        logger.error(
+            "PostgreSQL availability probe raised (will retry in %.0fs): %s",
+            PG_RECHECK_INTERVAL_SEC,
+            exc,
+            exc_info=True,
+        )
+        _pg_available = False
+        return
+    _pg_available = is_ok
+    if is_ok and previous is not True:
+        logger.info("PostgreSQL reachable — writes enabled")
+    elif not is_ok and previous is not False:
+        logger.info(
+            "PostgreSQL unavailable — writes deferred (will retry every %.0fs)",
+            PG_RECHECK_INTERVAL_SEC,
+        )
+
+
+def pg_probe() -> bool:
+    """Force an immediate probe; return True if PG is reachable. Public API."""
+    now = time.monotonic()
+    with _pg_state_lock:
+        _pg_probe_locked(now)
+        return bool(_pg_available)
+
+
+def pg_available() -> bool:
+    """
+    Return True if PostgreSQL is believed available.
+
+    Semantics (identical to the previous dual_writer._check_pg):
+      - Probe on first call (state == None).
+      - While believed unavailable, re-probe every PG_RECHECK_INTERVAL_SEC
+        seconds so a recovered PG is picked up mid-run.
+      - While believed available, do NOT re-probe — rely on write failures
+        to invalidate via mark_pg_unavailable().
+    """
+    global _pg_available, _pg_last_check_ts
+    now = time.monotonic()
+    with _pg_state_lock:
+        if _pg_available is None:
+            _pg_probe_locked(now)
+        elif _pg_available is False:
+            if _pg_last_check_ts is None or (now - _pg_last_check_ts) >= PG_RECHECK_INTERVAL_SEC:
+                _pg_probe_locked(now)
+        return bool(_pg_available)
+
+
+def mark_pg_unavailable(reason: str, exc: Exception | None = None) -> None:
+    """
+    Flip the cache to unavailable and start the backoff clock.
+
+    Callers use this after a PG write unexpectedly fails so subsequent
+    pg_available() calls stop hammering PG until PG_RECHECK_INTERVAL_SEC
+    elapses.
+
+    If exc is a connection-class error (e.g. "connection refused"), the
+    shared pool is also flushed — the next probe will rebuild fresh
+    connections instead of reusing sockets to a server that just died.
+    """
+    global _pg_available, _pg_last_check_ts
+    with _pg_state_lock:
+        was_available = _pg_available
+        _pg_available = False
+        _pg_last_check_ts = time.monotonic()
+        should_flush = exc is not None and _is_expected_connection_error(exc)
+    # Run side-effects OUTSIDE the state lock to avoid deadlocks if pool
+    # teardown ever blocks on something that itself wants the state lock.
+    if should_flush:
+        pg_reset_pool()
+    if was_available:
+        logger.error(
+            "PostgreSQL marked unavailable after write failure (%s); will retry in %.0fs",
+            reason,
+            PG_RECHECK_INTERVAL_SEC,
+        )
 
 
 # ─────────────────────── OPPORTUNITIES ───────────────────────
