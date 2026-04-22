@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 from collections import Counter
 from datetime import UTC, date, datetime, timedelta
@@ -12,6 +13,8 @@ from typing import Any
 from core.aquaman import Aquaman
 from zatanna.predictor import ZatannaPredictor
 
+
+logger = logging.getLogger("batman.clark_kent.daily_generator")
 
 REPORT_PATH = Path("storage/reports/ready_to_post.txt")
 OPPORTUNITIES_PATH = Path("storage/logs/opportunities.jsonl")
@@ -69,12 +72,12 @@ class DailyPostGenerator:
                     ts = datetime.fromisoformat(str(row.get("ts", "")).replace("Z", "+00:00"))
                     if ts >= cutoff:
                         rows.append(row)
-                except Exception:
+                except (json.JSONDecodeError, ValueError) as e:
+                    logger.error("Skipping malformed opportunity row: %s", e)
                     continue
         return rows[-250:]
 
     def _morning_alpha(self, data: list[dict[str, Any]]) -> dict[str, str]:
-        count = len(data)
         p2p_items = [item for item in data if self._is_p2p(item)]
         spot_items = [item for item in data if not self._is_p2p(item)]
         markets = Counter(self._market_name(item) for item in p2p_items if self._market_name(item))
@@ -173,8 +176,8 @@ class DailyPostGenerator:
         if base:
             try:
                 return self.predictor.predict(base)
-            except Exception:
-                pass
+            except Exception as e:
+                logger.error("ZATANNA predictor failed, using fallback: %s", e, exc_info=True)
 
         avg_edge = sum(float(item.get("edge_net", 0.0) or 0.0) for item in data) / len(data) if data else 0.0
         if avg_edge >= 1.5:
@@ -194,7 +197,8 @@ class DailyPostGenerator:
                     result = self.aquaman.verify_opportunity(opp)
                 if result and result.get("is_liquid"):
                     verified.append({**opp, "liquidity": result})
-            except Exception:
+            except Exception as e:
+                logger.error("Skipping opp in _filter_with_aquaman: %s", e, exc_info=True)
                 continue
         return verified
 
@@ -233,7 +237,7 @@ class DailyPostGenerator:
         REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
         output = "🦇 BATCAVE — Daily Posts\n"
         output += f"📅 Fecha: {date.today().isoformat()}\n"
-        output += f"✅ Filtrado por AQUAMAN (min $500 USD liquidez)\n"
+        output += "✅ Filtrado por AQUAMAN (min $500 USD liquidez)\n"
         output += "=" * 50 + "\n\n"
 
         for post in posts:
