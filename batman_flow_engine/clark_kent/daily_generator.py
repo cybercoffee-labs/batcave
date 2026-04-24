@@ -48,11 +48,27 @@ class DailyPostGenerator:
         self.last_spot_verified = [item for item in verified if not self._is_p2p(item)]
         self.last_market_summary = self.aquaman.get_market_summary()
 
+        # Step 7 (audit plan): dedup across generators. A single dominant opp
+        # used to be able to win every selector on a sparse-data day and
+        # produce 4 duplicate Binance Square posts — including misleading
+        # "independent confirmation" signal to followers. Each opp_id is now
+        # consumed at most once per run.
+        seen: set[str] = set()
+
+        def _excluding_seen(pool: list[dict[str, Any]]) -> list[dict[str, Any]]:
+            return [item for item in pool if item.get("opp_id") not in seen]
+
+        def _consume(post: dict[str, str]) -> dict[str, str]:
+            opp_id = post.get("opp_id") if isinstance(post, dict) else None
+            if opp_id:
+                seen.add(str(opp_id))
+            return post
+
         posts = [
-            self._morning_alpha(verified),
-            self._stablecoin_depth(verified),
-            self._top_liquid_opportunity(verified),
-            self._zatanna_prediction(verified),
+            _consume(self._morning_alpha(_excluding_seen(verified))),
+            _consume(self._stablecoin_depth(_excluding_seen(verified))),
+            _consume(self._top_liquid_opportunity(_excluding_seen(verified))),
+            _consume(self._zatanna_prediction(_excluding_seen(verified))),
         ]
         return posts
 
@@ -148,7 +164,7 @@ class DailyPostGenerator:
             "Data-driven analysis, DYOR\n"
             "#crypto #P2P"
         )
-        return self._build_post("06:00 PM", "top_signal", content)
+        return self._build_post("06:00 PM", "top_signal", content, opp_id=best.get("opp_id"))
 
     def _zatanna_prediction(self, data: list[dict[str, Any]]) -> dict[str, str]:
         base = max(data, key=lambda item: float(item.get("edge_net", 0.0) or 0.0), default={})
@@ -170,7 +186,7 @@ class DailyPostGenerator:
             "Data-driven analysis, DYOR\n"
             "#crypto #analysis"
         )
-        return self._build_post("09:00 PM", "ml_prediction", content)
+        return self._build_post("09:00 PM", "ml_prediction", content, opp_id=base.get("opp_id"))
 
     def _predict_with_fallback(self, base: dict[str, Any], data: list[dict[str, Any]]) -> dict[str, Any]:
         if base:
@@ -256,9 +272,18 @@ class DailyPostGenerator:
             print(post["content"])
             print(f"📏 {len(post['content'])} chars")
 
-    def _build_post(self, post_time: str, post_type: str, content: str) -> dict[str, str]:
+    def _build_post(
+        self,
+        post_time: str,
+        post_type: str,
+        content: str,
+        opp_id: str | None = None,
+    ) -> dict[str, str]:
         normalized = self._normalize_post(content)
-        return {"time": post_time, "type": post_type, "content": normalized}
+        post: dict[str, str] = {"time": post_time, "type": post_type, "content": normalized}
+        if opp_id:
+            post["opp_id"] = str(opp_id)
+        return post
 
     def _normalize_post(self, content: str) -> str:
         text = content.strip()
