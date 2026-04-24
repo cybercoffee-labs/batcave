@@ -313,6 +313,34 @@ def _publish_with_engine_override(opportunity: dict[str, Any]) -> bool:
         clark_kent.scheduler.MAX_POSTS_PER_DAY = original_max_posts
 
 
+def _publish_deferred_candidates(
+    candidates: list[tuple[dict[str, Any], float]],
+    module_timings: dict[str, float],
+) -> int:
+    """Publish Clark Kent candidates deferred until AFTER _persist_run succeeded.
+
+    Step 5 (audit plan 2026-04-17): this loop used to run inline during opportunity
+    verification, which opened a window where a public post could exist with no
+    durable run record ("ghost post"). Callers must only invoke this after
+    _persist_run returned True. Returns the number of posts actually published.
+    """
+    count = 0
+    for opportunity, edge_value in candidates:
+        try:
+            posted, publish_elapsed = _timed_call("CLARK_KENT", _publish_with_engine_override, opportunity)
+            module_timings["clark_kent_sec"] = module_timings.get("clark_kent_sec", 0.0) + publish_elapsed
+            if posted:
+                count += 1
+                logger.info(
+                    "CLARK KENT published: %s edge=%.1f%%",
+                    opportunity.get("opp_id", "unknown"),
+                    edge_value,
+                )
+        except Exception as exc:
+            logger.warning("Clark Kent skipped: %s", exc)
+    return count
+
+
 def _verify_p2p_opportunity(opportunity: dict[str, Any], edge_value: float) -> tuple[bool, str, int]:
     scanner_id = str(opportunity.get("scanner_id", "") or "")
     if scanner_id == "C-P2P-LATAM":
@@ -707,20 +735,32 @@ def _enrich_runtime_metadata(result: dict[str, Any]) -> None:
         result["data_quality"] = {"status": "ERROR", "error": str(exc)}
 
 
-def _persist_run(result: dict[str, Any]) -> None:
-    ts = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d_%H-%M-%S")
-    digest = hash_data(result)
-    report_path = REPORTS_DIR / f"{ts}.json"
-    payload = json.dumps(result, indent=2, default=str)
+def _persist_run(result: dict[str, Any]) -> bool:
+    """Persist a cycle report to disk. Returns True on success, False on failure.
 
-    report_path.write_text(payload, encoding="utf-8")
-    LATEST_FILE.write_text(payload, encoding="utf-8")
+    Step 5 (audit plan 2026-04-17) requires the cycle to be durable BEFORE Clark
+    Kent publishes. Callers use this return value to gate publication — a False
+    return (or any exception, caught and logged here) must prevent ghost posts
+    (public post on Binance Square with no matching on-disk run record).
+    """
+    try:
+        ts = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d_%H-%M-%S")
+        digest = hash_data(result)
+        report_path = REPORTS_DIR / f"{ts}.json"
+        payload = json.dumps(result, indent=2, default=str)
 
-    write_audit(ts, digest, report_path.name)
-    write_alerts(STORAGE_DIR, flow_threshold=6.0)
+        report_path.write_text(payload, encoding="utf-8")
+        LATEST_FILE.write_text(payload, encoding="utf-8")
 
-    logger.info("Report: %s", report_path)
-    logger.info("Hash: %s", digest)
+        write_audit(ts, digest, report_path.name)
+        write_alerts(STORAGE_DIR, flow_threshold=6.0)
+
+        logger.info("Report: %s", report_path)
+        logger.info("Hash: %s", digest)
+        return True
+    except Exception as exc:
+        logger.error("Engine run persistence FAILED: %s", exc, exc_info=True)
+        return False
 
 
 def _viable_opportunity_ratio(n: int = 50) -> float | None:
@@ -945,6 +985,11 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
         hawk_data: dict[str, Any] = {}
         dex_opps: list[dict[str, Any]] = []
         verified_opportunities: list[dict[str, Any]] = []
+        # Step 5 (audit plan): Clark Kent publication is deferred until AFTER
+        # _persist_run succeeds, so a crash between "publish" and "persist"
+        # cannot leave a ghost post. We collect (opportunity, edge_value) tuples
+        # here during the opp loop and drain them at each _persist_run call site.
+        publish_candidates: list[tuple[dict[str, Any], float]] = []
         posts_published = 0
         ml_scores: list[float] = []
         # PHASE 2: INTELLIGENCE
@@ -1057,21 +1102,13 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 opportunity["verified"] = True
                 opportunity["verify_method"] = verify_method
                 verified_opportunities.append(opportunity)
-                try:
-                    if edge_value >= 4.0:
-                        published, publish_elapsed = _timed_call(
-                            "CLARK_KENT", _publish_with_engine_override, opportunity
-                        )
-                        module_timings["clark_kent_sec"] = module_timings.get("clark_kent_sec", 0.0) + publish_elapsed
-                        if published:
-                            posts_published += 1
-                            logger.info(
-                                "CLARK KENT published: %s edge=%.1f%%",
-                                opportunity.get("opp_id", "unknown"),
-                                edge_value,
-                            )
-                except Exception as e:
-                    logger.warning("Clark Kent skipped: %s", e)
+                # Step 5 (audit plan): DEFER publication. Do NOT call
+                # _publish_with_engine_override here — it used to run inline,
+                # which meant a crash between the publish call and _persist_run
+                # would leak a public post with no durable record ("ghost post").
+                # The drain happens after _persist_run succeeds below.
+                if edge_value >= 4.0:
+                    publish_candidates.append((opportunity, edge_value))
 
         _enrich_runtime_metadata(result)
 
@@ -1108,7 +1145,18 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             }
             result.pop("_current_cycle_opportunity_counts", None)
             result.pop("_current_cycle_opportunities", None)
-            _persist_run(result)
+            # Step 5 (audit plan): persist BEFORE publishing. If persistence
+            # fails, refuse to publish — no ghost posts without a durable record.
+            if _persist_run(result):
+                if publish_candidates:
+                    posts_published += _publish_deferred_candidates(publish_candidates, module_timings)
+                    result["integrated_cycle"]["posts_published"] = posts_published
+            elif publish_candidates:
+                logger.error(
+                    "Skipping %d Clark Kent publication(s) — engine run persistence "
+                    "failed; refusing to create ghost posts without a durable record",
+                    len(publish_candidates),
+                )
             _append_jsonl(
                 CYCLE_STATS_FILE,
                 {
@@ -1266,7 +1314,18 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
         }
         result.pop("_current_cycle_opportunity_counts", None)
         result.pop("_current_cycle_opportunities", None)
-        _persist_run(result)
+        # Step 5 (audit plan): persist BEFORE publishing. If persistence fails,
+        # refuse to publish — no ghost posts without a durable record.
+        if _persist_run(result):
+            if publish_candidates:
+                posts_published += _publish_deferred_candidates(publish_candidates, module_timings)
+                result["integrated_cycle"]["posts_published"] = posts_published
+        elif publish_candidates:
+            logger.error(
+                "Skipping %d Clark Kent publication(s) — engine run persistence "
+                "failed; refusing to create ghost posts without a durable record",
+                len(publish_candidates),
+            )
         _append_jsonl(
             CYCLE_STATS_FILE,
             {
