@@ -63,7 +63,27 @@ class ClarkKent:
 
     def publish(self, opportunity: dict) -> bool:
         """Publish a qualifying opportunity to Binance Square or print it in dry-run mode."""
-        edge_value = self._edge_value(opportunity)
+        # Step 8 (audit plan): canonical edge_net only — no fallback chain.
+        # Scanners that don't emit `edge_net` are bugs at the source; the old
+        # 7-key fallback (`spread_pct`, `merchant_spread_pct`, …) silently
+        # masked field-drift and could even pick a semantically-wrong field
+        # if both candidates were present in the dict.
+        edge_value = self._canonical_edge(opportunity)
+        if edge_value is None:
+            logger.error(
+                "Publisher rejecting post: opp=%s missing or invalid edge_net",
+                opportunity.get("opp_id", "unknown"),
+            )
+            self._append_log(
+                {
+                    "ts": datetime.now(UTC).isoformat(),
+                    "status": "rejected",
+                    "reason": "missing_edge_net",
+                    "dry_run": self.dry_run,
+                    "opportunity": opportunity,
+                }
+            )
+            return False
         if edge_value < MIN_EDGE_THRESHOLD:
             logger.info("Skipping post below threshold: %.2f%%", edge_value)
             self._append_log(
@@ -165,8 +185,13 @@ class ClarkKent:
         """Format a Binance Square post and keep it under 280 characters."""
         asset = self._asset_symbol(data)
         stablecoin = self._stablecoin_cashtag(data)
-        edge_net = self._float_value(data, "edge_net", "spread_pct", "spread", "merchant_spread_pct")
-        spread = self._float_value(data, "spread", "spread_pct", "cross_premium_spread", "edge_net", "merchant_spread_pct")
+        # Step 8 (audit plan): edge_net is canonical — `publish()` already
+        # validated it, so a direct read is safe. `spread` keeps the legacy
+        # fallback chain because it's a display field with looser semantics.
+        edge_net = float(data.get("edge_net") or 0.0)
+        spread = self._float_value(
+            data, "spread", "spread_pct", "cross_premium_spread", "edge_net", "merchant_spread_pct"
+        )
         rate = self._float_value(data, "funding_rate", "rate")
         apy = self._float_value(data, "apy", "annualized_pct")
         if not apy and rate:
@@ -220,7 +245,10 @@ class ClarkKent:
         parts = []
         market = self._market_label(data)
         asset = self._asset_symbol(data)
-        edge_net = self._float_value(data, "edge_net", "spread_pct", "spread", "merchant_spread_pct")
+        # Step 8 (audit plan): edge_net is canonical — `publish()` already
+        # validated it. `spread` keeps the legacy fallback chain because it's
+        # a display field with looser semantics.
+        edge_net = float(data.get("edge_net") or 0.0)
         spread = self._float_value(data, "spread", "spread_pct", "cross_premium_spread", "merchant_spread_pct")
         buy_exchange = self._buy_exchange(data)
         sell_exchange = self._sell_exchange(data)
@@ -241,18 +269,23 @@ class ClarkKent:
         summary = " ".join(parts).strip()
         return summary or "Opportunity detected"
 
-    def _edge_value(self, opportunity: dict) -> float:
-        """Extract a comparable edge percentage from the opportunity payload."""
-        return self._float_value(
-            opportunity,
-            "edge_net",
-            "spread_pct",
-            "spread",
-            "edge_pct",
-            "profit_pct",
-            "cross_premium_spread",
-            "merchant_spread_pct",
-        )
+    def _canonical_edge(self, opportunity: dict[str, Any]) -> float | None:
+        """Return the canonical `edge_net` value as a float, or None on miss.
+
+        Step 8 (audit plan, 2026-04-24): the publisher previously fell back
+        through 7 candidate keys (`spread_pct`, `merchant_spread_pct`, …)
+        when `edge_net` was missing. That hid scanner field-drift bugs and
+        could pick a semantically-wrong field when multiple candidates
+        coexisted. Scanners are now expected to emit `edge_net` directly;
+        opportunities that don't are rejected at publish time.
+        """
+        value = opportunity.get("edge_net")
+        if value is None:
+            return None
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None
 
     def _float_value(self, data: dict[str, Any], *keys: str) -> float:
         """Return the first numeric value from a list of candidate keys."""

@@ -123,6 +123,10 @@ def scan_cross_exchange(log_to_file: bool = True) -> list[dict]:
             "binance_px": round(binance_px, 6),
             "okx_px": round(okx_px, 6),
             "spread_pct": round(spread_pct, 6),
+            # Step 8 (audit plan): canonical edge field used by Clark Kent publisher.
+            # Same magnitude as spread_pct; sign-stripped because the publisher
+            # treats edge as a positive scalar.
+            "edge_net": round(abs(spread_pct), 6),
             "scanner_id": SCANNER_ID,
             "observe_only": True,
         }
