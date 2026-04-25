@@ -370,6 +370,60 @@ def _verify_p2p_opportunity(opportunity: dict[str, Any], edge_value: float) -> t
     return False, "p2p_unknown", 0
 
 
+def _p2p_freshness_gate_passes(opportunity: dict[str, Any]) -> bool:
+    """Step 9 (audit plan): gate P2P publications on live merchant liquidity.
+
+    Scanner-side `_verify_p2p_opportunity` only counts merchants from the
+    scanner's cached payload — which can be minutes old by publish time.
+    Before letting Clark Kent broadcast a P2P signal to Binance Square,
+    fetch a fresh P2P ad snapshot and require:
+
+      1. At least 3 BUY ads AND 3 SELL ads on Binance P2P right now.
+      2. Scanner's recorded p2p_buy_price is within 0.5% of top-of-book BUY
+         price — no major drift since the opportunity was detected.
+
+    Returns True only if both checks pass. Any failure (missing fields,
+    fetch errors, thin book, drift) logs an ERROR and returns False.
+    """
+    try:
+        from core.p2p_latam import ad_snapshot
+    except Exception as exc:
+        logger.error("P2P freshness gate unavailable: %s", exc, exc_info=True)
+        return False
+
+    fiat = str(opportunity.get("market") or "").upper()
+    asset = str(opportunity.get("asset") or "USDT").upper()
+    if not fiat:
+        logger.error(
+            "P2P freshness gate: opp missing market/fiat opp=%s",
+            opportunity.get("opp_id", "unknown"),
+        )
+        return False
+
+    try:
+        snap = ad_snapshot(fiat, asset)
+    except Exception as exc:
+        logger.error("P2P freshness gate fetch failed: %s", exc, exc_info=True)
+        return False
+
+    if snap.get("buy_ads", 0) < 3 or snap.get("sell_ads", 0) < 3:
+        return False
+
+    scanner_buy = opportunity.get("p2p_buy_price")
+    top_buy = snap.get("top_buy")
+    if scanner_buy is None or top_buy is None:
+        return False
+    try:
+        scanner_buy_f = float(scanner_buy)
+        top_buy_f = float(top_buy)
+    except (TypeError, ValueError):
+        return False
+    if scanner_buy_f <= 0:
+        return False
+    drift = abs(top_buy_f - scanner_buy_f) / scanner_buy_f
+    return drift < 0.005  # 0.5% drift tolerance
+
+
 # ───────────────────────── ENGINE ─────────────────────────
 def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
     start = datetime.datetime.now(datetime.UTC)
@@ -1108,7 +1162,22 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 # would leak a public post with no durable record ("ghost post").
                 # The drain happens after _persist_run succeeds below.
                 if edge_value >= 4.0:
-                    publish_candidates.append((opportunity, edge_value))
+                    # Step 9 (audit plan): for P2P opps, require a fresh
+                    # merchant-ad snapshot before queueing for publication.
+                    # Scanner verification can be minutes old; merchants may
+                    # have vanished by the time Clark Kent would publish.
+                    if scanner_id in P2P_SCANNERS:
+                        if _p2p_freshness_gate_passes(opportunity):
+                            publish_candidates.append((opportunity, edge_value))
+                        else:
+                            logger.error(
+                                "P2P freshness gate failed — skipping publication " "opp=%s scanner=%s edge=%.2f",
+                                opportunity.get("opp_id", "unknown"),
+                                scanner_id,
+                                edge_value,
+                            )
+                    else:
+                        publish_candidates.append((opportunity, edge_value))
 
         _enrich_runtime_metadata(result)
 

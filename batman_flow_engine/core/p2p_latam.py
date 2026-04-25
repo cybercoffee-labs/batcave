@@ -2,13 +2,14 @@ import ccxt
 import requests
 import numpy as np
 import json
+import threading
 import uuid
 import yaml
 import logging
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List
-from time import time
+from typing import Any, Dict, List
+from time import monotonic, time
 from datetime import time as dt_time
 
 logger = logging.getLogger("scanner_p2p")
@@ -623,3 +624,56 @@ def p2p_premium_analysis(log_to_file: bool = True) -> dict:
         "pairs_successful": successful,
         "results": results,
     }
+
+
+# ──────────────── Step 9 audit: publish-time freshness snapshot ────────────────
+# Clark Kent publishes P2P opportunities that bypass AQUAMAN (commit 1696911).
+# The scanner-side `merchant_count` can be minutes old by publish time —
+# merchants may have vanished. `ad_snapshot` returns a fresh view of Binance P2P
+# order depth for a (fiat, asset) pair, used by the engine's publish-time gate
+# at engine._p2p_freshness_gate_passes.
+_AD_SNAPSHOT_CACHE: Dict[tuple, tuple] = {}
+_AD_SNAPSHOT_CACHE_LOCK = threading.Lock()
+_AD_SNAPSHOT_TTL_SEC: float = 60.0
+
+
+def ad_snapshot(fiat: str, asset: str = "USDT") -> Dict[str, Any]:
+    """Fresh merchant-ad snapshot for (fiat, asset) — publish-time freshness gate.
+
+    Shape:
+      {"fetched_at": float (wall time),
+       "buy_ads": int, "sell_ads": int,
+       "top_buy": float | None, "top_sell": float | None,
+       "fiat": str, "asset": str}
+
+    Caches non-empty snapshots for ~60s (process-local, keyed by (fiat, asset))
+    to avoid hammering Binance P2P across dense P2P cycles. Empty / error
+    snapshots are NOT cached — next call retries. Matches AQUAMAN cache
+    semantics from Step 4.
+    """
+    key = (fiat.upper(), asset.upper())
+    now = monotonic()
+    with _AD_SNAPSHOT_CACHE_LOCK:
+        cached = _AD_SNAPSHOT_CACHE.get(key)
+        if cached and now - cached[0] <= _AD_SNAPSHOT_TTL_SEC:
+            return dict(cached[1])
+
+    buys = get_p2p_announcements_binance(fiat=key[0], crypto=key[1], trade_type="BUY", top_n=5)
+    sells = get_p2p_announcements_binance(fiat=key[0], crypto=key[1], trade_type="SELL", top_n=5)
+
+    snapshot: Dict[str, Any] = {
+        "fetched_at": time(),
+        "fiat": key[0],
+        "asset": key[1],
+        "buy_ads": len(buys),
+        "sell_ads": len(sells),
+        "top_buy": float(buys[0]["price"]) if buys else None,
+        "top_sell": float(sells[0]["price"]) if sells else None,
+    }
+
+    # Only cache non-empty snapshots. Empty = outage / rate-limit / symbol
+    # drift; retry next time rather than serving a stale zero-ad verdict.
+    if snapshot["buy_ads"] and snapshot["sell_ads"]:
+        with _AD_SNAPSHOT_CACHE_LOCK:
+            _AD_SNAPSHOT_CACHE[key] = (now, dict(snapshot))
+    return snapshot
