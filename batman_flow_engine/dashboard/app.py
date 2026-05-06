@@ -144,4 +144,41 @@ else:
     st.info("No opportunities data yet. Start Batman: `python tools/run_loop.py`")
 
 st.divider()
+
+# ─────────────── BATDETECTIVE — Macro Intelligence ───────────────
+st.subheader("🔍 BATDETECTIVE — Macro Intelligence Alerts")
+try:
+    import sys as _sys
+    from pathlib import Path as _Path
+
+    _BASE = _Path(__file__).resolve().parent.parent
+    if str(_BASE) not in _sys.path:
+        _sys.path.insert(0, str(_BASE))
+    from core.macro_alerts import load_recent_alerts
+
+    _alerts = load_recent_alerts(limit=10)
+    if not _alerts:
+        st.caption("No macro alerts yet. BATDETECTIVE runs every cycle. " "Sources: Banxico, Fed, GDELT, BCRA (stub).")
+    else:
+        for _alert in _alerts:
+            _severity = _alert.get("severity", "low")
+            _icon = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "🟢"}.get(_severity, "⚪")
+            _confidence = _alert.get("confidence", 0.0)
+            _scanners = ", ".join(_alert.get("scanners_affected", [])) or "—"
+            with st.container():
+                _col1, _col2 = st.columns([4, 1])
+                with _col1:
+                    st.markdown(f"{_icon} **{_alert.get('headline', '(no title)')}**")
+                    st.caption(
+                        f"source={_alert.get('source')} · type={_alert.get('event_type')} · "
+                        f"scanners affected: **{_scanners}** · confidence: {_confidence:.0%}"
+                    )
+                    if _alert.get("source_url"):
+                        st.caption(f"[source]({_alert['source_url']})")
+                with _col2:
+                    st.metric("Severity", _severity.upper())
+                st.divider()
+except Exception as _exc:
+    st.warning(f"BATDETECTIVE alerts panel unavailable: {_exc}")
+
 st.caption("Navigate using the sidebar pages for detailed views.")

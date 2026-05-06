@@ -1412,6 +1412,24 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
             logger.warning("ORACLE_V2 skipped: %s", exc)
             result["oracle_v2_backtest"] = {"error": str(exc)}
 
+        # ─────────────── BATDETECTIVE — macro intelligence layer ───────────────
+        # Burry/Dalio-style detective mode: surface macro events to the operator
+        # alongside scanner output. Alerts are persisted to macro_alerts.jsonl
+        # (Streamlit reads from there) and surfaced in result["batdetective"]
+        # so latest.json carries the latest cycle's alerts. Failure here must
+        # NOT stop the engine cycle — it's enrichment, not core flow.
+        try:
+            from core.batdetective import run_batdetective_cycle
+
+            macro_alerts, module_timings["batdetective_sec"] = _timed_call("BATDETECTIVE", run_batdetective_cycle)
+            result["batdetective"] = {
+                "alerts": macro_alerts,
+                "alert_count": len(macro_alerts),
+            }
+        except Exception as exc:
+            logger.warning("BATDETECTIVE skipped: %s", exc)
+            result["batdetective"] = {"error": str(exc), "alerts": [], "alert_count": 0}
+
         cycle_duration = time.perf_counter() - cycle_started
         result["integrated_cycle"] = {
             "verified_opportunities": verified_opportunities,
