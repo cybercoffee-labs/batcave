@@ -232,6 +232,7 @@ def save_opportunity(opp: dict) -> bool:
         standard_keys = {
             "opp_id",
             "ts",
+            "cycle_id",  # audit Section C #9: stored in its own column, not metadata
             "type",
             "scanner_id",
             "asset",
@@ -253,16 +254,17 @@ def save_opportunity(opp: dict) -> bool:
             cur.execute(
                 """
                 INSERT INTO opportunities
-                    (opp_id, ts, scanner_type, scanner_id, asset, market, venue,
+                    (opp_id, ts, cycle_id, scanner_type, scanner_id, asset, market, venue,
                      buy_price, sell_price, spot_price, gross_spread_pct,
                      total_friction_pct, edge_net, viable, depth_estimate,
                      observe_only, metadata)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (opp_id) DO NOTHING
             """,
                 (
                     opp.get("opp_id"),
                     opp.get("ts", datetime.now(UTC).isoformat()),
+                    opp.get("cycle_id"),
                     opp.get("type", "?"),
                     opp.get("scanner_id", "unknown"),
                     opp.get("asset", "USDT"),
@@ -597,13 +599,14 @@ def save_engine_run_pg(result: dict) -> bool:
             cur.execute(
                 """
                 INSERT INTO engine_runs
-                    (ts, duration_sec, equities_total, equities_ok,
+                    (ts, cycle_id, duration_sec, equities_total, equities_ok,
                      crypto_total, crypto_ok, regime, dq_score,
                      corr_stress, errors, full_report)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """,
                 (
                     result.get("timestamp", datetime.now(UTC).isoformat()),
+                    result.get("cycle_id"),
                     meta.get("duration_sec"),
                     meta.get("equities_total"),
                     meta.get("equities_ok"),

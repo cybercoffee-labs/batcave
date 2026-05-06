@@ -39,6 +39,7 @@ EXPECTED_OPPORTUNITY_COLUMNS = {
     "id",
     "opp_id",
     "ts",
+    "cycle_id",  # audit Section C #9
     "scanner_type",
     "scanner_id",
     "asset",
@@ -49,6 +50,7 @@ EXPECTED_OPPORTUNITY_COLUMNS = {
 EXPECTED_ENGINE_RUN_COLUMNS = {
     "id",
     "ts",
+    "cycle_id",  # audit Section C #9
     "duration_sec",
 }
 

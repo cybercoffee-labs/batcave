@@ -26,6 +26,7 @@ def _ensure_schema(conn: sqlite3.Connection) -> None:
             id INTEGER PRIMARY KEY,
             opp_id TEXT UNIQUE,
             timestamp TEXT,
+            cycle_id TEXT,
             scanner_id TEXT,
             type TEXT,
             asset TEXT,
@@ -44,6 +45,13 @@ def _ensure_schema(conn: sqlite3.Connection) -> None:
         );
         """
     )
+    # Audit Section C #9: idempotent ALTER for installations created before
+    # cycle_id was part of the schema. SQLite doesn't have ADD COLUMN IF NOT
+    # EXISTS, so we check pragma table_info first.
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(signals)").fetchall()}
+    if "cycle_id" not in cols:
+        conn.execute("ALTER TABLE signals ADD COLUMN cycle_id TEXT")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_signals_cycle_id ON signals(cycle_id)")
 
 
 def _derive_edge(record: dict[str, Any]) -> float | None:
@@ -118,6 +126,7 @@ def _insert_signals(conn: sqlite3.Connection, opportunities: list[dict[str, Any]
             INSERT OR IGNORE INTO signals (
                 opp_id,
                 timestamp,
+                cycle_id,
                 scanner_id,
                 type,
                 asset,
@@ -125,11 +134,12 @@ def _insert_signals(conn: sqlite3.Connection, opportunities: list[dict[str, Any]
                 edge,
                 observe_only,
                 raw_json
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 opp_id,
                 record.get("ts"),
+                record.get("cycle_id"),
                 record.get("scanner_id"),
                 record.get("type"),
                 record.get("asset"),

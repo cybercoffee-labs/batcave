@@ -228,6 +228,10 @@ def _load_threshold():
 
 def _append_to_log(opp):
     try:
+        # Audit Section C #9: stamp cycle_id from process-global context if absent.
+        from core.cycle_context import stamp_cycle_id
+
+        stamp_cycle_id(opp)
         LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
         with open(LOG_FILE, "a") as f:
             f.write(json.dumps(opp) + "\n")

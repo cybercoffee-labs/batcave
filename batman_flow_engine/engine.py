@@ -25,6 +25,11 @@ from core.flows import flow_score_crypto, flow_score_equity
 from core.gordon import check as gordon_check
 from core.harvey import DB_PATH as HARVEY_DB_PATH
 from core.harvey import daily_exposure as harvey_daily_exposure
+from core.cycle_context import (
+    clear_current_cycle_id,
+    new_cycle_id,
+    set_current_cycle_id,
+)
 from core.harvey import ingest_opportunities
 from core.news_intel import narrative_intensity
 from core.ollama_intel import get_market_intelligence, get_ollama_status
@@ -428,8 +433,14 @@ def _p2p_freshness_gate_passes(opportunity: dict[str, Any]) -> bool:
 def _build_engine_result(cfg: EngineConfig) -> dict[str, Any]:
     start = datetime.datetime.now(datetime.UTC)
 
+    # Audit Section C #9: surface the active cycle correlation id at the top
+    # of the result dict. save_engine_run_pg reads it; latest.json carries it
+    # for downstream tools (Streamlit, reconciliation jobs).
+    from core.cycle_context import get_current_cycle_id
+
     result: dict[str, Any] = {
         "timestamp": start.isoformat(),
+        "cycle_id": get_current_cycle_id(),
         "equities": {},
         "crypto": {},
         "flows": {},
@@ -838,7 +849,17 @@ def _viable_opportunity_ratio(n: int = 50) -> float | None:
 
 
 def _current_cycle_opportunities(scanner_results: list[Any]) -> list[dict[str, Any]]:
-    """Normalize scanner return values into current-cycle opportunity records."""
+    """Normalize scanner return values into current-cycle opportunity records.
+
+    Also stamps cycle_id (audit Section C #9) on any opportunity that lacks
+    one. Scanners' _append_to_log already stamps before JSONL write, but the
+    in-memory dicts returned to the engine are not always those same objects
+    (some scanners build a final 'full_opp' separately). Stamping here is
+    defensive — a single source of truth for downstream HARVEY ingestion.
+    """
+    from core.cycle_context import get_current_cycle_id
+
+    cycle_id = get_current_cycle_id()
     opportunities: list[dict[str, Any]] = []
 
     for scanner_result in scanner_results:
@@ -857,6 +878,11 @@ def _current_cycle_opportunities(scanner_results: list[Any]) -> list[dict[str, A
             continue
 
         opportunities.append(scanner_result)
+
+    if cycle_id is not None:
+        for opp in opportunities:
+            if not opp.get("cycle_id"):
+                opp["cycle_id"] = cycle_id
 
     return opportunities
 
@@ -991,7 +1017,17 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
     _initialize_optional_modules()
     cycle_started = time.perf_counter()
     CYCLE_COUNTER += 1
-    logger.info("ENGINE START — equities=%d crypto=%d scanners=11", len(cfg.equities), len(cfg.crypto))
+    # Audit Section C #9: generate a cycle correlation id and stash it in
+    # process-global context so every scanner's _append_to_log can stamp it.
+    # Cleared in the outer finally below, AND on the lock-fail early-return.
+    cycle_id = new_cycle_id()
+    set_current_cycle_id(cycle_id)
+    logger.info(
+        "ENGINE START cycle_id=%s — equities=%d crypto=%d scanners=11",
+        cycle_id,
+        len(cfg.equities),
+        len(cfg.crypto),
+    )
 
     if LOCK_FILE.exists():
         try:
@@ -1023,6 +1059,8 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
 
         if pid_is_engine:
             logger.warning("Engine already running (PID %s). Aborting.", stored_pid)
+            # Audit Section C #9: never leak a cycle context past return.
+            clear_current_cycle_id()
             return {"status": "already_running", "lock_file": str(LOCK_FILE), "pid": stored_pid}
 
         logger.warning(
@@ -1420,6 +1458,10 @@ def run_engine(cfg: EngineConfig | None = None) -> dict[str, Any]:
                 LOCK_FILE.unlink()
         except Exception as exc:
             logger.debug("Engine lock cleanup skipped: %s", exc)
+        # Audit Section C #9: clear cycle context so a subsequent ad-hoc
+        # scanner call (CLI debugging) doesn't accidentally inherit the
+        # previous run's id.
+        clear_current_cycle_id()
 
 
 def main():

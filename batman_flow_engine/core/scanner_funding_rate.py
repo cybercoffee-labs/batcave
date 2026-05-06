@@ -83,6 +83,10 @@ def _load_threshold() -> float:
 def _append_to_log(opportunity: dict) -> bool:
     """Append opportunity to JSONL log file."""
     try:
+        # Audit Section C #9: stamp cycle_id from process-global context if absent.
+        from core.cycle_context import stamp_cycle_id
+
+        stamp_cycle_id(opportunity)
         LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
         with open(LOG_FILE, "a", encoding="utf-8") as f:
             f.write(json.dumps(opportunity) + "\n")

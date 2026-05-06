@@ -50,6 +50,16 @@ def log_opportunity(opp: dict, log_to_file: bool = True) -> PersistResult:
     jsonl_ok = False
     pg_ok: Optional[bool] = None
 
+    # Audit Section C #9: stamp cycle_id from process-global context if absent.
+    # No-op if the opp already carries one (scanner-side stamping is the
+    # primary path; this is defense-in-depth for direct dual_writer callers).
+    try:
+        from core.cycle_context import stamp_cycle_id
+
+        stamp_cycle_id(opp)
+    except Exception as exc:
+        logger.debug("cycle_id stamping skipped: %s", exc)
+
     # 1. Always write to JSONL (legacy, reliable).
     if log_to_file:
         try:
