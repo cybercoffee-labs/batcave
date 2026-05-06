@@ -28,6 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+from core.startup_check import run_all_checks  # noqa: E402
 from engine import run_engine  # noqa: E402
 from tools.make_daily_summary import main as make_daily_summary  # noqa: E402
 
@@ -81,7 +82,12 @@ def configure_logger() -> logging.Logger:
 
 
 class BatcaveLoop:
-    def __init__(self, interval_seconds: int | None = None, max_cycles: int | None = None):
+    def __init__(
+        self,
+        interval_seconds: int | None = None,
+        max_cycles: int | None = None,
+        skip_startup_check: bool = False,
+    ):
         self.cycle_count = 0
         self.error_count = 0
         self.start_time = datetime.now(UTC)
@@ -89,7 +95,20 @@ class BatcaveLoop:
         self.last_summary_date = None
         self.interval_seconds = interval_seconds or (CYCLE_INTERVAL_MINUTES * 60)
         self.max_cycles = max_cycles
+        self.skip_startup_check = skip_startup_check
         self.logger = configure_logger()
+
+    def _run_startup_checks(self) -> bool:
+        """Run startup health checks (audit Section C #8). Return False on any failure."""
+        if self.skip_startup_check:
+            self._log("⚠️  Startup checks SKIPPED (--skip-startup-check)")
+            return True
+        self._log("")
+        self._log("🔍 Running startup health checks...")
+        ok = run_all_checks()
+        if not ok:
+            self._log("🛑 Startup checks FAILED — refusing to start engine loop.")
+        return ok
 
     def run_forever(self):
         """Main loop with self-healing."""
@@ -97,9 +116,14 @@ class BatcaveLoop:
         signal.signal(signal.SIGTERM, signal_handler)
 
         self._log("🦇 BATCAVE ENGINE LOOP STARTED")
-        self._log(f"   Cycle interval: {self.interval_seconds // 60 if self.interval_seconds >= 60 else self.interval_seconds} {'min' if self.interval_seconds >= 60 else 'sec'}")
+        self._log(
+            f"   Cycle interval: {self.interval_seconds // 60 if self.interval_seconds >= 60 else self.interval_seconds} {'min' if self.interval_seconds >= 60 else 'sec'}"
+        )
         self._log(f"   Log file: {LOG_FILE}")
         self._log("   Press Ctrl+C to stop\n")
+
+        if not self._run_startup_checks():
+            return
 
         while not shutdown_requested:
             if self.max_cycles is not None and self.cycle_count >= self.max_cycles:
@@ -154,7 +178,9 @@ class BatcaveLoop:
         self._log(f"⚠️  Engine error (attempt {self.error_count}/{MAX_RETRIES}): {type(error).__name__}: {error}")
 
         if self.error_count >= MAX_RETRIES:
-            self._log(f"🛑 Max retries reached. Waiting {MAX_RETRY_COOLDOWN_SECONDS // 60} minutes before next cycle window...")
+            self._log(
+                f"🛑 Max retries reached. Waiting {MAX_RETRY_COOLDOWN_SECONDS // 60} minutes before next cycle window..."
+            )
             self._sleep_with_interrupt(MAX_RETRY_COOLDOWN_SECONDS)
             self.error_count = 0
             return True
@@ -236,9 +262,11 @@ class BatcaveLoop:
         self.logger.info(message)
 
 
-def run_single_cycle():
+def run_single_cycle(skip_startup_check: bool = False):
     """Run a single cycle and exit."""
-    loop = BatcaveLoop(max_cycles=1)
+    loop = BatcaveLoop(max_cycles=1, skip_startup_check=skip_startup_check)
+    if not loop._run_startup_checks():
+        return 1
     try:
         loop._run_cycle()
         loop._maybe_run_daily_summary()
@@ -264,12 +292,21 @@ Examples:
     parser.add_argument("--test", action="store_true", help="Run a single cycle for testing")
     parser.add_argument("--max-cycles", type=int, help="Stop after N successful/attempted cycles")
     parser.add_argument("--interval-seconds", type=int, help="Override cycle interval for local testing")
+    parser.add_argument(
+        "--skip-startup-check",
+        action="store_true",
+        help="Skip startup health checks (PG/schema/ALFRED). Use only for offline tests.",
+    )
     args = parser.parse_args()
 
     if args.test:
-        raise SystemExit(run_single_cycle())
+        raise SystemExit(run_single_cycle(skip_startup_check=args.skip_startup_check))
 
-    loop = BatcaveLoop(interval_seconds=args.interval_seconds, max_cycles=args.max_cycles)
+    loop = BatcaveLoop(
+        interval_seconds=args.interval_seconds,
+        max_cycles=args.max_cycles,
+        skip_startup_check=args.skip_startup_check,
+    )
     loop.run_forever()
 
 
