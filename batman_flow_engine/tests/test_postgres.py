@@ -136,3 +136,108 @@ def test_get_database_stats_returns_empty_on_error():
         result = get_database_stats()
         assert isinstance(result, dict)
         assert len(result) == 0
+
+
+# ─────────────────── SHARED AVAILABILITY STATE (2026-04-21 unification) ───────────────────
+
+
+def test_pg_available_probes_on_first_call_and_caches():
+    """First call probes; second call within the retry window must not re-probe."""
+    from database import postgres as pg
+
+    previous_available = pg._pg_available
+    previous_ts = pg._pg_last_check_ts
+    pg._pg_available = None
+    pg._pg_last_check_ts = None
+    try:
+        with patch(
+            "database.postgres.check_connection",
+            return_value={"status": "ok", "version": "x", "tables": 0},
+        ) as mocked:
+            assert pg.pg_available() is True
+            assert mocked.call_count == 1
+            assert pg.pg_available() is True  # cached — no second probe
+            assert mocked.call_count == 1
+    finally:
+        pg._pg_available = previous_available
+        pg._pg_last_check_ts = previous_ts
+
+
+def test_pg_available_reprobes_after_recheck_interval_when_down():
+    """While down, pg_available re-probes after PG_RECHECK_INTERVAL_SEC elapses."""
+    import time
+
+    from database import postgres as pg
+
+    previous_available = pg._pg_available
+    previous_ts = pg._pg_last_check_ts
+    pg._pg_available = False
+    pg._pg_last_check_ts = time.monotonic() - (pg.PG_RECHECK_INTERVAL_SEC + 1)
+    try:
+        with patch(
+            "database.postgres.check_connection",
+            return_value={"status": "ok"},
+        ) as mocked:
+            assert pg.pg_available() is True
+            assert mocked.call_count == 1
+            assert pg._pg_available is True
+    finally:
+        pg._pg_available = previous_available
+        pg._pg_last_check_ts = previous_ts
+
+
+def test_mark_pg_unavailable_flushes_pool_on_connection_error():
+    """mark_pg_unavailable flushes the pool ONLY for connection-class errors."""
+    from database import postgres as pg
+
+    previous_available = pg._pg_available
+    previous_ts = pg._pg_last_check_ts
+    previous_pool = pg._pool
+    try:
+        # Set up a sentinel "pool" we can observe being flushed.
+        pg._pool = object()  # truthy stand-in; pg_reset_pool handles non-pool gracefully
+        pg._pg_available = True
+        pg._pg_last_check_ts = None
+
+        # Non-connection error → state flips, pool is NOT touched.
+        pg.mark_pg_unavailable("bad data", exc=ValueError("bad value"))
+        assert pg._pg_available is False
+        assert pg._pool is not None
+
+        # Connection-class error → state flips, pool IS flushed.
+        # Re-arm state so we can observe the second transition.
+        pg._pg_available = True
+        connection_err = Exception("could not connect to server: Connection refused")
+        pg.mark_pg_unavailable("conn refused", exc=connection_err)
+        assert pg._pg_available is False
+        assert pg._pool is None
+    finally:
+        pg._pg_available = previous_available
+        pg._pg_last_check_ts = previous_ts
+        pg._pool = previous_pool
+
+
+def test_pg_probe_forces_immediate_check():
+    """pg_probe() bypasses the retry-window cache."""
+    import time
+
+    from database import postgres as pg
+
+    previous_available = pg._pg_available
+    previous_ts = pg._pg_last_check_ts
+    pg._pg_available = False
+    pg._pg_last_check_ts = time.monotonic()  # inside retry window — pg_available would skip
+    try:
+        with patch(
+            "database.postgres.check_connection",
+            return_value={"status": "ok"},
+        ) as mocked:
+            # pg_available stays False (retry window not elapsed).
+            assert pg.pg_available() is False
+            assert mocked.call_count == 0
+            # pg_probe forces a fresh probe regardless of window.
+            assert pg.pg_probe() is True
+            assert mocked.call_count == 1
+    finally:
+        pg._pg_available = previous_available
+        pg._pg_last_check_ts = previous_ts

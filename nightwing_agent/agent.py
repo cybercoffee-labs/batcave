@@ -22,14 +22,14 @@ from typing import Dict, Any
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR))
 
-from core.market_data import fetch_prices, _get_mode
-from core.lucius import check_jurisdiction
-from core.batman_bridge import fetch_from_batman
-from core.harvey import record_trade, print_summary
-from core.gordon import run_all_checks as gordon_check
-from core.notifier import alert_opportunity, alert_blocked, alert_autopause
-from core.microstructure import compute_depth_metrics
-from core.feature_logger import log_features
+from core.market_data import fetch_prices, _get_mode  # noqa: E402
+from core.lucius import check_jurisdiction  # noqa: E402
+from core.batman_bridge import fetch_from_batman  # noqa: E402
+from core.harvey import record_trade, print_summary  # noqa: E402
+from core.gordon import run_all_checks as gordon_check  # noqa: E402
+from core.notifier import alert_opportunity, alert_blocked, alert_autopause  # noqa: E402
+from core.microstructure import compute_depth_metrics  # noqa: E402
+from core.feature_logger import log_features  # noqa: E402
 
 CONFIG_FILE = BASE_DIR / "config" / "settings.yaml"
 PAIRS_FILE = BASE_DIR / "config" / "pairs.yaml"
@@ -314,6 +314,59 @@ def run_cycle(
             print("   SIMULATING trade (PAPER mode)")
             result["action"] = "SIMULATED_TRADE"
             result["executed_amount_usd"] = evaluated_amount_usd
+        elif mode == "MANUAL_P2P":
+            # Audit Section L.3 — Phase 3A
+            # Generate a PENDING manual order with sizing + SL/TP from
+            # RiskManager. Operator completes the trade on Binance P2P,
+            # then runs `manual_orders_cli.py fill <intent_id> ...` to
+            # close it. HARVEY records the trade only on FILLED.
+            try:
+                from core.manual_orders import create_order
+                from core.risk_manager import RiskManager
+
+                # Side is BUY for Nightwing's P2P USDT-vs-fiat path
+                # (we always buy USDT cheap from a merchant when there's
+                # premium edge to capture).
+                _side = "BUY"
+                _entry = float(batman.get("p2p_buy_price") or 0)
+                _risk_mgr = RiskManager(
+                    daily_capital_usd=10_000.0,
+                    risk_per_trade_pct=0.01,
+                )
+                _plan = _risk_mgr.plan_position(entry_price=_entry, side=_side)
+                # Validate against the daily loss budget.
+                _ok, _why = _risk_mgr.validate_trade(_plan.max_loss_usd)
+                if not _ok:
+                    print(f"   🛑 Manual order BLOCKED by RiskManager: {_why}")
+                    result["action"] = "BLOCKED_RISK_BUDGET"
+                else:
+                    _order = create_order(
+                        fiat=fiat,
+                        asset="USDT",
+                        side=_side,
+                        expected_price=_entry,
+                        amount_usd=min(_plan.position_size_usd, evaluated_amount_usd),
+                        stop_loss_price=_plan.stop_loss_price,
+                        take_profit_price=_plan.take_profit_price,
+                        max_loss_usd=_plan.max_loss_usd,
+                        opp_id=batman.get("opp_id"),
+                    )
+                    print(
+                        f"   📝 MANUAL P2P order created: {_order['intent_id']} " f"(deadline={_order['deadline_ts']})"
+                    )
+                    result["action"] = "MANUAL_P2P_PENDING"
+                    result["manual_order"] = {
+                        "intent_id": _order["intent_id"],
+                        "expected_price": _order["expected_price"],
+                        "amount_usd": _order["amount_usd"],
+                        "stop_loss_price": _order["stop_loss_price"],
+                        "take_profit_price": _order["take_profit_price"],
+                        "deadline_ts": _order["deadline_ts"],
+                    }
+            except Exception as _exc:
+                logger.error(f"Manual P2P order creation failed: {_exc}", exc_info=True)
+                result["action"] = "ERROR_MANUAL_P2P"
+                result["error"] = str(_exc)
         else:
             result["action"] = "LOGGED"
 
@@ -327,13 +380,22 @@ def run_cycle(
 
 def main():
     parser = argparse.ArgumentParser(description="NIGHTWING P2P Agent")
-    parser.add_argument("--mode", choices=["simulated", "paper", "live"])
+    parser.add_argument(
+        "--mode",
+        choices=["simulated", "paper", "manual_p2p", "live"],
+        help="simulated=fake prices; paper=real prices, simulated execution; "
+        "manual_p2p=real prices, operator completes trade on Binance P2P "
+        "(audit Section L.3 Phase 3A); live=BLOCKED until Phase 3B.",
+    )
     parser.add_argument("--cycles", type=int, default=0)
     parser.add_argument("--live", action="store_true", help="Use live market ingestion for price fetching")
     args = parser.parse_args()
 
     mode = args.mode.upper() if args.mode else _get_mode()
-    market_mode = "LIVE" if args.live else mode
+    # MANUAL_P2P uses real market data (like PAPER) — flip to LIVE pricing
+    # ingestion, since the operator needs accurate quotes to confirm the
+    # trade on Binance P2P.
+    market_mode = "LIVE" if (args.live or mode == "MANUAL_P2P") else mode
 
     if mode == "LIVE" and not args.live:
         print("ERROR: LIVE mode is BLOCKED.")

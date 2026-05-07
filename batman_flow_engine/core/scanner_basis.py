@@ -206,6 +206,10 @@ def _generate_opportunity(spot_price: float, futures_price: float, basis_pct: fl
         "spot_price": round(spot_price, 6),
         "futures_price": round(futures_price, 6),
         "basis_pct": round(basis_pct, 6),
+        # Step 8 (audit plan): canonical edge field used by Clark Kent publisher.
+        # Magnitude of dislocation — backwardation (negative basis) is still a
+        # tradeable edge.
+        "edge_net": round(abs(basis_pct), 6),
         "scanner_id": SCANNER_ID,
         "observe_only": True,
     }
@@ -234,6 +238,10 @@ def _append_to_log(opportunity: dict) -> bool:
         True if successfully logged, False otherwise
     """
     try:
+        # Audit Section C #9: stamp cycle_id from process-global context if absent.
+        from core.cycle_context import stamp_cycle_id
+
+        stamp_cycle_id(opportunity)
         # Ensure parent directory exists
         LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
 

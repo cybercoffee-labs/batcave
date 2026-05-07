@@ -1,0 +1,27 @@
+ethereum:
+  rpc: https://ethereum-rpc.publicnode.com
+  explorer: https://etherscan.io
+  chain_id: "1"
+  dex:
+    - uniswap
+    - sushi
+    - curve
+
+bsc:
+  rpc: https://bsc-rpc.publicnode.com
+  explorer: https://bscscan.com
+  chain_id: "56"
+  dex:
+    - pancakeswap
+    - biswap
+
+polygon:
+  rpc: https://polygon-rpc.com
+  explorer: https://polygonscan.com
+  chain_id: "137"
+  dex:
+    - quickswap
+    - uniswap
+
+solana:
+  rpc: https://api.mainnet-beta.solana.com

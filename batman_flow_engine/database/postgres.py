@@ -9,12 +9,13 @@ Setup:
   pip install psycopg2-binary --break-system-packages
 """
 
-import os
 import json
 import logging
-from datetime import datetime, timezone
+import os
+import threading
+import time
 from contextlib import contextmanager
-from typing import Optional
+from datetime import UTC, datetime
 
 logger = logging.getLogger("batman.postgres")
 
@@ -27,6 +28,26 @@ DB_CONFIG = {
 }
 
 _pool = None
+
+
+def _is_expected_connection_error(exc: Exception) -> bool:
+    message = str(exc).lower()
+    return any(
+        token in message
+        for token in (
+            "connection refused",
+            "could not connect to server",
+            "connection to server at",
+            "server closed the connection unexpectedly",
+        )
+    )
+
+
+def _log_db_error(message: str, exc: Exception) -> None:
+    if _is_expected_connection_error(exc):
+        logger.debug("%s: %s", message, exc)
+    else:
+        logger.error("%s: %s", message, exc)
 
 
 def get_pool():
@@ -75,6 +96,134 @@ def check_connection() -> dict:
         return {"status": "error", "error": str(e)}
 
 
+# ─────────────────────── SHARED AVAILABILITY STATE ───────────────────────
+#
+# This block is the single, canonical source of truth for PostgreSQL
+# availability across the Batman process.
+#
+# BEFORE (2026-04-20 dry-cycle audit): dual_writer owned its own
+# _pg_available / _pg_last_check_ts cache. HARVEY and engine.py's
+# risk-scores block had no availability cache at all — they called
+# save_opportunity / save_risk_score directly and discarded the return
+# value. Observed divergence: dual_writer marked PG DOWN early in a
+# cycle; a few seconds later PG was started; HARVEY wrote successfully
+# at the end of the same cycle while dual_writer still believed PG was
+# DOWN. Two views of the same external resource in one process.
+#
+# AFTER (2026-04-21): all consumers go through pg_available() and
+# mark_pg_unavailable() below. No module-local availability state.
+# See tests/test_dual_writer.py and tests/test_harvey_pg_gate.py.
+
+PG_RECHECK_INTERVAL_SEC = 60.0
+
+_pg_available: bool | None = None
+_pg_last_check_ts: float | None = None
+_pg_state_lock = threading.Lock()
+
+
+def pg_reset_pool() -> None:
+    """Close and discard the pool. The next get_pool() rebuilds from scratch."""
+    global _pool
+    if _pool is None:
+        return
+    try:
+        _pool.closeall()
+    except Exception as exc:
+        logger.debug("Pool closeall failed (non-fatal): %s", exc)
+    _pool = None
+
+
+def _pg_probe_locked(now: float) -> None:
+    """
+    Probe PG availability and update cached state + timestamp.
+
+    MUST be called while holding _pg_state_lock.
+    """
+    global _pg_available, _pg_last_check_ts
+    previous = _pg_available
+    _pg_last_check_ts = now
+    try:
+        result = check_connection()
+        is_ok = result.get("status") == "ok"
+    except Exception as exc:
+        logger.error(
+            "PostgreSQL availability probe raised (will retry in %.0fs): %s",
+            PG_RECHECK_INTERVAL_SEC,
+            exc,
+            exc_info=True,
+        )
+        _pg_available = False
+        return
+    _pg_available = is_ok
+    if is_ok and previous is not True:
+        logger.info("PostgreSQL reachable — writes enabled")
+    elif not is_ok and previous is not False:
+        logger.info(
+            "PostgreSQL unavailable — writes deferred (will retry every %.0fs)",
+            PG_RECHECK_INTERVAL_SEC,
+        )
+
+
+def pg_probe() -> bool:
+    """Force an immediate probe; return True if PG is reachable. Public API."""
+    now = time.monotonic()
+    with _pg_state_lock:
+        _pg_probe_locked(now)
+        return bool(_pg_available)
+
+
+def pg_available() -> bool:
+    """
+    Return True if PostgreSQL is believed available.
+
+    Semantics (identical to the previous dual_writer._check_pg):
+      - Probe on first call (state == None).
+      - While believed unavailable, re-probe every PG_RECHECK_INTERVAL_SEC
+        seconds so a recovered PG is picked up mid-run.
+      - While believed available, do NOT re-probe — rely on write failures
+        to invalidate via mark_pg_unavailable().
+    """
+    global _pg_available, _pg_last_check_ts
+    now = time.monotonic()
+    with _pg_state_lock:
+        if _pg_available is None:
+            _pg_probe_locked(now)
+        elif _pg_available is False:
+            if _pg_last_check_ts is None or (now - _pg_last_check_ts) >= PG_RECHECK_INTERVAL_SEC:
+                _pg_probe_locked(now)
+        return bool(_pg_available)
+
+
+def mark_pg_unavailable(reason: str, exc: Exception | None = None) -> None:
+    """
+    Flip the cache to unavailable and start the backoff clock.
+
+    Callers use this after a PG write unexpectedly fails so subsequent
+    pg_available() calls stop hammering PG until PG_RECHECK_INTERVAL_SEC
+    elapses.
+
+    If exc is a connection-class error (e.g. "connection refused"), the
+    shared pool is also flushed — the next probe will rebuild fresh
+    connections instead of reusing sockets to a server that just died.
+    """
+    global _pg_available, _pg_last_check_ts
+    with _pg_state_lock:
+        was_available = _pg_available
+        _pg_available = False
+        _pg_last_check_ts = time.monotonic()
+        should_flush = exc is not None and _is_expected_connection_error(exc)
+    # Run side-effects OUTSIDE the state lock to avoid deadlocks if pool
+    # teardown ever blocks on something that itself wants the state lock.
+    if should_flush:
+        pg_reset_pool()
+    if was_available:
+        logger.error(
+            "PostgreSQL marked unavailable after write failure (%s); will retry in %.0fs",
+            reason,
+            PG_RECHECK_INTERVAL_SEC,
+        )
+
+
 # ─────────────────────── OPPORTUNITIES ───────────────────────
 
 
@@ -83,6 +232,7 @@ def save_opportunity(opp: dict) -> bool:
         standard_keys = {
             "opp_id",
             "ts",
+            "cycle_id",  # audit Section C #9: stored in its own column, not metadata
             "type",
             "scanner_id",
             "asset",
@@ -104,16 +254,17 @@ def save_opportunity(opp: dict) -> bool:
             cur.execute(
                 """
                 INSERT INTO opportunities
-                    (opp_id, ts, scanner_type, scanner_id, asset, market, venue,
+                    (opp_id, ts, cycle_id, scanner_type, scanner_id, asset, market, venue,
                      buy_price, sell_price, spot_price, gross_spread_pct,
                      total_friction_pct, edge_net, viable, depth_estimate,
                      observe_only, metadata)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (opp_id) DO NOTHING
             """,
                 (
                     opp.get("opp_id"),
-                    opp.get("ts", datetime.now(timezone.utc).isoformat()),
+                    opp.get("ts", datetime.now(UTC).isoformat()),
+                    opp.get("cycle_id"),
                     opp.get("type", "?"),
                     opp.get("scanner_id", "unknown"),
                     opp.get("asset", "USDT"),
@@ -133,7 +284,7 @@ def save_opportunity(opp: dict) -> bool:
             )
         return True
     except Exception as e:
-        logger.error("Failed to save opportunity %s: %s", opp.get("opp_id"), e)
+        _log_db_error(f"Failed to save opportunity {opp.get('opp_id')}", e)
         return False
 
 
@@ -153,13 +304,13 @@ def get_viable_opportunities(hours: int = 24, scanner: str = None, limit: int = 
             params.append(limit)
             cur.execute(query, params)
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get opportunities: %s", e)
+        _log_db_error("Failed to get opportunities", e)
         return []
 
 
-def get_best_opportunity() -> Optional[dict]:
+def get_best_opportunity() -> dict | None:
     results = get_viable_opportunities(hours=1, limit=1)
     return results[0] if results else None
 
@@ -197,7 +348,7 @@ def save_trade(trade: dict) -> bool:
                 (
                     trade.get("trade_id"),
                     trade.get("agent", "unknown"),
-                    trade.get("ts", datetime.now(timezone.utc).isoformat()),
+                    trade.get("ts", datetime.now(UTC).isoformat()),
                     trade.get("opp_id"),
                     trade.get("asset", "USDT"),
                     trade.get("market"),
@@ -212,7 +363,7 @@ def save_trade(trade: dict) -> bool:
             )
         return True
     except Exception as e:
-        logger.error("Failed to save trade %s: %s", trade.get("trade_id"), e)
+        _log_db_error(f"Failed to save trade {trade.get('trade_id')}", e)
         return False
 
 
@@ -231,9 +382,9 @@ def get_daily_pnl(agent: str = None, days: int = 30) -> list:
             query += " GROUP BY agent, DATE(ts) ORDER BY trade_date DESC"
             cur.execute(query, params)
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get daily P&L: %s", e)
+        _log_db_error("Failed to get daily P&L", e)
         return []
 
 
@@ -295,9 +446,9 @@ def get_hodl_alerts() -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM v_hodl_alerts WHERE signal != 'HOLD' AND signal != 'NO_PRICE'")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get HODL alerts: %s", e)
+        _log_db_error("Failed to get HODL alerts", e)
         return []
 
 
@@ -306,9 +457,9 @@ def get_all_hodl() -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM v_hodl_alerts ORDER BY unrealized_pnl_pct DESC")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get HODL positions: %s", e)
+        _log_db_error("Failed to get HODL positions", e)
         return []
 
 
@@ -346,9 +497,9 @@ def get_all_ventures() -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM venture_positions WHERE status = 'active' ORDER BY updated_at DESC")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get ventures: %s", e)
+        _log_db_error("Failed to get ventures", e)
         return []
 
 
@@ -388,9 +539,9 @@ def get_portfolio_overview() -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM v_portfolio_overview")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get portfolio overview: %s", e)
+        _log_db_error("Failed to get portfolio overview", e)
         return []
 
 
@@ -429,9 +580,9 @@ def get_scanner_performance(days: int = 7) -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM v_scanner_performance")
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get scanner performance: %s", e)
+        _log_db_error("Failed to get scanner performance", e)
         return []
 
 
@@ -448,13 +599,14 @@ def save_engine_run_pg(result: dict) -> bool:
             cur.execute(
                 """
                 INSERT INTO engine_runs
-                    (ts, duration_sec, equities_total, equities_ok,
+                    (ts, cycle_id, duration_sec, equities_total, equities_ok,
                      crypto_total, crypto_ok, regime, dq_score,
                      corr_stress, errors, full_report)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """,
                 (
-                    result.get("timestamp", datetime.now(timezone.utc).isoformat()),
+                    result.get("timestamp", datetime.now(UTC).isoformat()),
+                    result.get("cycle_id"),
                     meta.get("duration_sec"),
                     meta.get("equities_total"),
                     meta.get("equities_ok"),
@@ -469,7 +621,7 @@ def save_engine_run_pg(result: dict) -> bool:
             )
         return True
     except Exception as e:
-        logger.error("Failed to save engine run: %s", e)
+        _log_db_error("Failed to save engine run", e)
         return False
 
 
@@ -488,7 +640,7 @@ def save_alert(source: str, title: str, message: str = None, severity: str = "in
             )
         return True
     except Exception as e:
-        logger.error("Failed to save alert: %s", e)
+        _log_db_error("Failed to save alert", e)
         return False
 
 
@@ -497,9 +649,9 @@ def get_unread_alerts(limit: int = 50) -> list:
         with get_cursor() as cur:
             cur.execute("SELECT * FROM alerts WHERE acknowledged = FALSE ORDER BY ts DESC LIMIT %s", (limit,))
             columns = [desc[0] for desc in cur.description]
-            return [dict(zip(columns, row)) for row in cur.fetchall()]
+            return [dict(zip(columns, row, strict=True)) for row in cur.fetchall()]
     except Exception as e:
-        logger.error("Failed to get alerts: %s", e)
+        _log_db_error("Failed to get alerts", e)
         return []
 
 
@@ -551,7 +703,7 @@ def get_concentration_risk() -> dict:
             "positions": len(values),
         }
     except Exception as e:
-        logger.error("Failed to compute concentration risk: %s", e)
+        _log_db_error("Failed to compute concentration risk", e)
         return {"hhi": None, "top_position_pct": None, "score": None, "positions": 0, "error": str(e)}
 
 
@@ -577,7 +729,7 @@ def save_risk_score(scores: dict) -> bool:
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """,
                 (
-                    scores.get("ts", datetime.now(timezone.utc).isoformat()),
+                    scores.get("ts", datetime.now(UTC).isoformat()),
                     scores.get("cycle_id"),
                     scores.get("operational_readiness"),
                     scores.get("concentration_risk"),
@@ -597,7 +749,7 @@ def save_risk_score(scores: dict) -> bool:
             )
         return True
     except Exception as e:
-        logger.error("Failed to save risk score: %s", e)
+        _log_db_error("Failed to save risk score", e)
         return False
 
 
@@ -615,9 +767,9 @@ def get_database_stats() -> dict:
                 "engine_runs",
                 "alerts",
             ]:
-                cur.execute(f"SELECT COUNT(*) FROM {table}")
+                cur.execute(f"SELECT COUNT(*) FROM {table}")  # noqa: S608
                 stats[table] = cur.fetchone()[0]
         return stats
     except Exception as e:
-        logger.error("Failed to get stats: %s", e)
+        _log_db_error("Failed to get stats", e)
         return {}

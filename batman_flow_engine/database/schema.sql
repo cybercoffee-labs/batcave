@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS opportunities (
     id SERIAL PRIMARY KEY,
     opp_id VARCHAR(30) UNIQUE NOT NULL,
     ts TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    cycle_id VARCHAR(16),  -- audit Section C #9: engine cycle correlation id
     scanner_type CHAR(2) NOT NULL,
     scanner_id VARCHAR(30) NOT NULL,
     asset VARCHAR(10) NOT NULL DEFAULT 'USDT',
@@ -24,10 +25,14 @@ CREATE TABLE IF NOT EXISTS opportunities (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- For installations created before audit Section C #9, add the column idempotently.
+ALTER TABLE opportunities ADD COLUMN IF NOT EXISTS cycle_id VARCHAR(16);
+
 CREATE INDEX IF NOT EXISTS idx_opps_ts ON opportunities(ts DESC);
 CREATE INDEX IF NOT EXISTS idx_opps_scanner ON opportunities(scanner_type);
 CREATE INDEX IF NOT EXISTS idx_opps_viable ON opportunities(viable) WHERE viable = TRUE;
 CREATE INDEX IF NOT EXISTS idx_opps_asset ON opportunities(asset);
+CREATE INDEX IF NOT EXISTS idx_opps_cycle_id ON opportunities(cycle_id);
 
 -- ─────────────────────── TRADES ───────────────────────
 CREATE TABLE IF NOT EXISTS trades (
@@ -136,6 +141,7 @@ CREATE INDEX IF NOT EXISTS idx_scanner_runs_ts ON scanner_runs(ts DESC);
 CREATE TABLE IF NOT EXISTS engine_runs (
     id SERIAL PRIMARY KEY,
     ts TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    cycle_id VARCHAR(16),  -- audit Section C #9: matches opportunities.cycle_id
     duration_sec DECIMAL(8,2),
     equities_total INTEGER,
     equities_ok INTEGER,
@@ -149,7 +155,10 @@ CREATE TABLE IF NOT EXISTS engine_runs (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+ALTER TABLE engine_runs ADD COLUMN IF NOT EXISTS cycle_id VARCHAR(16);
+
 CREATE INDEX IF NOT EXISTS idx_engine_runs_ts ON engine_runs(ts DESC);
+CREATE INDEX IF NOT EXISTS idx_engine_runs_cycle_id ON engine_runs(cycle_id);
 
 -- ─────────────────────── ALERTS ───────────────────────
 CREATE TABLE IF NOT EXISTS alerts (

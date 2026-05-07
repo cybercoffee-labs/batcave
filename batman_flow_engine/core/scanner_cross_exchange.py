@@ -89,6 +89,10 @@ def _load_threshold() -> float:
 
 def _append_to_log(opportunity: dict) -> bool:
     try:
+        # Audit Section C #9: stamp cycle_id from process-global context if absent.
+        from core.cycle_context import stamp_cycle_id
+
+        stamp_cycle_id(opportunity)
         LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
         with open(LOG_FILE, "a", encoding="utf-8") as f:
             f.write(json.dumps(opportunity) + "\n")
@@ -123,6 +127,10 @@ def scan_cross_exchange(log_to_file: bool = True) -> list[dict]:
             "binance_px": round(binance_px, 6),
             "okx_px": round(okx_px, 6),
             "spread_pct": round(spread_pct, 6),
+            # Step 8 (audit plan): canonical edge field used by Clark Kent publisher.
+            # Same magnitude as spread_pct; sign-stripped because the publisher
+            # treats edge as a positive scalar.
+            "edge_net": round(abs(spread_pct), 6),
             "scanner_id": SCANNER_ID,
             "observe_only": True,
         }

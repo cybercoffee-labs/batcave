@@ -1,13 +1,13 @@
 """
 Scanner D: Multi-Exchange Price Scanner (EXPANDED)
 
-PURPOSE: Compare 20 assets across Binance, OKX, Bybit, KuCoin, MEXC simultaneously.
+PURPOSE: Compare 20 assets across Binance, OKX, Bybit, Bitget, KuCoin, MEXC simultaneously.
          Detect cross-exchange arbitrage when spread > threshold.
 
 ASSETS: BTC, ETH, SOL, XRP, DOGE, ADA, AVAX, LINK, DOT, MATIC,
         UNI, ATOM, NEAR, APT, ARB, OP, FIL, LTC, BCH, XLM
 
-EXCHANGES: Binance, OKX, Bybit, KuCoin, MEXC (5 exchanges)
+EXCHANGES: Binance, OKX, Bybit, Bitget, KuCoin, MEXC (6 exchanges)
 
 OUTPUT: storage/logs/opportunities.jsonl
 FIELDS: type: "D", scanner_id: "D-MULTI-EXCHANGE"
@@ -15,12 +15,14 @@ FIELDS: type: "D", scanner_id: "D-MULTI-EXCHANGE"
 
 import json
 import time
-import uuid
-import urllib.request
 import urllib.error
-import yaml
-from datetime import datetime, timezone
+import urllib.request
+import uuid
+from datetime import UTC, datetime
 from pathlib import Path
+
+import yaml
+from core.exchange_bitget import get_spot_price
 
 SCANNER_ID = "D-MULTI-EXCHANGE"
 TIMEOUT = 10
@@ -192,6 +194,7 @@ DEFAULT_FEES = {
     "binance": 0.10,
     "okx": 0.10,
     "bybit": 0.10,
+    "bitget": 0.10,
     "kucoin": 0.10,
     "mexc": 0.10,
 }
@@ -225,6 +228,10 @@ def _load_threshold():
 
 def _append_to_log(opp):
     try:
+        # Audit Section C #9: stamp cycle_id from process-global context if absent.
+        from core.cycle_context import stamp_cycle_id
+
+        stamp_cycle_id(opp)
         LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
         with open(LOG_FILE, "a") as f:
             f.write(json.dumps(opp) + "\n")
@@ -269,6 +276,16 @@ def _fetch_bybit_price(symbol):
     return None
 
 
+def _fetch_bitget_price(symbol):
+    data = get_spot_price(symbol)
+    if data and data.get("status") == "ok":
+        try:
+            return {"bid": float(data["bid"]), "ask": float(data["ask"]), "price": float(data["price"])}
+        except Exception:
+            pass
+    return None
+
+
 def _fetch_kucoin_price(symbol):
     data = _fetch_json("https://api.kucoin.com/api/v1/market/orderbook/level1", {"symbol": symbol})
     if data and data.get("code") == "200000":
@@ -300,11 +317,14 @@ def fetch_all_prices(asset_config):
         "binance": (_fetch_binance_price, "binance"),
         "okx": (_fetch_okx_price, "okx"),
         "bybit": (_fetch_bybit_price, "bybit"),
+        "bitget": (_fetch_bitget_price, "bitget"),
         "kucoin": (_fetch_kucoin_price, "kucoin"),
         "mexc": (_fetch_mexc_price, "mexc"),
     }
-    for exchange, (fetcher, key) in fetchers.items():
+    for exchange, (fetcher, _key) in fetchers.items():
         symbol = asset_config.get(exchange)
+        if exchange == "bitget" and not symbol:
+            symbol = f"{asset_config['asset']}/USDT"
         if symbol:
             try:
                 data = fetcher(symbol)
@@ -358,7 +378,7 @@ def find_arbitrage_opportunity(asset, prices, threshold=0.08):
 def scan_multi_exchange(log_to_file=True):
     results = []
     threshold = _load_threshold()
-    print(f"[scanner_multi] Scanning {len(ASSETS)} assets across 5 exchanges (threshold: {threshold:.2f}%)...")
+    print(f"[scanner_multi] Scanning {len(ASSETS)} assets across 6 exchanges (threshold: {threshold:.2f}%)...")
 
     for asset_config in ASSETS:
         asset = asset_config["asset"]
@@ -372,7 +392,7 @@ def scan_multi_exchange(log_to_file=True):
         if opp:
             full_opp = {
                 "opp_id": f"OPP-D-{uuid.uuid4().hex[:10].upper()}",
-                "ts": datetime.now(timezone.utc).isoformat(),
+                "ts": datetime.now(UTC).isoformat(),
                 "type": "D",
                 "scanner_id": SCANNER_ID,
                 **opp,

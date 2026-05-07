@@ -26,6 +26,7 @@ def _ensure_schema(conn: sqlite3.Connection) -> None:
             id INTEGER PRIMARY KEY,
             opp_id TEXT UNIQUE,
             timestamp TEXT,
+            cycle_id TEXT,
             scanner_id TEXT,
             type TEXT,
             asset TEXT,
@@ -44,6 +45,13 @@ def _ensure_schema(conn: sqlite3.Connection) -> None:
         );
         """
     )
+    # Audit Section C #9: idempotent ALTER for installations created before
+    # cycle_id was part of the schema. SQLite doesn't have ADD COLUMN IF NOT
+    # EXISTS, so we check pragma table_info first.
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(signals)").fetchall()}
+    if "cycle_id" not in cols:
+        conn.execute("ALTER TABLE signals ADD COLUMN cycle_id TEXT")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_signals_cycle_id ON signals(cycle_id)")
 
 
 def _derive_edge(record: dict[str, Any]) -> float | None:
@@ -118,6 +126,7 @@ def _insert_signals(conn: sqlite3.Connection, opportunities: list[dict[str, Any]
             INSERT OR IGNORE INTO signals (
                 opp_id,
                 timestamp,
+                cycle_id,
                 scanner_id,
                 type,
                 asset,
@@ -125,11 +134,12 @@ def _insert_signals(conn: sqlite3.Connection, opportunities: list[dict[str, Any]
                 edge,
                 observe_only,
                 raw_json
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 opp_id,
                 record.get("ts"),
+                record.get("cycle_id"),
                 record.get("scanner_id"),
                 record.get("type"),
                 record.get("asset"),
@@ -173,17 +183,54 @@ def ingest_opportunities() -> dict[str, int]:
         conn.commit()
 
     if new_records:
-        try:
-            import sys as _sys
+        import sys as _sys
 
-            _sys.path.insert(0, str(BASE_DIR))
-            from database.postgres import save_opportunity
+        _sys.path.insert(0, str(BASE_DIR))
+        # Route PG availability through the shared state. Prior to 2026-04-21
+        # HARVEY had its own independent PG path with no availability cache,
+        # which meant HARVEY could write successfully to PG in the same cycle
+        # where dual_writer had already marked PG DOWN (or vice-versa).
+        from database.postgres import (
+            mark_pg_unavailable,
+            pg_available,
+            save_opportunity,
+        )
 
+        if not pg_available():
+            logger.info(
+                "HARVEY→PG sync deferred: %d new opportunities held in SQLite only (PG unavailable)",
+                len(new_records),
+            )
+        else:
+            written = 0
             for record in new_records:
-                save_opportunity(record)
-            logger.info("HARVEY→PG sync: %d new opportunities written", len(new_records))
-        except Exception as e:
-            logger.warning("HARVEY→PG sync failed (non-fatal): %s", e)
+                try:
+                    if save_opportunity(record):
+                        written += 1
+                    else:
+                        logger.error(
+                            "HARVEY→PG save_opportunity returned False for opp=%s",
+                            record.get("opp_id"),
+                        )
+                        mark_pg_unavailable("HARVEY save_opportunity returned False")
+                        break  # PG just flipped to unavailable; stop hammering
+                except Exception as e:
+                    logger.error(
+                        "HARVEY→PG sync raised on opp=%s: %s",
+                        record.get("opp_id"),
+                        e,
+                        exc_info=True,
+                    )
+                    mark_pg_unavailable(
+                        f"HARVEY save_opportunity raised {type(e).__name__}",
+                        exc=e,
+                    )
+                    break
+            logger.info(
+                "HARVEY→PG sync: %d/%d new opportunities written",
+                written,
+                len(new_records),
+            )
 
     logger.info(
         "HARVEY ingest complete: scanned=%d inserted=%d db=%s",
