@@ -257,17 +257,24 @@ def mark_filled(
     filled_amount_usd: float,
     fees_usd: float = 0.0,
     path: Path | None = None,
+    skip_post_trade_analysis: bool = False,
 ) -> dict[str, Any] | None:
     """Operator confirmation: trade was completed on Binance P2P.
 
     *filled_price* and *filled_amount_usd* may differ from the
     expected_price (price drift, partial fill). Both are recorded so
     post-trade analysis can compute slippage and friction.
+
+    Side effect (audit Section L.6): on a successful FILLED transition,
+    invokes ``tools.post_trade_analysis.log_trade_analysis`` to record
+    edge / friction / slippage / net P&L for the trade. Set
+    *skip_post_trade_analysis* to True for tests that don't want the
+    side write into the batman_flow_engine SQLite.
     """
     if filled_price <= 0 or filled_amount_usd <= 0:
         logger.error("mark_filled rejected: non-positive price or amount")
         return None
-    return _transition(
+    row = _transition(
         intent_id,
         "FILLED",
         extra={
@@ -278,6 +285,68 @@ def mark_filled(
         },
         path=path,
     )
+    if row is not None and not skip_post_trade_analysis:
+        _record_post_trade_analysis(row)
+    return row
+
+
+def _record_post_trade_analysis(filled_row: dict[str, Any]) -> None:
+    """Run measure_slippage + attribution + log_trade_analysis for a fill.
+
+    Failures here MUST NOT propagate — the order is already FILLED. The
+    most we'll do is log an error.
+    """
+    try:
+        # Locate batman_flow_engine on sys.path so we can import its tools.
+        import sys as _sys
+
+        batcave_root = Path(__file__).resolve().parent.parent.parent
+        batman_path = batcave_root / "batman_flow_engine"
+        if str(batman_path) not in _sys.path:
+            _sys.path.insert(0, str(batman_path))
+        from tools.post_trade_analysis import (  # noqa: PLC0415
+            attribution,
+            log_trade_analysis,
+            measure_slippage,
+        )
+    except Exception as exc:
+        logger.warning("Post-trade analysis import failed (skipping): %s", exc)
+        return
+
+    try:
+        expected_price = float(filled_row.get("expected_price") or 0.0)
+        filled_price = float(filled_row.get("filled_price") or 0.0)
+        amount = float(filled_row.get("filled_amount_usd") or 0.0)
+        fees = float(filled_row.get("fees_usd") or 0.0)
+        # Edge isn't on the manual order itself; the agent stores opp_id
+        # which we could chase, but for now we accept a 0 edge if absent
+        # and let the operator sees friction/slippage even when edge is
+        # unknown.
+        edge_pct = float(filled_row.get("edge_net") or filled_row.get("expected_edge_pct") or 0.0)
+
+        slip = measure_slippage(
+            expected_price=expected_price,
+            realized_price=filled_price,
+            fees=fees,
+            amount_usd=amount,
+        )
+        analysis = attribution(
+            edge_net=edge_pct,
+            fees=slip["friction_pct"],
+            slippage=slip["slippage_pct"],
+            amount_usd=amount,
+        )
+        result = log_trade_analysis(filled_row, analysis)
+        logger.info(
+            "Post-trade analysis logged for %s: classification=%s net=%.4f%% jsonl_ok=%s sqlite_ok=%s",
+            filled_row.get("intent_id"),
+            analysis.get("classification"),
+            analysis.get("net_pnl_pct", 0.0),
+            result.get("jsonl_ok"),
+            result.get("sqlite_ok"),
+        )
+    except Exception as exc:
+        logger.error("Post-trade analysis failed for %s: %s", filled_row.get("intent_id"), exc, exc_info=True)
 
 
 def mark_expired(

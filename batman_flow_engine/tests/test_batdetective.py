@@ -203,6 +203,65 @@ def test_load_recent_alerts_orders_newest_first(tmp_path):
     assert [a["headline"] for a in loaded] == ["third", "second", "first"]
 
 
+# ─────────────── viewed-state (Streamlit Detective Insights) ───────────────
+
+
+def test_mark_and_load_viewed_alert_roundtrip(tmp_path, monkeypatch):
+    import core.macro_alerts as alerts_module
+    from core.macro_alerts import (
+        is_alert_viewed,
+        load_viewed_keys,
+        mark_alert_viewed,
+    )
+
+    viewed_path = tmp_path / "viewed.jsonl"
+    monkeypatch.setattr(alerts_module, "VIEWED_ALERTS", viewed_path)
+
+    alert = {
+        "event_timestamp": "2026-05-04T10:00:00+00:00",
+        "headline": "FOMC raises rates",
+    }
+    assert is_alert_viewed(alert) is False
+    assert mark_alert_viewed(alert) is True
+
+    viewed_keys = load_viewed_keys()
+    assert len(viewed_keys) == 1
+    assert is_alert_viewed(alert, viewed_keys) is True
+
+
+def test_load_viewed_keys_handles_missing_file(tmp_path, monkeypatch):
+    import core.macro_alerts as alerts_module
+    from core.macro_alerts import load_viewed_keys
+
+    monkeypatch.setattr(alerts_module, "VIEWED_ALERTS", tmp_path / "does_not_exist.jsonl")
+    assert load_viewed_keys() == set()
+
+
+def test_load_viewed_keys_skips_malformed_rows(tmp_path, monkeypatch):
+    import core.macro_alerts as alerts_module
+    from core.macro_alerts import load_viewed_keys
+
+    viewed = tmp_path / "viewed.jsonl"
+    viewed.write_text(
+        '{"key": "ok"}\nthis is not json\n{"key": "also-ok"}\n',
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(alerts_module, "VIEWED_ALERTS", viewed)
+    assert load_viewed_keys() == {"ok", "also-ok"}
+
+
+def test_alert_key_is_stable_across_renders():
+    """Two identical-content alerts must produce the same key — the dashboard
+    relies on this for filtering already-viewed alerts."""
+    from core.macro_alerts import _alert_key
+
+    a = {"event_timestamp": "2026-05-04T10:00:00+00:00", "headline": "X"}
+    b = {"event_timestamp": "2026-05-04T10:00:00+00:00", "headline": "X"}
+    assert _alert_key(a) == _alert_key(b)
+    c = {"event_timestamp": "2026-05-04T10:00:00+00:00", "headline": "Y"}
+    assert _alert_key(a) != _alert_key(c)
+
+
 # ─────────────────────── batdetective orchestrator ───────────────────────
 
 

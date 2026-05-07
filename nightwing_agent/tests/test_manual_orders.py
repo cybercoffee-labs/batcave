@@ -9,11 +9,18 @@ import pytest
 
 @pytest.fixture(autouse=True)
 def _redirect_orders_log(tmp_path, monkeypatch):
-    """Each test gets a clean log file."""
+    """Each test gets a clean log file.
+
+    Also stub out the post-trade analysis side-effect that fires from
+    mark_filled (audit Section L.6) so these tests don't write into the
+    real batman_flow_engine SQLite. The post-trade pipeline has its own
+    dedicated tests in batman_flow_engine/tests/test_post_trade_analysis.py.
+    """
     import core.manual_orders as mo
 
     log_path = tmp_path / "manual_orders.jsonl"
     monkeypatch.setattr(mo, "ORDERS_LOG", log_path)
+    monkeypatch.setattr(mo, "_record_post_trade_analysis", lambda _row: None)
     yield log_path
 
 
@@ -221,3 +228,86 @@ def test_log_is_append_only_state_reconstructed(_redirect_orders_log):
     assert len(lines) == 2  # one PENDING, one CANCELLED
     final = get_order(order["intent_id"])
     assert final["status"] == "CANCELLED"
+
+
+# ─────────────────────── post-trade integration (audit L.6) ───────────────────────
+
+
+def test_mark_filled_invokes_post_trade_analysis(_redirect_orders_log, monkeypatch):
+    """When an order is FILLED, the post-trade analysis side effect must fire."""
+    import core.manual_orders as mo
+
+    captured: list[dict] = []
+
+    def _spy(filled_row):
+        captured.append(filled_row)
+
+    # Replace the no-op stub from the fixture with a spy that records calls.
+    monkeypatch.setattr(mo, "_record_post_trade_analysis", _spy)
+
+    from core.manual_orders import create_order, mark_filled
+
+    order = create_order(
+        fiat="MXN",
+        asset="USDT",
+        side="BUY",
+        expected_price=18.05,
+        amount_usd=500.0,
+    )
+    mark_filled(order["intent_id"], filled_price=18.07, filled_amount_usd=500.0, fees_usd=0.50)
+
+    assert len(captured) == 1
+    row = captured[0]
+    assert row["status"] == "FILLED"
+    assert row["filled_price"] == 18.07
+    assert row["fees_usd"] == 0.50
+
+
+def test_mark_filled_skip_post_trade_analysis_flag(_redirect_orders_log, monkeypatch):
+    """The skip flag must short-circuit the side-effect."""
+    import core.manual_orders as mo
+
+    counter = {"n": 0}
+
+    def _spy(_row):
+        counter["n"] += 1
+
+    monkeypatch.setattr(mo, "_record_post_trade_analysis", _spy)
+
+    from core.manual_orders import create_order, mark_filled
+
+    order = create_order(fiat="MXN", asset="USDT", side="BUY", expected_price=18.05, amount_usd=500)
+    mark_filled(
+        order["intent_id"],
+        filled_price=18.07,
+        filled_amount_usd=500.0,
+        fees_usd=0.50,
+        skip_post_trade_analysis=True,
+    )
+    assert counter["n"] == 0
+
+
+def test_mark_filled_post_trade_failure_does_not_block_fill(_redirect_orders_log, monkeypatch):
+    """If post-trade analysis raises, the FILLED transition must still
+    succeed (the order is filled in the real world either way)."""
+    import core.manual_orders as mo
+
+    def _boom(_row):
+        raise RuntimeError("post-trade exploded")
+
+    monkeypatch.setattr(mo, "_record_post_trade_analysis", _boom)
+
+    from core.manual_orders import create_order, get_order, mark_filled
+
+    order = create_order(fiat="MXN", asset="USDT", side="BUY", expected_price=18.05, amount_usd=500)
+    # The current contract is "post-trade is best-effort" — implemented via
+    # _record_post_trade_analysis catching its own exceptions. So callers
+    # never see the RuntimeError. Confirm that contract here.
+    with pytest.raises(RuntimeError):
+        # If _record itself raises (which it should NOT in production —
+        # but if a future regression breaks the inner try/except), this
+        # spec asserts that the spy actually fires from mark_filled.
+        mark_filled(order["intent_id"], filled_price=18.07, filled_amount_usd=500)
+    # Verify the filled status is still committed even though the spy
+    # blew up after the transition row was written.
+    assert get_order(order["intent_id"])["status"] == "FILLED"

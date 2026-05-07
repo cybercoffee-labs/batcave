@@ -145,8 +145,8 @@ else:
 
 st.divider()
 
-# ─────────────── BATDETECTIVE — Macro Intelligence ───────────────
-st.subheader("🔍 BATDETECTIVE — Macro Intelligence Alerts")
+# ─────────────── 🕵️ Detective Insights (BATDETECTIVE) ───────────────
+st.subheader("🕵️ Detective Insights — Macro Intelligence")
 try:
     import sys as _sys
     from pathlib import Path as _Path
@@ -154,31 +154,68 @@ try:
     _BASE = _Path(__file__).resolve().parent.parent
     if str(_BASE) not in _sys.path:
         _sys.path.insert(0, str(_BASE))
-    from core.macro_alerts import load_recent_alerts
+    from core.macro_alerts import (
+        load_recent_alerts,
+        load_viewed_keys,
+        mark_alert_viewed,
+        _alert_key,
+    )
 
-    _alerts = load_recent_alerts(limit=10)
+    _alerts = load_recent_alerts(limit=20)
+    _viewed_keys = load_viewed_keys()
+
+    # Toggle to show all vs unviewed-only.
+    _show_viewed = st.checkbox(
+        "Show alerts I've already viewed",
+        value=False,
+        help="Off by default — only alerts you haven't acknowledged.",
+    )
+    if not _show_viewed:
+        _alerts = [a for a in _alerts if _alert_key(a) not in _viewed_keys]
+
     if not _alerts:
-        st.caption("No macro alerts yet. BATDETECTIVE runs every cycle. " "Sources: Banxico, Fed, GDELT, BCRA (stub).")
+        if _viewed_keys:
+            st.caption("Inbox zero — no unviewed macro alerts. Toggle above to see history.")
+        else:
+            st.caption(
+                "No macro alerts yet. BATDETECTIVE runs every cycle. " "Sources: Banxico, Fed, GDELT, BCRA (stub)."
+            )
     else:
-        for _alert in _alerts:
+        st.caption(f"{len(_alerts)} alert(s) shown.")
+        for _idx, _alert in enumerate(_alerts):
             _severity = _alert.get("severity", "low")
             _icon = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "🟢"}.get(_severity, "⚪")
             _confidence = _alert.get("confidence", 0.0)
             _scanners = ", ".join(_alert.get("scanners_affected", [])) or "—"
+            _key = _alert_key(_alert)
+            _is_viewed = _key in _viewed_keys
             with st.container():
-                _col1, _col2 = st.columns([4, 1])
+                _col1, _col2, _col3 = st.columns([4, 1, 1])
                 with _col1:
-                    st.markdown(f"{_icon} **{_alert.get('headline', '(no title)')}**")
+                    _viewed_marker = " ✓" if _is_viewed else ""
+                    st.markdown(f"{_icon} **{_alert.get('headline', '(no title)')}**{_viewed_marker}")
                     st.caption(
                         f"source={_alert.get('source')} · type={_alert.get('event_type')} · "
                         f"scanners affected: **{_scanners}** · confidence: {_confidence:.0%}"
                     )
+                    if _alert.get("reasoning"):
+                        st.caption(_alert["reasoning"])
                     if _alert.get("source_url"):
                         st.caption(f"[source]({_alert['source_url']})")
                 with _col2:
                     st.metric("Severity", _severity.upper())
+                with _col3:
+                    if _is_viewed:
+                        st.caption("Viewed")
+                    else:
+                        if st.button("Mark viewed", key=f"detective_mark_{_idx}_{_key}"):
+                            if mark_alert_viewed(_alert):
+                                st.success("Marked.")
+                                st.rerun()
+                            else:
+                                st.error("Failed to persist viewed flag.")
                 st.divider()
 except Exception as _exc:
-    st.warning(f"BATDETECTIVE alerts panel unavailable: {_exc}")
+    st.warning(f"Detective Insights panel unavailable: {_exc}")
 
 st.caption("Navigate using the sidebar pages for detailed views.")
